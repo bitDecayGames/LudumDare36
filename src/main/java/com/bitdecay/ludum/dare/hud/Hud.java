@@ -6,8 +6,10 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bytebreakstudios.animagic.animation.Animation;
+import com.bytebreakstudios.animagic.animation.FrameRate;
 import com.bytebreakstudios.animagic.texture.AnimagicSpriteBatch;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -19,54 +21,37 @@ import java.util.*;
  */
 public class Hud {
 
-        private Player player;
-        AnimagicSpriteBatch uiBatch;
-        private Animation healthFace;
-        private Animation fuelGauge;
+    private Player player;
+    AnimagicSpriteBatch uiBatch;
+    private Animation healthFace;
+    private Animation fuelGauge;
 
-        public Hud(Player newPlayer, AnimagicSpriteBatch spriteBatch) {
-           player = newPlayer;
-           uiBatch = spriteBatch;
-           healthFace = new Animation();
-        }
+    public Hud(Player newPlayer, AnimagicSpriteBatch spriteBatch) {
+        player = newPlayer;
+        uiBatch = spriteBatch;
 
-        public void show() {
-            //healthFace = new Image(new TextureRegion(new Texture(Gdx.files.internal())));
-            datBoat = new Image(new TextureRegion(new Texture(Gdx.files.internal("src/main/resources/assets/buzzkill/dankest_boat.jpg"))));
-        }
+        //healthFace = new Animation("explode", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.03f), LudumDareGame.atlas.findRegions("hud/healthface"));
+        //fuelGauge = new Animation("explode", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.03f), LudumDareGame.atlas.findRegions("hud/fuelGauge"));
 
-        public void render(float delta) {
-            try {
-                update();
-                draw();
-            } catch (Exception e) {
-
-            }
-        }
-
-        public void update() {
-            //if player.HealthComponent != currentHealth{
-           // render
-        //}
-        }
-
-
-        public void render() {
-
-            draw();
-        }
-
-
-        private void draw(){
-            Gdx.gl.glClearColor(.1f, .1f, .1f, 1);
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-            int screenWidth = Gdx.graphics.getWidth() / 2;
-            int screenHeight = Gdx.graphics.getHeight() / 2;
-
-
-//        worldRenderer.render(world, cameras[0]);
-        }
     }
+
+    public void render() {
+      /*  double newHealth= player.health.current / player.health.max;
+        healthFace.setFrameIndex((int)Math.floor(newHealth));
+
+        double newFuel= player.jetpack.current / player.jetpack.max;
+        fuelGauge.setFrameIndex((int)Math.floor(newFuel));*/
+
+        TextureRegion temp = LudumDareGame.atlas.findRegion("buzzkill/dankest_boat").getNormalTextureRegion();
+        temp.setRegionHeight(30);
+        temp.setRegionWidth(30);
+        uiBatch.draw(temp,450,0);
+
+       /* uiBatch.draw(healthFace.getFrame(),450,0);
+        uiBatch.draw(fuelGauge.getFrame(),200,0);*/
+
+    }
+
+}
 
 

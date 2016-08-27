@@ -40,7 +40,6 @@ public class Player extends StateMachine {
     private final AnimationComponent anim;
     private final PlayerCurrencyComponent wallet;
     private final AttackComponent attack;
-
     private final LightComponent light;
 
     private LevelInteractionComponent levelComponent;
