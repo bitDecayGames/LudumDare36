@@ -3,7 +3,6 @@ package com.bitdecay.ludum.dare.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
@@ -15,7 +14,6 @@ import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
 import com.bitdecay.ludum.dare.hud.Hud;
-import org.lwjgl.Sys;
 
 public class GameScreen implements Screen {
 
@@ -27,7 +25,9 @@ public class GameScreen implements Screen {
     GameObjects gobs = new GameObjects();
     private Hud hud;
     private Player player;
+
     private SpriteBatch uiBatch;
+    private SpriteBatch gobsBatch;
 
     public GameScreen(LudumDareGame game) {
         this.game = game;
@@ -47,25 +47,14 @@ public class GameScreen implements Screen {
     public void show() {
         hud = new Hud(player);
         uiBatch = new SpriteBatch();
+        gobsBatch = new SpriteBatch();
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        world.step(delta);
-        gobs.update(delta);
-
-        camera.addFollowPoint(player.getPosition());
-        camera.update();
-
-        worldRenderer.render(world, camera);
-
         update(delta);
-        uiBatch.begin();
-        hud.render(uiBatch);
-        uiBatch.end();
 
+        draw();
     }
 
     @Override
@@ -93,7 +82,27 @@ public class GameScreen implements Screen {
 
     }
 
-    public void update (float delta) {
+    private void update (float delta) {
+        world.step(delta);
         gobs.update(delta);
+
+        camera.addFollowPoint(player.getPosition());
+        camera.update();
+
+        gobsBatch.setProjectionMatrix(camera.combined);
+    }
+
+    private void draw() {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        worldRenderer.render(world, camera);
+
+        gobsBatch.begin();
+        gobs.draw(gobsBatch);
+        gobsBatch.end();
+
+        uiBatch.begin();
+        hud.render(uiBatch);
+        uiBatch.end();
     }
 }

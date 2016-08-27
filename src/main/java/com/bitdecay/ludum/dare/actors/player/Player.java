@@ -38,7 +38,7 @@ public class Player extends StateMachine {
         size = new SizeComponent(100, 100);
         pos = new PositionComponent(0, 0);
         health = new HealthComponent(10, 10);
-        anim = new AnimationComponent("player", pos, 1f, new Vector2(8, -5));
+        anim = new AnimationComponent("player", pos, 1f, new Vector2());
         setupAnimation(anim.animator);
 
         attack = new AttackComponent(10);
@@ -50,7 +50,7 @@ public class Player extends StateMachine {
         ControlMap controls = keybaord;
         phys.getBody().controller = new PlayerInputController(controls);
 
-        append(size).append(pos).append(phys).append(health).append(jetpack);//.append(anim).;
+        append(size).append(pos).append(phys).append(health).append(jetpack).append(anim)   ;
     }
 
 
