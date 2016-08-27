@@ -59,7 +59,7 @@ public class MikeTestBulletScreen implements Screen {
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (InputUtil.checkInputs(Input.Keys.S, Xbox360Pad.BACK)) {
+        if (InputUtil.isPressed(Input.Keys.S, Xbox360Pad.BACK)) {
             nextScreen();
         }
 

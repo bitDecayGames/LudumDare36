@@ -10,8 +10,12 @@ public class InputUtil {
     private final static float STICK_TOLERANCE = 0.5f;
 
     // Check for global keyboard or gamepad input. Use only for menus.
-    public static Boolean checkInputs(int keyBoardKey, Xbox360Pad value) {
+    public static Boolean isPressed(int keyBoardKey, Xbox360Pad value) {
         return  Gdx.input.isKeyPressed(keyBoardKey) || checkAllXboxInputs(value);
+    }
+
+    public static Boolean isJustPressed(int keyBoardKey, Xbox360Pad value) {
+        return  Gdx.input.isKeyJustPressed(keyBoardKey) || checkAllXboxInputs(value);
     }
 
     private static Boolean checkAllXboxInputs(Xbox360Pad value) {
