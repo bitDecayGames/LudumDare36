@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.bitdecay.ludum.dare.LudumDareGame;
+import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.control.InputUtil;
 import com.bitdecay.ludum.dare.control.Xbox360Pad;
 
@@ -52,10 +53,9 @@ public class CreditsScreen implements Screen {
         upIsPressed = false;
         escWasPressed = false;
 
-        TextureAtlas atlas = LudumDareGame.assetManager.get("skins/ui.atlas", TextureAtlas.class);
-        Skin skin = new Skin(Gdx.files.internal("skins/menu-skin.json"), atlas);
+        Skin skin = new Skin(ResourceDir.internal("skins/skin.json"));
 
-        background = new Image(new TextureRegion(new Texture(Gdx.files.internal("assets/ui/creditsBG.png"))));
+        background = new Image(LudumDareGame.atlas.findRegion("buzzkill/dankest_boat"));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         lblTitle = new Label("Credits", skin);
@@ -70,25 +70,16 @@ public class CreditsScreen implements Screen {
         lblBack.setAlignment(Align.bottom, Align.right);
         lblBack.setColor(Color.WHITE);
 
-        lblCredits = new Label("Art: " + SPACE_AFTER_TITLE +
-                "Erik Meredith" + SPACE_AFTER_TITLE +
-                "Programmers:" + SPACE_AFTER_TITLE +
-                "Logan Moore" + SPACE_AFTER_NAME +
-                "Mike Wingfield" + SPACE_AFTER_NAME +
-                "Jake \"Ballmer Peak\" Cabon-Thomski" + SPACE_AFTER_NAME +
-                "Jake Fisher" + SPACE_AFTER_NAME +
-                "Tanner Moore" + SPACE_AFTER_TITLE +
-                "Music:" + SPACE_AFTER_TITLE +
-                "Ville Nousiainen Xythe mutkanto - Fight" + SPACE_AFTER_NAME +
-                "Matthew Pablo - Riverside Ride" + SPACE_AFTER_NAME +
-                "Trevor Lentz - Hero Immortal" + SPACE_AFTER_NAME +
-                "lemon42 - A Journey Awaits" + SPACE_AFTER_NAME +
-                "pierrecartoons1979 - Slot Machine Sounds" + SPACE_AFTER_NAME +
-                "Setuniman - High Jump Sound" + SPACE_AFTER_NAME +
-                "dobroide - Slow down sound" + SPACE_AFTER_NAME +
-                "VyckRo - Stun gun sound" + SPACE_AFTER_NAME +
-                "Chriddof - Speed up sound" + SPACE_AFTER_NAME +
-                "tyops - Space ship sound",
+        lblCredits = new Label("Oculomancers (Art): " + SPACE_AFTER_TITLE +
+                "Erik \"Groovemaster\"\n Meredith" + SPACE_AFTER_NAME +
+                "Logan \"New York is too\nfar away\" Moore" + SPACE_AFTER_TITLE +
+                "Bitwizards (Dev):" + SPACE_AFTER_TITLE +
+                "Mike \"Font Destroyer\"\n Wingfield" + SPACE_AFTER_NAME +
+                "Jake \"Donuts & Whiskey\"\n Kabob-Thompski" + SPACE_AFTER_NAME +
+                "Jake \"Luke\" Fisher" + SPACE_AFTER_NAME +
+                "Luke \"Jake\" Fisher" + SPACE_AFTER_NAME +
+                "Tristan \"El Hombre Nuevo\"\n Havelick" + SPACE_AFTER_TITLE +
+                "Soundscapes:" + SPACE_AFTER_TITLE,
                 skin);
         lblCredits.setFontScale(6);
         lblCredits.setFillParent(true);
