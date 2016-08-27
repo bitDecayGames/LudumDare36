@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
@@ -37,21 +41,21 @@ public class TitleScreen implements Screen {
 
     @Override
     public void show() {
-        datBoat = new Image(new TextureRegion(new Texture(Gdx.files.internal("src/main/resources/assets/buzzkill/dankest_boat.jpg"))));
-        datBoat.setScaling(Scaling.fill);
-        datBoat.setWidth(Gdx.graphics.getWidth());
-        datBoat.setHeight(Gdx.graphics.getHeight());
-
-        stage.addActor(datBoat);
-
-        Skin skin = new Skin(Gdx.files.internal("src/main/resources/skins/skin.json"));
-        dankTitle = new Label("The Dankest Boat", skin);
-        dankTitle.setFontScale(10);
-        dankTitle.setFillParent(true);
-        dankTitle.setAlignment(Align.top, Align.center);
-        dankTitle.setColor(Color.GREEN);
-
-        stage.addActor(dankTitle);
+//        datBoat = new Image(new TextureRegion(new Texture(Gdx.files.internal("src/main/resources/assets/buzzkill/dankest_boat.jpg"))));
+//        datBoat.setScaling(Scaling.fill);
+//        datBoat.setWidth(Gdx.graphics.getWidth());
+//        datBoat.setHeight(Gdx.graphics.getHeight());
+//
+//        stage.addActor(datBoat);
+//
+//        Skin skin = new Skin(Gdx.files.internal("src/main/resources/skins/skin.json"));
+//        dankTitle = new Label("The Dankest Boat", skin);
+//        dankTitle.setFontScale(10);
+//        dankTitle.setFillParent(true);
+//        dankTitle.setAlignment(Align.top, Align.center);
+//        dankTitle.setColor(Color.GREEN);
+//
+//        stage.addActor(dankTitle);
     }
 
     @Override

@@ -47,18 +47,18 @@ public class SplashScreen implements Screen {
         ldWallpaper.addAction(
                 Actions.sequence(
                         Actions.alpha(0),
-                        Actions.delay(0.25f),
-                        Actions.fadeIn(3f),
-                        Actions.delay(3f),
-                        Actions.fadeOut(3f),
+                        Actions.delay(0.05f),
+                        Actions.fadeIn(.1f),
+                        Actions.delay(.1f),
+                        Actions.fadeOut(.1f),
                         Actions.run(
                                 new Runnable() {
                                     @Override
                                     public void run() {
                                         bdWallpaper.addAction(Actions.sequence(
-                                                Actions.fadeIn(3f),
-                                                Actions.delay(3f),
-                                                Actions.fadeOut(3f),
+                                                Actions.fadeIn(.1f),
+                                                Actions.delay(.1f),
+                                                Actions.fadeOut(.1f),
                                                 Actions.run(
                                                         new Runnable() {
                                                             @Override
