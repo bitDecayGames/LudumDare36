@@ -16,10 +16,6 @@ import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.control.InputUtil;
 import com.bitdecay.ludum.dare.control.Xbox360Pad;
 
-
-/**
- * Created by mwingfield on 8/6/15.
- */
 public class CreditsScreen implements Screen {
 
     private static String SPACE_AFTER_TITLE = "\n\n\n";
@@ -81,7 +77,7 @@ public class CreditsScreen implements Screen {
         lblCredits.setFontScale(6);
         lblCredits.setFillParent(true);
         lblCredits.setAlignment(Align.center);
-        lblCredits.setColor(Color.DARK_GRAY);
+        lblCredits.setColor(Color.WHITE);
 
 
         stage.addActor(background);
