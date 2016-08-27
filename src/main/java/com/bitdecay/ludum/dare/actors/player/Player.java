@@ -138,4 +138,8 @@ public class Player extends StateMachine {
 //        shapeRenderer.setColor(Color.GOLD);
 //        shapeRenderer.rect(pos.x, pos.y, size.w, size.h);
     }
+
+    public JetPackComponent getJetpack(){
+        return jetpack;
+    }
 }
