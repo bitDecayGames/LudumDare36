@@ -5,8 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -25,10 +23,10 @@ public class SplashScreen implements Screen {
     public SplashScreen(LudumDareGame game){
         this.game = game;
         stage = new Stage();
-//        ldWallpaper = new Image(new TextureRegion(new Texture(Gdx.files.internal("assets/splash/splash.png"))));
-        ldWallpaper = new Image(new TextureRegion(new Texture(Gdx.files.internal("assets/buzzkill/dankest_boat.jpg"))));
+//        ldWallpaper = new Image(new TextureRegion(new Texture(Gdx.files.internal(Config.RESOURCE_DIR + "splash/splash.png"))));
+        ldWallpaper = new Image(LudumDareGame.atlas.findRegion("buzzkill/dankest_boat"));
         ldWallpaper.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        bdWallpaper = new Image(new TextureRegion(new Texture(Gdx.files.internal("assets/splash/bitDecay.png"))));
+        bdWallpaper = new Image(LudumDareGame.atlas.findRegion("splash/bitDecay"));
         bdWallpaper.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         stage.addActor(ldWallpaper);
         stage.addActor(bdWallpaper);
