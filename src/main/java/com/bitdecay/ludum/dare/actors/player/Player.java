@@ -54,7 +54,7 @@ public class Player extends StateMachine {
         body.jumperProps.jumpCount = Integer.MAX_VALUE;
         body.jumperProps.jumpVariableHeightWindow = Float.POSITIVE_INFINITY;
         body.bodyType = BodyType.DYNAMIC;
-        body.aabb.set(new BitRectangle(0, 0, 16, 32));
+        body.aabb.set(new BitRectangle(0, 0, 13, 18));
         body.userObject = this;
         body.renderStateWatcher = new JumperRenderStateWatcher();
 

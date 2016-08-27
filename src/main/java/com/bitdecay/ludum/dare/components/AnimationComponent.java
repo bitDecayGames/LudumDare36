@@ -7,7 +7,6 @@ import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bitdecay.ludum.dare.interfaces.IDraw;
 import com.bitdecay.ludum.dare.interfaces.IUpdate;
 import com.bytebreakstudios.animagic.animation.Animator;
-import com.bytebreakstudios.animagic.texture.AnimagicSpriteBatch;
 
 public class AnimationComponent implements IComponent, IUpdate, IDraw {
 
@@ -33,7 +32,7 @@ public class AnimationComponent implements IComponent, IUpdate, IDraw {
     @Override
     public void draw(SpriteBatch spriteBatch) {
         TextureRegion reg = animator.getFrame();
-        spriteBatch.draw(reg, position.x + offset.x, position.y + offset.y, reg.getRegionWidth() * scale * (flipVerticalAxis ? -1 : 1), reg.getRegionHeight() * scale);
+        spriteBatch.draw(reg, position.x + offset.x + (flipVerticalAxis ? reg.getRegionWidth() * scale : 0), position.y + offset.y, reg.getRegionWidth() * scale * (flipVerticalAxis ? -1 : 1), reg.getRegionHeight() * scale);
     }
 
     public void setFlipVerticalAxis(boolean value) {

@@ -37,15 +37,21 @@ public class Hud {
     }
 
     public void render(SpriteBatch uiBatch) {
+        int screenWidth = Gdx.graphics.getWidth();
+        int screenHeight = Gdx.graphics.getHeight();
+
+        int fuelX = screenWidth - 100;
+        int fuelY = screenHeight -100;
+
        /* double newHealth= player.health.current / player.health.max;
         healthBar.setFrameIndex((int)Math.floor(newHealth));
 */
         float newFuel=player.getJetpack().currentFuel / player.getJetpack().maxFuel;
         
-        //uiBatch.draw(healthBar.getFrame(),450,0);
-        float rotation = (240*newFuel)-160;
-        uiBatch.draw(fuelGauge,100,100);
-        uiBatch.draw(fuelNeedle,100,100,32,32,64,64,1,1,rotation);
+        //uiBatch.draw(healthBar.getFrame(), 450, 0);
+        float rotation = (240 * newFuel) - 160;
+        uiBatch.draw(fuelGauge, fuelX, fuelY);
+        uiBatch.draw(fuelNeedle, fuelX, fuelY, 32, 32, 64, 64, 1, 1, rotation);
 
     }
 
