@@ -4,13 +4,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.JumperBody;
-import com.bitdecay.jump.control.ControlMap;
 import com.bitdecay.jump.control.PlayerInputController;
 import com.bitdecay.jump.geom.BitRectangle;
 import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.jump.render.JumperRenderStateWatcher;
 import com.bitdecay.ludum.dare.actors.StateMachine;
 import com.bitdecay.ludum.dare.actors.state.HurtState;
+import com.bitdecay.ludum.dare.actors.state.StandState;
 import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 
