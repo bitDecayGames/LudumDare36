@@ -1,5 +1,6 @@
 package com.bitdecay.ludum.dare.collection;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.gameobject.AINodeGameObject;
@@ -65,7 +66,7 @@ public class GameObjects implements IUpdate, IDraw, IShapeDraw {
         gameObjects.forEach(obj -> obj.preDraw(batch));
     }
 
-    public void draw(AnimagicSpriteBatch batch) {
+    public void draw(SpriteBatch batch) {
         gameObjects.forEach(obj -> obj.draw(batch));
     }
 
