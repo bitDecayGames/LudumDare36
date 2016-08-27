@@ -56,6 +56,7 @@ public class GameScreen implements Screen {
         camera.update();
         worldRenderer.render(world, camera);
 
+        update(delta);
         uiBatch.begin();
         hud.render(uiBatch);
         uiBatch.end();
@@ -85,5 +86,9 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    public void update (float delta) {
+        gobs.update(delta);
     }
 }

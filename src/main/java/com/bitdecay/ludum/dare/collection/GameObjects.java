@@ -37,7 +37,6 @@ public class GameObjects implements IUpdate, IDraw, IShapeDraw {
     public void update(float delta) {
         // Add pending objects.
         doAdds();
-
         gameObjects.forEach(obj -> {
             obj.update(delta);
 
