@@ -7,7 +7,7 @@
   },
   "com.badlogic.gdx.graphics.g2d.BitmapFont": {
     "defaultFont": {
-      "file": "src/main/resources/assets/fonts/420.fnt"
+      "file": "fonts/bit.fnt"
     }
   },
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {

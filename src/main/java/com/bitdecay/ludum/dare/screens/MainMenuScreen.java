@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.bitdecay.ludum.dare.LudumDareGame;
+import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.control.InputUtil;
 import com.bitdecay.ludum.dare.control.Xbox360Pad;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
@@ -47,9 +48,9 @@ public class MainMenuScreen implements Screen {
         upIsPressed = false;
         enterWasPressed = false;
 
-        Skin skin = new Skin(Gdx.files.internal("skins/skin.json"));
+        Skin skin = new Skin(ResourceDir.internal("skins/skin.json"));
 
-        background = new Image(new TextureRegion(new Texture(Gdx.files.internal("assets/buzzkill/dankest_boat.jpg"))));
+        background = new Image(LudumDareGame.atlas.findRegion("buzzkill/dankest_boat"));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         title = new Label("Crystal", skin);

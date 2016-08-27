@@ -17,7 +17,6 @@ public class LudumDareGame extends Game {
     public static void queueAssetsForLoad() {
         assetManager.setLoader(AnimagicTextureAtlas.class, new AnimagicTextureAtlasLoader(new InternalFileHandleResolver()));
         LudumDareGame.assetManager.load(ResourceDir.path("packed/main.atlas"), AnimagicTextureAtlas.class);
-        LudumDareGame.assetManager.load(ResourceDir.path("packed/fonts.atlas"), AnimagicTextureAtlas.class);
     }
 
     @Override
