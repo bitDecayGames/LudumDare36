@@ -59,6 +59,23 @@
     </build>
 
     <dependencies>
+        <!-- TODO Why do we need these jackson imports? animagic should bring them in. -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jacksonVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jacksonVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jacksonVersion}</version>
+        </dependency>
+        <!-- End jackson imports -->
         <dependency>
             <groupId>com.bitdecay</groupId>
             <artifactId>jump-common</artifactId>
