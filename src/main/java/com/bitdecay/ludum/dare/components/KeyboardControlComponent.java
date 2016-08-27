@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.bitdecay.jump.control.PlayerAction;
 import com.bitdecay.jump.gdx.input.GDXControls;
+import com.bitdecay.jump.gdx.input.KeyState;
 import com.bitdecay.ludum.dare.control.InputAction;
 
 import java.util.HashMap;
@@ -20,20 +21,12 @@ public class KeyboardControlComponent extends InputComponent {
 
     private Set<InputAction> previousPresses = new HashSet<>();
 
-    static Map<InputAction, Integer> actionsToKeys = new HashMap<>();
-
-    static {
-        actionsToKeys.put(InputAction.JUMP, Input.Keys.SPACE);
-        actionsToKeys.put(InputAction.LEFT, Input.Keys.A);
-        actionsToKeys.put(InputAction.RIGHT, Input.Keys.D);
-        actionsToKeys.put(InputAction.UP, Input.Keys.W);
-        actionsToKeys.put(InputAction.DOWN, Input.Keys.S);
-        actionsToKeys.put(InputAction.PUNCH, Input.Keys.Q);
-        actionsToKeys.put(InputAction.PROJECTILE, Input.Keys.E);
-    }
-
     public KeyboardControlComponent() {
-        keyboard = GDXControls.defaultMapping;
+        keyboard = new GDXControls();
+        keyboard.set(PlayerAction.JUMP, new KeyState(Input.Keys.W));
+        keyboard.set(PlayerAction.LEFT, new KeyState(Input.Keys.A));
+        keyboard.set(PlayerAction.RIGHT, new KeyState(Input.Keys.D));
+        keyboard.set(PlayerAction.DOWN, new KeyState(Input.Keys.S));
     }
 
     @Override
@@ -42,21 +35,6 @@ public class KeyboardControlComponent extends InputComponent {
         for (InputAction action : InputAction.values()) {
             if (isPressed(action)) previousPresses.add(action);
         }
-    }
-
-    @Override
-    public boolean isJustPressed(InputAction action) {
-        return inControl && isPressed(action) && !previousPresses.contains(action);
-    }
-
-    @Override
-    public boolean isPressed(InputAction action) {
-        int key;
-        if (!inControl) return false;
-        else if (actionsToKeys.containsKey(action)) key = actionsToKeys.get(action);
-        else return false;
-
-        return Gdx.input.isKeyPressed(key);
     }
 
     @Override
@@ -84,5 +62,15 @@ public class KeyboardControlComponent extends InputComponent {
     public boolean isPressed(PlayerAction playerAction) {
         InputAction action = InputAction.forPlayerAction(playerAction);
         return inControl && action != null && keyboard.isPressed(playerAction);
+    }
+
+    @Override
+    public boolean isPressed(InputAction action) {
+        return false;
+    }
+
+    @Override
+    public boolean isJustPressed(InputAction action) {
+        return false;
     }
 }
