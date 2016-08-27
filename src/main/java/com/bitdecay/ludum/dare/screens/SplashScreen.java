@@ -10,11 +10,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.bitdecay.ludum.dare.Config;
+import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.control.InputUtil;
 import com.bitdecay.ludum.dare.control.Xbox360Pad;
-import com.bitdecay.ludum.dare.util.SoundLibrary;
 
 public class SplashScreen implements Screen {
 
@@ -28,9 +27,9 @@ public class SplashScreen implements Screen {
         this.game = game;
         stage = new Stage();
 //        ldWallpaper = new Image(new TextureRegion(new Texture(Gdx.files.internal(Config.RESOURCE_DIR + "splash/splash.png"))));
-        ldWallpaper = new Image(new TextureRegion(new Texture(Gdx.files.internal(Config.RESOURCE_DIR + "assets/buzzkill/dankest_boat.jpg"))));
+        ldWallpaper = new Image(new TextureRegion(new Texture(ResourceDir.internal("assets/main/buzzkill/dankest_boat.jpg"))));
         ldWallpaper.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        bdWallpaper = new Image(new TextureRegion(new Texture(Gdx.files.internal(Config.RESOURCE_DIR + "assets/splash/bitDecay.png"))));
+        bdWallpaper = new Image(new TextureRegion(new Texture(ResourceDir.internal("assets/main/splash/bitDecay.png"))));
         bdWallpaper.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         stage.addActor(ldWallpaper);
         stage.addActor(bdWallpaper);

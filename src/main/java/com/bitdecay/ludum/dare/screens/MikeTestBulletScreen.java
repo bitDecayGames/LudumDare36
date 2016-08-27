@@ -15,13 +15,13 @@ import com.bitdecay.ludum.dare.control.InputUtil;
 import com.bitdecay.ludum.dare.control.Xbox360Pad;
 import com.bytebreakstudios.animagic.animation.Animation;
 import com.bytebreakstudios.animagic.animation.FrameRate;
-import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.badlogic.gdx.math.MathUtils.radiansToDegrees;
+import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 
 public class MikeTestBulletScreen implements Screen {
 
@@ -34,7 +34,6 @@ public class MikeTestBulletScreen implements Screen {
     private TextureRegion region;
     private SpriteBatch sb;
     private float speed = 30;
-    private AnimagicTextureAtlas atlas;
     private List<Animation> animations = new ArrayList<>();
     private Array<AnimagicTextureRegion> animationRegions;
     private AnimagicTextureRegion[] asArray;
@@ -48,14 +47,10 @@ public class MikeTestBulletScreen implements Screen {
     public void show() {
         sb = new SpriteBatch();
 
-        atlas = LudumDareGame.assetManager.get("packed/main.atlas", AnimagicTextureAtlas.class);
-
         animationRegions = atlas.findRegions("bulletexplode");
-        System.out.println("Atlas " + animationRegions.size);
         asArray = animationRegions.toArray(AnimagicTextureRegion.class);
 
         region = atlas.findRegion("bullet", 1);
-
     }
 
     @Override

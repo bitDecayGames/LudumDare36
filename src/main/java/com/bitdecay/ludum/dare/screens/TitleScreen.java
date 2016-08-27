@@ -3,10 +3,10 @@ package com.bitdecay.ludum.dare.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -14,11 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.bitdecay.ludum.dare.LudumDareGame;
+import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.control.InputUtil;
 import com.bitdecay.ludum.dare.control.Xbox360Pad;
-import com.bytebreakstudios.animagic.texture.AnimagicSpriteBatch;
-import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
-import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 
 public class TitleScreen implements Screen {
 
@@ -35,14 +33,14 @@ public class TitleScreen implements Screen {
 
     @Override
     public void show() {
-        datBoat = new Image(new TextureRegion(new Texture(Gdx.files.internal("src/main/resources/assets/buzzkill/dankest_boat.jpg"))));
+        datBoat = new Image(new TextureRegion(new Texture(ResourceDir.internal("assets/main/buzzkill/dankest_boat.jpg"))));
         datBoat.setScaling(Scaling.fill);
         datBoat.setWidth(Gdx.graphics.getWidth());
         datBoat.setHeight(Gdx.graphics.getHeight());
 
         stage.addActor(datBoat);
 
-        Skin skin = new Skin(Gdx.files.internal("src/main/resources/skins/skin.json"));
+        Skin skin = new Skin(ResourceDir.internal("skins/skin.json"));
         dankTitle = new Label("The Dankest Boat", skin);
         dankTitle.setFontScale(10);
         dankTitle.setFillParent(true);
@@ -92,6 +90,6 @@ public class TitleScreen implements Screen {
     }
 
     private void nextScreen() {
-        game.setScreen(new MainMenuScreen(game));
+        game.setScreen(new MikeTestBulletScreen(game));
     }
 }
