@@ -10,6 +10,7 @@ import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.actors.player.Player;
+import com.bitdecay.ludum.dare.actors.state.StandState;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
