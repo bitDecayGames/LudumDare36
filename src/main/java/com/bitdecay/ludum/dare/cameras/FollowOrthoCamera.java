@@ -1,12 +1,15 @@
 package com.bitdecay.ludum.dare.cameras;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.bitdecay.ludum.dare.util.CRectangle;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by mwingfield on 8/12/15.
+ */
 public class FollowOrthoCamera extends OrthographicCamera {
     public float maxZoom = 0.05f;
     public float minZoom = 0.1f;
@@ -24,7 +27,7 @@ public class FollowOrthoCamera extends OrthographicCamera {
     private float targetZoom = 0.1f;
     private Vector2 targetPosition = new Vector2(0, 0);
 
-    private Rectangle window;
+    private CRectangle window;
     private float originalWidth = 0;
     private float widthRatio = 0;
     private float heightRatio = 0;
@@ -43,7 +46,7 @@ public class FollowOrthoCamera extends OrthographicCamera {
         originalWidth = width;
         widthRatio = height / width;
         heightRatio = width / height;
-        window = new Rectangle(0, 0, width, height);
+        window = new CRectangle(0, 0, width, height);
     }
 
     public void addFollowPoint(Vector2 point){
@@ -56,17 +59,19 @@ public class FollowOrthoCamera extends OrthographicCamera {
         if (pointsToFollow != null && pointsToFollow.size() > 0) {
             getWorldMaxWindow();
 
-            window.x = 0;
-            window.y = 0;
+            window.x = midX;
+            window.y = midY;
             targetPosition.x = window.x;
             targetPosition.y = window.y;
             // try max width first
             window.width = maxW;
             window.height = maxW * widthRatio;
+            window.setOriginAtCenter();
             if (!testAllPoints()) {
                 // then try max height
                 window.height = maxH;
                 window.width = maxH * heightRatio;
+                window.setOriginAtCenter();
             }
             targetZoom = window.width / originalWidth;
             //
