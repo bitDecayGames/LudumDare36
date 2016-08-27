@@ -5,7 +5,6 @@ import com.bitdecay.ludum.dare.actors.ai.AIMoveState;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.control.InputAction;
 import com.bitdecay.ludum.dare.gameobject.AINodeGameObject;
-import com.bitdecay.ludum.dare.gameobject.FinishLineGameObject;
 import com.bitdecay.ludum.dare.interfaces.IState;
 import com.bitdecay.ludum.dare.util.Players;
 
@@ -22,8 +21,6 @@ public class AIControlComponent extends InputComponent {
 
     Set<InputAction> currentActions = new HashSet<>();
     Set<InputAction> previousActions = new HashSet<>();
-
-    public FinishLineGameObject finishLine;
 
     public AIControlComponent() {
         super();

@@ -99,9 +99,7 @@ public class SetupScreen implements Screen {
         inputObjects = new ArrayList<>();
         players = new ArrayList<>();
 
-        for (int i = 0; i < NUM_PLAYERS; i++) {
-            players.add(new Player(i));
-        }
+        players.add(new Player());
 
         SizeComponent size = new SizeComponent(BOX_SIDE, BOX_SIDE);
         for (int i = 0; i < players.size(); i++) {

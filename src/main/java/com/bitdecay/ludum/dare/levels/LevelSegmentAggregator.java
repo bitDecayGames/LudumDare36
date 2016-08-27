@@ -7,7 +7,6 @@ import com.bitdecay.jump.level.Level;
 import com.bitdecay.jump.level.LevelObject;
 import com.bitdecay.jump.level.TileObject;
 import com.bitdecay.jump.level.builder.LevelBuilder;
-import com.bitdecay.ludum.dare.screens.RaceScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,10 +156,6 @@ public class LevelSegmentAggregator {
 
     public static void updateOwnNeighbors(int x, int y, TileObject[][] grid) {
         if (!ArrayUtilities.onGrid(grid, x, y) || grid[x][y] == null) {
-            return;
-        }
-
-        if (grid[x][y].material == RaceScreen.WOOD_MATERIAL) {
             return;
         }
 
