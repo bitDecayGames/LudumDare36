@@ -2,10 +2,8 @@ package com.bitdecay.ludum.dare.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -20,9 +18,10 @@ import com.bytebreakstudios.animagic.texture.AnimagicSpriteBatch;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 
-public class DemoScreen implements Screen {
+public class TitleScreen implements Screen {
 
     private Image datBoat;
+    private Label dankTitle;
 
     private Stage stage;
     private LudumDareGame game;
@@ -30,7 +29,7 @@ public class DemoScreen implements Screen {
     LibGDXWorldRenderer worldRenderer = new LibGDXWorldRenderer();
     BitWorld world = new BitWorld();
 
-    public DemoScreen(LudumDareGame game) {
+    public TitleScreen(LudumDareGame game) {
         this.game = game;
         stage = new Stage();
 
@@ -39,10 +38,21 @@ public class DemoScreen implements Screen {
 
     @Override
     public void show() {
-        AnimagicTextureAtlas atlas = LudumDareGame.assetManager.get("packed/sprites.atlas", AnimagicTextureAtlas.class);
-        datBoat = new Image(new TextureRegion(new Texture(Gdx.files.internal("assets/sprites/dankest_boat.jpg"))));
+        datBoat = new Image(new TextureRegion(new Texture(Gdx.files.internal("src/main/resources/assets/buzzkill/dankest_boat.jpg"))));
+        datBoat.setScaling(Scaling.fill);
+        datBoat.setWidth(Gdx.graphics.getWidth());
+        datBoat.setHeight(Gdx.graphics.getHeight());
 
         stage.addActor(datBoat);
+
+        Skin skin = new Skin(Gdx.files.internal("src/main/resources/skins/skin.json"));
+        dankTitle = new Label("The Dankest Boat", skin);
+        dankTitle.setFontScale(10);
+        dankTitle.setFillParent(true);
+        dankTitle.setAlignment(Align.top, Align.center);
+        dankTitle.setColor(Color.GREEN);
+
+        stage.addActor(dankTitle);
     }
 
     @Override
