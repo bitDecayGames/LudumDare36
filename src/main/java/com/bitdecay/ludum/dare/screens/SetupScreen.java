@@ -130,7 +130,7 @@ public class SetupScreen implements Screen {
     public void render(float v) {
         getGameObjects().forEach(obj -> obj.update(v));
 
-        if (InputUtil.checkInputs(Input.Keys.ENTER, Xbox360Pad.START)) {
+        if (InputUtil.isPressed(Input.Keys.ENTER, Xbox360Pad.START)) {
 
             // Set players globally with associated inputs.
             Players.initialize(getResults());
