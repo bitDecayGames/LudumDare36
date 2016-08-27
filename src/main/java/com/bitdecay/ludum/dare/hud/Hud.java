@@ -23,29 +23,29 @@ import java.util.*;
 public class Hud {
 
     private Player player;
-    private Animation healthFace;
-    private Animation fuelGauge;
+    private Animation healthBar;
+    private TextureRegion fuelGauge;
+    private TextureRegion fuelNeedle;
 
     public Hud(Player newPlayer) {
         player = newPlayer;
 
-        //healthFace = new Animation("explode", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.03f), LudumDareGame.atlas.findRegions("hud/healthface"));
-        //fuelGauge = new Animation("explode", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.03f), LudumDareGame.atlas.findRegions("hud/fuelGauge"));
+        //healthBar = LudumDareGame.atlas.findRegion("healthBar/HealthBar");
+        fuelGauge = LudumDareGame.atlas.findRegion("fuelGauge/FuelGauge");
+        fuelNeedle= LudumDareGame.atlas.findRegion("fuelGauge/FuelNeedle");
 
     }
 
     public void render(SpriteBatch uiBatch) {
        /* double newHealth= player.health.current / player.health.max;
-        healthFace.setFrameIndex((int)Math.floor(newHealth));
+        healthBar.setFrameIndex((int)Math.floor(newHealth));
 */
-        double newFuel= player.getJetpack().currentFuel / player.getJetpack().maxFuel;
-        fuelGauge.setFrameIndex((int)Math.floor(newFuel));
-
-        /*TextureRegion temp = LudumDareGame.atlas.findRegion("buzzkill/dankest_boat");
-        uiBatch.draw(temp,450,0);*/
-
-        //uiBatch.draw(healthFace.getFrame(),450,0);
-        uiBatch.draw(fuelGauge.getFrame(),200,0);
+        float newFuel= (float)Math.floor(player.getJetpack().currentFuel / player.getJetpack().maxFuel);
+        
+        //uiBatch.draw(healthBar.getFrame(),450,0);
+        float rotation = -160+240*newFuel;
+        uiBatch.draw(fuelGauge,100,100);
+        uiBatch.draw(fuelNeedle,100,100,32,32,64,64,1,1,rotation);
 
     }
 
