@@ -1,0 +1,16 @@
+{
+  "com.badlogic.gdx.graphics.Color": {
+    "green": { "r": 0, "g": 1, "b": 0, "a": 1 }
+  },
+  "com.badlogic.gdx.graphics.g2d.BitmapFont": {
+    "defaultFont": {
+      "file": "assets/fonts/420.fnt"
+    }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+    "default": {
+      "font": "defaultFont",
+      "fontColor": "green"
+    }
+  }
+}
