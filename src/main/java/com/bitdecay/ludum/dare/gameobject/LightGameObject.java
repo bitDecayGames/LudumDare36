@@ -1,5 +1,6 @@
 package com.bitdecay.ludum.dare.gameobject;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.level.LevelObject;
@@ -22,7 +23,7 @@ public class LightGameObject extends BasePlacedObject {
     }
 
     @Override
-    public void draw(AnimagicSpriteBatch spriteBatch) {
-        LightUtil.addLocatedLight(spriteBatch, new Vector2(pos.x, pos.y));
+    public void draw(SpriteBatch spriteBatch) {
+//        LightUtil.addLocatedLight(spriteBatch, new Vector2(pos.x, pos.y));
     }
 }

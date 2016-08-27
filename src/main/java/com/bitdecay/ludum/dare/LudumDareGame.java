@@ -3,6 +3,7 @@ package com.bitdecay.ludum.dare;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.bitdecay.ludum.dare.screens.GameScreen;
 import com.bitdecay.ludum.dare.screens.SplashScreen;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlasLoader;
@@ -25,6 +26,6 @@ public class LudumDareGame extends Game {
         assetManager.finishLoading();
         atlas = assetManager.get(ResourceDir.path("packed/main.atlas"), AnimagicTextureAtlas.class);
 
-        setScreen(new SplashScreen(this));
+        setScreen(new GameScreen(this));
     }
 }

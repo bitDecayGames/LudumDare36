@@ -1,5 +1,6 @@
 package com.bitdecay.ludum.dare.components;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
@@ -30,7 +31,7 @@ public class AnimationComponent implements IComponent, IUpdate, IDraw {
     }
 
     @Override
-    public void draw(AnimagicSpriteBatch spriteBatch) {
+    public void draw(SpriteBatch spriteBatch) {
         TextureRegion reg = animator.getFrame();
         spriteBatch.draw(reg, position.x + offset.x, position.y + offset.y, reg.getRegionWidth() * scale * (flipVerticalAxis ? -1 : 1), reg.getRegionHeight() * scale);
     }

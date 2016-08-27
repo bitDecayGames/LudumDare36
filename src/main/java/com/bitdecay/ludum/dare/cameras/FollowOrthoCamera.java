@@ -82,7 +82,7 @@ public class FollowOrthoCamera extends OrthographicCamera {
 
     private boolean testAllPoints(){
         for (Vector2 point : pointsToFollow){
-            if (! window.contains(point)){
+            if (!window.contains(point)){
                 return false;
             }
         }

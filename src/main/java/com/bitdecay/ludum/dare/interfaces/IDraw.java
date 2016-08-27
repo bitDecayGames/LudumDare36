@@ -1,7 +1,7 @@
 package com.bitdecay.ludum.dare.interfaces;
 
-import com.bytebreakstudios.animagic.texture.AnimagicSpriteBatch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public interface IDraw {
-    void draw(AnimagicSpriteBatch spriteBatch);
+    void draw(SpriteBatch spriteBatch);
 }

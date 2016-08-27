@@ -23,7 +23,6 @@ public class SplashScreen implements Screen {
     public SplashScreen(LudumDareGame game){
         this.game = game;
         stage = new Stage();
-//        ldWallpaper = new Image(new TextureRegion(new Texture(Gdx.files.internal(Config.RESOURCE_DIR + "splash/splash.png"))));
         ldWallpaper = new Image(LudumDareGame.atlas.findRegion("buzzkill/dankest_boat"));
         ldWallpaper.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         bdWallpaper = new Image(LudumDareGame.atlas.findRegion("splash/bitDecay"));

@@ -1,5 +1,6 @@
 package com.bitdecay.ludum.dare.actors;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.level.LevelObject;
@@ -95,7 +96,7 @@ public class GameObject implements IUpdate, IDraw, IPreDraw, IShapeDraw {
     }
 
     @Override
-    public void draw(AnimagicSpriteBatch spriteBatch) {
+    public void draw(SpriteBatch spriteBatch) {
         drawableComponents.forEach(c -> c.draw(spriteBatch));
     }
 
