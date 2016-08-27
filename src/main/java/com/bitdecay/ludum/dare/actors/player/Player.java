@@ -4,22 +4,16 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.JumperBody;
-import com.bitdecay.jump.control.ControlMap;
 import com.bitdecay.jump.control.PlayerInputController;
 import com.bitdecay.jump.geom.BitRectangle;
 import com.bitdecay.jump.properties.JumperProperties;
+import com.bitdecay.jump.render.JumperRenderStateWatcher;
 import com.bitdecay.ludum.dare.actors.StateMachine;
 import com.bitdecay.ludum.dare.actors.state.HurtState;
 
 import com.bitdecay.ludum.dare.actors.state.StandState;
 import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
-import com.bytebreakstudios.animagic.animation.Animation;
-import com.bytebreakstudios.animagic.animation.Animator;
-import com.bytebreakstudios.animagic.animation.FrameRate;
-import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
-
-import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 
 public class Player extends StateMachine {
     private final SizeComponent size;
@@ -29,8 +23,7 @@ public class Player extends StateMachine {
     private final AttackComponent attack;
     private final JetPackComponent jetpack;
     private final PhysicsComponent phys;
-    private final KeyboardControlComponent keybaord;
-    private final JumperRenderStateComponent renderStateComponent;
+    private final KeyboardControlComponent keyboard;
 
     private LevelInteractionComponent levelComponent;
 
@@ -42,15 +35,15 @@ public class Player extends StateMachine {
 
         attack = new AttackComponent(10);
 
-        renderStateComponent = new PlayerRenderStateComponent(this);
         phys = createBody();
         jetpack = new JetPackComponent((JumperBody) phys.getBody());
 
-        keybaord = new KeyboardControlComponent();
-        ControlMap controls = keybaord;
-        phys.getBody().controller = new PlayerInputController(controls);
+        keyboard = new KeyboardControlComponent();
+        phys.getBody().controller = new PlayerInputController(keyboard);
 
-        append(size).append(pos).append(phys).append(health).append(jetpack).append(anim).append(renderStateComponent);
+        append(size).append(pos).append(phys).append(health).append(jetpack).append(anim).append(keyboard);
+
+        setActiveState(new StandState(components));
     }
 
 
@@ -63,8 +56,7 @@ public class Player extends StateMachine {
         body.bodyType = BodyType.DYNAMIC;
         body.aabb.set(new BitRectangle(0, 0, 16, 32));
         body.userObject = this;
-
-        renderStateComponent.addToBody(body);
+        body.renderStateWatcher = new JumperRenderStateWatcher();
 
         return new PhysicsComponent(body, pos, size);
     }
