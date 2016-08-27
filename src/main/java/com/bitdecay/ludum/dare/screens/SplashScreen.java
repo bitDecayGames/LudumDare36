@@ -76,7 +76,7 @@ public class SplashScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (InputUtil.checkInputs(Input.Keys.ENTER, Xbox360Pad.START)) {
+        if (InputUtil.checkInputs(Input.Keys.S, Xbox360Pad.START)) {
             nextScreen();
         }
 
@@ -110,6 +110,6 @@ public class SplashScreen implements Screen {
     }
 
     private void nextScreen() {
-        game.setScreen(new TitleScreen(game));
+        game.setScreen(new MainMenuScreen(game));
     }
 }

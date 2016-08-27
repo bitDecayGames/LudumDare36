@@ -16,14 +16,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.bitdecay.ludum.dare.LudumDareGame;
+import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.control.InputUtil;
 import com.bitdecay.ludum.dare.control.Xbox360Pad;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
 
-
-/**
- * Created by mwingfield on 8/6/15.
- */
 public class MainMenuScreen implements Screen {
 
     private LudumDareGame game;
@@ -51,10 +48,9 @@ public class MainMenuScreen implements Screen {
         upIsPressed = false;
         enterWasPressed = false;
 
-        TextureAtlas atlas = LudumDareGame.assetManager.get("skins/ui.atlas", TextureAtlas.class);
-        Skin skin = new Skin(Gdx.files.internal("skins/menu-skin.json"), atlas);
+        Skin skin = new Skin(ResourceDir.internal("skins/skin.json"));
 
-        background = new Image(new TextureRegion(new Texture(Gdx.files.internal("assets/ui/title.png"))));
+        background = new Image(LudumDareGame.atlas.findRegion("buzzkill/dankest_boat"));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         title = new Label("Crystal", skin);
@@ -131,11 +127,12 @@ public class MainMenuScreen implements Screen {
 
         if (InputUtil.checkInputs(Input.Keys.ENTER, Xbox360Pad.A)) {
             enterWasPressed = true;
-            SoundLibrary.playSound("Select_confirm");
+//            SoundLibrary.playSound("Select_confirm");
         } else if (enterWasPressed && !(InputUtil.checkInputs(Input.Keys.ENTER, Xbox360Pad.A))){
             switch (menuSelection) {
                 case 0:
-                    game.setScreen(new SetupScreen(game));
+                    // TODO when we have a game.
+//                    game.setScreen(new GameScreen(game));
                     break;
                 case 1:
                     game.setScreen(new CreditsScreen(game));
@@ -147,7 +144,7 @@ public class MainMenuScreen implements Screen {
         }
 
         if (InputUtil.checkInputs(Input.Keys.DOWN, Xbox360Pad.LS_DOWN) && !downIsPressed) {
-            SoundLibrary.playSound("Select_change");
+//            SoundLibrary.playSound("Select_change");
             menuSelection = (menuSelection + 1) % 3;
             downIsPressed = true;
         } else if(!InputUtil.checkInputs(Input.Keys.DOWN, Xbox360Pad.LS_DOWN)){
@@ -155,7 +152,7 @@ public class MainMenuScreen implements Screen {
         }
 
         if (InputUtil.checkInputs(Input.Keys.UP, Xbox360Pad.LS_UP) && !upIsPressed) {
-            SoundLibrary.playSound("Select_change");
+//            SoundLibrary.playSound("Select_change");
             menuSelection -= 1;
             if (menuSelection < 0) {
                 menuSelection = 2;
@@ -165,10 +162,10 @@ public class MainMenuScreen implements Screen {
             upIsPressed = false;
         }
 
-            updateMenuSelection();
+        updateMenuSelection();
     }
 
-    private void updateMenuSelection(){
+    private void updateMenuSelection() {
         switch(menuSelection){
             case 0:
                 // start selected
