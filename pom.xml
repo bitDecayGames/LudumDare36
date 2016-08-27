@@ -11,7 +11,7 @@
 
     <properties>
         <log4jVersion>1.2.17</log4jVersion>
-        <gdxVersion>1.9.0</gdxVersion>
+        <gdxVersion>1.6.5</gdxVersion>
         <jacksonVersion>2.6.1</jacksonVersion>
         <commonsVersion>2.4</commonsVersion>
         <jumpVersion>0.1-SNAPSHOT</jumpVersion>

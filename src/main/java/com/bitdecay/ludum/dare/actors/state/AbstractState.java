@@ -80,7 +80,7 @@ public abstract class AbstractState implements IState, StateListener {
             case RIGHT_JUMPING:
             case LEFT_JUMPING:
                 int randomizer = (int) (Math.random() * 4) + 1;
-                SoundLibrary.playSound("Jump" + randomizer);
+//                SoundLibrary.playSound("Jump" + randomizer);
                 jumpState = new JumpState(components);
                 break;
             case RIGHT_APEX:
