@@ -2,16 +2,16 @@ package com.bitdecay.ludum.dare.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
 import com.bitdecay.jump.level.Level;
+import com.bitdecay.jump.level.TileObject;
 import com.bitdecay.jump.leveleditor.EditorHook;
 import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
@@ -43,6 +43,7 @@ public class GameScreen implements Screen, EditorHook {
     private SpriteBatch uiBatch;
     private SpriteBatch gobsBatch;
     Map<Integer, TextureRegion[]> tilesetMap = new HashMap<>();
+    private Level currentLevel;
 
     public GameScreen(LudumDareGame game) {
         this.game = game;
@@ -57,7 +58,8 @@ public class GameScreen implements Screen, EditorHook {
 
         Array<AnimagicTextureRegion> aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec");
         tilesetMap.put(0, aztecTileTextures.toArray(TextureRegion.class));
-        world.setLevel(LevelUtilities.loadLevel(ResourceDir.path("thePit.level")));
+        currentLevel = LevelUtilities.loadLevel(ResourceDir.path("thePit.level"));
+        world.setLevel(currentLevel);
 
         hud = new Hud(player);
         uiBatch = new SpriteBatch();
@@ -81,13 +83,16 @@ public class GameScreen implements Screen, EditorHook {
     }
 
     private void draw(OrthographicCamera cam) {
-        gobsBatch.setProjectionMatrix(camera.combined);
+        gobsBatch.setProjectionMatrix(cam.combined);
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         worldRenderer.render(world, cam);
 
         gobsBatch.begin();
+
+        drawLevel();
+
         gobs.draw(gobsBatch);
         gobsBatch.end();
 
@@ -95,6 +100,21 @@ public class GameScreen implements Screen, EditorHook {
         hud.render(uiBatch);
         uiBatch.end();
 
+    }
+
+    private void drawLevel() {
+        /**
+         * TODO: we still need to find a better way to load a grid into the world but with custom tile objects.
+         * It shouldn't be hard, but it does need to be done.
+         **/
+        for (int x = 0; x < currentLevel.gridObjects.length; x++) {
+            for (int y = 0; y < currentLevel.gridObjects[0].length; y++) {
+                TileObject obj = currentLevel.gridObjects[x][y];
+                if (obj != null) {
+                    gobsBatch.draw(tilesetMap.get(obj.material)[obj.renderNValue], obj.rect.xy.x, obj.rect.xy.y, obj.rect.width, obj.rect.height);
+                }
+            }
+        }
     }
 
     @Override
@@ -171,5 +191,11 @@ public class GameScreen implements Screen, EditorHook {
 
     @Override
     public void levelChanged(Level level) {
+        currentLevel = level;
+        world = new BitWorld();
+        world.setLevel(level);
+        player = new Player();
+        LevelInteractionComponent playerLevelLink = new LevelInteractionComponent(world, gobs);
+        player.addToScreen(playerLevelLink);
     }
 }

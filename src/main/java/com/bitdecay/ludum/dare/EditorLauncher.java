@@ -9,8 +9,8 @@ public class EditorLauncher {
 
     public static void main(String[] arg) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.width = 900;
-        config.height = 600;
+        config.width = 1600;
+        config.height = 900;
         config.title = "Jump";
 
         LevelEditor.setAssetsFolder("../jump/jump-leveleditor/assets");
