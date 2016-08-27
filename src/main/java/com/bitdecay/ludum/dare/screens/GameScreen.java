@@ -11,19 +11,17 @@ import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.actors.player.Player;
+import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
 import com.bitdecay.ludum.dare.hud.Hud;
-import com.bytebreakstudios.animagic.texture.AnimagicSpriteBatch;
+import org.lwjgl.Sys;
 
-/**
- * Created by jacob on 8/27/16.
- */
 public class GameScreen implements Screen {
 
     private LudumDareGame game;
 
-    OrthographicCamera camera = new OrthographicCamera(900, 600);
+    FollowOrthoCamera camera;
     LibGDXWorldRenderer worldRenderer = new LibGDXWorldRenderer();
     BitWorld world = new BitWorld();
     GameObjects gobs = new GameObjects();
@@ -33,6 +31,9 @@ public class GameScreen implements Screen {
 
     public GameScreen(LudumDareGame game) {
         this.game = game;
+
+        camera = new FollowOrthoCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.maxZoom = 0.5f;
 
         world.setGravity(0, -900);
         player = new Player();
@@ -53,7 +54,11 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         world.step(delta);
+        gobs.update(delta);
+
+        camera.addFollowPoint(player.getPosition());
         camera.update();
+
         worldRenderer.render(world, camera);
 
         update(delta);

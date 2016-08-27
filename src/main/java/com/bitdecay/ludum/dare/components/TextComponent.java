@@ -2,6 +2,7 @@ package com.bitdecay.ludum.dare.components;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bitdecay.ludum.dare.interfaces.IDraw;
 import com.bytebreakstudios.animagic.texture.AnimagicSpriteBatch;
@@ -34,7 +35,7 @@ public class TextComponent implements IComponent, IDraw {
     }
 
     @Override
-    public void draw(AnimagicSpriteBatch spriteBatch) {
+    public void draw(SpriteBatch spriteBatch) {
         font.draw(spriteBatch, text, position.x, position.y);
     }
 }
