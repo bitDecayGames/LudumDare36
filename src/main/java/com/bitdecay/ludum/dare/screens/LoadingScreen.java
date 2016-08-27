@@ -45,8 +45,9 @@ public class LoadingScreen implements Screen {
         );
     }
 
+    //TODO make this do a thing
     private void nextScreen() {
-        game.setScreen(new RaceScreen(game));
+//        game.setScreen(new RaceScreen(game));
     }
 
     @Override
