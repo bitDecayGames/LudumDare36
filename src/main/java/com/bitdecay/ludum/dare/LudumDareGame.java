@@ -9,18 +9,22 @@ import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlasLoader;
 
 public class LudumDareGame extends Game {
     public static boolean MUSIC_ON = true;
+    final static int NUM_PLAYER_ASSETS = 5;
 
     public static AssetManager assetManager = new AssetManager();
+    public static AnimagicTextureAtlas atlas;
+
     public static void queueAssetsForLoad() {
         assetManager.setLoader(AnimagicTextureAtlas.class, new AnimagicTextureAtlasLoader(new InternalFileHandleResolver()));
-        LudumDareGame.assetManager.load("packed/assets.atlas", AnimagicTextureAtlas.class);
-        LudumDareGame.assetManager.load("packed/fonts.atlas", AnimagicTextureAtlas.class);
+        LudumDareGame.assetManager.load(ResourceDir.path("packed/main.atlas"), AnimagicTextureAtlas.class);
     }
 
     @Override
     public void create() {
         queueAssetsForLoad();
         assetManager.finishLoading();
+        atlas = assetManager.get(ResourceDir.path("packed/main.atlas"), AnimagicTextureAtlas.class);
+
         setScreen(new SplashScreen(this));
     }
 }

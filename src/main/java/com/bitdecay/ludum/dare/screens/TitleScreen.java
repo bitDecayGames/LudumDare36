@@ -40,21 +40,21 @@ public class TitleScreen implements Screen {
 
     @Override
     public void show() {
-//        datBoat = new Image(new TextureRegion(new Texture(Gdx.files.internal("src/main/resources/assets/buzzkill/dankest_boat.jpg"))));
-//        datBoat.setScaling(Scaling.fill);
-//        datBoat.setWidth(Gdx.graphics.getWidth());
-//        datBoat.setHeight(Gdx.graphics.getHeight());
-//
-//        stage.addActor(datBoat);
-//
-//        Skin skin = new Skin(Gdx.files.internal("src/main/resources/skins/skin.json"));
-//        dankTitle = new Label("The Dankest Boat", skin);
-//        dankTitle.setFontScale(10);
-//        dankTitle.setFillParent(true);
-//        dankTitle.setAlignment(Align.top, Align.center);
-//        dankTitle.setColor(Color.GREEN);
-//
-//        stage.addActor(dankTitle);
+        datBoat = new Image(LudumDareGame.atlas.findRegion("buzzkill/dankest_boat"));
+        datBoat.setScaling(Scaling.fill);
+        datBoat.setWidth(Gdx.graphics.getWidth());
+        datBoat.setHeight(Gdx.graphics.getHeight());
+
+        stage.addActor(datBoat);
+
+        Skin skin = new Skin(ResourceDir.internal("skins/skin.json"));
+        dankTitle = new Label("The Dankest Boat", skin);
+        dankTitle.setFontScale(10);
+        dankTitle.setFillParent(true);
+        dankTitle.setAlignment(Align.top, Align.center);
+        dankTitle.setColor(Color.GREEN);
+
+        stage.addActor(dankTitle);
     }
 
     @Override
@@ -101,6 +101,6 @@ public class TitleScreen implements Screen {
     }
 
     private void nextScreen() {
-        game.setScreen(new MainMenuScreen(game));
+        game.setScreen(new MikeTestBulletScreen(game));
     }
 }

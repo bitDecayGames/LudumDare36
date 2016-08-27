@@ -5,16 +5,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.bitdecay.ludum.dare.Config;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.control.InputUtil;
 import com.bitdecay.ludum.dare.control.Xbox360Pad;
-import com.bitdecay.ludum.dare.util.SoundLibrary;
 
 public class SplashScreen implements Screen {
 
@@ -28,9 +24,9 @@ public class SplashScreen implements Screen {
         this.game = game;
         stage = new Stage();
 //        ldWallpaper = new Image(new TextureRegion(new Texture(Gdx.files.internal(Config.RESOURCE_DIR + "splash/splash.png"))));
-        ldWallpaper = new Image(new TextureRegion(new Texture(Gdx.files.internal(Config.RESOURCE_DIR + "assets/buzzkill/dankest_boat.jpg"))));
+        ldWallpaper = new Image(LudumDareGame.atlas.findRegion("buzzkill/dankest_boat"));
         ldWallpaper.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        bdWallpaper = new Image(new TextureRegion(new Texture(Gdx.files.internal(Config.RESOURCE_DIR + "assets/splash/bitDecay.png"))));
+        bdWallpaper = new Image(LudumDareGame.atlas.findRegion("splash/bitDecay"));
         bdWallpaper.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         stage.addActor(ldWallpaper);
         stage.addActor(bdWallpaper);
@@ -80,7 +76,7 @@ public class SplashScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (InputUtil.checkInputs(Input.Keys.ENTER, Xbox360Pad.START)) {
+        if (InputUtil.checkInputs(Input.Keys.S, Xbox360Pad.START)) {
             nextScreen();
         }
 
@@ -114,6 +110,6 @@ public class SplashScreen implements Screen {
     }
 
     private void nextScreen() {
-        game.setScreen(new TitleScreen(game));
+        game.setScreen(new MainMenuScreen(game));
     }
 }
