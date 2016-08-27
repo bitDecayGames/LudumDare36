@@ -22,13 +22,13 @@ import com.bytebreakstudios.animagic.animation.Animator;
 public class Player extends StateMachine {
     private final SizeComponent size;
     private final PositionComponent pos;
-    public final PhysicsComponent phys;
     private final HealthComponent health;
     private final AnimationComponent anim;
     private final AttackComponent attack;
     private final JetPackComponent jetpack;
+    private final PhysicsComponent phys;
+    private final KeyboardControlComponent keybaord;
 
-    //TODO refactor this bitch
     private LevelInteractionComponent levelComponent;
 
     public Player() {
@@ -42,8 +42,14 @@ public class Player extends StateMachine {
 
         phys = createBody();
         jetpack = new JetPackComponent();
+
+        keybaord = new KeyboardControlComponent();
+        ControlMap controls = keybaord;
+        phys.getBody().controller = new PlayerInputController(controls);
+
         append(size).append(pos).append(phys).append(health).append(anim);
     }
+
 
     private PhysicsComponent createBody() {
         JumperBody body = new JumperBody();
@@ -138,15 +144,7 @@ public class Player extends StateMachine {
         levelComponent.addToLevel(this, phys);
     }
 
-    public void activateControls() {
-        try {
-            ControlMap controls = (ControlMap) getFirstComponent(InputComponent.class);
-            phys.getBody().controller = new PlayerInputController(controls);
-            setActiveState(new StandState(components));
-        } catch (Error e) {
-            throw new Error("Could not activate player controls");
-        }
-    }
+
 
     public void draw(ShapeRenderer shapeRenderer) {
 //        super.draw(shapeRenderer);

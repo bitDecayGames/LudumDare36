@@ -12,10 +12,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.bitdecay.jump.collision.BitWorld;
+import com.bitdecay.jump.control.PlayerInputController;
+import com.bitdecay.jump.gdx.input.GDXControls;
 import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.actors.player.Player;
+import com.bitdecay.ludum.dare.collection.GameObjects;
+import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
 
 public class TitleScreen implements Screen {
@@ -28,15 +32,19 @@ public class TitleScreen implements Screen {
     OrthographicCamera camera = new OrthographicCamera(512, 512);
     LibGDXWorldRenderer worldRenderer = new LibGDXWorldRenderer();
     BitWorld world = new BitWorld();
+    GameObjects gobs = new GameObjects();
 
     public TitleScreen(LudumDareGame game) {
         this.game = game;
         stage = new Stage();
 
-        world.setLevel(LevelUtilities.loadLevel("src/main/resources/thePit.level"));
+        world.setGravity(0, -900);
 
         Player player = new Player();
-        world.addBody(player.phys.getBody());
+        LevelInteractionComponent playerLevelLink= new LevelInteractionComponent(world, gobs);
+        player.addToScreen(playerLevelLink);
+
+        world.setLevel(LevelUtilities.loadLevel("src/main/resources/thePit.level"));
     }
 
     @Override
@@ -62,7 +70,7 @@ public class TitleScreen implements Screen {
     public void render(float delta) {
 //        LudumDareGame.assetManager.update();
 //        Gdx.gl.glClearColor(1, 0, 0, 1);
-//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 //        if (InputUtil.checkInputs(Input.Keys.S, Xbox360Pad.BACK)) {
 //            nextScreen();
