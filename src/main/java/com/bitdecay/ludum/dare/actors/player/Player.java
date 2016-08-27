@@ -22,10 +22,11 @@ import com.bytebreakstudios.animagic.animation.Animator;
 public class Player extends StateMachine {
     private final SizeComponent size;
     private final PositionComponent pos;
-    private final PhysicsComponent phys;
+    public final PhysicsComponent phys;
     private final HealthComponent health;
     private final AnimationComponent anim;
     private final AttackComponent attack;
+    private final JetPackComponent jetpack;
 
     //TODO refactor this bitch
     private LevelInteractionComponent levelComponent;
@@ -40,6 +41,7 @@ public class Player extends StateMachine {
         attack = new AttackComponent(10);
 
         phys = createBody();
+        jetpack = new JetPackComponent();
         append(size).append(pos).append(phys).append(health).append(anim);
     }
 

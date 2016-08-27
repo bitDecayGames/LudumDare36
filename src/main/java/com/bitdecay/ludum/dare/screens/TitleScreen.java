@@ -5,18 +5,14 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
-import com.bitdecay.ludum.dare.control.InputUtil;
-import com.bitdecay.ludum.dare.control.Xbox360Pad;
-import com.bytebreakstudios.animagic.texture.AnimagicSpriteBatch;
+import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
-import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 
 public class TitleScreen implements Screen {
 
@@ -33,7 +29,10 @@ public class TitleScreen implements Screen {
         this.game = game;
         stage = new Stage();
 
-        world.setLevel(LevelUtilities.loadLevel("thePit.level"));
+        world.setLevel(LevelUtilities.loadLevel("src/main/resources/thePit.level"));
+
+        Player player = new Player();
+        world.addBody(player.phys.getBody());
     }
 
     @Override
