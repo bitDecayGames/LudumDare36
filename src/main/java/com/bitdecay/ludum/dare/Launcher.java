@@ -9,7 +9,7 @@ import java.io.File;
 public class Launcher {
 
     public static void main(String[] arg) {
-        AnimagicTexturePacker.pack(new File("assets"), new File("packed"));
+        AnimagicTexturePacker.pack(new File(Config.RESOURCE_DIR), new File("packed"));
 
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.resizable = false;
