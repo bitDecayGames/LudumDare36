@@ -7,6 +7,7 @@ public enum InputAction {
     RIGHT(PlayerAction.RIGHT),
     DOWN(PlayerAction.DOWN),
     JUMP(PlayerAction.JUMP),
+    UP(PlayerAction.UP),
     SHOOT();
 
     public PlayerAction playerAction = null;

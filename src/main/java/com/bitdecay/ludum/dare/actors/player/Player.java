@@ -42,9 +42,9 @@ public class Player extends StateMachine {
         keyboard = new KeyboardControlComponent();
         shoot = new ShootComponent(keyboard);
 
-        append(size).append(pos).append(phys).append(health).append(jetpack).append(anim).append(keyboard).append(shoot);
         phys.getBody().controller = new PlayerInputController(keyboard);
 
+        append(size).append(pos).append(phys).append(health).append(jetpack).append(anim).append(keyboard).append(shoot);
         setActiveState(new StandState(components));
     }
 
