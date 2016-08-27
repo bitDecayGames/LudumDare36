@@ -8,13 +8,12 @@ import com.bitdecay.jump.control.ControlMap;
 import com.bitdecay.jump.control.PlayerInputController;
 import com.bitdecay.jump.geom.BitRectangle;
 import com.bitdecay.jump.properties.JumperProperties;
-import com.bitdecay.jump.render.JumperRenderStateWatcher;
 import com.bitdecay.ludum.dare.actors.StateMachine;
 import com.bitdecay.ludum.dare.actors.state.HurtState;
 
+import com.bitdecay.ludum.dare.actors.state.StandState;
 import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
-import com.bitdecay.ludum.dare.interfaces.IState;
 import com.bytebreakstudios.animagic.animation.Animation;
 import com.bytebreakstudios.animagic.animation.Animator;
 import com.bytebreakstudios.animagic.animation.FrameRate;
@@ -31,6 +30,7 @@ public class Player extends StateMachine {
     private final JetPackComponent jetpack;
     private final PhysicsComponent phys;
     private final KeyboardControlComponent keybaord;
+    private final JumperRenderStateComponent renderStateComponent;
 
     private LevelInteractionComponent levelComponent;
 
@@ -38,11 +38,11 @@ public class Player extends StateMachine {
         size = new SizeComponent(100, 100);
         pos = new PositionComponent(0, 0);
         health = new HealthComponent(10, 10);
-        anim = new AnimationComponent("player", pos, 1f, new Vector2());
-        setupAnimation(anim.animator);
+        anim = new PlayerAnimationComponent(pos);
 
         attack = new AttackComponent(10);
 
+        renderStateComponent = new PlayerRenderStateComponent(this);
         phys = createBody();
         jetpack = new JetPackComponent((JumperBody) phys.getBody());
 
@@ -50,7 +50,7 @@ public class Player extends StateMachine {
         ControlMap controls = keybaord;
         phys.getBody().controller = new PlayerInputController(controls);
 
-        append(size).append(pos).append(phys).append(health).append(jetpack).append(anim)   ;
+        append(size).append(pos).append(phys).append(health).append(jetpack).append(anim).append(renderStateComponent);
     }
 
 
@@ -60,31 +60,13 @@ public class Player extends StateMachine {
         body.jumperProps = new JumperProperties();
         body.jumperProps.jumpCount = Integer.MAX_VALUE;
         body.jumperProps.jumpVariableHeightWindow = Float.POSITIVE_INFINITY;
-        body.renderStateWatcher = new JumperRenderStateWatcher();
         body.bodyType = BodyType.DYNAMIC;
         body.aabb.set(new BitRectangle(0, 0, 16, 32));
         body.userObject = this;
 
-        setupAnimation(anim.animator);
+        renderStateComponent.addToBody(body);
+
         return new PhysicsComponent(body, pos, size);
-    }
-
-
-    private void setupAnimation(Animator a) {
-//        a.addAnimation(new Animation("run", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("run").toArray(AnimagicTextureRegion.class)));
-//        a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.1f), atlas.findRegions("jump").toArray(AnimagicTextureRegion.class)));
-//        a.addAnimation(new Animation("apex", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.1f), atlas.findRegions("apex").toArray(AnimagicTextureRegion.class)));
-//        a.addAnimation(new Animation("fall", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.1f), atlas.findRegions("fall").toArray(AnimagicTextureRegion.class)));
-//        a.addAnimation(new Animation("knockback", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.1f), atlas.findRegions("knockback").toArray(AnimagicTextureRegion.class)));
-//        a.addAnimation(new Animation("punch/front", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.05f), atlas.findRegions("punch/front").toArray(AnimagicTextureRegion.class)));
-//        a.addAnimation(new Animation("punch/jumping/down", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.05f), atlas.findRegions("punch/jumping/down").toArray(AnimagicTextureRegion.class)));
-//        a.addAnimation(new Animation("punch/jumping/front", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.05f), atlas.findRegions("punch/jumping/front").toArray(AnimagicTextureRegion.class)));
-//        a.addAnimation(new Animation("punch/jumping/up", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.1f), atlas.findRegions("punch/jumping/up").toArray(AnimagicTextureRegion.class)));
-//        a.addAnimation(new Animation("punch/up", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.05f), atlas.findRegions("punch/up").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("stand", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("player/stand").toArray(AnimagicTextureRegion.class)));
-//        a.addAnimation(new Animation("wall", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("wall").toArray(AnimagicTextureRegion.class)));
-//
-        a.switchToAnimation("stand");
     }
 
     @Override
@@ -102,10 +84,6 @@ public class Player extends StateMachine {
 
     public void hit(AttackComponent attackComponent) {
         setActiveState(new HurtState(components, attackComponent));
-    }
-
-    private void checkForStateSwitch() {
-        IState newState = null;
     }
 
     public void setPosition(float x, float y) {
