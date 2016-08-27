@@ -13,6 +13,6 @@
 3. ```mvn install```
 
 ### Setup this project
-1. ```git clone git@github.com:bitDecayGames/LudumDare36.git```
+1. ```git clone git@github.com:bitDecayGames/LudumDare36.git ludumdare36```
 2. ```cd ludumdare36/```
 3. ```mvn compile```
