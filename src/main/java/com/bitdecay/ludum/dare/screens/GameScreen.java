@@ -20,7 +20,7 @@ public class GameScreen implements Screen {
 
     private LudumDareGame game;
 
-    OrthographicCamera camera = new OrthographicCamera(512, 512);
+    OrthographicCamera camera = new OrthographicCamera(900, 600);
     LibGDXWorldRenderer worldRenderer = new LibGDXWorldRenderer();
     BitWorld world = new BitWorld();
     GameObjects gobs = new GameObjects();
