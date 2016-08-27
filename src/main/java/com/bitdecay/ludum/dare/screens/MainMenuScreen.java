@@ -131,8 +131,7 @@ public class MainMenuScreen implements Screen {
         } else if (enterWasPressed && !(InputUtil.checkInputs(Input.Keys.ENTER, Xbox360Pad.A))){
             switch (menuSelection) {
                 case 0:
-                    // TODO when we have a game.
-//                    game.setScreen(new GameScreen(game));
+                    game.setScreen(new GameScreen(game));
                     break;
                 case 1:
                     game.setScreen(new CreditsScreen(game));

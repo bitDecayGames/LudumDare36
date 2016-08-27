@@ -1,11 +1,14 @@
 package com.bitdecay.ludum.dare.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
+import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.collection.GameObjects;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
@@ -30,7 +33,7 @@ public class GameScreen implements Screen {
         LevelInteractionComponent playerLevelLink = new LevelInteractionComponent(world, gobs);
         player.addToScreen(playerLevelLink);
 
-        world.setLevel(LevelUtilities.loadLevel("src/main/resources/thePit.level"));
+        world.setLevel(LevelUtilities.loadLevel(ResourceDir.path("thePit.level")));
     }
 
     @Override
@@ -39,7 +42,12 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public void render(float v) {
+    public void render(float delta) {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        world.step(delta);
+        camera.update();
+        worldRenderer.render(world, camera);
 
     }
 
