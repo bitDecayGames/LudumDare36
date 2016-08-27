@@ -16,3 +16,4 @@
 1. ```git clone git@github.com:bitDecayGames/LudumDare36.git ludumdare36```
 2. ```cd ludumdare36/```
 3. ```mvn compile```
+4. Go into the project in your IDE, right click the Launcher.java file and run as a main class.
