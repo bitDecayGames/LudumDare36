@@ -14,6 +14,8 @@ public class LudumDareGame extends Game {
     public static AssetManager assetManager = new AssetManager();
     public static void queueAssetsForLoad() {
         assetManager.setLoader(AnimagicTextureAtlas.class, new AnimagicTextureAtlasLoader(new InternalFileHandleResolver()));
+        LudumDareGame.assetManager.load("src/main/resources/packed/whitebullet.atlas", AnimagicTextureAtlas.class);
+
 //        LudumDareGame.assetManager.load("packed/tiles.atlas", AnimagicTextureAtlas.class);
 //        LudumDareGame.assetManager.load("packed/level.atlas", AnimagicTextureAtlas.class);
 //        LudumDareGame.assetManager.load("packed/test.atlas", AnimagicTextureAtlas.class);
@@ -30,6 +32,7 @@ public class LudumDareGame extends Game {
     public void create() {
         queueAssetsForLoad();
         assetManager.finishLoading();
+        System.out.println("Assets: " + assetManager.getAssetNames());
         setScreen(new DemoScreen(this));
     }
 }

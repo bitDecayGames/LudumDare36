@@ -9,14 +9,15 @@ import java.io.File;
 public class Launcher {
 
     public static void main(String[] arg) {
-        if (arg != null && arg.length > 3) {
-            AnimagicTexturePacker.pack(new File("sprites"), new File("packed"));
-            AnimagicTexturePacker.pack(new File("assets"), new File("packed"));
-        }
+        //if (arg != null && arg.length > 3) {
+            //AnimagicTexturePacker.pack(new File("sprites"), new File("packed"));
+        System.out.println(new File(".").getAbsolutePath());
+        AnimagicTexturePacker.pack(new File("src/main/resources/assets"), new File("src/main/resources/packed"));
+        //}
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.resizable = false;
-        config.width = 1600;
-        config.height = 900;
+        config.width = 900;
+        config.height = 600;
 
         if (arg != null && arg.length > 0) {
             if (arg[0].equalsIgnoreCase("medium")) {
