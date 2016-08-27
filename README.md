@@ -8,7 +8,7 @@
 3. ```mvn install```
 
 ### Install Jump
-1. ```git clone git@github.com:bitDecayGames/Jump.git```
+1. ```git clone git@github.com:bitDecayGames/Jump.git jump```
 2. ```cd jump/```
 3. ```mvn install```
 
