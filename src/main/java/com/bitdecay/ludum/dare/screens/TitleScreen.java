@@ -1,20 +1,27 @@
 package com.bitdecay.ludum.dare.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
+import com.bitdecay.jump.collision.BitWorld;
+import com.bitdecay.jump.control.PlayerInputController;
+import com.bitdecay.jump.gdx.input.GDXControls;
+import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
+import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
-import com.bitdecay.ludum.dare.control.InputUtil;
-import com.bitdecay.ludum.dare.control.Xbox360Pad;
+import com.bitdecay.ludum.dare.actors.player.Player;
+import com.bitdecay.ludum.dare.collection.GameObjects;
+import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
+import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
 
 public class TitleScreen implements Screen {
 
@@ -23,6 +30,9 @@ public class TitleScreen implements Screen {
 
     private Stage stage;
     private LudumDareGame game;
+    OrthographicCamera camera = new OrthographicCamera(512, 512);
+    LibGDXWorldRenderer worldRenderer = new LibGDXWorldRenderer();
+    BitWorld world = new BitWorld();
 
     public TitleScreen(LudumDareGame game) {
         this.game = game;
@@ -50,13 +60,17 @@ public class TitleScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        LudumDareGame.assetManager.update();
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+//        LudumDareGame.assetManager.update();
+//        Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (InputUtil.checkInputs(Input.Keys.ENTER, Xbox360Pad.START)) {
-            nextScreen();
-        }
+//        if (InputUtil.checkInputs(Input.Keys.S, Xbox360Pad.BACK)) {
+//            nextScreen();
+//        }
+
+        world.step(delta);
+        camera.update();
+        worldRenderer.render(world, camera);
 
         stage.act();
         stage.draw();

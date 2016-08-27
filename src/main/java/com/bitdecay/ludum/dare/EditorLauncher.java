@@ -6,8 +6,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.bitdecay.jump.leveleditor.render.LevelEditor;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.components.KeyboardControlComponent;
-import com.bitdecay.ludum.dare.gameobject.FinishLineGameObject;
-import com.bitdecay.ludum.dare.screens.RaceScreen;
 import com.bitdecay.ludum.dare.util.Players;
 import com.bytebreakstudios.animagic.texture.AnimagicTexturePacker;
 
@@ -35,18 +33,13 @@ public class EditorLauncher {
                 LudumDareGame.assetManager.finishLoading();
 
                 List<Player> players = new ArrayList<>();
-                Player playerInstance = new Player(0);
+                Player playerInstance = new Player();
                 playerInstance.append(new KeyboardControlComponent());
                 players.add(playerInstance);
 //                players.add(playerInstance);
 //                players.add(playerInstance);
 //                players.add(playerInstance);
                 Players.initialize(players);
-
-                RaceScreen raceScreen = new RaceScreen(game);
-                raceScreen.finishOverride = new FinishLineGameObject();
-                raceScreen.show();
-                setScreen(new LevelEditor(raceScreen));
             }
         }, config);
     }

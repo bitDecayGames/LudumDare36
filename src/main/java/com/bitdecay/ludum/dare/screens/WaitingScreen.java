@@ -45,8 +45,9 @@ public class WaitingScreen implements Screen {
         );
     }
 
+    //TODO make this do a thing that we want it to do
     private void nextScreen() {
-        game.setScreen(new UpgradeScreen(game));
+//        game.setScreen(new UpgradeScreen(game));
     }
 
     @Override
