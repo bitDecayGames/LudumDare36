@@ -9,11 +9,8 @@ import java.io.File;
 public class Launcher {
 
     public static void main(String[] arg) {
-        //if (arg != null && arg.length > 3) {
-            //AnimagicTexturePacker.pack(new File("sprites"), new File("packed"));
-        System.out.println(new File(".").getAbsolutePath());
-        AnimagicTexturePacker.pack(new File("src/main/resources/assets"), new File("src/main/resources/packed"));
-        //}
+        AnimagicTexturePacker.pack(new File(Config.RESOURCE_DIR), new File("packed"));
+
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.resizable = false;
         config.width = 900;

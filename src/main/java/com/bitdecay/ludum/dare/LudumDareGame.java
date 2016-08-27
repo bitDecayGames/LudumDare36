@@ -15,6 +15,8 @@ public class LudumDareGame extends Game {
     public static void queueAssetsForLoad() {
         assetManager.setLoader(AnimagicTextureAtlas.class, new AnimagicTextureAtlasLoader(new InternalFileHandleResolver()));
         LudumDareGame.assetManager.load("packed/main.atlas", AnimagicTextureAtlas.class);
+        LudumDareGame.assetManager.load("packed/assets.atlas", AnimagicTextureAtlas.class);
+        LudumDareGame.assetManager.load("packed/fonts.atlas", AnimagicTextureAtlas.class);
     }
 
     @Override
@@ -23,5 +25,6 @@ public class LudumDareGame extends Game {
         assetManager.finishLoading();
         System.out.println("Assets: " + assetManager.getAssetNames());
         setScreen(new MikeTestBulletScreen(this));
+        setScreen(new SplashScreen(this));
     }
 }
