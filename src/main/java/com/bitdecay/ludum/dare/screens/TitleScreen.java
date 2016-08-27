@@ -32,19 +32,10 @@ public class TitleScreen implements Screen {
     OrthographicCamera camera = new OrthographicCamera(512, 512);
     LibGDXWorldRenderer worldRenderer = new LibGDXWorldRenderer();
     BitWorld world = new BitWorld();
-    GameObjects gobs = new GameObjects();
 
     public TitleScreen(LudumDareGame game) {
         this.game = game;
         stage = new Stage();
-
-        world.setGravity(0, -900);
-
-        Player player = new Player();
-        LevelInteractionComponent playerLevelLink= new LevelInteractionComponent(world, gobs);
-        player.addToScreen(playerLevelLink);
-
-        world.setLevel(LevelUtilities.loadLevel("src/main/resources/thePit.level"));
     }
 
     @Override
