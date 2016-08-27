@@ -24,6 +24,7 @@ public class Player extends StateMachine {
     private final JetPackComponent jetpack;
     private final PhysicsComponent phys;
     private final KeyboardControlComponent keyboard;
+    private final ShootComponent shoot;
 
     private LevelInteractionComponent levelComponent;
 
@@ -39,10 +40,11 @@ public class Player extends StateMachine {
         jetpack = new JetPackComponent((JumperBody) phys.getBody());
 
         keyboard = new KeyboardControlComponent();
+        shoot = new ShootComponent(keyboard);
+
         phys.getBody().controller = new PlayerInputController(keyboard);
 
-        append(size).append(pos).append(phys).append(health).append(jetpack).append(anim).append(keyboard);
-
+        append(size).append(pos).append(phys).append(health).append(jetpack).append(anim).append(keyboard).append(shoot);
         setActiveState(new StandState(components));
     }
 
