@@ -42,7 +42,7 @@ public class Hud {
         double newFuel= player.jetpack.current / player.jetpack.max;
         fuelGauge.setFrameIndex((int)Math.floor(newFuel));*/
 
-        TextureRegion temp = LudumDareGame.atlas.findRegion("buzzkill/dankest_boat").getNormalTextureRegion();
+        TextureRegion temp = LudumDareGame.atlas.findRegion("buzzkill/dankest_boat");
         temp.setRegionHeight(30);
         temp.setRegionWidth(30);
         uiBatch.draw(temp,450,0);
