@@ -5,9 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -137,9 +134,9 @@ public class CreditsScreen implements Screen {
 
     public void update(float delta){
 
-        if (InputUtil.checkInputs(Input.Keys.ESCAPE, Xbox360Pad.B) || InputUtil.checkInputs(Input.Keys.B, Xbox360Pad.B)) {
+        if (InputUtil.isPressed(Input.Keys.ESCAPE, Xbox360Pad.B) || InputUtil.isPressed(Input.Keys.B, Xbox360Pad.B)) {
             escWasPressed = true;
-        } else if (escWasPressed && !(InputUtil.checkInputs(Input.Keys.ESCAPE, Xbox360Pad.B))){
+        } else if (escWasPressed && !(InputUtil.isPressed(Input.Keys.ESCAPE, Xbox360Pad.B))){
             game.setScreen(new MainMenuScreen(game));
         }
     }
