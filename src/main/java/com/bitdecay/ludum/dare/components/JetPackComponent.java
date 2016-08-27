@@ -30,7 +30,6 @@ public class JetPackComponent implements IComponent, IUpdate{
 
     @Override
     public void update(float delta) {
-        System.out.println("My damn fuel: " + currentFuel);
         if(playerJumpBody.controller.getStatus().equals(JumpingControlState.class.getSimpleName())){
             isFiring = true;
         } else {
