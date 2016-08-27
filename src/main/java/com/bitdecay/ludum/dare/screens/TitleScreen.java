@@ -5,8 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -33,7 +31,7 @@ public class TitleScreen implements Screen {
 
     @Override
     public void show() {
-        datBoat = new Image(new TextureRegion(new Texture(ResourceDir.internal("assets/main/buzzkill/dankest_boat.jpg"))));
+        datBoat = new Image(LudumDareGame.atlas.findRegion("buzzkill/dankest_boat"));
         datBoat.setScaling(Scaling.fill);
         datBoat.setWidth(Gdx.graphics.getWidth());
         datBoat.setHeight(Gdx.graphics.getHeight());
