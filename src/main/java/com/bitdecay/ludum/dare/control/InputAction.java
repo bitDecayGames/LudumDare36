@@ -5,11 +5,9 @@ import com.bitdecay.jump.control.PlayerAction;
 public enum InputAction {
     LEFT(PlayerAction.LEFT),
     RIGHT(PlayerAction.RIGHT),
-    UP(PlayerAction.UP),
     DOWN(PlayerAction.DOWN),
     JUMP(PlayerAction.JUMP),
-    PUNCH(),
-    PROJECTILE();
+    SHOOT();
 
     public PlayerAction playerAction = null;
 
