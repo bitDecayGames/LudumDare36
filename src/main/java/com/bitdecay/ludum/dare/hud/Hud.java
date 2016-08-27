@@ -40,10 +40,10 @@ public class Hud {
        /* double newHealth= player.health.current / player.health.max;
         healthBar.setFrameIndex((int)Math.floor(newHealth));
 */
-        float newFuel= (float)Math.floor(player.getJetpack().currentFuel / player.getJetpack().maxFuel);
+        float newFuel=player.getJetpack().currentFuel / player.getJetpack().maxFuel;
         
         //uiBatch.draw(healthBar.getFrame(),450,0);
-        float rotation = -160+240*newFuel;
+        float rotation = (240*newFuel)-160;
         uiBatch.draw(fuelGauge,100,100);
         uiBatch.draw(fuelNeedle,100,100,32,32,64,64,1,1,rotation);
 
