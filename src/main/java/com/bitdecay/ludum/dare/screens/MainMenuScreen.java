@@ -160,10 +160,10 @@ public class MainMenuScreen implements Screen {
             upIsPressed = false;
         }
 
-            updateMenuSelection();
+        updateMenuSelection();
     }
 
-    private void updateMenuSelection(){
+    private void updateMenuSelection() {
         switch(menuSelection){
             case 0:
                 // start selected
