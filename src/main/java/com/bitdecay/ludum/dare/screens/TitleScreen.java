@@ -35,14 +35,14 @@ public class TitleScreen implements Screen {
 
     @Override
     public void show() {
-        datBoat = new Image(new TextureRegion(new Texture(Gdx.files.internal("assets/sprites/dankest_boat.jpg"))));
+        datBoat = new Image(new TextureRegion(new Texture(Gdx.files.internal("src/main/resources/assets/buzzkill/dankest_boat.jpg"))));
         datBoat.setScaling(Scaling.fill);
         datBoat.setWidth(Gdx.graphics.getWidth());
         datBoat.setHeight(Gdx.graphics.getHeight());
 
         stage.addActor(datBoat);
 
-        Skin skin = new Skin(Gdx.files.internal("assets/skins/skin.json"));
+        Skin skin = new Skin(Gdx.files.internal("src/main/resources/skins/skin.json"));
         dankTitle = new Label("The Dankest Boat", skin);
         dankTitle.setFontScale(10);
         dankTitle.setFillParent(true);
@@ -58,7 +58,8 @@ public class TitleScreen implements Screen {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (InputUtil.checkInputs(Input.Keys.S, Xbox360Pad.BACK)) {
+        if (InputUtil.checkInputs(Input.Keys.ENTER, Xbox360Pad.START
+        )) {
             nextScreen();
         }
 
