@@ -30,9 +30,6 @@ public class MainMenuScreen implements Screen {
     private Label quitLbl;
 
     private int menuSelection;
-    private boolean downIsPressed;
-    private boolean upIsPressed;
-    private boolean enterWasPressed;
 
     boolean active = true;
 
@@ -40,9 +37,6 @@ public class MainMenuScreen implements Screen {
         this.game = game;
 
         menuSelection = 0;
-        downIsPressed = false;
-        upIsPressed = false;
-        enterWasPressed = false;
 
         Skin skin = new Skin(ResourceDir.internal("skins/skin.json"));
 
@@ -121,10 +115,7 @@ public class MainMenuScreen implements Screen {
 
     public void update(float delta){
 
-        if (InputUtil.isPressed(Input.Keys.ENTER, Xbox360Pad.A)) {
-            enterWasPressed = true;
-//            SoundLibrary.playSound("Select_confirm");
-        } else if (enterWasPressed && !(InputUtil.isPressed(Input.Keys.ENTER, Xbox360Pad.A))){
+        if (InputUtil.isJustPressed(Input.Keys.ENTER, Xbox360Pad.A)){
             switch (menuSelection) {
                 case 0:
                     game.setScreen(new GameScreen(game));
@@ -138,23 +129,17 @@ public class MainMenuScreen implements Screen {
             }
         }
 
-        if (InputUtil.isPressed(Input.Keys.DOWN, Xbox360Pad.LS_DOWN) && !downIsPressed) {
+        if (InputUtil.isJustPressed(Input.Keys.DOWN, Xbox360Pad.LS_DOWN)) {
 //            SoundLibrary.playSound("Select_change");
             menuSelection = (menuSelection + 1) % 3;
-            downIsPressed = true;
-        } else if(!InputUtil.isPressed(Input.Keys.DOWN, Xbox360Pad.LS_DOWN)){
-            downIsPressed = false;
         }
 
-        if (InputUtil.isPressed(Input.Keys.UP, Xbox360Pad.LS_UP) && !upIsPressed) {
+        if (InputUtil.isPressed(Input.Keys.UP, Xbox360Pad.LS_UP)) {
 //            SoundLibrary.playSound("Select_change");
             menuSelection -= 1;
             if (menuSelection < 0) {
                 menuSelection = 2;
             }
-            upIsPressed = true;
-        } else if(!InputUtil.isPressed(Input.Keys.UP, Xbox360Pad.LS_UP)){
-            upIsPressed = false;
         }
 
         updateMenuSelection();
