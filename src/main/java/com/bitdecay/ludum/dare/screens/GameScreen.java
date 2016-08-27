@@ -51,6 +51,7 @@ public class GameScreen implements Screen, EditorHook {
 
         camera = new FollowOrthoCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.maxZoom = 0.5f;
+        camera.snapSpeed = 0.2f;
 
         world.setGravity(0, -900);
         player = new Player();

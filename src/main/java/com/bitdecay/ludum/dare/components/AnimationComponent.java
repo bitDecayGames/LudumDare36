@@ -32,7 +32,7 @@ public class AnimationComponent implements IComponent, IUpdate, IDraw {
     @Override
     public void draw(SpriteBatch spriteBatch) {
         TextureRegion reg = animator.getFrame();
-        spriteBatch.draw(reg, position.x + offset.x + (flipVerticalAxis ? reg.getRegionWidth() / 2 : 0), position.y + offset.y, reg.getRegionWidth() * scale * (flipVerticalAxis ? -1 : 1), reg.getRegionHeight() * scale);
+        spriteBatch.draw(reg, position.x + offset.x + (flipVerticalAxis ? reg.getRegionWidth() * scale : 0), position.y + offset.y, reg.getRegionWidth() * scale * (flipVerticalAxis ? -1 : 1), reg.getRegionHeight() * scale);
     }
 
     public void setFlipVerticalAxis(boolean value) {
