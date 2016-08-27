@@ -11,9 +11,6 @@ import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.jump.render.JumperRenderStateWatcher;
 import com.bitdecay.ludum.dare.actors.StateMachine;
 import com.bitdecay.ludum.dare.actors.state.HurtState;
-import com.bitdecay.ludum.dare.actors.state.ProjectileState;
-import com.bitdecay.ludum.dare.actors.state.PunchState;
-import com.bitdecay.ludum.dare.actors.state.StandState;
 import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bitdecay.ludum.dare.interfaces.IState;
@@ -41,13 +38,13 @@ public class Player extends StateMachine {
         attack = new AttackComponent(10);
 
         phys = createBody();
-        jetpack = new JetPackComponent();
+        jetpack = new JetPackComponent((JumperBody) phys.getBody());
 
         keybaord = new KeyboardControlComponent();
         ControlMap controls = keybaord;
         phys.getBody().controller = new PlayerInputController(controls);
 
-        append(size).append(pos).append(phys).append(health).append(anim);
+        append(size).append(pos).append(phys).append(health).append(jetpack);//.append(anim).;
     }
 
 
@@ -55,7 +52,8 @@ public class Player extends StateMachine {
         JumperBody body = new JumperBody();
         body.props.deceleration = 10000;
         body.jumperProps = new JumperProperties();
-        body.jumperProps.jumpCount = 0;
+        body.jumperProps.jumpCount = Integer.MAX_VALUE;
+        body.jumperProps.jumpVariableHeightWindow = Float.POSITIVE_INFINITY;
         body.renderStateWatcher = new JumperRenderStateWatcher();
         body.bodyType = BodyType.DYNAMIC;
         body.aabb.set(new BitRectangle(0, 0, 16, 32));
@@ -102,17 +100,6 @@ public class Player extends StateMachine {
 
     private void checkForStateSwitch() {
         IState newState = null;
-        PunchState punch = new PunchState(components);
-        ProjectileState projectile = new ProjectileState(components);
-        if (punch.shouldRun(activeState)) {
-            newState = punch;
-        } else if (projectile.shouldRun(activeState)) {
-            newState = projectile;
-        }
-
-        if (newState != null) {
-            setActiveState(newState);
-        }
     }
 
     public void setPosition(float x, float y) {

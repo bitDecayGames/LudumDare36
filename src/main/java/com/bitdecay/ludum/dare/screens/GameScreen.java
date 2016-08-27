@@ -49,6 +49,8 @@ public class GameScreen implements Screen {
         camera.update();
         worldRenderer.render(world, camera);
 
+        update(delta);
+
     }
 
     @Override
@@ -74,5 +76,9 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    public void update (float delta) {
+        gobs.update(delta);
     }
 }
