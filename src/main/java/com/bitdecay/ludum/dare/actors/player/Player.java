@@ -4,14 +4,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.JumperBody;
-import com.bitdecay.jump.control.ControlMap;
 import com.bitdecay.jump.control.PlayerInputController;
 import com.bitdecay.jump.geom.BitRectangle;
 import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.jump.render.JumperRenderStateWatcher;
 import com.bitdecay.ludum.dare.actors.StateMachine;
 import com.bitdecay.ludum.dare.actors.state.HurtState;
-
 import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bitdecay.ludum.dare.interfaces.IState;
@@ -30,7 +28,7 @@ public class Player extends StateMachine {
     private final AttackComponent attack;
     private final JetPackComponent jetpack;
     private final PhysicsComponent phys;
-    private final KeyboardControlComponent keybaord;
+    private final KeyboardControlComponent keyboard;
 
     private LevelInteractionComponent levelComponent;
 
@@ -46,9 +44,8 @@ public class Player extends StateMachine {
         phys = createBody();
         jetpack = new JetPackComponent((JumperBody) phys.getBody());
 
-        keybaord = new KeyboardControlComponent();
-        ControlMap controls = keybaord;
-        phys.getBody().controller = new PlayerInputController(controls);
+        keyboard = new KeyboardControlComponent();
+        phys.getBody().controller = new PlayerInputController(keyboard);
 
         append(size).append(pos).append(phys).append(health).append(jetpack).append(anim)   ;
     }

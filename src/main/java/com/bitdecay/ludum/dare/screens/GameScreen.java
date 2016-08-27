@@ -9,6 +9,7 @@ import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
+import com.bitdecay.ludum.dare.actors.ai.Monkey;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
@@ -37,8 +38,9 @@ public class GameScreen implements Screen {
 
         world.setGravity(0, -900);
         player = new Player();
-        LevelInteractionComponent playerLevelLink = new LevelInteractionComponent(world, gobs);
-        player.addToScreen(playerLevelLink);
+        player.addToScreen(new LevelInteractionComponent(world, gobs));
+
+        new Monkey().addToScreen(new LevelInteractionComponent(world, gobs));
 
         world.setLevel(LevelUtilities.loadLevel(ResourceDir.path("thePit.level")));
     }
