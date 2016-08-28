@@ -26,4 +26,8 @@ public class LevelInteractionComponent implements IComponent {
         getWorld().addBody(phys.getBody());
         getObjects().add(obj);
     }
+
+    public void removeFromLevel(PhysicsComponent phys) {
+        getWorld().removeBody(phys.getBody());
+    }
 }

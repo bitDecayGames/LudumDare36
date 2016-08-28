@@ -20,6 +20,7 @@ import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
+import com.bitdecay.ludum.dare.actors.items.ShipPart;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.actors.state.StandState;
 import com.bitdecay.ludum.dare.background.BackgroundManager;
@@ -62,8 +63,8 @@ public class GameScreen implements Screen, EditorHook {
 
         world.setGravity(0, -900);
         player = new Player();
-        LevelInteractionComponent playerLevelLink = new LevelInteractionComponent(world, gobs);
-        player.addToScreen(playerLevelLink);
+        LevelInteractionComponent levelInteraction = new LevelInteractionComponent(world, gobs);
+        player.addToScreen(levelInteraction);
 
         Array<AnimagicTextureRegion> aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec");
         Array<AnimagicTextureRegion> bridgesTileTextures = LudumDareGame.atlas.findRegions("tiles/bridges");
@@ -78,6 +79,9 @@ public class GameScreen implements Screen, EditorHook {
         hud = new Hud(player);
         uiBatch = new SpriteBatch();
         gobsBatch = new SpriteBatch();
+
+        ShipPart alienGun = ShipPart.alienGun(levelInteraction);
+        alienGun.setPosition(200, 0);
     }
 
     @Override
