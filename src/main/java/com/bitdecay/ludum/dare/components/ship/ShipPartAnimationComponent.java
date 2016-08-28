@@ -1,5 +1,7 @@
-package com.bitdecay.ludum.dare.components;
+package com.bitdecay.ludum.dare.components.ship;
 
+import com.bitdecay.ludum.dare.components.AnimationComponent;
+import com.bitdecay.ludum.dare.components.PositionComponent;
 import com.bytebreakstudios.animagic.animation.Animation;
 import com.bytebreakstudios.animagic.animation.FrameRate;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
