@@ -276,7 +276,7 @@ public class GameScreen implements Screen, EditorHook {
     @Override
     public void levelChanged(Level level) {
         currentLevel = level;
-        world = new BitWorld();
+        world.removeAllBodies();
         world.setLevel(level);
         player = new Player();
         LevelInteractionComponent playerLevelLink = new LevelInteractionComponent(world, gobs);
