@@ -85,6 +85,11 @@ public class KeyboardControlComponent extends InputComponent {
 
     @Override
     public boolean isJustPressed(InputAction action) {
-        return inControl && isPressed(action) && !previousPresses.contains(action);
+        int key;
+        if (!inControl) return false;
+        else if (actionsToKeys.containsKey(action)) key = actionsToKeys.get(action);
+        else return false;
+
+        return Gdx.input.isKeyJustPressed(key);
     }
 }
