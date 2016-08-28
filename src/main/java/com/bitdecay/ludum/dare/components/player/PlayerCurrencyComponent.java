@@ -1,4 +1,4 @@
-package com.bitdecay.ludum.dare.components;
+package com.bitdecay.ludum.dare.components.player;
 
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 

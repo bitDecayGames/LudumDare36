@@ -1,6 +1,5 @@
 package com.bitdecay.ludum.dare.actors.items;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.BitBody;
@@ -11,6 +10,8 @@ import com.bitdecay.jump.geom.BitRectangle;
 import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.components.*;
+import com.bitdecay.ludum.dare.components.ship.ShipPartAnimationComponent;
+import com.bitdecay.ludum.dare.components.ship.ShipPartComponent;
 import com.bitdecay.ludum.dare.interfaces.IRemoveable;
 
 public class ShipPart extends GameObject implements ContactListener, IRemoveable {
@@ -22,16 +23,21 @@ public class ShipPart extends GameObject implements ContactListener, IRemoveable
     private final PhysicsComponent physics;
     private LevelInteractionComponent levelInteraction;
 
+    // What s given to the player object when the player collects this.
+    private final ShipPartComponent shipPartComponent;
+
     private ShipPart(String name) {
         super();
+
+        shipPartComponent = new ShipPartComponent(name);
 
         position = new PositionComponent(0, 0);
         size = new SizeComponent(100, 100);
 
-        animation = new ShipPartAnimationComponent(name, position);
+        animation = new ShipPartAnimationComponent(name, position, false);
         TextureRegion region = animation.animator.getFrame();
-        float width = region.getRegionWidth();
-        float height = region.getRegionHeight();
+        float width = region.getRegionWidth() * ShipPartAnimationComponent.SCALE;
+        float height = region.getRegionHeight() * ShipPartAnimationComponent.SCALE;
 
         physics = createPhysics(width, height);
 
@@ -103,9 +109,13 @@ public class ShipPart extends GameObject implements ContactListener, IRemoveable
     @Override
     public void contactStarted(BitBody bitBody) {
         if (bitBody.userObject instanceof Player) {
-            shouldRemove = true;
-            // TODO make the player aware they hit a ship part.
-//            ((Player) bitBody.userObject);
+            Player player = ((Player) bitBody.userObject);
+
+            if (!player.hasShipPart()) {
+                shipPartComponent.addToPlayer(player);
+
+                shouldRemove = true;
+            }
         }
     }
 
