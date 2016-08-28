@@ -1,4 +1,4 @@
-package com.bitdecay.ludum.dare.editor;
+package com.bitdecay.ludum.dare.editor.shippart;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bitdecay.jump.BitBody;

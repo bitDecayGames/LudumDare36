@@ -9689,7 +9689,73 @@
     "collideNValue" : 8,
     "oneway" : false
   }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ] ],
-  "otherObjects" : [ "java.util.ArrayList", [ ] ],
+  "otherObjects" : [ "java.util.ArrayList", [ [ "com.bitdecay.ludum.dare.editor.shippart.EngineEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 560.0,
+        "y" : 160.0
+      },
+      "width" : 16.5,
+      "height" : 10.0
+    },
+    "uuid" : "8c83c89f-d885-42b9-91b0-f0038e52a149",
+    "name" : "engine"
+  } ], [ "com.bitdecay.ludum.dare.editor.shippart.WingsEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 496.0,
+        "y" : 48.0
+      },
+      "width" : 36.0,
+      "height" : 14.5
+    },
+    "uuid" : "fea94c50-2328-4d1e-898d-b37575c75794",
+    "name" : "wings"
+  } ], [ "com.bitdecay.ludum.dare.editor.shippart.CockpitEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 368.0,
+        "y" : 64.0
+      },
+      "width" : 31.0,
+      "height" : 10.5
+    },
+    "uuid" : "363c2643-9071-4a60-ba5b-c5a8240610d5",
+    "name" : "cockpit"
+  } ], [ "com.bitdecay.ludum.dare.editor.shippart.ShieldModuleEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 432.0,
+        "y" : 160.0
+      },
+      "width" : 8.5,
+      "height" : 6.0
+    },
+    "uuid" : "54d0da21-e415-410b-a77c-602c854a4dc3",
+    "name" : "shieldModule"
+  } ], [ "com.bitdecay.ludum.dare.editor.shippart.AlienGunEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 144.0,
+        "y" : 32.0
+      },
+      "width" : 20.5,
+      "height" : 4.5
+    },
+    "uuid" : "c1641b3d-a202-46f9-a074-278d1d137ebd",
+    "name" : "alienGun"
+  } ], [ "com.bitdecay.ludum.dare.editor.shippart.NavModuleEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 720.0,
+        "y" : 192.0
+      },
+      "width" : 9.5,
+      "height" : 8.5
+    },
+    "uuid" : "b101f9ff-310d-43db-829e-d35f55e855ea",
+    "name" : "navModule"
+  } ] ] ],
   "triggers" : [ "java.util.ArrayList", [ ] ],
   "gridOffset" : {
     "x" : -7,

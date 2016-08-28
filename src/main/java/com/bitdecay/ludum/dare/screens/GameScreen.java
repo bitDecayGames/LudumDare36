@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
@@ -32,8 +31,7 @@ import com.bitdecay.ludum.dare.background.BackgroundManager;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
-import com.bitdecay.ludum.dare.editor.AlienGunEditorObject;
-import com.bitdecay.ludum.dare.editor.IEditorShipPart;
+import com.bitdecay.ludum.dare.editor.shippart.*;
 import com.bitdecay.ludum.dare.hud.Hud;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
@@ -102,12 +100,8 @@ public class GameScreen implements Screen, EditorHook {
         debugRenderer = new ShapeRenderer();
         debugRenderer.setAutoShapeType(true);
 
-//        ShipPart alienGun = ShipPart.alienGun();
-//        alienGun.addToLevel(levelInteraction);
-//        alienGun.setPosition(200, 0);
-
         DeadShip deadShip = DeadShip.create(levelInteraction);
-        deadShip.setPosition(-100, 0);
+        deadShip.setPosition(0, 0);
     }
 
     private void forceBackgroundTiles(Level level) {
@@ -256,10 +250,10 @@ public class GameScreen implements Screen, EditorHook {
 
         backgroundManager.update(delta);
         //TODO: LF ,for testing monkey ai
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-            Vector3 worldPos = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            monkey.debugMonkeyAi(worldPos.x, worldPos.y);
-        }
+//        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+//            Vector3 worldPos = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+//            monkey.debugMonkeyAi(worldPos.x, worldPos.y);
+//        }
     }
 
     @Override
@@ -275,6 +269,11 @@ public class GameScreen implements Screen, EditorHook {
         List<RenderableLevelObject> exampleItems = new ArrayList<>();
 
         exampleItems.add(new AlienGunEditorObject());
+        exampleItems.add(new CockpitEditorObject());
+        exampleItems.add(new EngineEditorObject());
+        exampleItems.add(new NavModuleEditorObject());
+        exampleItems.add(new ShieldModuleEditorObject());
+        exampleItems.add(new WingsEditorObject());
 
         return exampleItems;
     }
