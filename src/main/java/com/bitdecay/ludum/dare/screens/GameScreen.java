@@ -65,19 +65,32 @@ public class GameScreen implements Screen, EditorHook {
         Array<AnimagicTextureRegion> aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec");
         Array<AnimagicTextureRegion> bridgesTileTextures = LudumDareGame.atlas.findRegions("tiles/bridges");
         Array<AnimagicTextureRegion> rockTileTextures = LudumDareGame.atlas.findRegions("tiles/rock");
+        Array<AnimagicTextureRegion> aztecBackgroundTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec_bgt");
+
         tilesetMap.put(0, aztecTileTextures.toArray(TextureRegion.class));
         tilesetMap.put(1, bridgesTileTextures.toArray(TextureRegion.class));
         tilesetMap.put(2, rockTileTextures.toArray(TextureRegion.class));
+        tilesetMap.put(3, aztecBackgroundTileTextures.toArray(TextureRegion.class));
 
         currentLevel = LevelUtilities.loadLevel(ResourceDir.path("thePit.level"));
-        world.setLevel(currentLevel);
-
+        levelChanged(currentLevel);
         hud = new Hud(player);
         uiBatch = new SpriteBatch();
         gobsBatch = new SpriteBatch();
 
         ShipPart alienGun = ShipPart.alienGun(levelInteraction);
         alienGun.setPosition(200, 0);
+    }
+
+    private void forceBackgroundTiles(Level level) {
+        for (int x = 0; x < level.gridObjects.length; x++) {
+            for (int y = 0; y < level.gridObjects[0].length; y++) {
+                TileObject obj = level.gridObjects[x][y];
+                if (obj != null && obj.material == 3) {
+                    obj.collideNValue = 15;
+                }
+            }
+        }
     }
 
     @Override
@@ -180,7 +193,9 @@ public class GameScreen implements Screen, EditorHook {
         return Arrays.asList(
                 new EditorIdentifierObject(0, "Aztec", tilesetMap.get(0)[0]),
                 new EditorIdentifierObject(1, "Bridges", tilesetMap.get(1)[0]),
-                new EditorIdentifierObject(2, "Rock", tilesetMap.get(2)[0]));
+                new EditorIdentifierObject(2, "Rock", tilesetMap.get(2)[0]),
+                new EditorIdentifierObject(3, "AztecBackground", tilesetMap.get(3)[0]));
+
     }
 
     @Override
@@ -203,6 +218,7 @@ public class GameScreen implements Screen, EditorHook {
     public void levelChanged(Level level) {
         currentLevel = level;
         world = new BitWorld();
+        forceBackgroundTiles(level);
         world.setLevel(level);
         player = new Player();
         LevelInteractionComponent playerLevelLink = new LevelInteractionComponent(world, gobs);
