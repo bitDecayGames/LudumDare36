@@ -26,7 +26,6 @@ public class ShootState extends AbstractState {
 
     public void enter() {
         super.enter();
-        System.out.println("We entering shooting stance.");
         if (physicsComponent.getBody().facing.toString().equals("LEFT")){
             Projectile projectile = new Projectile(positionComponent, new Vector2(-1, 0), levelInteractionComponent, physicsComponent);
             levelInteractionComponent.addToLevel(projectile, projectile.getPhysics());
@@ -37,7 +36,6 @@ public class ShootState extends AbstractState {
     }
 
     public void exit () {
-        System.out.println("we exitingh shoootin stance...");
         super.exit();
     }
 }
