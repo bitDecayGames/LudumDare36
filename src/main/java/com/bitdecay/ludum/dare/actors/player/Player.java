@@ -76,6 +76,7 @@ public class Player extends StateMachine {
         body.aabb.set(new BitRectangle(0, 0, 13, 18));
         body.userObject = this;
         body.renderStateWatcher = new JumperRenderStateWatcher();
+        body.jumperProps.jumpHittingHeadStopsJump = false;
 
         return new PhysicsComponent(body, pos, size);
     }
