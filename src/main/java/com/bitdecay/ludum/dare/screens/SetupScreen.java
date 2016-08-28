@@ -12,7 +12,6 @@ import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.components.PositionComponent;
 import com.bitdecay.ludum.dare.components.SizeComponent;
-import com.bitdecay.ludum.dare.control.ControllerScreenObject;
 import com.bitdecay.ludum.dare.control.InputUtil;
 import com.bitdecay.ludum.dare.control.Xbox360Pad;
 import com.bitdecay.ludum.dare.text.TextScreenObject;
@@ -32,7 +31,6 @@ public class SetupScreen implements Screen {
     LudumDareGame game;
 
     List<GameObject> otherObjects;
-    List<ControllerScreenObject> inputObjects;
     List<Player> players;
 
     TextureRegion splitScreenSeparator;
@@ -82,30 +80,21 @@ public class SetupScreen implements Screen {
     public List<GameObject> getGameObjects() {
         List<GameObject> returnValues = new ArrayList<>();
         returnValues.addAll(otherObjects);
-        returnValues.addAll(inputObjects);
         return returnValues;
     }
 
     public List<Player> getResults() {
         // Copy inputs into players.
-        for (int i = 0; i < inputObjects.size(); i++) {
-            players.get(i).append(inputObjects.get(i).getInputComponent());
-        }
 
         return players;
     }
 
     private void setupPlayers() {
-        inputObjects = new ArrayList<>();
         players = new ArrayList<>();
 
         players.add(new Player());
 
         SizeComponent size = new SizeComponent(BOX_SIDE, BOX_SIDE);
-        for (int i = 0; i < players.size(); i++) {
-            ControllerScreenObject obj = new ControllerScreenObject(keyboardSelectKeys.get(i), keyboardDeselectKeys.get(i), i, playerControllerPositions.get(i), size);
-            inputObjects.add(obj);
-        }
     }
 
     private void setupText() {
@@ -184,9 +173,6 @@ public class SetupScreen implements Screen {
 
         batch.dispose();
         batch = null;
-
-        inputObjects.clear();
-        inputObjects = null;
 
         otherObjects.clear();
         otherObjects = null;

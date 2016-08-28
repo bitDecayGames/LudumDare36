@@ -5,14 +5,12 @@ import com.bitdecay.jump.Facing;
 import com.bitdecay.jump.common.RenderState;
 import com.bitdecay.jump.common.StateListener;
 import com.bitdecay.jump.render.JumperRenderState;
-import com.bitdecay.ludum.dare.components.AnimationComponent;
-import com.bitdecay.ludum.dare.components.InputComponent;
-import com.bitdecay.ludum.dare.components.PhysicsComponent;
-import com.bitdecay.ludum.dare.components.PositionComponent;
+import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bitdecay.ludum.dare.interfaces.IState;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
 
+import java.security.Key;
 import java.util.Set;
 
 public abstract class AbstractState implements IState, StateListener {
@@ -79,16 +77,18 @@ public abstract class AbstractState implements IState, StateListener {
                 break;
             case RIGHT_JUMPING:
             case LEFT_JUMPING:
-                int randomizer = (int) (Math.random() * 4) + 1;
-//                SoundLibrary.playSound("Jump" + randomizer);
+//                int randomizer = (int) (Math.random() * 4) + 1;
+                SoundLibrary.playSound("Jetpack");
                 jumpState = new JumpState(components);
                 break;
             case RIGHT_APEX:
             case LEFT_APEX:
+                SoundLibrary.stopSound("Jetpack");
                 jumpState = new ApexState(components);
                 break;
             case RIGHT_FALLING:
             case LEFT_FALLING:
+                SoundLibrary.stopSound("Jetpack");
                 jumpState = new FallState(components);
                 break;
             case RIGHT_AIR_AGAINST_WALL:
