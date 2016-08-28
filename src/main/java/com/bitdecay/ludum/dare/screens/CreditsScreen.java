@@ -72,7 +72,8 @@ public class CreditsScreen implements Screen {
                 "Jake \"Luke\" Fisher" + SPACE_AFTER_NAME +
                 "Luke \"Jake\" Fisher" + SPACE_AFTER_NAME +
                 "Tristan \"El Hombre Nuevo\"\n Havelick" + SPACE_AFTER_TITLE +
-                "Soundscapes:" + SPACE_AFTER_TITLE,
+                "Soundscapes:" + SPACE_AFTER_TITLE +
+                "Logan \n \"Yes, he's two people\"\n Moore",
                 skin);
         lblCredits.setFontScale(6);
         lblCredits.setFillParent(true);
