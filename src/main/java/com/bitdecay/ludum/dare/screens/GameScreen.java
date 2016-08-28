@@ -127,45 +127,6 @@ public class GameScreen implements Screen, EditorHook {
         }
     }
 
-    private void forceBackgroundTiles(Level level) {
-        for (int x = 0; x < level.gridObjects.length; x++) {
-            for (int y = 0; y < level.gridObjects[0].length; y++) {
-                TileObject obj = level.gridObjects[x][y];
-                if (obj != null && obj.material == 3) {
-                    obj.collideNValue = 15;
-                    updateOwnNeighborValues(level.gridObjects, x, y);
-                }
-            }
-        }
-    }
-
-    void updateOwnNeighborValues(TileObject[][] grid, int x, int y) {
-        if (!ArrayUtilities.onGrid(grid, x, y) || grid[x][y] == null) {
-            return;
-        }
-
-        // check right
-        if (ArrayUtilities.onGrid(grid, x + 1, y) && grid[x + 1][y] != null && grid[x+1][y].material != 3) {
-            grid[x+1][y].collideNValue &= Direction.NOT_LEFT;
-            grid[x+1][y].renderNValue &= Direction.NOT_LEFT;
-        }
-        // check left
-        if (ArrayUtilities.onGrid(grid, x - 1, y) && grid[x - 1][y] != null && grid[x-1][y].material != 3) {
-            grid[x-1][y].collideNValue &= Direction.NOT_RIGHT;
-            grid[x-1][y].renderNValue &= Direction.NOT_RIGHT;
-        }
-        // check up
-        if (ArrayUtilities.onGrid(grid, x, y + 1) && grid[x][y + 1] != null && grid[x][y+1].material != 3) {
-            grid[x][y+1].collideNValue &= Direction.NOT_DOWN;
-            grid[x][y+1].renderNValue &= Direction.NOT_DOWN;
-        }
-        // check down
-        if (ArrayUtilities.onGrid(grid, x, y - 1) && grid[x][y - 1] != null && grid[x][y-1].material != 3) {
-            grid[x][y-1].collideNValue &= Direction.NOT_UP;
-            grid[x][y-1].renderNValue &= Direction.NOT_UP;
-        }
-    }
-
     @Override
     public void show() {
         SoundLibrary.loopMusic("ROZKOLAmbientIV");
@@ -290,7 +251,7 @@ public class GameScreen implements Screen, EditorHook {
     @Override
     public void levelChanged(Level level) {
         currentLevel = level;
-        world = new BitWorld();
+        world.removeAllBodies();
         forceBackgroundTiles(level);
         world.setLevel(level);
         player = new Player();
