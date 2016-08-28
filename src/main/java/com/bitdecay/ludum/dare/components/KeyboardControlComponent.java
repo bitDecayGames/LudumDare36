@@ -3,8 +3,10 @@ package com.bitdecay.ludum.dare.components;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.bitdecay.jump.control.PlayerAction;
+import com.bitdecay.jump.control.PlayerInputController;
 import com.bitdecay.jump.gdx.input.GDXControls;
 import com.bitdecay.jump.gdx.input.KeyState;
+import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.control.InputAction;
 
 import java.util.HashMap;
@@ -16,10 +18,17 @@ import java.util.Set;
  * Adapter for interfacing keyboard with JUMP
  */
 public class KeyboardControlComponent extends InputComponent {
-
     private GDXControls keyboard;
 
     private Set<InputAction> previousPresses = new HashSet<>();
+
+    public boolean enabled = true;
+
+    static Map<InputAction, Integer> actionsToKeys = new HashMap<>();
+
+    static {
+        actionsToKeys.put(InputAction.SHOOT, Input.Keys.SPACE);
+    }
 
     public KeyboardControlComponent() {
         keyboard = new GDXControls();
@@ -39,17 +48,17 @@ public class KeyboardControlComponent extends InputComponent {
 
     @Override
     public void enable() {
-
+        enabled = true;
     }
 
     @Override
     public void disable() {
-
+        enabled = false;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return enabled;
     }
 
     @Override
@@ -66,11 +75,21 @@ public class KeyboardControlComponent extends InputComponent {
 
     @Override
     public boolean isPressed(InputAction action) {
-        return false;
+        int key;
+        if (!inControl) return false;
+        else if (actionsToKeys.containsKey(action)) key = actionsToKeys.get(action);
+        else return false;
+
+        return Gdx.input.isKeyPressed(key);
     }
 
     @Override
     public boolean isJustPressed(InputAction action) {
-        return false;
+        int key;
+        if (!inControl) return false;
+        else if (actionsToKeys.containsKey(action)) key = actionsToKeys.get(action);
+        else return false;
+
+        return Gdx.input.isKeyJustPressed(key);
     }
 }

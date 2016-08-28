@@ -10,8 +10,11 @@ import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.jump.render.JumperRenderStateWatcher;
 import com.bitdecay.ludum.dare.actors.StateMachine;
 import com.bitdecay.ludum.dare.actors.state.HurtState;
+
+import com.bitdecay.ludum.dare.actors.state.ShootState;
 import com.bitdecay.ludum.dare.actors.state.StandState;
 import com.bitdecay.ludum.dare.components.*;
+import com.bitdecay.ludum.dare.control.InputAction;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 
 public class Player extends StateMachine {
@@ -38,13 +41,12 @@ public class Player extends StateMachine {
         jetpack = new JetPackComponent((JumperBody) phys.getBody());
 
         keyboard = new KeyboardControlComponent();
+
         phys.getBody().controller = new PlayerInputController(keyboard);
 
         append(size).append(pos).append(phys).append(health).append(jetpack).append(anim).append(keyboard);
-
         setActiveState(new StandState(components));
     }
-
 
     private PhysicsComponent createBody() {
         JumperBody body = new JumperBody();
@@ -71,6 +73,9 @@ public class Player extends StateMachine {
 //        checkForStateSwitch();
 
         super.update(delta);
+        if (keyboard.isJustPressed(InputAction.SHOOT)){
+            setActiveState(new ShootState(components));
+        }
     }
 
     public void hit(AttackComponent attackComponent) {

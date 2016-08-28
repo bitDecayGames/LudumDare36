@@ -19,18 +19,16 @@ import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.actors.ai.Monkey;
 import com.bitdecay.ludum.dare.actors.player.Player;
-import com.bitdecay.ludum.dare.actors.state.StandState;
+import com.bitdecay.ludum.dare.background.BackgroundManager;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
 import com.bitdecay.ludum.dare.hud.Hud;
+import com.bitdecay.ludum.dare.util.SoundLibrary;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 
 import java.util.*;
 
-/**
- * Created by jacob on 8/27/16.
- */
 public class GameScreen implements Screen, EditorHook {
 
     private LudumDareGame game;
@@ -39,6 +37,9 @@ public class GameScreen implements Screen, EditorHook {
     LibGDXWorldRenderer worldRenderer = new LibGDXWorldRenderer();
     BitWorld world = new BitWorld();
     GameObjects gobs = new GameObjects();
+
+    private BackgroundManager backgroundManager;
+
     private Hud hud;
     private Player player;
 
@@ -51,8 +52,10 @@ public class GameScreen implements Screen, EditorHook {
         this.game = game;
 
         camera = new FollowOrthoCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.maxZoom = 0.5f;
+        camera.maxZoom = 0.3f;
         camera.snapSpeed = 0.2f;
+
+        backgroundManager = new BackgroundManager(camera);
 
         world.setGravity(0, -900);
         player = new Player();
@@ -61,7 +64,12 @@ public class GameScreen implements Screen, EditorHook {
         new Monkey().addToScreen(new LevelInteractionComponent(world, gobs));
 
         Array<AnimagicTextureRegion> aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec");
+        Array<AnimagicTextureRegion> bridgesTileTextures = LudumDareGame.atlas.findRegions("tiles/bridges");
+        Array<AnimagicTextureRegion> rockTileTextures = LudumDareGame.atlas.findRegions("tiles/rock");
         tilesetMap.put(0, aztecTileTextures.toArray(TextureRegion.class));
+        tilesetMap.put(1, bridgesTileTextures.toArray(TextureRegion.class));
+        tilesetMap.put(2, rockTileTextures.toArray(TextureRegion.class));
+
         currentLevel = LevelUtilities.loadLevel(ResourceDir.path("thePit.level"));
         world.setLevel(currentLevel);
 
@@ -72,6 +80,7 @@ public class GameScreen implements Screen, EditorHook {
 
     @Override
     public void show() {
+        SoundLibrary.loopMusic("ROZKOLAmbientIV");
     }
 
     @Override
@@ -87,12 +96,19 @@ public class GameScreen implements Screen, EditorHook {
     }
 
     private void draw(OrthographicCamera cam) {
-        gobsBatch.setProjectionMatrix(cam.combined);
-
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        worldRenderer.render(world, cam);
+        // Background
+        gobsBatch.begin();
 
+        backgroundManager.draw(gobsBatch);
+
+        gobsBatch.end();
+
+        worldRenderer.render(world, camera);
+
+        // Level and game objects.
+        gobsBatch.setProjectionMatrix(camera.combined);
         gobsBatch.begin();
 
         drawLevel();
@@ -100,6 +116,7 @@ public class GameScreen implements Screen, EditorHook {
         gobs.draw(gobsBatch);
         gobsBatch.end();
 
+        // UI/HUD
         uiBatch.begin();
         hud.render(uiBatch);
         uiBatch.end();
@@ -153,28 +170,15 @@ public class GameScreen implements Screen, EditorHook {
         camera.addFollowPoint(player.getPosition());
         camera.update();
 
-
-    }
-
-    private void draw() {
-
-
-        // Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        // worldRenderer.render(world, camera);
-
-        // gobsBatch.begin();
-        // gobs.draw(gobsBatch);
-        // gobsBatch.end();
-
-        // uiBatch.begin();
-        // hud.render(uiBatch);
-        // uiBatch.end();
+        backgroundManager.update(delta);
     }
 
     @Override
     public List<EditorIdentifierObject> getTilesets() {
-        return Arrays.asList(new EditorIdentifierObject(0, "Fallback", tilesetMap.get(0)[0]));
+        return Arrays.asList(
+                new EditorIdentifierObject(0, "Aztec", tilesetMap.get(0)[0]),
+                new EditorIdentifierObject(1, "Bridges", tilesetMap.get(1)[0]),
+                new EditorIdentifierObject(2, "Rock", tilesetMap.get(2)[0]));
     }
 
     @Override

@@ -30,8 +30,6 @@ public class GamepadControlComponent extends InputComponent {
         actionsToXboxButtons.put(InputAction.RIGHT, Xbox360Pad.LS_RIGHT.val);
         actionsToXboxButtons.put(InputAction.UP, Xbox360Pad.LS_UP.val);
         actionsToXboxButtons.put(InputAction.DOWN, Xbox360Pad.LS_DOWN.val);
-        actionsToXboxButtons.put(InputAction.PUNCH, Xbox360Pad.X.val);
-        actionsToXboxButtons.put(InputAction.PROJECTILE, Xbox360Pad.Y.val);
     }
 
     public GamepadControlComponent(int index) {

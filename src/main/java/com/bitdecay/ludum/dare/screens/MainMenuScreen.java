@@ -40,7 +40,7 @@ public class MainMenuScreen implements Screen {
 
         Skin skin = new Skin(ResourceDir.internal("skins/skin.json"));
 
-        background = new Image(LudumDareGame.atlas.findRegion("buzzkill/dankest_boat"));
+        background = new Image(LudumDareGame.atlas.findRegion("splash/TitleScreen"));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         title = new Label("Crystal", skin);
