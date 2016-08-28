@@ -24,8 +24,8 @@ public class Player extends StateMachine {
     private static final int MAX_VOLUNTARY_SPEED = 150;
     private static final int MAX_VOLUNTARY_SPEED_CARRY = 100;
 
-    private static final int JUMP_STRENGTH = 300;
-    private static final int JUMP_STRENGTH_CARRY = 135;
+    private static final int JUMP_STRENGTH = 150;
+    private static final int JUMP_STRENGTH_CARRY = 100;
 
     private final AnimationComponent animNormal;
     private final AnimationComponent animCarry;
@@ -73,6 +73,7 @@ public class Player extends StateMachine {
         body.props.acceleration = 1000;
         body.props.airAcceleration = 700;
         body.jumperProps = new JumperProperties();
+        body.jumperProps.jumpStrength = JUMP_STRENGTH;
         body.jumperProps.jumpCount = Integer.MAX_VALUE;
         body.jumperProps.jumpVariableHeightWindow = Float.POSITIVE_INFINITY;
         body.bodyType = BodyType.DYNAMIC;
