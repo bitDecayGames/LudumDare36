@@ -14,6 +14,7 @@ import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
 import com.bitdecay.jump.geom.ArrayUtilities;
+import com.bitdecay.jump.geom.BitPoint;
 import com.bitdecay.jump.level.Direction;
 import com.bitdecay.jump.level.Level;
 import com.bitdecay.jump.level.LevelObject;
@@ -31,6 +32,7 @@ import com.bitdecay.ludum.dare.background.BackgroundManager;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
+import com.bitdecay.ludum.dare.editor.deadship.DeadShipEditorObject;
 import com.bitdecay.ludum.dare.editor.shippart.*;
 import com.bitdecay.ludum.dare.hud.Hud;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
@@ -99,9 +101,6 @@ public class GameScreen implements Screen, EditorHook {
         gobsBatch = new SpriteBatch();
         debugRenderer = new ShapeRenderer();
         debugRenderer.setAutoShapeType(true);
-
-        DeadShip deadShip = DeadShip.create(levelInteraction);
-        deadShip.setPosition(0, 0);
     }
 
     private void forceBackgroundTiles(Level level) {
@@ -266,26 +265,32 @@ public class GameScreen implements Screen, EditorHook {
 
     @Override
     public List<RenderableLevelObject> getCustomObjects() {
-        List<RenderableLevelObject> exampleItems = new ArrayList<>();
+        List<RenderableLevelObject> items = new ArrayList<>();
 
-        exampleItems.add(new AlienGunEditorObject());
-        exampleItems.add(new CockpitEditorObject());
-        exampleItems.add(new EngineEditorObject());
-        exampleItems.add(new NavModuleEditorObject());
-        exampleItems.add(new ShieldModuleEditorObject());
-        exampleItems.add(new WingsEditorObject());
+        items.add(new AlienGunEditorObject());
+        items.add(new CockpitEditorObject());
+        items.add(new EngineEditorObject());
+        items.add(new NavModuleEditorObject());
+        items.add(new ShieldModuleEditorObject());
+        items.add(new WingsEditorObject());
+        items.add(new DeadShipEditorObject());
 
-        return exampleItems;
+        return items;
     }
 
     private void buildGameObjects(Collection<LevelObject> otherObjects) {
         for (LevelObject levelObject : otherObjects) {
             if (levelObject instanceof RenderableLevelObject) {
                 RenderableLevelObject rlo = (RenderableLevelObject) levelObject;
+                BitPoint p = rlo.rect.xy;
+
                 if (rlo instanceof IEditorShipPart) {
                     ShipPart part = new ShipPart(rlo.name());
-                    part.setPosition(rlo.rect.xy.x, rlo.rect.xy.y);
+                    part.setPosition(p.x, p.y);
                     part.addToLevel(levelInteraction);
+                } else if (rlo instanceof DeadShipEditorObject) {
+                    DeadShip ship = DeadShip.create(levelInteraction);
+                    ship.setPosition(p.x, p.y);
                 }
             }
         }
