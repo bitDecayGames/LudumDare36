@@ -9,7 +9,7 @@ import com.bitdecay.ludum.dare.interfaces.IRemoveable;
 import com.bitdecay.ludum.dare.interfaces.IUpdate;
 
 public class ShipPartComponent implements IComponent, IUpdate, IDraw, IRemoveable {
-    private static final Vector2 DRAW_OFFSET = new Vector2(-5, 7);
+    private static final Vector2 DRAW_OFFSET = new Vector2(0, 5);
 
     private final PositionComponent position;
     private final AnimationComponent animation;
@@ -30,6 +30,10 @@ public class ShipPartComponent implements IComponent, IUpdate, IDraw, IRemoveabl
     public void removeFromPlayer() {
         player = null;
         shouldRemove = true;
+    }
+
+    public void flipVerticalAxis(boolean flip) {
+        animation.setFlipVerticalAxis(flip);
     }
 
     @Override

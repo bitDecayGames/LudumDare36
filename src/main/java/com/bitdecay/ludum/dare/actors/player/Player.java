@@ -1,5 +1,6 @@
 package com.bitdecay.ludum.dare.actors.player;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.BitBody;
@@ -81,7 +82,7 @@ public class Player extends StateMachine {
     // TODO This will be expensive to do dynamically due to getFirstComponent, maybe optimize later.
     private void updateAnimationComponent() {
         IComponent currentAnim = getFirstComponent(AnimationComponent.class);
-        IComponent shipPart = getFirstComponent(ShipPartComponent.class);
+        IComponent shipPart = getShipPart();
 
         // Switch to carry animation set.
         if (shipPart != null && currentAnim != animCarry) {
@@ -103,6 +104,10 @@ public class Player extends StateMachine {
         body.jumperProps.jumpStrength = carry ? JUMP_STRENGTH_CARRY : JUMP_STRENGTH;
     }
 
+    private ShipPartComponent getShipPart() {
+        return ((ShipPartComponent) getFirstComponent(ShipPartComponent.class));
+    }
+
     @Override
     public void update(float delta) {
         updateAnimationComponent();
@@ -121,6 +126,17 @@ public class Player extends StateMachine {
             shootAgain = 0;
             setActiveState(new ShootState(components));
         }
+    }
+
+    @Override
+    public void draw(SpriteBatch spriteBatch) {
+        ShipPartComponent shipPart = getShipPart();
+        AnimationComponent anim = ((AnimationComponent) getFirstComponent(AnimationComponent.class));
+        if (shipPart != null && anim != null) {
+            shipPart.flipVerticalAxis(!anim.getFlipVerticalAxis());
+        }
+
+        super.draw(spriteBatch);
     }
 
     public void hit(AttackComponent attackComponent) {
