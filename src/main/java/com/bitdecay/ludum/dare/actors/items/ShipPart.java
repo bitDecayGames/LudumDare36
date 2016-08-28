@@ -1,12 +1,13 @@
 package com.bitdecay.ludum.dare.actors.items;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.collision.ContactListener;
 import com.bitdecay.jump.geom.BitPoint;
 import com.bitdecay.jump.geom.BitRectangle;
-import com.bitdecay.jump.level.Level;
 import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.components.*;
@@ -26,8 +27,13 @@ public class ShipPart extends GameObject implements ContactListener, IRemoveable
 
         position = new PositionComponent(0, 0);
         size = new SizeComponent(100, 100);
+
         animation = new ShipPartAnimationComponent(name, position);
-        physics = createPhysics();
+        TextureRegion region = animation.animator.getFrame();
+        float width = region.getRegionWidth();
+        float height = region.getRegionHeight();
+
+        physics = createPhysics(width, height);
 
         append(position).append(size).append(animation).append(physics);
     }
@@ -36,10 +42,10 @@ public class ShipPart extends GameObject implements ContactListener, IRemoveable
         return (new ShipPart(name)).addToLevel(levelInteraction);
     }
 
-    private PhysicsComponent createPhysics() {
+    private PhysicsComponent createPhysics(float width, float height) {
         BitBody bitBody = new BitBody();
         bitBody.bodyType = BodyType.DYNAMIC;
-        bitBody.aabb.set(new BitRectangle(0, 0, 32, 32));
+        bitBody.aabb.set(new BitRectangle(0, 0, width, height));
         bitBody.userObject = this;
         bitBody.addContactListener(this);
 
