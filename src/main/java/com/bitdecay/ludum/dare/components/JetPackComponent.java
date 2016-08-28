@@ -22,6 +22,7 @@ public class JetPackComponent implements IComponent, IUpdate{
 
     public boolean isFiring = false;
     public boolean canRefuel = false;
+    public boolean firstPress = false;
 
     public JetPackComponent(JumperBody playerJumpBody) {
         this.playerJumpBody = playerJumpBody;
@@ -31,6 +32,9 @@ public class JetPackComponent implements IComponent, IUpdate{
     @Override
     public void update(float delta) {
         if(playerJumpBody.controller.getStatus().equals(JumpingControlState.class.getSimpleName())){
+            if (!isFiring) {
+                firstPress = true;
+            }
             isFiring = true;
         } else {
             isFiring = false;
@@ -43,6 +47,10 @@ public class JetPackComponent implements IComponent, IUpdate{
         }
 
         if(isFiring && currentFuel > 0){
+            if (firstPress) {
+                currentFuel -= 15;
+                firstPress = false;
+            }
             currentFuel--;
             if(currentFuel < 0){
                 currentFuel = 0;

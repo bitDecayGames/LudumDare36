@@ -28,6 +28,7 @@ public class Player extends StateMachine {
     private final KeyboardControlComponent keyboard;
 
     private LevelInteractionComponent levelComponent;
+    private float shootAgain = 0;
 
     public Player() {
         size = new SizeComponent(100, 100);
@@ -71,9 +72,11 @@ public class Player extends StateMachine {
 //        }
 
 //        checkForStateSwitch();
-
         super.update(delta);
-        if (keyboard.isJustPressed(InputAction.SHOOT)){
+
+        shootAgain += delta;
+        if (keyboard.isJustPressed(InputAction.SHOOT) && shootAgain > .5){
+            shootAgain = 0;
             setActiveState(new ShootState(components));
         }
     }

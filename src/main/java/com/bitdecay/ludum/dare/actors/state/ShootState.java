@@ -1,5 +1,6 @@
 package com.bitdecay.ludum.dare.actors.state;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.ludum.dare.actors.projectile.Projectile;
 import com.bitdecay.ludum.dare.components.KeyboardControlComponent;
@@ -31,13 +32,11 @@ public class ShootState extends AbstractState {
         if (physicsComponent.getBody().facing.toString().equals("LEFT")){
             Projectile projectile = new Projectile(positionComponent, new Vector2(-1, 0), levelInteractionComponent, physicsComponent);
             levelInteractionComponent.addToLevel(projectile, projectile.getPhysics());
-            int sound = new Random().nextInt(4) + 1;
-            SoundLibrary.playSound("Laser_Shoot" + sound);
+            SoundLibrary.playSound("Laser_Shoot" + MathUtils.random(1, 4));
         } else {
             Projectile projectile = new Projectile(positionComponent, new Vector2(1, 0), levelInteractionComponent, physicsComponent);
             levelInteractionComponent.addToLevel(projectile, projectile.getPhysics());
-            int sound = new Random().nextInt(4) + 1;
-            SoundLibrary.playSound("Laser_Shoot" + sound);
+            SoundLibrary.playSound("Laser_Shoot" + MathUtils.random(1, 4));
         }
     }
 
