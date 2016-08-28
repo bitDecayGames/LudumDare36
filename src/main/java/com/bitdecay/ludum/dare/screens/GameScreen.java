@@ -7,12 +7,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
 import com.bitdecay.jump.geom.ArrayUtilities;
 import com.bitdecay.jump.level.Direction;
 import com.bitdecay.jump.level.Level;
+import com.bitdecay.jump.level.LevelObject;
 import com.bitdecay.jump.level.TileObject;
 import com.bitdecay.jump.leveleditor.EditorHook;
 import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
@@ -26,6 +28,8 @@ import com.bitdecay.ludum.dare.background.BackgroundManager;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
+import com.bitdecay.ludum.dare.editor.AlienGunEditorObject;
+import com.bitdecay.ludum.dare.editor.IEditorShipPart;
 import com.bitdecay.ludum.dare.hud.Hud;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
@@ -51,6 +55,8 @@ public class GameScreen implements Screen, EditorHook {
     Map<Integer, TextureRegion[]> tilesetMap = new HashMap<>();
     private Level currentLevel;
 
+    LevelInteractionComponent levelInteraction;
+
     public GameScreen(LudumDareGame game) {
         this.game = game;
 
@@ -62,8 +68,7 @@ public class GameScreen implements Screen, EditorHook {
 
         world.setGravity(0, -900);
         player = new Player();
-        LevelInteractionComponent levelInteraction = new LevelInteractionComponent(world, gobs);
-        player.addToScreen(levelInteraction);
+        levelInteraction = new LevelInteractionComponent(world, gobs);
 
         Array<AnimagicTextureRegion> aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec");
         Array<AnimagicTextureRegion> bridgesTileTextures = LudumDareGame.atlas.findRegions("tiles/bridges");
@@ -83,8 +88,9 @@ public class GameScreen implements Screen, EditorHook {
         uiBatch = new SpriteBatch();
         gobsBatch = new SpriteBatch();
 
-        ShipPart alienGun = ShipPart.alienGun(levelInteraction);
-        alienGun.setPosition(200, 0);
+//        ShipPart alienGun = ShipPart.alienGun();
+//        alienGun.addToLevel(levelInteraction);
+//        alienGun.setPosition(200, 0);
 
         DeadShip deadShip = DeadShip.create(levelInteraction);
         deadShip.setPosition(-100, 0);
@@ -238,7 +244,23 @@ public class GameScreen implements Screen, EditorHook {
     @Override
     public List<RenderableLevelObject> getCustomObjects() {
         List<RenderableLevelObject> exampleItems = new ArrayList<>();
+
+        exampleItems.add(new AlienGunEditorObject());
+
         return exampleItems;
+    }
+
+    private void buildGameObjects(Collection<LevelObject> otherObjects) {
+        for (LevelObject levelObject : otherObjects) {
+            if (levelObject instanceof RenderableLevelObject) {
+                RenderableLevelObject rlo = (RenderableLevelObject) levelObject;
+                if (rlo instanceof IEditorShipPart) {
+                    ShipPart part = new ShipPart(rlo.name());
+                    part.setPosition(rlo.rect.xy.x, rlo.rect.xy.y);
+                    part.addToLevel(levelInteraction);
+                }
+            }
+        }
     }
 
     @Override
@@ -257,8 +279,8 @@ public class GameScreen implements Screen, EditorHook {
         world.removeAllBodies();
         forceBackgroundTiles(level);
         world.setLevel(level);
-        player = new Player();
-        LevelInteractionComponent playerLevelLink = new LevelInteractionComponent(world, gobs);
-        player.addToScreen(playerLevelLink);
+
+        buildGameObjects(level.otherObjects);
+        player.addToScreen(levelInteraction);
     }
 }
