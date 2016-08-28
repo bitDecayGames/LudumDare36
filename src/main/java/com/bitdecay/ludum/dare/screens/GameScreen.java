@@ -88,7 +88,7 @@ public class GameScreen implements Screen, EditorHook {
         world.setLevel(currentLevel);
         levelChanged(currentLevel);
 
-        monkey = new Monkey(-160, 0);
+        monkey = new Monkey(0, 0);
         monkey.addToScreen(new LevelInteractionComponent(world, gobs));
 
         hud = new Hud(player);
