@@ -17,9 +17,9 @@ import com.bitdecay.ludum.dare.interfaces.IUpdate;
 public class JetPackComponent implements IComponent, IUpdate, IDraw {
     private JumperBody playerJumpBody;
 
-    public final float maxFuel = 100;
+    public final float maxFuel = 40;
 
-    public float currentFuel = 100;
+    public float currentFuel = 40;
 
     public boolean isFiring = false;
     public boolean canRefuel = false;
