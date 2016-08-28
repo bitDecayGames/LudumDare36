@@ -3,10 +3,18 @@ package com.bitdecay.ludum.dare.components;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bitdecay.ludum.dare.interfaces.IUpdate;
 
+/**
+ * Timer component that tracks down from a specified time.
+ */
 public class TimerComponent implements IComponent, IUpdate {
     private final float maxTime;
     private float time;
 
+    /**
+     * Create a TimerComponent.
+     *
+     * @param maxTime boolean Time before this timer is completed each cycle.
+     */
     public TimerComponent(float maxTime) {
         this.maxTime = maxTime;
         time = this.maxTime;
@@ -20,10 +28,18 @@ public class TimerComponent implements IComponent, IUpdate {
         }
     }
 
+    /**
+     * Has the timer completed.
+     *
+     * @return boolean
+     */
     public boolean complete() {
         return time <= 0;
     }
 
+    /**
+     * Reset the timer to its starting value.
+     */
     public void reset() {
         time = maxTime;
     }
