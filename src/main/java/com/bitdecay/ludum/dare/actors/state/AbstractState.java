@@ -77,16 +77,18 @@ public abstract class AbstractState implements IState, StateListener {
                 break;
             case RIGHT_JUMPING:
             case LEFT_JUMPING:
-                int randomizer = (int) (Math.random() * 4) + 1;
-//                SoundLibrary.playSound("Jump" + randomizer);
+//                int randomizer = (int) (Math.random() * 4) + 1;
+                SoundLibrary.playSound("Jetpack");
                 jumpState = new JumpState(components);
                 break;
             case RIGHT_APEX:
             case LEFT_APEX:
+                SoundLibrary.stopSound("Jetpack");
                 jumpState = new ApexState(components);
                 break;
             case RIGHT_FALLING:
             case LEFT_FALLING:
+                SoundLibrary.stopSound("Jetpack");
                 jumpState = new FallState(components);
                 break;
             case RIGHT_AIR_AGAINST_WALL:
