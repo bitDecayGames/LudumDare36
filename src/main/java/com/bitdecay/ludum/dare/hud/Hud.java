@@ -58,7 +58,7 @@ public class Hud {
         uiBatch.draw(fuelGauge, fuelX, fuelY);
         uiBatch.draw(fuelNeedle, fuelX, fuelY, 32, 32, 64, 64, 1, 1, rotation);
         int parts = DeadShip.getNumCollectedParts();
-        shipPartsText.setText("SHIP PARTS: " + parts + "/5");
+        shipPartsText.setText("SHIP PARTS: " + parts + "/6");
 
         shipPartsText.draw(uiBatch);
     }
