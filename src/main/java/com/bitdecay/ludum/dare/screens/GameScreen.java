@@ -22,9 +22,9 @@ import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
+import com.bitdecay.ludum.dare.actors.ai.Monkey;
 import com.bitdecay.ludum.dare.actors.environment.DeadShip;
 import com.bitdecay.ludum.dare.actors.items.ShipPart;
-import com.bitdecay.ludum.dare.actors.ai.Monkey;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.background.BackgroundManager;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
@@ -152,7 +152,7 @@ public class GameScreen implements Screen, EditorHook {
 
     @Override
     public void show() {
-        SoundLibrary.loopMusic("ROZKOLAmbientIV");
+        SoundLibrary.loopMusic("ambientGame");
     }
 
     @Override
