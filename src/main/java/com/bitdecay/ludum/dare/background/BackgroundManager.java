@@ -10,12 +10,18 @@ import com.bitdecay.ludum.dare.interfaces.IUpdate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manager for the background of the game.
+ */
 public class BackgroundManager implements IUpdate, IDraw {
-    private static final float PARALLAX_EFFECT = 0.1f;
+    // Controls distortion of parallax on backgrounds.
+    private static final float PARALLAX_EFFECT = 0.2f;
 
     private List<BackgroundLayer> layers;
 
+    // Camera to render parallax effect.
     private OrthographicCamera backgroundCamera;
+    // Camera of character we're following.
     private OrthographicCamera characterCamera;
 
     public BackgroundManager(OrthographicCamera characterCamera) {
@@ -23,13 +29,8 @@ public class BackgroundManager implements IUpdate, IDraw {
 
         initDimensions();
 
-        String[] backgroundNames = new String[] {
-                "space",
-                "hillsFar",
-                "hillsMiddle",
-                "hillsClose"
-        };
-
+        // First backgrounds are further back and move slower than later entries
+        // when the character this is watching moves.
         layers = new ArrayList<>();
         // Space
         layers.add(
@@ -55,7 +56,7 @@ public class BackgroundManager implements IUpdate, IDraw {
             BackgroundLayer.create()
                 .setVerticalOffsetIndex(-1)
                 .setDirection(BackgroundLayerDirection.DOWN)
-                .setVerticalOffset(30)
+                .setVerticalOffset(300 * PARALLAX_EFFECT)
                 .addBackground("startUnderground")
                 .addBackground("underground")
         );
@@ -65,13 +66,22 @@ public class BackgroundManager implements IUpdate, IDraw {
 
     @Override
     public void update(float delta) {
-        backgroundCamera.position.set(characterCamera.position.x * PARALLAX_EFFECT + Gdx.graphics.getWidth() / 3, characterCamera.position.y * PARALLAX_EFFECT + Gdx.graphics.getHeight() / 3, 0);
+        // Sync with character camera.
+        backgroundCamera.position.set(
+            characterCamera.position.x * PARALLAX_EFFECT + Gdx.graphics.getWidth() / 3,
+            characterCamera.position.y * PARALLAX_EFFECT + Gdx.graphics.getHeight() / 3,
+            0);
     }
 
     @Override
     public void draw(SpriteBatch spriteBatch) {
+        final float parallax = 1 + PARALLAX_EFFECT;
         for (BackgroundLayer l : layers) {
-            backgroundCamera.position.set(backgroundCamera.position.x * (1 + PARALLAX_EFFECT), backgroundCamera.position.y * (1 + PARALLAX_EFFECT), 0);
+            // Increase move value as we move from background to foreground.
+            backgroundCamera.position.set(
+                backgroundCamera.position.x * parallax,
+                backgroundCamera.position.y * parallax,
+                0);
             backgroundCamera.update();
 
             spriteBatch.setProjectionMatrix(backgroundCamera.combined);
@@ -79,9 +89,11 @@ public class BackgroundManager implements IUpdate, IDraw {
         }
     }
 
+    // Sets initial layer specs.
     private void initDimensions() {
         TextureRegion mainTile = BackgroundUtil.getBackground("space");
         BackgroundLayer.setTileWidth(mainTile.getRegionWidth());
         BackgroundLayer.setTileHeight(mainTile.getRegionHeight());
+        BackgroundLayer.setHorizontalSize(10);
     }
 }

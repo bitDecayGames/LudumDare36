@@ -7,13 +7,24 @@ import com.bitdecay.ludum.dare.interfaces.IDraw;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BackgroundLayer implements IDraw{
+/**
+ * Vertical layer of parallax background.
+ */
+public class BackgroundLayer implements IDraw {
+    // Width of standard background tiles.
     private static float tileWidth = 0;
+    // Height of standard background tile.
     private static float tileHeight = 0;
+    // Tiles number of tiles that will be added to the left, and then the right form the center.
+    private static float horizontalSize = 1;
 
     private List<TextureRegion> backgrounds;
+
+    // Standard tile space to deviate from vertically. Can be positive or negative.
     private float verticalOffsetIndex = 0;
+    // One time vertical offset to apply to layer. Can be positive or negative.
     private float verticalOffset = 0;
+    // Direction to lay out backgrounds in.
     private BackgroundLayerDirection direction = BackgroundLayerDirection.UP;
 
     private BackgroundLayer() {
@@ -25,13 +36,21 @@ public class BackgroundLayer implements IDraw{
         float verticalIndex = verticalOffsetIndex;
 
         for (TextureRegion background : backgrounds) {
+            // Set vertical position.
             float y = verticalIndex * tileHeight + verticalOffset;
-            spriteBatch.draw(background, -tileWidth, y);
 
+            // Draw center tile.
             spriteBatch.draw(background, 0, y);
 
-            spriteBatch.draw(background, tileWidth, y);
+            // Draw size tiles based on size.
+            // TODO Do this dymanically with a calculation to save memory and render time.
+            for (int i = 0; i < horizontalSize; i++) {
+                spriteBatch.draw(background, i * -tileWidth, y);
 
+                spriteBatch.draw(background, i * tileWidth, y);
+            }
+
+            // Set direction to go for next background in layer.
             switch (direction) {
                 case UP:
                     verticalIndex++;
@@ -53,6 +72,10 @@ public class BackgroundLayer implements IDraw{
 
     public static void setTileHeight(float tileHeight) {
         BackgroundLayer.tileHeight = tileHeight;
+    }
+
+    public static void setHorizontalSize(float horizontalSize) {
+        BackgroundLayer.horizontalSize = horizontalSize;
     }
 
     public BackgroundLayer addBackground(String name) {
