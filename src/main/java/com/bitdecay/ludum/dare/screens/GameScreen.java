@@ -46,6 +46,7 @@ public class GameScreen implements Screen, EditorHook {
 
     private Hud hud;
     private Player player;
+    private Monkey monkey;
 
     private SpriteBatch uiBatch;
     private SpriteBatch gobsBatch;
@@ -63,9 +64,11 @@ public class GameScreen implements Screen, EditorHook {
 
         world.setGravity(0, -900);
         player = new Player();
-        player.addToScreen(new LevelInteractionComponent(world, gobs));
+        LevelInteractionComponent levelInteraction = new LevelInteractionComponent(world, gobs);
+        player.addToScreen(levelInteraction);
 
-        new Monkey().addToScreen(new LevelInteractionComponent(world, gobs));
+        monkey = new Monkey();
+        monkey.addToScreen(new LevelInteractionComponent(world, gobs));
 
         Array<AnimagicTextureRegion> aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec");
         Array<AnimagicTextureRegion> bridgesTileTextures = LudumDareGame.atlas.findRegions("tiles/bridges");
@@ -158,10 +161,10 @@ public class GameScreen implements Screen, EditorHook {
 
         gobsBatch.end();
 
-        worldRenderer.render(world, cam);
+        worldRenderer.render(world, camera);
 
         // Level and game objects.
-        gobsBatch.setProjectionMatrix(cam.combined);
+        gobsBatch.setProjectionMatrix(camera.combined);
         gobsBatch.begin();
 
         drawLevel();
@@ -231,10 +234,7 @@ public class GameScreen implements Screen, EditorHook {
         return Arrays.asList(
                 new EditorIdentifierObject(0, "Aztec", tilesetMap.get(0)[0]),
                 new EditorIdentifierObject(1, "Bridges", tilesetMap.get(1)[0]),
-                new EditorIdentifierObject(2, "Rock", tilesetMap.get(2)[0]),
-                new EditorIdentifierObject(3, "AztecBackground", tilesetMap.get(3)[0]),
-                new EditorIdentifierObject(4, "AztecVines", tilesetMap.get(4)[0]));
-
+                new EditorIdentifierObject(2, "Rock", tilesetMap.get(2)[0]));
     }
 
     @Override
@@ -256,8 +256,7 @@ public class GameScreen implements Screen, EditorHook {
     @Override
     public void levelChanged(Level level) {
         currentLevel = level;
-        world.removeAllBodies();
-        forceBackgroundTiles(level);
+        world = new BitWorld();
         world.setLevel(level);
         player = new Player();
         LevelInteractionComponent playerLevelLink = new LevelInteractionComponent(world, gobs);
