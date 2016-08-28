@@ -3,7 +3,6 @@ package com.bitdecay.ludum.dare.actors.player;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.JumperBody;
 import com.bitdecay.jump.control.PlayerInputController;
@@ -15,6 +14,8 @@ import com.bitdecay.ludum.dare.actors.state.HurtState;
 import com.bitdecay.ludum.dare.actors.state.ShootState;
 import com.bitdecay.ludum.dare.actors.state.StandState;
 import com.bitdecay.ludum.dare.components.*;
+import com.bitdecay.ludum.dare.components.player.PlayerAnimationComponent;
+import com.bitdecay.ludum.dare.components.ship.ShipPartComponent;
 import com.bitdecay.ludum.dare.control.InputAction;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 

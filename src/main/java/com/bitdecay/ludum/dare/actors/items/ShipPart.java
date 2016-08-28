@@ -10,6 +10,8 @@ import com.bitdecay.jump.geom.BitRectangle;
 import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.components.*;
+import com.bitdecay.ludum.dare.components.ship.ShipPartAnimationComponent;
+import com.bitdecay.ludum.dare.components.ship.ShipPartComponent;
 import com.bitdecay.ludum.dare.interfaces.IRemoveable;
 
 public class ShipPart extends GameObject implements ContactListener, IRemoveable {

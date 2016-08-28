@@ -5,12 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.ludum.dare.actors.projectile.Projectile;
 import com.bitdecay.ludum.dare.components.KeyboardControlComponent;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
-import com.bitdecay.ludum.dare.components.PositionComponent;
-import com.bitdecay.ludum.dare.components.ShipPartComponent;
+import com.bitdecay.ludum.dare.components.ship.ShipPartComponent;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
 
-import java.util.Random;
 import java.util.Set;
 
 /**

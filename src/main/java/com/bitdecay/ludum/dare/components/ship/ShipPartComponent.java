@@ -1,8 +1,10 @@
-package com.bitdecay.ludum.dare.components;
+package com.bitdecay.ludum.dare.components.ship;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.ludum.dare.actors.player.Player;
+import com.bitdecay.ludum.dare.components.AnimationComponent;
+import com.bitdecay.ludum.dare.components.PositionComponent;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bitdecay.ludum.dare.interfaces.IDraw;
 import com.bitdecay.ludum.dare.interfaces.IRemoveable;
