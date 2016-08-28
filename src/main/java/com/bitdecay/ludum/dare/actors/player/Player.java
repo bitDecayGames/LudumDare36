@@ -10,7 +10,6 @@ import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.jump.render.JumperRenderStateWatcher;
 import com.bitdecay.ludum.dare.actors.StateMachine;
 import com.bitdecay.ludum.dare.actors.state.HurtState;
-
 import com.bitdecay.ludum.dare.actors.state.ShootState;
 import com.bitdecay.ludum.dare.actors.state.StandState;
 import com.bitdecay.ludum.dare.components.*;
@@ -24,6 +23,7 @@ public class Player extends StateMachine {
     private final AnimationComponent anim;
     private final AttackComponent attack;
     private final JetPackComponent jetpack;
+
     private final PhysicsComponent phys;
     private final KeyboardControlComponent keyboard;
 
@@ -52,6 +52,9 @@ public class Player extends StateMachine {
     private PhysicsComponent createBody() {
         JumperBody body = new JumperBody();
         body.props.deceleration = 10000;
+        body.props.acceleration = 1000;
+        body.props.airAcceleration = 700;
+        body.props.maxVoluntarySpeed = 150;
         body.jumperProps = new JumperProperties();
         body.jumperProps.jumpCount = Integer.MAX_VALUE;
         body.jumperProps.jumpVariableHeightWindow = Float.POSITIVE_INFINITY;
