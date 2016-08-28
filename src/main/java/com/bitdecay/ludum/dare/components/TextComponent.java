@@ -1,5 +1,6 @@
 package com.bitdecay.ludum.dare.components;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,9 +18,10 @@ public class TextComponent implements IComponent, IDraw {
     public TextComponent(PositionComponent position) {
         this.position = position;
 
-        font = new BitmapFont();
+        font = new BitmapFont(Gdx.files.internal("fonts/bit.fnt"));
         font.getData().setScale(5);
         font.setColor(Color.BLUE);
+
     }
 
     public TextComponent setText(String text) {
@@ -31,6 +33,11 @@ public class TextComponent implements IComponent, IDraw {
     public TextComponent setColor(Color color) {
         font.setColor(color);
 
+        return this;
+    }
+
+    public TextComponent setScale(float s) {
+        font.getData().setScale(s);
         return this;
     }
 
