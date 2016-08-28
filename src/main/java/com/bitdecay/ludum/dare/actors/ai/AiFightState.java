@@ -9,7 +9,7 @@ import com.bitdecay.ludum.dare.interfaces.IState;
 
 import java.util.List;
 
-public class AIFightState implements IState {
+public class AiFightState implements IState {
 
     private Player me;
     private AIControlComponent input;
@@ -19,7 +19,7 @@ public class AIFightState implements IState {
 
     float waitToGo = 0;
 
-    public AIFightState(Player me, AIControlComponent input, List<AINodeGameObject> nodes) {
+    public AiFightState(Player me, AIControlComponent input, List<AINodeGameObject> nodes) {
         this.me = me;
         this.input = input;
         this.nodes = nodes;
