@@ -37,7 +37,6 @@ public class GameScreen implements Screen, EditorHook {
     private LudumDareGame game;
 
     FollowOrthoCamera camera;
-    OrthographicCamera backgroundCamera;
     LibGDXWorldRenderer worldRenderer = new LibGDXWorldRenderer();
     BitWorld world = new BitWorld();
     GameObjects gobs = new GameObjects();

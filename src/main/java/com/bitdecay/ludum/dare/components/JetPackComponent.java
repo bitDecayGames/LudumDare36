@@ -16,7 +16,7 @@ import com.sun.org.apache.xpath.internal.SourceTree;
 public class JetPackComponent implements IComponent, IUpdate{
     private JumperBody playerJumpBody;
 
-    public final float maxFuel = Float.MAX_VALUE;
+    public final float maxFuel = 100;
 
     public float currentFuel = 100;
 
