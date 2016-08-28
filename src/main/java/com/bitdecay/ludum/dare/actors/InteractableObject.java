@@ -46,7 +46,7 @@ public class InteractableObject extends StateMachine implements ContactListener,
         return new PhysicsComponent(bitBody, position, size);
     }
 
-    protected InteractableObject addToLevel(LevelInteractionComponent levelInteraction) {
+    public InteractableObject addToLevel(LevelInteractionComponent levelInteraction) {
         if (this.levelInteraction != null) {
             this.levelInteraction.removeFromLevel(physics);
         }
