@@ -1,11 +1,14 @@
 package com.bitdecay.ludum.dare.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
@@ -42,9 +45,11 @@ public class GameScreen implements Screen, EditorHook {
 
     private Hud hud;
     private Player player;
+    private Monkey monkey;
 
     private SpriteBatch uiBatch;
     private SpriteBatch gobsBatch;
+    private ShapeRenderer debugRenderer;
     Map<Integer, TextureRegion[]> tilesetMap = new HashMap<>();
     private Level currentLevel;
 
@@ -72,11 +77,14 @@ public class GameScreen implements Screen, EditorHook {
         currentLevel = LevelUtilities.loadLevel(ResourceDir.path("thePit.level"));
         world.setLevel(currentLevel);
 
-        new Monkey().addToScreen(new LevelInteractionComponent(world, gobs));
+        monkey = new Monkey(0, 0);
+        monkey.addToScreen(new LevelInteractionComponent(world, gobs));
 
         hud = new Hud(player);
         uiBatch = new SpriteBatch();
         gobsBatch = new SpriteBatch();
+        debugRenderer = new ShapeRenderer();
+        debugRenderer.setAutoShapeType(true);
     }
 
     @Override
@@ -116,6 +124,12 @@ public class GameScreen implements Screen, EditorHook {
 
         gobs.draw(gobsBatch);
         gobsBatch.end();
+
+        // debug renderer
+        debugRenderer.setProjectionMatrix(camera.combined);
+        debugRenderer.begin();
+        monkey.debugDraw(debugRenderer);
+        debugRenderer.end();
 
         // UI/HUD
         uiBatch.begin();
@@ -172,6 +186,11 @@ public class GameScreen implements Screen, EditorHook {
         camera.update();
 
         backgroundManager.update(delta);
+        //TODO: LF ,for testing monkey ai
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+            Vector3 worldPos = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+            monkey.debugMonkeyAi(worldPos.x, worldPos.y);
+        }
     }
 
     @Override
