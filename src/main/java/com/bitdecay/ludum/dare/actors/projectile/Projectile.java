@@ -1,6 +1,7 @@
 package com.bitdecay.ludum.dare.actors.projectile;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.BooleanArray;
 import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.Facing;
@@ -34,6 +35,7 @@ public class Projectile extends GameObject implements ContactListener, IRemoveab
     private final TimedComponent timedComponent;
 
     private Boolean shouldRemove = false;
+    private Boolean leftFacing = false;
 
     public Projectile(PositionComponent source, Vector2 direction, LevelInteractionComponent levelComp, PhysicsComponent sourcePhysicsComponent) {
         super();
@@ -51,6 +53,7 @@ public class Projectile extends GameObject implements ContactListener, IRemoveab
             anim = new AnimationComponent(ResourceDir.path("assets/main/bullet"), pos, .5f, new Vector2(2, 0));
             anim.setFlipVerticalAxis(true);
         } else {
+            leftFacing = true;
             anim = new AnimationComponent(ResourceDir.path("assets/main/bullet"), pos, .5f, new Vector2(-2, 0));
         }
 
@@ -66,11 +69,7 @@ public class Projectile extends GameObject implements ContactListener, IRemoveab
         body.jumperProps = new JumperProperties();
         body.bodyType = BodyType.DYNAMIC;
 
-        if (sourcePhysicsComponent.getBody().facing.equals(Facing.RIGHT)) {
-            body.aabb.set(new BitRectangle(pos.x + 5, pos.y + 7, 15, 8));
-        } else {
-            body.aabb.set(new BitRectangle(pos.x - sourcePhysicsComponent.getBody().aabb.width/2, pos.y + 7, 15, 8));
-        }
+        body.aabb.set(new BitRectangle(pos.x, pos.y + 7, sourcePhysicsComponent.getBody().aabb.width, 8));
 
         body.velocity.set(PROJECTILE_SPEED * direction.x, PROJECTILE_SPEED * direction.y);
         body.userObject = this;
@@ -110,6 +109,18 @@ public class Projectile extends GameObject implements ContactListener, IRemoveab
     public void remove() {
         // Remove ourselves from the physics world.
         levelComponent.getWorld().removeBody(phys.getBody());
+        shouldRemove = true;
+
+        PositionComponent passin;
+        if(leftFacing){
+            passin = new PositionComponent(pos.x - 14, pos.y - 10);
+
+        } else {
+            passin = new PositionComponent(pos.x, pos.y - 10);
+        }
+        ProjectileExplosion expo = new ProjectileExplosion(passin);
+
+        levelComponent.getObjects().add(expo);
     }
 
     @Override
