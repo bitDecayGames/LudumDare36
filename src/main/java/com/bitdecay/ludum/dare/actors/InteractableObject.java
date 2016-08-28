@@ -5,9 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.collision.ContactListener;
-import com.bitdecay.jump.geom.BitPoint;
 import com.bitdecay.jump.geom.BitRectangle;
-import com.bitdecay.ludum.dare.actors.environment.DeadShip;
 import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.components.ship.DeadShipAnimationComponent;
 import com.bitdecay.ludum.dare.interfaces.IRemoveable;
@@ -63,7 +61,7 @@ public class InteractableObject extends StateMachine implements ContactListener,
     }
 
     public InteractableObject setPosition(float x, float y) {
-        physics.getBody().aabb.xy = new BitPoint(x, y);
+        physics.getBody().aabb.xy.set(x, y);
 
         return this;
     }
