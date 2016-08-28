@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.JumperBody;
+import com.bitdecay.jump.control.PlayerAction;
 import com.bitdecay.jump.control.PlayerInputController;
 import com.bitdecay.jump.geom.BitRectangle;
 import com.bitdecay.jump.properties.JumperProperties;
@@ -34,9 +35,9 @@ public class Player extends StateMachine {
     private final HealthComponent health;
     private final AttackComponent attack;
     private final JetPackComponent jetpack;
-
     private final PhysicsComponent phys;
     private final KeyboardControlComponent keyboard;
+    private final TimerComponent timer;
 
     private LevelInteractionComponent levelComponent;
     private float shootAgain = 0;
@@ -60,7 +61,9 @@ public class Player extends StateMachine {
 
         phys.getBody().controller = new PlayerInputController(keyboard);
 
-        append(size).append(pos).append(phys).append(health).append(jetpack).append(animNormal).append(keyboard);
+        timer = new TimerComponent(0.5f);
+
+        append(size).append(pos).append(phys).append(health).append(jetpack).append(animNormal).append(keyboard).append(timer);
         setActiveState(new StandState(components));
     }
 
@@ -122,6 +125,13 @@ public class Player extends StateMachine {
         if (keyboard.isJustPressed(InputAction.SHOOT) && shootAgain > .5){
             shootAgain = 0;
             setActiveState(new ShootState(components));
+        }
+
+        if (timer.complete() &&
+            keyboard.isJustPressed(PlayerAction.DOWN) &&
+            hasShipPart()) {
+            getShipPart().removeFromPlayer(false);
+            timer.reset();
         }
     }
 
@@ -187,5 +197,9 @@ public class Player extends StateMachine {
 
     public boolean hasShipPart() {
         return getShipPart() != null;
+    }
+
+    public TimerComponent getTimer() {
+        return timer;
     }
 }
