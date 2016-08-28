@@ -25,7 +25,7 @@ public class Player extends StateMachine {
     private static final int MAX_VOLUNTARY_SPEED_CARRY = 100;
 
     private static final int JUMP_STRENGTH = 300;
-    private static final int JUMP_STRENGTH_CARRY = 100;
+    private static final int JUMP_STRENGTH_CARRY = 135;
 
     private final AnimationComponent animNormal;
     private final AnimationComponent animCarry;
