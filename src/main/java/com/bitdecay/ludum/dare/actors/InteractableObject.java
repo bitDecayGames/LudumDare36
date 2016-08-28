@@ -99,6 +99,8 @@ public class InteractableObject extends StateMachine implements ContactListener,
 
     @Override
     public void remove() {
-
+        if (levelInteraction != null) {
+            levelInteraction.removeFromLevel(physics);
+        }
     }
 }
