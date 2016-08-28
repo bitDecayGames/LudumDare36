@@ -40,10 +40,7 @@ public class SoundLibrary {
         sounds.put("Scwaaaap", new SoundEffect(0.07f));
         sounds.put("ShipBeacon", new SoundEffect(0.07f));
 
-//        musics.put("a_journey_awaits", new MusicEffect(0.05f));
-//        musics.put("fight", new MusicEffect(0.07f));
-//        musics.put("hero_immortal_short_intro", new MusicEffect(0.05f));
-//        musics.put("Ouroboros", new MusicEffect(0.05f));
+        musics.put("ROZKOLAmbientIV", new MusicEffect(1f));
     }
 
     public static synchronized Sound playSound(String name) {
@@ -79,7 +76,7 @@ public class SoundLibrary {
 
         music = musics.get(name);
         if (music.music == null) {
-            music.music = Gdx.audio.newMusic(Gdx.files.internal("music/" + name + ".mp3"));
+            music.music = Gdx.audio.newMusic(ResourceDir.internal("music/" + name + ".mp3"));
             musics.put(name, music);
         }
 
