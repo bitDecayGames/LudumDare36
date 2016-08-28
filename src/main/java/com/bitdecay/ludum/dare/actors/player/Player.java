@@ -105,10 +105,6 @@ public class Player extends StateMachine {
         body.jumperProps.jumpStrength = carry ? JUMP_STRENGTH_CARRY : JUMP_STRENGTH;
     }
 
-    private ShipPartComponent getShipPart() {
-        return ((ShipPartComponent) getFirstComponent(ShipPartComponent.class));
-    }
-
     @Override
     public void update(float delta) {
         updateAnimationComponent();
@@ -185,7 +181,11 @@ public class Player extends StateMachine {
         return jetpack;
     }
 
+    public ShipPartComponent getShipPart() {
+        return ((ShipPartComponent) getFirstComponent(ShipPartComponent.class));
+    }
+
     public boolean hasShipPart() {
-        return getFirstComponent(ShipPartComponent.class) != null;
+        return getShipPart() != null;
     }
 }
