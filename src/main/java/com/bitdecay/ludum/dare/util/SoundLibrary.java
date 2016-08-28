@@ -40,7 +40,7 @@ public class SoundLibrary {
         sounds.put("Scwaaaap", new SoundEffect(0.07f));
         sounds.put("ShipBeacon", new SoundEffect(0.07f));
 
-        musics.put("ROZKOLAmbientIV", new MusicEffect(1f));
+        musics.put("ROZKOLAmbientIV", new MusicEffect(1.5f));
     }
 
     public static synchronized Sound playSound(String name) {
