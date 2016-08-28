@@ -61,7 +61,6 @@ public class GameScreen implements Screen, EditorHook {
         player = new Player();
         player.addToScreen(new LevelInteractionComponent(world, gobs));
 
-        new Monkey().addToScreen(new LevelInteractionComponent(world, gobs));
 
         Array<AnimagicTextureRegion> aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec");
         Array<AnimagicTextureRegion> bridgesTileTextures = LudumDareGame.atlas.findRegions("tiles/bridges");
@@ -72,6 +71,8 @@ public class GameScreen implements Screen, EditorHook {
 
         currentLevel = LevelUtilities.loadLevel(ResourceDir.path("thePit.level"));
         world.setLevel(currentLevel);
+
+        new Monkey().addToScreen(new LevelInteractionComponent(world, gobs));
 
         hud = new Hud(player);
         uiBatch = new SpriteBatch();

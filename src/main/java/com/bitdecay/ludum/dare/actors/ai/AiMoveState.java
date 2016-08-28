@@ -15,6 +15,9 @@ import java.util.List;
 
 public class AiMoveState implements IState {
 
+
+    private static float JUMP_TILE_SIZE = 16;
+
     private Monkey me;
     private AIControlComponent input;
     private AiNode goal;
@@ -27,12 +30,40 @@ public class AiMoveState implements IState {
 
         this.me = me;
         this.input = input;
-        this.goal = new AiNode(goalPos, posToIndex(goalPos), AiNodeType.STOP);
+        BitPointInt startIndex = posToIndex(this.me.getPosition());
+        BitPointInt goalIndex = posToIndex(goalPos);
+        this.goal = new AiNode(goalPos, goalIndex, AiNodeType.STOP);
 
         // TODO: calculate all the sub targets
-        nodes.add(new AiNode(this.me.getPosition(), posToIndex(this.me.getPosition()), AiNodeType.START));
-
+        nodes.add(new AiNode(this.me.getPosition(), startIndex, AiNodeType.START));
+        recurseThroughNodes(nodes.get(0), goal, nodes);
         nodes.add(this.goal);
+    }
+
+    private void recurseThroughNodes(AiNode currentNode, AiNode goal, List<AiNode> visitedNodes){
+        AiNode nextNode = findWalkableNode(currentNode, goal, visitedNodes);
+        if (nextNode != null){
+            visitedNodes.add(nextNode);
+            recurseThroughNodes(nextNode, goal, visitedNodes);
+        } else {
+            nextNode = findJumpableNode(currentNode, goal, visitedNodes);
+            if (nextNode != null){
+                visitedNodes.add(nextNode);
+                recurseThroughNodes(nextNode, goal, visitedNodes);
+            }
+        }
+    }
+
+    private AiNode findWalkableNode(AiNode currentNode, AiNode goal, List<AiNode> visitedNodes){
+        // TODO: check node to left(empty) and bottomLeft(solid) or right(empty) and bottomRight(solid)
+        // TODO: or check for not to left/right(empty) and then up to 3 down to be empty and then a solid (aka: fall)
+        return null;
+    }
+
+    private AiNode findJumpableNode(AiNode currentNode, AiNode goal, List<AiNode> visitedNodes){
+        // TODO: check node to upper/accross two right/left(empty) with a solid platform beneath
+        // TODO: or check for lower/accross two right/left(empty) with a solid platform beneath
+        return null;
     }
 
     private BitBody bodyAtIndex(BitPointInt index){
@@ -52,6 +83,10 @@ public class AiMoveState implements IState {
         }
     }
 
+    private void p(String s){
+        System.out.println(s);
+    }
+
     private BitPointInt posToIndex(Vector2 pos){
         BitBody[][] bodies = me.getWorld().getGrid();
         for (int x = 0; x < bodies.length; x++){
@@ -59,9 +94,13 @@ public class AiMoveState implements IState {
             if (col != null) for (int y = 0; y < col.length; y++){
                 BitBody body = col[y];
                 if (body != null && body.aabb.contains(pos.x, pos.y)) return new BitPointInt(x, y);
+                else if (body != null) {
+                    BitPoint diff = new BitPoint(body.aabb.center()).minus(pos.x, pos.y).dividedBy(-JUMP_TILE_SIZE);
+                    return new BitPointInt(x + Math.round(diff.x), y + Math.round(diff.y));
+                }
             }
         }
-        return null;
+        throw new RuntimeException("AHHHH This should never happen!!!!");
     }
 
     @Override
@@ -77,9 +116,11 @@ public class AiMoveState implements IState {
     @Override
     public IState update(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
-            input.isJustPressed(InputAction.JUMP);
-        else if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
-            input.isPressed(InputAction.JUMP);
+            input.justPressed(InputAction.JUMP);
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+            input.pressed(InputAction.LEFT);
+        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+            input.pressed(InputAction.RIGHT);
 
         // TODO: figure out how to get to the next node
         if (nodes.size() == 0){

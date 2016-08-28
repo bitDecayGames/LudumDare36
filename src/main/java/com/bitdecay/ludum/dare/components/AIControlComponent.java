@@ -21,7 +21,6 @@ public class AIControlComponent extends InputComponent {
     }
 
     public void pressed(InputAction action) {
-        System.out.println("Pressed: " + action);
         currentActions.add(action);
         previousActions.add(action);
     }
@@ -32,7 +31,6 @@ public class AIControlComponent extends InputComponent {
     }
 
     public void justPressed(InputAction action) {
-        System.out.println("JustPressed: " + action);
         currentActions.add(action);
         previousActions.remove(action);
     }

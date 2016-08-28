@@ -62,12 +62,23 @@ public class Monkey extends StateMachine {
         return new PhysicsComponent(body, pos, size);
     }
 
-
     private void setupAnimation(Animator a) {
         a.addAnimation(new Animation("walk", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/walk").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("stand", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/stand").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/jump").toArray(AnimagicTextureRegion.class)));
         a.switchToAnimation("stand");
+    }
+
+    public void addToScreen(LevelInteractionComponent levelComp) {
+        // Remove any existing level components.
+        remove(LevelInteractionComponent.class);
+
+        levelComponent = levelComp;
+        append(levelComponent);
+
+        levelComponent.addToLevel(this, phys);
+
+        setActiveState(new AiMoveState(this, input, pos.toVector2().add(0, 0)));
     }
 
     @Override
@@ -137,20 +148,6 @@ public class Monkey extends StateMachine {
 
     public Vector2 getPosition() {
         return new Vector2(pos.x, pos.y);
-    }
-
-    public void addToScreen(LevelInteractionComponent levelComp) {
-        // Remove any existing level components.
-        remove(LevelInteractionComponent.class);
-
-        levelComponent = levelComp;
-        append(levelComponent);
-
-        levelComponent.addToLevel(this, phys);
-
-        setActiveState(new AiMoveState(this, input, pos.toVector2().add(100, 0)));
-
-        setPosition(-50, 0);
     }
 
     public BitWorld getWorld(){
