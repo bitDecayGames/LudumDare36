@@ -38,4 +38,8 @@ public class AnimationComponent implements IComponent, IUpdate, IDraw {
     public void setFlipVerticalAxis(boolean value) {
         flipVerticalAxis = value;
     }
+
+    public boolean getFlipVerticalAxis() {
+        return flipVerticalAxis;
+    }
 }

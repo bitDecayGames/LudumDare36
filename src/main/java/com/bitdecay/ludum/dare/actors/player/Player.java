@@ -1,7 +1,9 @@
 package com.bitdecay.ludum.dare.actors.player;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.JumperBody;
 import com.bitdecay.jump.control.PlayerInputController;
@@ -17,10 +19,18 @@ import com.bitdecay.ludum.dare.control.InputAction;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 
 public class Player extends StateMachine {
+    private static final int MAX_VOLUNTARY_SPEED = 150;
+    private static final int MAX_VOLUNTARY_SPEED_CARRY = 100;
+
+    private static final int JUMP_STRENGTH = 300;
+    private static final int JUMP_STRENGTH_CARRY = 100;
+
+    private final AnimationComponent animNormal;
+    private final AnimationComponent animCarry;
+
     private final SizeComponent size;
     private final PositionComponent pos;
     private final HealthComponent health;
-    private final AnimationComponent anim;
     private final AttackComponent attack;
     private final JetPackComponent jetpack;
 
@@ -34,18 +44,22 @@ public class Player extends StateMachine {
         size = new SizeComponent(100, 100);
         pos = new PositionComponent(0, 0);
         health = new HealthComponent(10, 10);
-        anim = new PlayerAnimationComponent(pos);
+
+        animNormal = new PlayerAnimationComponent(pos, false);
+        animCarry = new PlayerAnimationComponent(pos, true);
 
         attack = new AttackComponent(10);
 
         phys = createBody();
+        setCarryPhysics(false);
+
         jetpack = new JetPackComponent((JumperBody) phys.getBody());
 
         keyboard = new KeyboardControlComponent();
 
         phys.getBody().controller = new PlayerInputController(keyboard);
 
-        append(size).append(pos).append(phys).append(health).append(jetpack).append(anim).append(keyboard);
+        append(size).append(pos).append(phys).append(health).append(jetpack).append(animNormal).append(keyboard);
         setActiveState(new StandState(components));
     }
 
@@ -54,7 +68,6 @@ public class Player extends StateMachine {
         body.props.deceleration = 10000;
         body.props.acceleration = 1000;
         body.props.airAcceleration = 700;
-        body.props.maxVoluntarySpeed = 150;
         body.jumperProps = new JumperProperties();
         body.jumperProps.jumpCount = Integer.MAX_VALUE;
         body.jumperProps.jumpVariableHeightWindow = Float.POSITIVE_INFINITY;
@@ -66,8 +79,39 @@ public class Player extends StateMachine {
         return new PhysicsComponent(body, pos, size);
     }
 
+    // TODO This will be expensive to do dynamically due to getFirstComponent, maybe optimize later.
+    private void updateAnimationComponent() {
+        IComponent currentAnim = getFirstComponent(AnimationComponent.class);
+        IComponent shipPart = getShipPart();
+
+        // Switch to carry animation set.
+        if (shipPart != null && currentAnim != animCarry) {
+            remove(AnimationComponent.class);
+            append(animCarry);
+            setCarryPhysics(true);
+        // Switch to normal animation set.
+        } else if (shipPart == null && currentAnim != animNormal) {
+            remove(AnimationComponent.class);
+            append(animNormal);
+            setCarryPhysics(false);
+        }
+    }
+
+    private void setCarryPhysics(boolean carry) {
+        JumperBody body = ((JumperBody) phys.getBody());
+
+        body.props.maxVoluntarySpeed = carry ? MAX_VOLUNTARY_SPEED_CARRY : MAX_VOLUNTARY_SPEED;
+        body.jumperProps.jumpStrength = carry ? JUMP_STRENGTH_CARRY : JUMP_STRENGTH;
+    }
+
+    private ShipPartComponent getShipPart() {
+        return ((ShipPartComponent) getFirstComponent(ShipPartComponent.class));
+    }
+
     @Override
     public void update(float delta) {
+        updateAnimationComponent();
+
         // Reset for now
         // TODO do this somewhere else?
 //        if (pos.y < -1000) {
@@ -82,6 +126,17 @@ public class Player extends StateMachine {
             shootAgain = 0;
             setActiveState(new ShootState(components));
         }
+    }
+
+    @Override
+    public void draw(SpriteBatch spriteBatch) {
+        ShipPartComponent shipPart = getShipPart();
+        AnimationComponent anim = ((AnimationComponent) getFirstComponent(AnimationComponent.class));
+        if (shipPart != null && anim != null) {
+            shipPart.flipVerticalAxis(!anim.getFlipVerticalAxis());
+        }
+
+        super.draw(spriteBatch);
     }
 
     public void hit(AttackComponent attackComponent) {
@@ -127,5 +182,9 @@ public class Player extends StateMachine {
 
     public JetPackComponent getJetpack(){
         return jetpack;
+    }
+
+    public boolean hasShipPart() {
+        return getFirstComponent(ShipPartComponent.class) != null;
     }
 }
