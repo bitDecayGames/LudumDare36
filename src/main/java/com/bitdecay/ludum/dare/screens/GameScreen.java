@@ -2,13 +2,10 @@ package com.bitdecay.ludum.dare.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
@@ -22,7 +19,6 @@ import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.actors.items.ShipPart;
 import com.bitdecay.ludum.dare.actors.player.Player;
-import com.bitdecay.ludum.dare.actors.state.StandState;
 import com.bitdecay.ludum.dare.background.BackgroundManager;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
@@ -111,10 +107,10 @@ public class GameScreen implements Screen, EditorHook {
 
         gobsBatch.end();
 
-        worldRenderer.render(world, camera);
+        worldRenderer.render(world, cam);
 
         // Level and game objects.
-        gobsBatch.setProjectionMatrix(camera.combined);
+        gobsBatch.setProjectionMatrix(cam.combined);
         gobsBatch.begin();
 
         drawLevel();
