@@ -108,7 +108,7 @@ public class GameScreen implements Screen, EditorHook {
         for (int x = 0; x < level.gridObjects.length; x++) {
             for (int y = 0; y < level.gridObjects[0].length; y++) {
                 TileObject obj = level.gridObjects[x][y];
-                if (obj != null && obj.material == 3) {
+                if (obj != null && isBackgroundMaterial(obj.material)) {
                     obj.collideNValue = 15;
                     updateOwnNeighborValues(level.gridObjects, x, y);
                 }
@@ -116,30 +116,37 @@ public class GameScreen implements Screen, EditorHook {
         }
     }
 
+    private boolean isBackgroundMaterial(int m) {
+        // To add another tile set, say 5, that is a background change like this:
+
+        // return (m == 3 || m == 5);
+
+        return (m == 3);
+    }
     void updateOwnNeighborValues(TileObject[][] grid, int x, int y) {
         if (!ArrayUtilities.onGrid(grid, x, y) || grid[x][y] == null) {
             return;
         }
 
         // check right
-        if (ArrayUtilities.onGrid(grid, x + 1, y) && grid[x + 1][y] != null && grid[x + 1][y].material != 3) {
-            grid[x + 1][y].collideNValue &= Direction.NOT_LEFT;
-            grid[x + 1][y].renderNValue &= Direction.NOT_LEFT;
+        if (ArrayUtilities.onGrid(grid, x + 1, y) && grid[x + 1][y] != null && !isBackgroundMaterial(grid[x+1][y].material)) {
+            grid[x+1][y].collideNValue &= Direction.NOT_LEFT;
+            grid[x+1][y].renderNValue &= Direction.NOT_LEFT;
         }
         // check left
-        if (ArrayUtilities.onGrid(grid, x - 1, y) && grid[x - 1][y] != null && grid[x - 1][y].material != 3) {
-            grid[x - 1][y].collideNValue &= Direction.NOT_RIGHT;
-            grid[x - 1][y].renderNValue &= Direction.NOT_RIGHT;
+        if (ArrayUtilities.onGrid(grid, x - 1, y) && grid[x - 1][y] != null && !isBackgroundMaterial(grid[x-1][y].material)) {
+            grid[x-1][y].collideNValue &= Direction.NOT_RIGHT;
+            grid[x-1][y].renderNValue &= Direction.NOT_RIGHT;
         }
         // check up
-        if (ArrayUtilities.onGrid(grid, x, y + 1) && grid[x][y + 1] != null && grid[x][y + 1].material != 3) {
-            grid[x][y + 1].collideNValue &= Direction.NOT_DOWN;
-            grid[x][y + 1].renderNValue &= Direction.NOT_DOWN;
+        if (ArrayUtilities.onGrid(grid, x, y + 1) && grid[x][y + 1] != null && !isBackgroundMaterial(grid[x][y+1].material)) {
+            grid[x][y+1].collideNValue &= Direction.NOT_DOWN;
+            grid[x][y+1].renderNValue &= Direction.NOT_DOWN;
         }
         // check down
-        if (ArrayUtilities.onGrid(grid, x, y - 1) && grid[x][y - 1] != null && grid[x][y - 1].material != 3) {
-            grid[x][y - 1].collideNValue &= Direction.NOT_UP;
-            grid[x][y - 1].renderNValue &= Direction.NOT_UP;
+        if (ArrayUtilities.onGrid(grid, x, y - 1) && grid[x][y - 1] != null && !isBackgroundMaterial(grid[x][y-1].material)) {
+            grid[x][y-1].collideNValue &= Direction.NOT_UP;
+            grid[x][y-1].renderNValue &= Direction.NOT_UP;
         }
     }
 
