@@ -66,11 +66,7 @@ public class Projectile extends GameObject implements ContactListener, IRemoveab
         body.jumperProps = new JumperProperties();
         body.bodyType = BodyType.DYNAMIC;
 
-        if (sourcePhysicsComponent.getBody().facing.equals(Facing.RIGHT)) {
-            body.aabb.set(new BitRectangle(pos.x + 5, pos.y + 7, 15, 8));
-        } else {
-            body.aabb.set(new BitRectangle(pos.x - sourcePhysicsComponent.getBody().aabb.width/2, pos.y + 7, 15, 8));
-        }
+        body.aabb.set(new BitRectangle(pos.x, pos.y + 7, sourcePhysicsComponent.getBody().aabb.width, 8));
 
         body.velocity.set(PROJECTILE_SPEED * direction.x, PROJECTILE_SPEED * direction.y);
         body.userObject = this;

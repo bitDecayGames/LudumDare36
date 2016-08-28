@@ -12,6 +12,7 @@ public class EditorLauncher {
         config.width = 1600;
         config.height = 900;
         config.title = "Jump";
+        config.fullscreen = false;
 
         LevelEditor.setAssetsFolder("../jump/jump-leveleditor/assets");
         new LwjglApplication(new LD36EditorApp(), config);
