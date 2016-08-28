@@ -48,6 +48,7 @@ public class AiMoveState implements IState {
         optionalNodes.add(findWalkableNode(currentNode, goal, visitedNodes));
         optionalNodes.add(findHopDownNode(currentNode, goal, visitedNodes));
         optionalNodes.add(findLeapOverEmptyNode(currentNode, goal, visitedNodes));
+        optionalNodes.add(findLeapOverAndUpNode(currentNode, goal, visitedNodes));
         optionalNodes.add(findLeapOverAndDownNode(currentNode, goal, visitedNodes));
         optionalNodes.add(findJumpDownNode(currentNode, goal, visitedNodes));
         optionalNodes.add(findLeapDownNode(currentNode, goal, visitedNodes));
@@ -252,19 +253,50 @@ public class AiMoveState implements IState {
                         !neighbors.topLeft &&
                         !neighbors.topLeftNeighbors().left &&
                         !neighbors.leftNeighbors().left &&
+                        !neighbors.left &&
+                        !neighbors.bottomLeft &&
+                        !neighbors.bottomLeftNeighbors().bottom &&
                         !neighbors.bottomLeftNeighbors().left &&
-                        !neighbors.bottomLeftNeighbors().bottomLeft &&
-                        !neighbors.bottomLeftNeighbors().bottomNeighbors().bottom &&
-                        neighbors.bottomLeftNeighbors().bottomLeftNeighbors().bottom,
+                        neighbors.bottomLeftNeighbors().bottomLeft,
                 new BitPointInt(currentNode.index.x + 2, currentNode.index.y - 1),
                 (neighbors) -> !neighbors.top &&
                         !neighbors.topRight &&
                         !neighbors.topRightNeighbors().right &&
                         !neighbors.rightNeighbors().right &&
+                        !neighbors.right &&
+                        !neighbors.bottomRight &&
+                        !neighbors.bottomRightNeighbors().bottom &&
                         !neighbors.bottomRightNeighbors().right &&
-                        !neighbors.bottomRightNeighbors().bottomRight &&
-                        !neighbors.bottomRightNeighbors().bottomNeighbors().bottom &&
-                        neighbors.bottomRightNeighbors().bottomRightNeighbors().bottom
+                        neighbors.bottomRightNeighbors().bottomRight
+        );
+    }
+
+    private Optional<AiNode> findLeapOverAndUpNode(AiNode currentNode, AiNode goal, List<AiNode> visitedNodes){
+        return movementCheck(
+                AiNodeType.JUMP,
+                currentNode,
+                goal,
+                visitedNodes,
+                new BitPointInt(currentNode.index.x - 2, currentNode.index.y + 1),
+                (neighbors) -> !neighbors.top &&
+                        !neighbors.topNeighbors().top &&
+                        !neighbors.topNeighbors().topLeft &&
+                        !neighbors.topLeft &&
+                        !neighbors.topLeftNeighbors().topLeft &&
+                        !neighbors.topLeftNeighbors().left &&
+                        !neighbors.left &&
+                        !neighbors.bottomLeft &&
+                        neighbors.leftNeighbors().left,
+                new BitPointInt(currentNode.index.x + 2, currentNode.index.y + 1),
+                (neighbors) ->  !neighbors.top &&
+                        !neighbors.topNeighbors().top &&
+                        !neighbors.topNeighbors().topRight &&
+                        !neighbors.topRight &&
+                        !neighbors.topRightNeighbors().topRight &&
+                        !neighbors.topRightNeighbors().right &&
+                        !neighbors.right &&
+                        !neighbors.bottomRight &&
+                        neighbors.rightNeighbors().right
         );
     }
 

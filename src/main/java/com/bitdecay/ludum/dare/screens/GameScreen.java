@@ -88,7 +88,7 @@ public class GameScreen implements Screen, EditorHook {
         world.setLevel(currentLevel);
         levelChanged(currentLevel);
 
-        monkey = new Monkey(0, 0);
+        monkey = new Monkey(-160, 0);
         monkey.addToScreen(new LevelInteractionComponent(world, gobs));
 
         hud = new Hud(player);
@@ -170,10 +170,10 @@ public class GameScreen implements Screen, EditorHook {
 
         gobsBatch.end();
 
-        worldRenderer.render(world, camera);
+        worldRenderer.render(world, cam);
 
         // Level and game objects.
-        gobsBatch.setProjectionMatrix(camera.combined);
+        gobsBatch.setProjectionMatrix(cam.combined);
         gobsBatch.begin();
 
         drawLevel();
@@ -182,7 +182,7 @@ public class GameScreen implements Screen, EditorHook {
         gobsBatch.end();
 
         // debug renderer
-        debugRenderer.setProjectionMatrix(camera.combined);
+        debugRenderer.setProjectionMatrix(cam.combined);
         debugRenderer.begin();
         monkey.debugDraw(debugRenderer);
         debugRenderer.end();
@@ -278,7 +278,6 @@ public class GameScreen implements Screen, EditorHook {
         currentLevel = level;
         world.removeAllBodies();
         world.setLevel(level);
-        player = new Player();
         LevelInteractionComponent playerLevelLink = new LevelInteractionComponent(world, gobs);
         player.addToScreen(playerLevelLink);
     }
