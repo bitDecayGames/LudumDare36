@@ -67,7 +67,12 @@ public class GameScreen implements Screen, EditorHook {
         player.addToScreen(playerLevelLink);
 
         Array<AnimagicTextureRegion> aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec");
+        Array<AnimagicTextureRegion> bridgesTileTextures = LudumDareGame.atlas.findRegions("tiles/bridges");
+        Array<AnimagicTextureRegion> rockTileTextures = LudumDareGame.atlas.findRegions("tiles/rock");
         tilesetMap.put(0, aztecTileTextures.toArray(TextureRegion.class));
+        tilesetMap.put(1, bridgesTileTextures.toArray(TextureRegion.class));
+        tilesetMap.put(2, rockTileTextures.toArray(TextureRegion.class));
+
         currentLevel = LevelUtilities.loadLevel(ResourceDir.path("thePit.level"));
         world.setLevel(currentLevel);
 
@@ -173,7 +178,10 @@ public class GameScreen implements Screen, EditorHook {
 
     @Override
     public List<EditorIdentifierObject> getTilesets() {
-        return Arrays.asList(new EditorIdentifierObject(0, "Fallback", tilesetMap.get(0)[0]));
+        return Arrays.asList(
+                new EditorIdentifierObject(0, "Aztec", tilesetMap.get(0)[0]),
+                new EditorIdentifierObject(1, "Bridges", tilesetMap.get(1)[0]),
+                new EditorIdentifierObject(2, "Rock", tilesetMap.get(2)[0]));
     }
 
     @Override
