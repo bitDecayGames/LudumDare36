@@ -2,8 +2,10 @@ package com.bitdecay.ludum.dare.components.ship;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.bitdecay.ludum.dare.actors.items.ShipPart;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.components.AnimationComponent;
+import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
 import com.bitdecay.ludum.dare.components.PositionComponent;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bitdecay.ludum.dare.interfaces.IDraw;
@@ -15,24 +17,46 @@ public class ShipPartComponent implements IComponent, IUpdate, IDraw, IRemoveabl
 
     private final PositionComponent position;
     private final AnimationComponent animation;
+    private LevelInteractionComponent levelInteraction;
 
     private Player player;
+    private ShipPart shipPart;
     private boolean shouldRemove;
 
-    public ShipPartComponent(String name) {
+    public final String name;
+
+    public ShipPartComponent(String name, ShipPart shipPart) {
+        this.name = name;
+        this.shipPart = shipPart;
+
         position = new PositionComponent(0, 0);
         animation = new ShipPartAnimationComponent(name, true);
         animation.setPositionComponent(position);
     }
 
-    public void addToPlayer(Player player) {
+    public void addToPlayer(Player player, LevelInteractionComponent levelInteraction) {
+        this.levelInteraction = levelInteraction;
         this.player = player;
         this.player.queueAdd(this);
     }
 
-    public void removeFromPlayer() {
-        player = null;
+    public void removeFromPlayer(boolean toDeadShip) {
         shouldRemove = true;
+
+        // Don't drop if being given to ship.
+        if (toDeadShip) {
+            return;
+        }
+
+        if (levelInteraction != null && shipPart != null) {
+            shipPart.addToLevel(levelInteraction);
+            Vector2 playerPosition = player.getPosition();
+            shipPart.setPosition(playerPosition.x, playerPosition.y);
+
+            levelInteraction = null;
+        }
+
+        player = null;
     }
 
     public void flipVerticalAxis(boolean flip) {
@@ -51,7 +75,7 @@ public class ShipPartComponent implements IComponent, IUpdate, IDraw, IRemoveabl
 
     @Override
     public void remove() {
-
+        shouldRemove = false;
     }
 
     @Override
