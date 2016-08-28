@@ -23,6 +23,7 @@ import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
 import com.bitdecay.ludum.dare.hud.Hud;
+import com.bitdecay.ludum.dare.util.SoundLibrary;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 
 import java.util.*;
@@ -70,6 +71,7 @@ public class GameScreen implements Screen, EditorHook {
 
     @Override
     public void show() {
+        SoundLibrary.loopMusic("ROZKOLAmbientIV");
     }
 
     @Override
