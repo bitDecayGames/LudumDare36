@@ -6,7 +6,9 @@ import com.bitdecay.ludum.dare.components.KeyboardControlComponent;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
 import com.bitdecay.ludum.dare.components.PositionComponent;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
+import com.bitdecay.ludum.dare.util.SoundLibrary;
 
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -29,9 +31,13 @@ public class ShootState extends AbstractState {
         if (physicsComponent.getBody().facing.toString().equals("LEFT")){
             Projectile projectile = new Projectile(positionComponent, new Vector2(-1, 0), levelInteractionComponent, physicsComponent);
             levelInteractionComponent.addToLevel(projectile, projectile.getPhysics());
+            int sound = new Random().nextInt(4) + 1;
+            SoundLibrary.playSound("Laser_Shoot" + sound);
         } else {
             Projectile projectile = new Projectile(positionComponent, new Vector2(1, 0), levelInteractionComponent, physicsComponent);
             levelInteractionComponent.addToLevel(projectile, projectile.getPhysics());
+            int sound = new Random().nextInt(4) + 1;
+            SoundLibrary.playSound("Laser_Shoot" + sound);
         }
     }
 
