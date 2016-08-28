@@ -15,7 +15,7 @@ public class DeadShip extends InteractableObject {
     private static final Set<String> collectedParts = new HashSet<>();
 
     private DeadShip() {
-        super(new DeadShipAnimationComponent());
+        super(new DeadShipAnimationComponent("deadShip"));
     }
 
     public static DeadShip create(LevelInteractionComponent levelInteraction) {
@@ -26,8 +26,12 @@ public class DeadShip extends InteractableObject {
         return collectedParts.size();
     }
 
-    private static void addPart(String name) {
+    private static void addPart(DeadShip ship, String name) {
         collectedParts.add(name);
+
+        DeadShipAnimationComponent anim = new DeadShipAnimationComponent("overlay_" + name);
+        anim.setPositionComponent(ship.position);
+        ship.append(anim);
     }
 
     @Override
@@ -49,7 +53,7 @@ public class DeadShip extends InteractableObject {
         }
 
         if (name != null) {
-            addPart(name);
+            addPart(this, name);
         }
     }
 }

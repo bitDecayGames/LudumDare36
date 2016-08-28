@@ -9755,6 +9755,17 @@
     },
     "uuid" : "b101f9ff-310d-43db-829e-d35f55e855ea",
     "name" : "navModule"
+  } ], [ "com.bitdecay.ludum.dare.editor.deadship.DeadShipEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 576.0,
+        "y" : 16.0
+      },
+      "width" : 64.0,
+      "height" : 32.0
+    },
+    "uuid" : "5eda6510-d523-43b7-be14-c285731fe0d0",
+    "name" : "deadShip"
   } ] ] ],
   "triggers" : [ "java.util.ArrayList", [ ] ],
   "gridOffset" : {
