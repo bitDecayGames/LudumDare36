@@ -21,7 +21,8 @@ public class ShipPartComponent implements IComponent, IUpdate, IDraw, IRemoveabl
 
     public ShipPartComponent(String name) {
         position = new PositionComponent(0, 0);
-        animation = new ShipPartAnimationComponent(name, position, true);
+        animation = new ShipPartAnimationComponent(name, true);
+        animation.setPositionComponent(position);
     }
 
     public void addToPlayer(Player player) {

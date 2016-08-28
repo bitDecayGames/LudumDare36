@@ -11,7 +11,7 @@ import com.bytebreakstudios.animagic.animation.Animator;
 public class AnimationComponent implements IComponent, IUpdate, IDraw {
 
     public final Animator animator;
-    private final PositionComponent position;
+    private PositionComponent position;
     private final float scale;
     public Vector2 offset;
     private boolean flipVerticalAxis = false;
@@ -33,6 +33,10 @@ public class AnimationComponent implements IComponent, IUpdate, IDraw {
     public void draw(SpriteBatch spriteBatch) {
         TextureRegion reg = animator.getFrame();
         spriteBatch.draw(reg, position.x + offset.x + (flipVerticalAxis ? reg.getRegionWidth() * scale : 0), position.y + offset.y, reg.getRegionWidth() * scale * (flipVerticalAxis ? -1 : 1), reg.getRegionHeight() * scale);
+    }
+
+    public void setPositionComponent(PositionComponent position) {
+        this.position = position;
     }
 
     public void setFlipVerticalAxis(boolean value) {
