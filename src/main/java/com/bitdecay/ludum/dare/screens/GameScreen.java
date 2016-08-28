@@ -17,6 +17,7 @@ import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
+import com.bitdecay.ludum.dare.actors.environment.DeadShip;
 import com.bitdecay.ludum.dare.actors.items.ShipPart;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.background.BackgroundManager;
@@ -78,6 +79,9 @@ public class GameScreen implements Screen, EditorHook {
 
         ShipPart alienGun = ShipPart.alienGun(levelInteraction);
         alienGun.setPosition(200, 0);
+
+        DeadShip deadShip = DeadShip.create(levelInteraction);
+        deadShip.setPosition(-100, 0);
     }
 
     @Override
