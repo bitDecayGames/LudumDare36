@@ -27,6 +27,7 @@ public class LudumDareGame extends Game {
 
 //        setScreen(new GameScreen(this));
 //        setScreen(new MainMenuScreen(this));
-        setScreen(new SplashScreen(this));
+//        setScreen(new SplashScreen(this));
+        setScreen(new OpeningSceneCutScreen(this));
     }
 }

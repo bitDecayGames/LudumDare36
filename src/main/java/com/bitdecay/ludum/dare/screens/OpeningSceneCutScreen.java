@@ -75,7 +75,8 @@ public class OpeningSceneCutScreen implements Screen {
                     Actions.run(( () -> {
                         SoundLibrary.stopMusic("AlarmExtended");
                         SoundLibrary.stopMusic("ambientIntro");
-                        game.setScreen(new GameScreen(game));
+//                        game.setScreen(new GameScreen(game));
+                        game.setScreen(new SplashScreen(game));
                     })))
             );
         }
