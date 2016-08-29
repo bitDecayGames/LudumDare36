@@ -52,6 +52,9 @@ public class Player extends StateMachine implements IRemoveable {
     private float invincibleTimer;
     private float shootTimer;
 
+    public boolean canShoot = false;
+    public boolean canFly = false;
+
 
     private LevelInteractionComponent levelComponent;
     private float shootAgain = 0;
@@ -71,7 +74,7 @@ public class Player extends StateMachine implements IRemoveable {
         phys = createBody();
         setCarryPhysics(false);
 
-        jetpack = new JetPackComponent((JumperBody) phys.getBody(), camera);
+        jetpack = new JetPackComponent(this, camera);
 
         keyboard = new KeyboardControlComponent();
 
@@ -144,7 +147,7 @@ public class Player extends StateMachine implements IRemoveable {
         super.update(delta);
 
         shootAgain += delta;
-        if (keyboard.isJustPressed(InputAction.SHOOT) && shootAgain > .25){
+        if (keyboard.isJustPressed(InputAction.SHOOT) && shootAgain > .25 && canShoot){
             shootAgain = 0;
             resetShootTimer();
             setActiveState(new ShootState(components));

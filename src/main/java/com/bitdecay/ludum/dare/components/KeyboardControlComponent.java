@@ -35,7 +35,7 @@ public class KeyboardControlComponent extends InputComponent {
         keyboard.set(PlayerAction.JUMP, new KeyState(Input.Keys.W));
         keyboard.set(PlayerAction.LEFT, new KeyState(Input.Keys.A));
         keyboard.set(PlayerAction.RIGHT, new KeyState(Input.Keys.D));
-        keyboard.set(PlayerAction.DOWN, new KeyState(Input.Keys.S));
+        keyboard.set(PlayerAction.DOWN, new KeyState(Input.Keys.DOWN));
     }
 
     @Override
