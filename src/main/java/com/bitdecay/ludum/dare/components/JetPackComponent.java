@@ -7,6 +7,7 @@ import com.bitdecay.jump.Facing;
 import com.bitdecay.jump.JumperBody;
 import com.bitdecay.jump.control.state.GroundedControlState;
 import com.bitdecay.jump.control.state.JumpingControlState;
+import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bitdecay.ludum.dare.interfaces.IDraw;
 import com.bitdecay.ludum.dare.interfaces.IUpdate;
@@ -16,6 +17,7 @@ import com.bitdecay.ludum.dare.interfaces.IUpdate;
  */
 public class JetPackComponent implements IComponent, IUpdate, IDraw {
     private JumperBody playerJumpBody;
+    private FollowOrthoCamera camera;
 
     public final float maxFuel = 50;
 
@@ -29,8 +31,9 @@ public class JetPackComponent implements IComponent, IUpdate, IDraw {
 
     ParticleEffect fx;
 
-    public JetPackComponent(JumperBody playerJumpBody) {
+    public JetPackComponent(JumperBody playerJumpBody, FollowOrthoCamera camera) {
         this.playerJumpBody = playerJumpBody;
+        this.camera = camera;
         fx = new ParticleEffect();
         fx.load(Gdx.files.internal("particle/flame3.p"), Gdx.files.internal("particle"));
         fx.scaleEffect(.5f);
@@ -66,6 +69,7 @@ public class JetPackComponent implements IComponent, IUpdate, IDraw {
         }
 
         if(isFiring && currentFuel > 0){
+            camera.rumble();
             if (firstPress) {
                 currentFuel -= FIRST_TICK_FUEL_COST;
                 firstPress = false;
