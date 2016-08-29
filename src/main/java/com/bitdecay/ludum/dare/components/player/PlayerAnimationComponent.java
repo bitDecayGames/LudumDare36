@@ -14,7 +14,8 @@ public class PlayerAnimationComponent extends AnimationComponent {
     public enum AnimType {
         NORMAL,
         CARRY,
-        SHOOT
+        SHOOT,
+        NAKED
     }
 
     public PlayerAnimationComponent(PositionComponent position, AnimType type) {
@@ -51,6 +52,17 @@ public class PlayerAnimationComponent extends AnimationComponent {
                 animator.addAnimation(new Animation("wall", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("player/jetpack/fall/shoot").toArray(AnimagicTextureRegion.class)));
                 animator.addAnimation(new Animation("hurt", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.5f), atlas.findRegions("player/pain").toArray(AnimagicTextureRegion.class)));
                 animator.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.16f), atlas.findRegions("player/death").toArray(AnimagicTextureRegion.class)));
+                break;
+            case NAKED:
+                animator.addAnimation(new Animation("run", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("player/run/naked").toArray(AnimagicTextureRegion.class)));
+                animator.addAnimation(new Animation("jump", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("player/jetpack/idle").toArray(AnimagicTextureRegion.class)));
+                animator.addAnimation(new Animation("apex", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.1f), atlas.findRegions("player/jetpack/apex").toArray(AnimagicTextureRegion.class)));
+                animator.addAnimation(new Animation("fall", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.1f), atlas.findRegions("player/jetpack/fall").toArray(AnimagicTextureRegion.class)));
+                animator.addAnimation(new Animation("stand", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("player/stand/naked").toArray(AnimagicTextureRegion.class)));
+                animator.addAnimation(new Animation("wall", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("player/jetpack/fall").toArray(AnimagicTextureRegion.class)));
+                animator.addAnimation(new Animation("hurt", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.5f), atlas.findRegions("player/pain").toArray(AnimagicTextureRegion.class)));
+                animator.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.16f), atlas.findRegions("player/death").toArray(AnimagicTextureRegion.class)));
+
                 break;
         }
 
