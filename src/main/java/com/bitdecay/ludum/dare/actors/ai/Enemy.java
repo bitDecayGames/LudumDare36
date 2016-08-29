@@ -15,7 +15,10 @@ import com.bitdecay.jump.render.JumperRenderState;
 import com.bitdecay.jump.render.JumperRenderStateWatcher;
 import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.actors.StateMachine;
-import com.bitdecay.ludum.dare.actors.ai.behaviors.*;
+import com.bitdecay.ludum.dare.actors.ai.behaviors.AttackBehavior;
+import com.bitdecay.ludum.dare.actors.ai.behaviors.EnemyIdleBehavior;
+import com.bitdecay.ludum.dare.actors.ai.behaviors.FrustratedBehavior;
+import com.bitdecay.ludum.dare.actors.ai.behaviors.RoamBehavior;
 import com.bitdecay.ludum.dare.actors.ai.movement.AiIdleState;
 import com.bitdecay.ludum.dare.actors.ai.movement.AiMoveState;
 import com.bitdecay.ludum.dare.actors.player.Player;
@@ -26,9 +29,9 @@ import com.bitdecay.ludum.dare.interfaces.IRemoveable;
 import com.bitdecay.ludum.dare.interfaces.IShapeDraw;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
 import com.bytebreakstudios.animagic.animation.Animator;
-import com.sun.deploy.panel.ExceptionListDialog;
 
 import java.util.List;
+import java.util.Optional;
 
 public abstract class Enemy extends StateMachine implements IShapeDraw, ContactListener, IRemoveable {
     protected abstract String NAME();
@@ -122,7 +125,7 @@ public abstract class Enemy extends StateMachine implements IShapeDraw, ContactL
         behavior.update(delta);
 
         if (!(behavior.getActiveState() instanceof AttackBehavior) && getPosition().dst(player.getPosition()) < AGRO_RANGE()){
-            behavior.setActiveState(getAttack());
+            goAgro();
         }
         if (isGrounded()) setSpeed(WALKING_SPEED());
         else setSpeed(FLYING_SPEED());
@@ -130,6 +133,9 @@ public abstract class Enemy extends StateMachine implements IShapeDraw, ContactL
         if (activeState instanceof AiMoveState){
             if (behavior.getActiveState() instanceof AttackBehavior) setSpeed(ATTACK_SPEED());
         }
+
+        Optional<AgroCooldownComponent> cooldown = findComponent(AgroCooldownComponent.class);
+        if (cooldown.isPresent() && cooldown.get().shouldRemove()) remove(AgroCooldownComponent.class);
 
         updateFacing();
 
@@ -139,8 +145,8 @@ public abstract class Enemy extends StateMachine implements IShapeDraw, ContactL
             case LEFT_STANDING:
                 if (activeState instanceof AiIdleState) {
                     if (behavior.getActiveState() instanceof AttackBehavior){
-                        if (getPosition().dst(player.getPosition()) > ATTACK_RANGE() && ((AiIdleState) activeState).wasMovementBlocked()) behavior.setActiveState(new FrustratedBehavior(this, input, roamBehavior));
-                    } else if (!(behavior.getActiveState() instanceof FrustratedBehavior)) behavior.setActiveState(idleBehavior);
+                        if (getPosition().dst(player.getPosition()) > ATTACK_RANGE() && ((AiIdleState) activeState).wasMovementBlocked()) goFrustrated();
+                    } else if (!(behavior.getActiveState() instanceof FrustratedBehavior)) goIdle();
                 }
                 break;
             case RIGHT_RUNNING:
@@ -238,6 +244,30 @@ public abstract class Enemy extends StateMachine implements IShapeDraw, ContactL
 
     protected abstract GameObject getDeath();
 
+    public void goAgro(){
+        behavior.setActiveState(getAttack());
+        broadcastAgro();
+    }
+
+    public void goIdle(){
+        behavior.setActiveState(idleBehavior);
+        unBroadcastAgro();
+    }
+
+    public void goFrustrated(){
+        behavior.setActiveState(new FrustratedBehavior(this, input, roamBehavior));
+        unBroadcastAgro();
+    }
+
+    public void broadcastAgro(){
+        append(new AgroComponent());
+    }
+
+    public void unBroadcastAgro(){
+        append(new AgroCooldownComponent());
+        remove(AgroComponent.class);
+    }
+
     @Override
     public void contactStarted(BitBody bitBody){// Not allowed to hit source.
         if (bitBody.equals(phys.getBody())) {
@@ -251,6 +281,7 @@ public abstract class Enemy extends StateMachine implements IShapeDraw, ContactL
         if (bitBody.userObject instanceof Projectile) {
             this.health.health -= ((Projectile) bitBody.userObject).getAttack().attack;
             SoundLibrary.playSound(HURT_SFX());
+            goAgro();
             if(this.health.health <= 0){
                 shouldRemove = true;
             }

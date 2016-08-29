@@ -4,15 +4,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.gameobject.AINodeGameObject;
-import com.bitdecay.ludum.dare.interfaces.IDraw;
-import com.bitdecay.ludum.dare.interfaces.IRemoveable;
-import com.bitdecay.ludum.dare.interfaces.IShapeDraw;
-import com.bitdecay.ludum.dare.interfaces.IUpdate;
+import com.bitdecay.ludum.dare.interfaces.*;
 import com.bytebreakstudios.animagic.texture.AnimagicSpriteBatch;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameObjects implements IUpdate, IDraw, IShapeDraw {
     List<GameObject> gameObjects;
@@ -28,6 +26,10 @@ public class GameObjects implements IUpdate, IDraw, IShapeDraw {
 
     public Iterator getIter() {
         return gameObjects.iterator();
+    }
+
+    public <T extends GameObject> List<T> getGameObjectsOfType(Class<T> clazz){
+        return gameObjects.stream().filter(obj -> clazz.isAssignableFrom(obj.getClass())).map(obj -> clazz.cast(obj)).collect(Collectors.toList());
     }
 
     // Will be added at start of next update loop.
@@ -60,6 +62,14 @@ public class GameObjects implements IUpdate, IDraw, IShapeDraw {
         // Make sure to let it know it was removed.
         pendingRemoves.forEach(obj -> ((IRemoveable) obj).remove());
         pendingRemoves.clear();
+    }
+
+    public List<GameObject> findWithComponents(Class<? extends IComponent>... components){
+        return gameObjects.stream().filter(obj -> {
+            for (int i = 0; i < components.length; i++)
+                if (!obj.hasComponent(components[i])) return false;
+            return true;
+        }).collect(Collectors.toList());
     }
 
     public void preDraw(AnimagicSpriteBatch batch) {

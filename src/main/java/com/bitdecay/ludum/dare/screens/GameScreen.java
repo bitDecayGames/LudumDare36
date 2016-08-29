@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
@@ -22,6 +24,7 @@ import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
+import com.bitdecay.ludum.dare.actors.ai.Enemy;
 import com.bitdecay.ludum.dare.actors.ai.Gorilla;
 import com.bitdecay.ludum.dare.actors.ai.Monkey;
 import com.bitdecay.ludum.dare.actors.environment.DeadShip;
@@ -31,7 +34,7 @@ import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.background.BackgroundManager;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
-import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
+import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.editor.GorillaEditorObject;
 import com.bitdecay.ludum.dare.editor.HealthTotemEditorObject;
 import com.bitdecay.ludum.dare.editor.MonkeyEditorObject;
@@ -69,8 +72,9 @@ public class GameScreen implements Screen, EditorHook {
         this.game = game;
 
         camera = new FollowOrthoCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.maxZoom = 0.3f;
-        camera.snapSpeed = 0.2f;
+        camera.maxZoom = 0.4f;
+        camera.minZoom = 1f;
+        camera.snapSpeed = 0.04f;
 
         backgroundManager = new BackgroundManager(camera);
 
@@ -249,8 +253,37 @@ public class GameScreen implements Screen, EditorHook {
         world.step(delta);
         gobs.update(delta);
 
-        camera.addFollowPoint(player.getPosition());
+        // This adds anything with a FollowComponent to the camera view (player)
+        gobs.findWithComponents(FollowComponent.class, PositionComponent.class).forEach(obj -> {
+            Optional<PositionComponent> pos = obj.findComponent(PositionComponent.class);
+            if (pos.isPresent()) camera.addFollowPoint(pos.get().toVector2());
+        });
+        // This adds anything that has the ImportantNearPlayerComponent to the camera view that is near the player
+        gobs.findWithComponents(ImportantNearPlayerComponent.class, PositionComponent.class).forEach(obj -> {
+            Optional<PositionComponent> pos = obj.findComponent(PositionComponent.class);
+            if (pos.isPresent()) {
+                Optional<ImportantNearPlayerComponent> imp = obj.findComponent(ImportantNearPlayerComponent.class);
+                Vector2 p = pos.get().toVector2();
+                if (p.dst(player.getPosition()) < imp.get().range) {
+                    camera.addFollowPoint(p);
+                    if (! imp.get().near) SoundLibrary.playSound(imp.get().sound);
+                    imp.get().near = true;
+                } else imp.get().near = false;
+            }
+        });
         camera.update();
+
+        // this broadcasts agro messages to any nearby enemies
+        gobs.findWithComponents(AgroComponent.class, PositionComponent.class).forEach(agro -> {
+            Optional<AgroComponent> agroComponent = agro.findComponent(AgroComponent.class);
+            Optional<PositionComponent> posComponent = agro.findComponent(PositionComponent.class);
+            gobs.getGameObjectsOfType(Enemy.class).forEach(enemy -> {
+                if (!enemy.hasComponent(AgroComponent.class) &&
+                        !enemy.hasComponent(AgroCooldownComponent.class) &&
+                        posComponent.get().toVector2().dst(enemy.getPosition()) < agroComponent.get().range &&
+                        MathUtils.random(0, 20) == 0) enemy.goAgro();
+            });
+        });
 
         backgroundManager.update(delta);
         //TODO: LF ,for testing monkey ai

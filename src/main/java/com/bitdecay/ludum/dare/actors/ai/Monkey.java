@@ -1,6 +1,5 @@
 package com.bitdecay.ludum.dare.actors.ai;
 
-import com.badlogic.gdx.Game;
 import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.AttackBehavior;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.EnemyIdleBehavior;

@@ -11,7 +11,6 @@ import com.bitdecay.jump.geom.BitRectangle;
 import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.jump.render.JumperRenderStateWatcher;
 import com.bitdecay.ludum.dare.actors.StateMachine;
-import com.bitdecay.ludum.dare.actors.state.HurtState;
 import com.bitdecay.ludum.dare.actors.state.ShootState;
 import com.bitdecay.ludum.dare.actors.state.StandState;
 import com.bitdecay.ludum.dare.components.*;
@@ -67,7 +66,7 @@ public class Player extends StateMachine {
 
         timer = new TimerComponent(0.5f);
 
-        append(size).append(pos).append(phys).append(health).append(jetpack).append(animNormal).append(keyboard).append(timer);
+        append(size).append(pos).append(phys).append(health).append(jetpack).append(animNormal).append(keyboard).append(timer).append(new FollowComponent());
         setActiveState(new StandState(components));
     }
 
