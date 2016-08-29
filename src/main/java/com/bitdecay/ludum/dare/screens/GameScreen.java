@@ -183,7 +183,7 @@ public class GameScreen implements Screen, EditorHook {
         gobsBatch.end();
 
         // Debug Body Renderer
-        //worldRenderer.render(world, cam);
+        worldRenderer.render(world, cam);
 
         // Level and game objects.
         gobsBatch.setProjectionMatrix(cam.combined);
