@@ -35,12 +35,14 @@ public class AiMoveState implements IState {
         this.input = input;
         BitPointInt startIndex = posToIndex(me.getWorld(), this.me.getCenter());
         BitPointInt goalIndex = posToIndex(me.getWorld(), goalPos);
-        this.goal = new AiNode(indexToPos(me.getWorld(), goalIndex), goalIndex, AiNodeType.STOP);
-        AiNode start = new AiNode(this.me.getCenter(), startIndex, AiNodeType.START);
+        if (startIndex != null && goalIndex != null) {
+            this.goal = new AiNode(indexToPos(me.getWorld(), goalIndex), goalIndex, AiNodeType.STOP);
+            AiNode start = new AiNode(this.me.getCenter(), startIndex, AiNodeType.START);
 
-        // calculate all the sub targets
-        nodes.add(start);
-        recurseThroughNodes(nodes.get(0), goal, nodes);
+            // calculate all the sub targets
+            nodes.add(start);
+            recurseThroughNodes(nodes.get(0), goal, nodes);
+        }
         isBlocked = nodes.size() <= 1;
     }
 

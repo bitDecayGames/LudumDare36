@@ -29,7 +29,8 @@ public class BitWorldUtils {
                     }
                 }
             }
-            throw new RuntimeException("This should never never ever happen");
+            //throw new RuntimeException("This should never never ever happen");
+            return null;
         } else {
             BitPoint p = body.aabb.center();
             return new Vector2(p.x, p.y);
@@ -49,6 +50,7 @@ public class BitWorldUtils {
                 }
             }
         }
-        throw new RuntimeException("AHHHH This should never happen!!!!");
+        //throw new RuntimeException("AHHHH This should never happen!!!!");
+        return null;
     }
 }
