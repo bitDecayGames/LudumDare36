@@ -32,6 +32,7 @@ import com.bitdecay.ludum.dare.background.BackgroundManager;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
+import com.bitdecay.ludum.dare.editor.MonkeyEditorObject;
 import com.bitdecay.ludum.dare.editor.deadship.DeadShipEditorObject;
 import com.bitdecay.ludum.dare.editor.shippart.*;
 import com.bitdecay.ludum.dare.hud.Hud;
@@ -274,6 +275,7 @@ public class GameScreen implements Screen, EditorHook {
         items.add(new ShieldModuleEditorObject());
         items.add(new WingsEditorObject());
         items.add(new DeadShipEditorObject());
+        items.add(new MonkeyEditorObject());
 
         return items;
     }
@@ -291,6 +293,9 @@ public class GameScreen implements Screen, EditorHook {
                 } else if (rlo instanceof DeadShipEditorObject) {
                     DeadShip ship = DeadShip.create(levelInteraction);
                     ship.setPosition(p.x, p.y);
+                } else if (rlo instanceof MonkeyEditorObject) {
+                    Monkey monkey = new Monkey(p.x, p.y);
+                    monkey.addToScreen(levelInteraction);
                 }
             }
         }
