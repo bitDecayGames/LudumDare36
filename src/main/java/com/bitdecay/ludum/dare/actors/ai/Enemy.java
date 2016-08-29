@@ -2,28 +2,35 @@ package com.bitdecay.ludum.dare.actors.ai;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.Facing;
 import com.bitdecay.jump.JumperBody;
 import com.bitdecay.jump.collision.BitWorld;
+import com.bitdecay.jump.collision.ContactListener;
 import com.bitdecay.jump.control.PlayerInputController;
 import com.bitdecay.jump.geom.BitRectangle;
 import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.jump.render.JumperRenderState;
 import com.bitdecay.jump.render.JumperRenderStateWatcher;
+import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.actors.StateMachine;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.*;
 import com.bitdecay.ludum.dare.actors.ai.movement.AiIdleState;
 import com.bitdecay.ludum.dare.actors.ai.movement.AiMoveState;
 import com.bitdecay.ludum.dare.actors.player.Player;
+import com.bitdecay.ludum.dare.actors.projectile.Projectile;
 import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
+import com.bitdecay.ludum.dare.interfaces.IRemoveable;
 import com.bitdecay.ludum.dare.interfaces.IShapeDraw;
+import com.bitdecay.ludum.dare.util.SoundLibrary;
 import com.bytebreakstudios.animagic.animation.Animator;
+import com.sun.deploy.panel.ExceptionListDialog;
 
 import java.util.List;
 
-public abstract class Enemy extends StateMachine implements IShapeDraw {
+public abstract class Enemy extends StateMachine implements IShapeDraw, ContactListener, IRemoveable {
     protected abstract String NAME();
     protected abstract float SCALE();
     protected abstract float SIZE();
@@ -35,6 +42,8 @@ public abstract class Enemy extends StateMachine implements IShapeDraw {
     protected abstract float START_HEALTH();
     protected abstract float MAX_HEALTH();
     protected abstract float JUMP_HEIGHT();
+    protected abstract int ATTACK_STRENGTH();
+    protected abstract String HURT_SFX();
 
     protected final SizeComponent size;
     protected final PositionComponent pos;
@@ -42,6 +51,8 @@ public abstract class Enemy extends StateMachine implements IShapeDraw {
     protected final AnimationComponent anim;
     protected final PhysicsComponent phys;
     protected final AIControlComponent input;
+    protected final AttackComponent attack;
+    private Boolean shouldRemove = false;
 
     protected LevelInteractionComponent levelComponent;
 
@@ -56,6 +67,7 @@ public abstract class Enemy extends StateMachine implements IShapeDraw {
         size = new SizeComponent(100, 100);
         pos = new PositionComponent(startX, startY);
         health = new HealthComponent(START_HEALTH(), MAX_HEALTH());
+        attack = new AttackComponent(ATTACK_STRENGTH());
         anim = new AnimationComponent(NAME(), pos, SCALE(), new Vector2());
         setupAnimation(anim.animator);
         phys = createBody();
@@ -81,6 +93,7 @@ public abstract class Enemy extends StateMachine implements IShapeDraw {
         body.bodyType = BodyType.DYNAMIC;
         body.aabb.set(new BitRectangle(pos.x, pos.y, SIZE(), SIZE()));
         body.userObject = this;
+        body.addContactListener(this);
 
         setupAnimation(anim.animator);
         return new PhysicsComponent(body, pos, size);
@@ -222,4 +235,47 @@ public abstract class Enemy extends StateMachine implements IShapeDraw {
     }
 
     protected abstract AttackBehavior getAttack();
+
+    protected abstract GameObject getDeath();
+
+    @Override
+    public void contactStarted(BitBody bitBody){// Not allowed to hit source.
+        if (bitBody.equals(phys.getBody())) {
+            return;
+        }
+        // If we hit another player, set them to their hurt state.
+        if (bitBody.userObject instanceof Player) {
+            ((Player) bitBody.userObject).hit(attack);
+        }
+        // TODO Add more logic for damage here if we hit a player.
+        if (bitBody.userObject instanceof Projectile) {
+            this.health.health -= ((Projectile) bitBody.userObject).getAttack().attack;
+            SoundLibrary.playSound(HURT_SFX());
+            if(this.health.health <= 0){
+                shouldRemove = true;
+            }
+        }
+    }
+
+    @Override
+    public boolean shouldRemove() {
+        return shouldRemove;
+    }
+
+    public void remove() {
+        // Remove ourselves from the physics world.
+        levelComponent.getWorld().removeBody(phys.getBody());
+        shouldRemove = true;
+
+        levelComponent.getObjects().add(getDeath());
+    }
+
+    @Override
+    public void contact(BitBody var1){};
+
+    @Override
+    public void contactEnded(BitBody var1){};
+
+    @Override
+    public void crushed(){};
 }

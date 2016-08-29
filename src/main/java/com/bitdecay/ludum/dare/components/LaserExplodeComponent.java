@@ -31,7 +31,6 @@ public class LaserExplodeComponent implements IRemoveable, IUpdate, IComponent, 
     @Override
     public void update(float delta) {
         if (!started) {
-            System.out.println("Starting particle");
             started = true;
             fx.start();
         } else {
