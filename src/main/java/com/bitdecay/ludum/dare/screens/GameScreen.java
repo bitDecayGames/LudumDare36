@@ -50,7 +50,6 @@ import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 import java.util.*;
 
 public class GameScreen implements Screen, EditorHook {
-
     public static final boolean DEBUG = false;
 
     private LudumDareGame game;
@@ -95,7 +94,7 @@ public class GameScreen implements Screen, EditorHook {
         backgroundManager = new BackgroundManager(camera);
 
         world.setGravity(0, -900);
-        player = new Player();
+        player = new Player(camera);
         levelInteraction = new LevelInteractionComponent(world, gobs);
 
 
@@ -307,7 +306,7 @@ public class GameScreen implements Screen, EditorHook {
                 } else imp.get().near = false;
             }
         });
-        camera.update();
+        camera.update(delta);
 
         // this broadcasts agro messages to any nearby enemies
         gobs.findWithComponents(AgroComponent.class, PositionComponent.class).forEach(agro -> {
@@ -416,6 +415,7 @@ public class GameScreen implements Screen, EditorHook {
     @Override
     public void levelChanged(Level level) {
         currentLevel = level;
+        gobs.clear();
         world.removeAllBodies();
         world.setLevel(level);
         forceBackgroundTiles(level);
