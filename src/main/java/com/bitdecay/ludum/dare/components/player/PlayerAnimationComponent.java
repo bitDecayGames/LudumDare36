@@ -17,11 +17,8 @@ public class PlayerAnimationComponent extends AnimationComponent {
         SHOOT;
     }
 
-    public PlayerAnimationComponent(PositionComponent position, boolean carry) {
+    public PlayerAnimationComponent(PositionComponent position, AnimType type) {
         super("player", position, 0.5f, new Vector2(0, -3));
-
-        String carryStr = carry ? "/carry" : "";
-        String standPath = carry ? "player/run/carry/1" : "player/stand";
 
 
         switch (type) {
