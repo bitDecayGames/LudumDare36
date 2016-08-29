@@ -32,8 +32,8 @@ public class SoundLibrary {
         sounds.put("LaserShootHigh", new SoundEffect(0.07f));
         sounds.put("LongDeath", new SoundEffect(0.07f));
         sounds.put("MonkeyCall", new SoundEffect(0.07f));
-        sounds.put("MonkeyHurt", new SoundEffect(0.07f));
-        sounds.put("MonkeyVaporize", new SoundEffect(0.07f));
+        sounds.put("MonkeyHurt", new SoundEffect(0.5f));
+        sounds.put("MonkeyVaporize", new SoundEffect(0.4f));
         sounds.put("Power", new SoundEffect(0.07f));
         sounds.put("Quake", new SoundEffect(0.07f));
         sounds.put("Randomize2", new SoundEffect(0.07f));

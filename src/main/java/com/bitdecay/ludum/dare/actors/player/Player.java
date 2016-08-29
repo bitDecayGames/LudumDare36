@@ -154,7 +154,7 @@ public class Player extends StateMachine {
     }
 
     public void hit(AttackComponent attackComponent) {
-        setActiveState(new HurtState(components, attackComponent));
+        this.health.health =- attackComponent.attack;
     }
 
     public void setPosition(float x, float y) {

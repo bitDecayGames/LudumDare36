@@ -137,6 +137,10 @@ public class Projectile extends GameObject implements ContactListener, IRemoveab
         shouldRemove = true;
     }
 
+    public AttackComponent getAttack(){
+        return attackComponent;
+    }
+
     @Override
     public void contact(BitBody bitBody) {
 

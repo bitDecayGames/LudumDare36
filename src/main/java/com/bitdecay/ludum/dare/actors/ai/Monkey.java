@@ -2,10 +2,12 @@ package com.bitdecay.ludum.dare.actors.ai;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.Facing;
 import com.bitdecay.jump.JumperBody;
 import com.bitdecay.jump.collision.BitWorld;
+import com.bitdecay.jump.collision.ContactListener;
 import com.bitdecay.jump.control.PlayerInputController;
 import com.bitdecay.jump.geom.BitRectangle;
 import com.bitdecay.jump.properties.JumperProperties;
@@ -19,8 +21,12 @@ import com.bitdecay.ludum.dare.actors.ai.behaviors.RoamBehavior;
 import com.bitdecay.ludum.dare.actors.ai.movement.AiIdleState;
 import com.bitdecay.ludum.dare.actors.ai.movement.AiMoveState;
 import com.bitdecay.ludum.dare.actors.player.Player;
+import com.bitdecay.ludum.dare.actors.projectile.Projectile;
+import com.bitdecay.ludum.dare.actors.state.HurtState;
 import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
+import com.bitdecay.ludum.dare.interfaces.IRemoveable;
+import com.bitdecay.ludum.dare.util.SoundLibrary;
 import com.bytebreakstudios.animagic.animation.Animation;
 import com.bytebreakstudios.animagic.animation.Animator;
 import com.bytebreakstudios.animagic.animation.FrameRate;
@@ -31,7 +37,7 @@ import java.util.List;
 
 import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 
-public class Monkey extends StateMachine {
+public class Monkey extends StateMachine implements ContactListener,IRemoveable {
     public static final float SCALE = 0.5f;
 
     private final float SIZE = 8;
@@ -45,8 +51,10 @@ public class Monkey extends StateMachine {
     private final PositionComponent pos;
     private final HealthComponent health;
     private final AnimationComponent anim;
+    private final AttackComponent attack;
     private final PhysicsComponent phys;
     private final AIControlComponent input;
+    private Boolean shouldRemove = false;
 
     private LevelInteractionComponent levelComponent;
 
@@ -55,20 +63,19 @@ public class Monkey extends StateMachine {
     private StateMachine behavior;
     private EnemyIdleBehavior idleBehavior;
     private RoamBehavior roamBehavior;
-    private boolean Agroed;
 
     public Monkey(float startX, float startY, Player player) {
         this.player = player;
-        Agroed =false;
         size = new SizeComponent(100, 100);
         pos = new PositionComponent(startX, startY);
-        health = new HealthComponent(10, 10);
+        health = new HealthComponent(20, 20);
         anim = new AnimationComponent("monkey", pos, SCALE, new Vector2());
         setupAnimation(anim.animator);
         phys = createBody();
         input = new AIControlComponent();
-
+        attack = new AttackComponent(10);
         phys.getBody().controller = new PlayerInputController(input);
+
 
         append(size).append(pos).append(phys).append(health).append(anim);
 
@@ -94,6 +101,7 @@ public class Monkey extends StateMachine {
         body.bodyType = BodyType.DYNAMIC;
         body.aabb.set(new BitRectangle(pos.x, pos.y, SIZE, SIZE));
         body.userObject = this;
+        body.addContactListener(this);
 
         setupAnimation(anim.animator);
         return new PhysicsComponent(body, pos, size);
@@ -129,7 +137,6 @@ public class Monkey extends StateMachine {
         input.update(delta);
         super.update(delta);
         behavior.update(delta);
-        if(behavior.getActiveState() == idleBehavior) Agroed = false;
 
         if (!(behavior.getActiveState() instanceof JumpAttackBehavior) && getPosition().dst(player.getPosition()) < AGRO_RANGE){
             behavior.setActiveState(new JumpAttackBehavior(this, player, input, ATTACK_RANGE));
@@ -243,4 +250,46 @@ public class Monkey extends StateMachine {
         setActiveState(new AiIdleState(input, false));
         setActiveState(new AiMoveState(this, input, new Vector2(x, y)));
     }
+
+    @Override
+    public boolean shouldRemove() {
+        return shouldRemove;
+    }
+
+    public void remove() {
+        // Remove ourselves from the physics world.
+        levelComponent.getWorld().removeBody(phys.getBody());
+        shouldRemove = true;
+
+        MonkeyDeath deadMonkey = new MonkeyDeath(this.pos,this.phys.getBody().facing);
+
+        levelComponent.getObjects().add(deadMonkey);
+    }
+    @Override
+    public void contactStarted(BitBody bitBody){// Not allowed to hit source.
+        if (bitBody.equals(phys.getBody())) {
+            return;
+        }
+        // If we hit another player, set them to their hurt state.
+        if (bitBody.userObject instanceof Player) {
+            ((Player) bitBody.userObject).hit(attack);
+        }
+        // TODO Add more logic for damage here if we hit a player.
+        if (bitBody.userObject instanceof Projectile) {
+           this.health.health -= ((Projectile) bitBody.userObject).getAttack().attack;
+            SoundLibrary.playSound("MonkeyHurt");
+            if(this.health.health <= 0){
+                shouldRemove = true;
+            }
+        }
+    }
+
+    @Override
+    public void contact(BitBody var1){};
+
+    @Override
+    public void contactEnded(BitBody var1){};
+
+    @Override
+    public void crushed(){};
 }
