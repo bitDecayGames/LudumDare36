@@ -51,7 +51,7 @@ public class Monkey extends Enemy {
 
     @Override
     protected float AGRO_RANGE() {
-        return 112;
+        return 50;
     }
 
     @Override
@@ -74,9 +74,7 @@ public class Monkey extends Enemy {
         return 32;
     }
 
-    public Monkey(float startX, float startY, Player player) {
-        super(startX, startY, player);
-    }
+    public Monkey(float startX, float startY, Player player) { super(startX, startY, player); }
 
     @Override
     protected List<String> getIdleAnimations(){

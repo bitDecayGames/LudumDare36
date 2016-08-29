@@ -22,7 +22,6 @@ import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
-import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.actors.ai.Gorilla;
 import com.bitdecay.ludum.dare.actors.ai.Monkey;
 import com.bitdecay.ludum.dare.actors.environment.DeadShip;
@@ -39,7 +38,6 @@ import com.bitdecay.ludum.dare.editor.MonkeyEditorObject;
 import com.bitdecay.ludum.dare.editor.deadship.DeadShipEditorObject;
 import com.bitdecay.ludum.dare.editor.shippart.*;
 import com.bitdecay.ludum.dare.hud.Hud;
-import com.bitdecay.ludum.dare.interfaces.IShapeDraw;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 
@@ -93,7 +91,7 @@ public class GameScreen implements Screen, EditorHook {
         tilesetMap.put(3, aztecBackgroundTileTextures.toArray(TextureRegion.class));
         tilesetMap.put(4, aztecVinesTileTextures.toArray(TextureRegion.class));
 
-        currentLevel = LevelUtilities.loadLevel(ResourceDir.path("thePit.level"));
+        currentLevel = LevelUtilities.loadLevel(ResourceDir.path("flatTest.level"));
         world.setLevel(currentLevel);
         levelChanged(currentLevel);
 
@@ -123,6 +121,7 @@ public class GameScreen implements Screen, EditorHook {
 
         return (m == 3);
     }
+
     void updateOwnNeighborValues(TileObject[][] grid, int x, int y) {
         if (!ArrayUtilities.onGrid(grid, x, y) || grid[x][y] == null) {
             return;
@@ -177,7 +176,8 @@ public class GameScreen implements Screen, EditorHook {
 
         gobsBatch.end();
 
-        worldRenderer.render(world, cam);
+        // Debug Body Renderer
+        //worldRenderer.render(world, cam);
 
         // Level and game objects.
         gobsBatch.setProjectionMatrix(cam.combined);
@@ -189,14 +189,14 @@ public class GameScreen implements Screen, EditorHook {
         gobsBatch.end();
 
         // debug renderer
-        debugRenderer.setProjectionMatrix(cam.combined);
-        debugRenderer.begin();
-        Iterator<GameObject> iter = gobs.getIter();
-        while(iter.hasNext()){
-            GameObject obj = iter.next();
-            if (obj instanceof IShapeDraw) ((IShapeDraw) obj).draw(debugRenderer);
-        }
-        debugRenderer.end();
+//        debugRenderer.setProjectionMatrix(cam.combined);
+//        debugRenderer.begin();
+//        Iterator<GameObject> iter = gobs.getIter();
+//        while(iter.hasNext()){
+//            GameObject obj = iter.next();
+//            if (obj instanceof IShapeDraw) ((IShapeDraw) obj).draw(debugRenderer);
+//        }
+//        debugRenderer.end();
 
         // UI/HUD
         uiBatch.begin();
@@ -265,7 +265,9 @@ public class GameScreen implements Screen, EditorHook {
         return Arrays.asList(
                 new EditorIdentifierObject(0, "Aztec", tilesetMap.get(0)[0]),
                 new EditorIdentifierObject(1, "Bridges", tilesetMap.get(1)[0]),
-                new EditorIdentifierObject(2, "Rock", tilesetMap.get(2)[0]));
+                new EditorIdentifierObject(2, "Rock", tilesetMap.get(2)[0]),
+                new EditorIdentifierObject(3, "AztecBack", tilesetMap.get(3)[0]),
+                new EditorIdentifierObject(4, "Vines", tilesetMap.get(4)[0]));
     }
 
     @Override
@@ -329,6 +331,7 @@ public class GameScreen implements Screen, EditorHook {
         currentLevel = level;
         world.removeAllBodies();
         world.setLevel(level);
+        forceBackgroundTiles(level);
 
         player.addToScreen(levelInteraction);
         buildGameObjects(level.otherObjects);

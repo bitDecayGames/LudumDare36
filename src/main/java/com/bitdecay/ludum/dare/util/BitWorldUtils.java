@@ -5,11 +5,14 @@ import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.geom.BitPoint;
 import com.bitdecay.jump.geom.BitPointInt;
+import com.bitdecay.jump.level.TileBody;
 
 public class BitWorldUtils {
     public static BitBody bodyAtIndex(BitWorld world, BitPointInt index){
         try {
-            return world.getGrid()[index.x][index.y];
+            BitBody bod = world.getGrid()[index.x][index.y];
+            if (bod instanceof TileBody && ((TileBody) bod).nValue != 15) return bod;
+            else return null;
         } catch (Exception e){
             return null;
         }

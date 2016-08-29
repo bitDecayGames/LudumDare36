@@ -96,6 +96,8 @@ public abstract class Enemy extends StateMachine implements IShapeDraw {
         append(levelComponent);
 
         levelComponent.addToLevel(this, phys);
+
+        setUpBehaviors();
     }
 
     protected abstract void setUpBehaviors();

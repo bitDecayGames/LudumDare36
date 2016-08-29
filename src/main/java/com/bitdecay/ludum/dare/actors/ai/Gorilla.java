@@ -45,7 +45,7 @@ public class Gorilla extends Enemy {
 
     @Override
     protected int ATTACK_SPEED() {
-        return 80;
+        return 100;
     }
 
     @Override
@@ -87,7 +87,7 @@ public class Gorilla extends Enemy {
 
     @Override
     protected void setupAnimation(Animator a) {
-        a.addAnimation(new Animation("walk", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/run").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("walk", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("gorilla/run").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("stand", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/sit").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/jump").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/death").toArray(AnimagicTextureRegion.class)));

@@ -5,6 +5,7 @@ import com.bitdecay.ludum.dare.interfaces.IState;
 
 public class StateMachine extends GameObject {
     protected IState activeState = null;
+    public boolean debug = false;
 
     public StateMachine() {
         super();
@@ -20,6 +21,8 @@ public class StateMachine extends GameObject {
         } else if (activeState != null && value != null && activeState.getClass().equals(value.getClass())) {
             return;
         }
+
+        if (debug) logStateTransition(activeState, value);
 
         if (activeState != null) {
             activeState.exit();
@@ -48,6 +51,6 @@ public class StateMachine extends GameObject {
     }
 
     private void logStateTransition(IState currentState, IState newState) {
-        System.out.println(currentState != null ? currentState.getClass() : "Nothing" + " -> " + newState != null ? newState.getClass() : "Nothing");
+        System.out.println(currentState != null ? currentState.getClass().getSimpleName() : "Nothing" + " -> " + newState != null ? newState.getClass().getSimpleName() : "Nothing");
     }
 }

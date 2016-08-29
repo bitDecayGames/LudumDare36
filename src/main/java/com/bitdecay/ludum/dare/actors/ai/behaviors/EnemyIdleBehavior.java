@@ -35,7 +35,7 @@ public class EnemyIdleBehavior implements IState {
     public IState update(float delta) {
         timer -= delta;
         if (timer <= 0){
-            if (MathUtils.random(0, 0) == 0)
+            if (MathUtils.random(0, 3) == 0)
                 return roamBehavior;
             switchToRandomIdle();
             resetTimer();
@@ -48,6 +48,6 @@ public class EnemyIdleBehavior implements IState {
     }
 
     public void resetTimer(){
-        timer = MathUtils.random(5, 5);
+        timer = MathUtils.random(3, 8);
     }
 }
