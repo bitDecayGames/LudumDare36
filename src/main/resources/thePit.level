@@ -9755,6 +9755,17 @@
     },
     "uuid" : "b101f9ff-310d-43db-829e-d35f55e855ea",
     "name" : "navModule"
+  } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 320.0,
+        "y" : 80.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "26156e50-fa27-411f-8fd2-29c2e1c66a05",
+    "name" : "monkey"
   } ], [ "com.bitdecay.ludum.dare.editor.deadship.DeadShipEditorObject", {
     "rect" : {
       "xy" : {

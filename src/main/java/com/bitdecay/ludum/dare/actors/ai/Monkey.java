@@ -1,5 +1,3 @@
-// #Luke420BlazinErryDayYo
-
 package com.bitdecay.ludum.dare.actors.ai;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -25,6 +23,8 @@ import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 
 public class Monkey extends StateMachine {
+    public static final float SCALE = 0.5f;
+
     private final float SIZE = 8;
     private final int WALKING_SPEED = 20;
     private final int FLYING_SPEED = 60;
@@ -42,7 +42,7 @@ public class Monkey extends StateMachine {
         size = new SizeComponent(100, 100);
         pos = new PositionComponent(startX, startY);
         health = new HealthComponent(10, 10);
-        anim = new AnimationComponent("monkey", pos, 0.5f, new Vector2());
+        anim = new AnimationComponent("monkey", pos, SCALE, new Vector2());
         setupAnimation(anim.animator);
         phys = createBody();
         input = new AIControlComponent();
