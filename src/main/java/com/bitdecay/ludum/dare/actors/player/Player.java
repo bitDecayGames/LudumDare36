@@ -21,6 +21,8 @@ import com.bitdecay.ludum.dare.control.InputAction;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 
 public class Player extends StateMachine {
+    private static final float MAX_HEALTH = 113;
+
     private static final float DEATH_Y = -1500;
 
     private static final int MAX_VOLUNTARY_SPEED = 150;
@@ -47,7 +49,7 @@ public class Player extends StateMachine {
     public Player() {
         size = new SizeComponent(100, 100);
         pos = new PositionComponent(0, 0);
-        health = new HealthComponent(10, 10);
+        health = new HealthComponent(MAX_HEALTH, MAX_HEALTH);
 
         animNormal = new PlayerAnimationComponent(pos, false);
         animCarry = new PlayerAnimationComponent(pos, true);
@@ -131,8 +133,11 @@ public class Player extends StateMachine {
             timer.reset();
         }
 
-        // Reset for now
+        // Reset if player falls or dies.
         if (pos.y < DEATH_Y) {
+            setPosition(0, 0);
+        } else if (health.health <= 0) {
+            health.health = health.max;
             setPosition(0, 0);
         }
     }
@@ -203,5 +208,9 @@ public class Player extends StateMachine {
 
     public TimerComponent getTimer() {
         return timer;
+    }
+
+    public HealthComponent getHealth() {
+        return health;
     }
 }

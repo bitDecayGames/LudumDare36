@@ -9689,7 +9689,18 @@
     "collideNValue" : 8,
     "oneway" : false
   }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ] ],
-  "otherObjects" : [ "java.util.ArrayList", [ [ "com.bitdecay.ludum.dare.editor.shippart.EngineEditorObject", {
+  "otherObjects" : [ "java.util.ArrayList", [ [ "com.bitdecay.ludum.dare.editor.HealthTotemEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 848.0,
+        "y" : 224.0
+      },
+      "width" : 25.0,
+      "height" : 31.0
+    },
+    "uuid" : "bac8ff2c-a8a3-4c5f-9752-a090a2619dd7",
+    "name" : "shrines"
+  } ], [ "com.bitdecay.ludum.dare.editor.shippart.EngineEditorObject", {
     "rect" : {
       "xy" : {
         "x" : 560.0,

@@ -11,7 +11,7 @@ public class DeadShipAnimationComponent extends AnimationComponent {
     public static final float SCALE = 0.5f;
 
     public DeadShipAnimationComponent(String name) {
-        super(name, null, SCALE, null);
+        super("deadShip", null, SCALE, null);
 
         animator.addAnimation(new Animation("static", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.1f), atlas.findRegions("ship/pieces/" + name).toArray(AnimagicTextureRegion.class)));
 
