@@ -1,5 +1,7 @@
 package com.bitdecay.ludum.dare.actors.ai;
 
+import com.badlogic.gdx.Game;
+import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.AttackBehavior;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.EnemyIdleBehavior;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.JumpAttackBehavior;
@@ -61,17 +63,27 @@ public class Monkey extends Enemy {
 
     @Override
     protected float START_HEALTH() {
-        return 10;
+        return 20;
     }
 
     @Override
     protected float MAX_HEALTH() {
-        return 10;
+        return 20;
     }
 
     @Override
     protected float JUMP_HEIGHT() {
         return 32;
+    }
+
+    @Override
+    protected int ATTACK_STRENGTH(){
+        return 10;
+    }
+
+    @Override
+    protected String HURT_SFX(){
+        return "MonkeyHurt";
     }
 
     public Monkey(float startX, float startY, Player player) { super(startX, startY, player); }
@@ -108,4 +120,8 @@ public class Monkey extends Enemy {
         return new JumpAttackBehavior(this, player, input, ATTACK_RANGE());
     }
 
+    @Override
+    protected GameObject getDeath(){
+        return new MonkeyDeath(this.pos,this.phys.getBody().facing);
+    }
 }

@@ -1,5 +1,6 @@
 package com.bitdecay.ludum.dare.actors.ai;
 
+import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.AttackBehavior;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.EnemyIdleBehavior;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.RoamBehavior;
@@ -79,6 +80,16 @@ public class Gorilla extends Enemy {
     }
 
     @Override
+    protected int ATTACK_STRENGTH(){
+        return 20;
+    }
+
+    @Override
+    protected String HURT_SFX(){
+        return "MonkeyHurt";
+    }
+
+    @Override
     protected List<String> getIdleAnimations() {
         List<String> idles = new ArrayList<>();
         idles.add("stand");
@@ -107,5 +118,10 @@ public class Gorilla extends Enemy {
     @Override
     protected AttackBehavior getAttack() {
         return new RunAttackBehavior(this, player, input, ATTACK_RANGE());
+    }
+
+    @Override
+    protected GameObject getDeath(){
+        return new MonkeyDeath(this.pos,this.phys.getBody().facing);
     }
 }
