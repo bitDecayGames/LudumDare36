@@ -5,12 +5,14 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
@@ -52,14 +54,32 @@ public class MainMenuScreen implements Screen {
         startLbl = new Label("Start", skin);
         startLbl.setFontScale(8);
         startLbl.setColor(Color.WHITE);
+        startLbl.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                gotoGame();
+            }
+        });
 
         creditsLbl = new Label("Credits", skin);
         creditsLbl.setFontScale(8);
         creditsLbl.setColor(Color.WHITE);
+        creditsLbl.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                gotoCredits();
+            }
+        });
 
         quitLbl = new Label("Quit", skin);
         quitLbl.setFontScale(8);
         quitLbl.setColor(Color.WHITE);
+        quitLbl.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                exitGame();
+            }
+        });
 
         menu = new Table();
         menu.setFillParent(true);
@@ -67,6 +87,8 @@ public class MainMenuScreen implements Screen {
         menu.add(creditsLbl).height(60).padBottom(20).row();
         menu.add(quitLbl).height(60).padBottom(20).row();
         menu.align(Align.center);
+        menu.padLeft(300);
+        menu.padBottom(200);
 
         stage.addActor(background);
         stage.addActor(menu);
@@ -118,13 +140,13 @@ public class MainMenuScreen implements Screen {
         if (InputUtil.isJustPressed(Input.Keys.ENTER, Xbox360Pad.A)){
             switch (menuSelection) {
                 case 0:
-                    game.setScreen(new GameScreen(game));
+                    gotoGame();
                     break;
                 case 1:
-                    game.setScreen(new CreditsScreen(game));
+                    gotoCredits();
                     break;
                 case 2:
-                    Gdx.app.exit();
+                    exitGame();
                     break;
             }
         }
@@ -143,6 +165,18 @@ public class MainMenuScreen implements Screen {
         }
 
         updateMenuSelection();
+    }
+
+    private void gotoGame() {
+        game.setScreen(new GameScreen(game));
+    }
+
+    private void gotoCredits() {
+        game.setScreen(new CreditsScreen(game));
+    }
+
+    private void exitGame() {
+        Gdx.app.exit();
     }
 
     private void updateMenuSelection() {
