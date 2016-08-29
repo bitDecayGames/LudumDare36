@@ -21,6 +21,8 @@ import com.bitdecay.ludum.dare.control.InputAction;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 
 public class Player extends StateMachine {
+    private static final float DEATH_Y = -1500;
+
     private static final int MAX_VOLUNTARY_SPEED = 150;
     private static final int MAX_VOLUNTARY_SPEED_CARRY = 100;
 
@@ -112,16 +114,9 @@ public class Player extends StateMachine {
 
     @Override
     public void update(float delta) {
-        updateAnimationComponent();
-
-        // Reset for now
-        // TODO do this somewhere else?
-//        if (pos.y < -1000) {
-//            setPosition(0, 0);
-//        }
-
-//        checkForStateSwitch();
         super.update(delta);
+
+        updateAnimationComponent();
 
         shootAgain += delta;
         if (keyboard.isJustPressed(InputAction.SHOOT) && shootAgain > .5){
@@ -134,6 +129,11 @@ public class Player extends StateMachine {
             hasShipPart()) {
             getShipPart().removeFromPlayer(false);
             timer.reset();
+        }
+
+        // Reset for now
+        if (pos.y < DEATH_Y) {
+            setPosition(0, 0);
         }
     }
 
