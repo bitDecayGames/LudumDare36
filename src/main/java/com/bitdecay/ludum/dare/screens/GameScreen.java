@@ -95,7 +95,7 @@ public class GameScreen implements Screen, EditorHook {
         backgroundManager = new BackgroundManager(camera);
 
         world.setGravity(0, -900);
-        player = new Player();
+        player = new Player(camera);
         levelInteraction = new LevelInteractionComponent(world, gobs);
 
 
@@ -305,7 +305,7 @@ public class GameScreen implements Screen, EditorHook {
                 } else imp.get().near = false;
             }
         });
-        camera.update();
+        camera.update(delta);
 
         // this broadcasts agro messages to any nearby enemies
         gobs.findWithComponents(AgroComponent.class, PositionComponent.class).forEach(agro -> {
