@@ -156,10 +156,10 @@ public class MainMenuScreen implements Screen {
             menuSelection = (menuSelection + 1) % 3;
         }
 
-        if (InputUtil.isPressed(Input.Keys.UP, Xbox360Pad.LS_UP)) {
+        if (InputUtil.isJustPressed(Input.Keys.UP, Xbox360Pad.LS_UP)) {
 //            SoundLibrary.playSound("Select_change");
             menuSelection -= 1;
-            if (menuSelection < 0) {
+            if (menuSelection < 0){
                 menuSelection = 2;
             }
         }
@@ -168,7 +168,7 @@ public class MainMenuScreen implements Screen {
     }
 
     private void gotoGame() {
-        game.setScreen(new GameScreen(game));
+        game.setScreen(new OpeningSceneCutScreen(game));
     }
 
     private void gotoCredits() {
