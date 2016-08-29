@@ -106,7 +106,9 @@ public class Player extends StateMachine {
         if (shipPart != null && currentAnim != animCarry) {
             System.out.println("entering carry anim");
             remove(AnimationComponent.class);
+            remove(ShipPartComponent.class);
             append(animCarry);
+            append(shipPart); // need to make sure the ship part renders on top of the player animation
             setCarryPhysics(true);
         // Switch to normal animation set.
         } else if (shipPart == null) {
