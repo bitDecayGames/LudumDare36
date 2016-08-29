@@ -105,7 +105,7 @@ public class Player extends StateMachine implements IRemoveable {
 
         // Switch to carry animation set.
         if (shipPart != null && currentAnim != animCarry) {
-            System.out.println("entering carry anim");
+            //System.out.println("entering carry anim");
             remove(AnimationComponent.class);
             remove(ShipPartComponent.class);
             append(animCarry);
@@ -115,13 +115,13 @@ public class Player extends StateMachine implements IRemoveable {
         } else if (shipPart == null) {
             if(shootTimer > 0) {
                 if (currentAnim != animShoot) {
-                    System.out.println("entering shoot anim");
+                   // System.out.println("entering shoot anim");
                     remove(AnimationComponent.class);
                     append(animShoot);
                     setCarryPhysics(false);
                 }
             }else if (currentAnim != animNormal) {
-                System.out.println("entering normal anim");
+                //System.out.println("entering normal anim");
                 remove(AnimationComponent.class);
                 append(animNormal);
                 setCarryPhysics(false);

@@ -377,6 +377,7 @@ public class GameScreen implements Screen, EditorHook {
                 if (rlo instanceof IEditorShipPart) {
                     ShipPart part = new ShipPart(rlo.name());
                     part.setPosition(p.x, p.y);
+                    part.setInitialPosition(p.x,p.y);
                     part.addToLevel(levelInteraction);
                 } else if (rlo instanceof DeadShipEditorObject) {
                     DeadShip ship = DeadShip.create(player, levelInteraction);
