@@ -46,8 +46,8 @@ public class Player extends StateMachine {
 
     private final FollowOrthoCamera camera;
 
-    private double invincibleTimer;
-    private double shootTimer;
+    private float invincibleTimer;
+    private float shootTimer;
 
     private LevelInteractionComponent levelComponent;
     private float shootAgain = 0;
@@ -180,11 +180,15 @@ public class Player extends StateMachine {
     }
 
     public void hit(AttackComponent attackComponent) {
-        if(invincibleTimer <= 0) {
+        if(!isInvincible()) {
             this.health.health -= attackComponent.attack;
             this.animNormal.animator.switchToAnimation("hurt");
             resetInvincibility();
         }
+    }
+
+    public boolean isInvincible(){
+        return invincibleTimer > 0;
     }
 
     public void setPosition(float x, float y) {
@@ -225,7 +229,8 @@ public class Player extends StateMachine {
     }
 
     private void resetInvincibility(){
-        invincibleTimer = .5;
+        invincibleTimer = .5f;
+        camera.shake(invincibleTimer);
     }
 
     public JetPackComponent getJetpack(){
@@ -241,7 +246,7 @@ public class Player extends StateMachine {
     }
 
     public void resetShootTimer(){
-        shootTimer = 0.5;
+        shootTimer = 0.5f;
     }
 
 
