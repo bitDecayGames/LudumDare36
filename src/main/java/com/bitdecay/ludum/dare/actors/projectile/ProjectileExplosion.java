@@ -6,9 +6,9 @@ import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.components.AnimationComponent;
+import com.bitdecay.ludum.dare.components.LaserExplodeComponent;
 import com.bitdecay.ludum.dare.components.PositionComponent;
 import com.bitdecay.ludum.dare.interfaces.IRemoveable;
-import com.bitdecay.ludum.dare.interfaces.IUpdate;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
 import com.bytebreakstudios.animagic.animation.Animation;
 import com.bytebreakstudios.animagic.animation.FrameRate;
@@ -21,6 +21,7 @@ import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 public class ProjectileExplosion extends GameObject implements IRemoveable {
     private AnimationComponent anim;
     private PositionComponent pos;
+    private final LaserExplodeComponent laserPop;
 
     public ProjectileExplosion (PositionComponent pos) {
         this.pos = pos;
@@ -34,16 +35,14 @@ public class ProjectileExplosion extends GameObject implements IRemoveable {
 
         anim.animator.switchToAnimation("bulletExplo");
 
-        append(anim).append(pos);
+        laserPop = new LaserExplodeComponent(pos);
+
+        append(pos).append(laserPop);
     }
 
     @Override
     public boolean shouldRemove() {
-        if (anim.animator.getFrameIndex() >= 4){
-            return true;
-        } else {
-            return false;
-        }
+        return laserPop.shouldRemove();
     }
 
     @Override
