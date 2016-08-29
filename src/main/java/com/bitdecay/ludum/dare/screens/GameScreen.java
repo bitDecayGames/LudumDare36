@@ -2,6 +2,7 @@ package com.bitdecay.ludum.dare.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -42,14 +43,20 @@ import com.bitdecay.ludum.dare.editor.shippart.*;
 import com.bitdecay.ludum.dare.hud.Hud;
 import com.bitdecay.ludum.dare.interfaces.IShapeDraw;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
+import com.bytebreakstudios.animagic.animation.Animation;
+import com.bytebreakstudios.animagic.animation.FrameRate;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 
 import java.util.*;
+
+import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 
 public class GameScreen implements Screen, EditorHook {
     public static final boolean DEBUG = false;
 //    public static final String LEVEL_NAME = "flatTest.level";
     public static final String LEVEL_NAME = "thePit.level";
+
+    public static final Color HURT_TINT = new Color(1, 0.5f, 0.5f, 1);
 
     private LudumDareGame game;
 
@@ -70,6 +77,8 @@ public class GameScreen implements Screen, EditorHook {
     private Level currentLevel;
 
     LevelInteractionComponent levelInteraction;
+
+    Animation hurtAnimation;
 
     Pixmap black = new Pixmap(1, 1, Pixmap.Format.RGB888);
     Sprite fader;
@@ -97,14 +106,16 @@ public class GameScreen implements Screen, EditorHook {
         levelInteraction = new LevelInteractionComponent(world, gobs);
 
 
-        Array<AnimagicTextureRegion> aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec");
-        Array<AnimagicTextureRegion> bridgesTileTextures = LudumDareGame.atlas.findRegions("tiles/bridges");
-        Array<AnimagicTextureRegion> rockTileTextures = LudumDareGame.atlas.findRegions("tiles/rock");
-        Array<AnimagicTextureRegion> aztecBackgroundTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec_bgt");
-        Array<AnimagicTextureRegion> aztecVinesTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec_vines");
-        Array<AnimagicTextureRegion> rockBackgroundTileTextures = LudumDareGame.atlas.findRegions("tiles/rock_bgt");
-        Array<AnimagicTextureRegion> rock2rockTileTextures = LudumDareGame.atlas.findRegions("tiles/rock2rock");
-        Array<AnimagicTextureRegion> aztec2aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec2aztec");
+        Array<AnimagicTextureRegion> aztecTileTextures = atlas.findRegions("tiles/aztec");
+        Array<AnimagicTextureRegion> bridgesTileTextures = atlas.findRegions("tiles/bridges");
+        Array<AnimagicTextureRegion> rockTileTextures = atlas.findRegions("tiles/rock");
+        Array<AnimagicTextureRegion> aztecBackgroundTileTextures = atlas.findRegions("tiles/aztec_bgt");
+        Array<AnimagicTextureRegion> aztecVinesTileTextures = atlas.findRegions("tiles/aztec_vines");
+        Array<AnimagicTextureRegion> rockBackgroundTileTextures = atlas.findRegions("tiles/rock_bgt");
+        Array<AnimagicTextureRegion> rock2rockTileTextures = atlas.findRegions("tiles/rock2rock");
+        Array<AnimagicTextureRegion> aztec2aztecTileTextures = atlas.findRegions("tiles/aztec2aztec");
+
+        hurtAnimation = new Animation("walk", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("screen/hurt").toArray(AnimagicTextureRegion.class));
 
         tilesetMap.put(0, aztecTileTextures.toArray(TextureRegion.class));
         tilesetMap.put(3, aztecBackgroundTileTextures.toArray(TextureRegion.class));
@@ -195,6 +206,7 @@ public class GameScreen implements Screen, EditorHook {
             return;
         }
 
+
         // Background
         gobsBatch.begin();
 
@@ -212,6 +224,8 @@ public class GameScreen implements Screen, EditorHook {
         drawLevel();
 
         gobs.draw(gobsBatch);
+
+
         gobsBatch.end();
 
         // debug renderer
@@ -230,6 +244,11 @@ public class GameScreen implements Screen, EditorHook {
         uiBatch.begin();
         hud.render(uiBatch);
         fader.draw(uiBatch);
+
+        if (player.isInvincible()) {
+            hurtAnimation.update(1f / 60f);
+            uiBatch.draw(hurtAnimation.getFrame(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
         uiBatch.end();
 
     }
