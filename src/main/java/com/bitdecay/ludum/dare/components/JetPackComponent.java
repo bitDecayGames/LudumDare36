@@ -75,8 +75,9 @@ public class JetPackComponent implements IComponent, IUpdate, IDraw {
                 currentFuel = 0;
             }
         } else if (canRefuel && currentFuel < maxFuel){
-            currentFuel++;
-            if(currentFuel > 100){
+            currentFuel+=5;
+            if(currentFuel > maxFuel){
+                currentFuel = maxFuel;
                 currentFuel = maxFuel;
             }
         }

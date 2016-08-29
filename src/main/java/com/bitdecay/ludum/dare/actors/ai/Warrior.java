@@ -65,12 +65,12 @@ public class Warrior extends Enemy {
 
     @Override
     protected float START_HEALTH() {
-        return 10;
+        return 20;
     }
 
     @Override
     protected float MAX_HEALTH() {
-        return 10;
+        return 20;
     }
 
     @Override

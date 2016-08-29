@@ -48,7 +48,7 @@ public class InteractableObject extends StateMachine implements ContactListener,
 
     public InteractableObject addToLevel(LevelInteractionComponent levelInteraction) {
         if (this.levelInteraction != null) {
-            this.levelInteraction.removeFromLevel(physics);
+            this.levelInteraction.removeFromLevel(this, physics);
         }
         remove(LevelInteractionComponent.class);
 
@@ -98,7 +98,7 @@ public class InteractableObject extends StateMachine implements ContactListener,
     @Override
     public void remove() {
         if (levelInteraction != null) {
-            levelInteraction.removeFromLevel(physics);
+            levelInteraction.removeFromLevel(this, physics);
         }
     }
 }
