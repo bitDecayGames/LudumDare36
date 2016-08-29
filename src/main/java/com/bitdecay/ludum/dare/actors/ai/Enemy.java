@@ -12,26 +12,18 @@ import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.jump.render.JumperRenderState;
 import com.bitdecay.jump.render.JumperRenderStateWatcher;
 import com.bitdecay.ludum.dare.actors.StateMachine;
-import com.bitdecay.ludum.dare.actors.ai.behaviors.EnemyIdleBehavior;
-import com.bitdecay.ludum.dare.actors.ai.behaviors.FrustratedBehavior;
-import com.bitdecay.ludum.dare.actors.ai.behaviors.JumpAttackBehavior;
-import com.bitdecay.ludum.dare.actors.ai.behaviors.RoamBehavior;
+import com.bitdecay.ludum.dare.actors.ai.behaviors.*;
 import com.bitdecay.ludum.dare.actors.ai.movement.AiIdleState;
 import com.bitdecay.ludum.dare.actors.ai.movement.AiMoveState;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
-import com.bytebreakstudios.animagic.animation.Animation;
+import com.bitdecay.ludum.dare.interfaces.IShapeDraw;
 import com.bytebreakstudios.animagic.animation.Animator;
-import com.bytebreakstudios.animagic.animation.FrameRate;
-import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
-
-public abstract class Enemy extends StateMachine {
+public abstract class Enemy extends StateMachine implements IShapeDraw {
     protected abstract String NAME();
     protected abstract float SCALE();
     protected abstract float SIZE();
@@ -44,20 +36,20 @@ public abstract class Enemy extends StateMachine {
     protected abstract float MAX_HEALTH();
     protected abstract float JUMP_HEIGHT();
 
-    private final SizeComponent size;
-    private final PositionComponent pos;
-    private final HealthComponent health;
-    private final AnimationComponent anim;
-    private final PhysicsComponent phys;
-    private final AIControlComponent input;
+    protected final SizeComponent size;
+    protected final PositionComponent pos;
+    protected final HealthComponent health;
+    protected final AnimationComponent anim;
+    protected final PhysicsComponent phys;
+    protected final AIControlComponent input;
 
-    private LevelInteractionComponent levelComponent;
+    protected LevelInteractionComponent levelComponent;
 
-    private Player player;
+    protected Player player;
 
-    private StateMachine behavior;
-    private EnemyIdleBehavior idleBehavior;
-    private RoamBehavior roamBehavior;
+    protected StateMachine behavior;
+    protected EnemyIdleBehavior idleBehavior;
+    protected RoamBehavior roamBehavior;
 
     public Enemy(float startX, float startY, Player player) {
         this.player = player;
@@ -114,14 +106,14 @@ public abstract class Enemy extends StateMachine {
         super.update(delta);
         behavior.update(delta);
 
-        if (!(behavior.getActiveState() instanceof JumpAttackBehavior) && getPosition().dst(player.getPosition()) < AGRO_RANGE()){
-            behavior.setActiveState(new JumpAttackBehavior(this, player, input, ATTACK_RANGE()));
+        if (!(behavior.getActiveState() instanceof AttackBehavior) && getPosition().dst(player.getPosition()) < AGRO_RANGE()){
+            behavior.setActiveState(getAttack());
         }
         if (isGrounded()) setSpeed(WALKING_SPEED());
         else setSpeed(FLYING_SPEED());
 
         if (activeState instanceof AiMoveState){
-            if (behavior.getActiveState() instanceof JumpAttackBehavior) setSpeed(ATTACK_SPEED());
+            if (behavior.getActiveState() instanceof AttackBehavior) setSpeed(ATTACK_SPEED());
         }
 
         updateFacing();
@@ -131,7 +123,7 @@ public abstract class Enemy extends StateMachine {
             case RIGHT_STANDING:
             case LEFT_STANDING:
                 if (activeState instanceof AiIdleState) {
-                    if (behavior.getActiveState() instanceof JumpAttackBehavior){
+                    if (behavior.getActiveState() instanceof AttackBehavior){
                         if (getPosition().dst(player.getPosition()) > ATTACK_RANGE() && ((AiIdleState) activeState).wasMovementBlocked()) behavior.setActiveState(new FrustratedBehavior(this, input, roamBehavior));
                     } else if (!(behavior.getActiveState() instanceof FrustratedBehavior)) behavior.setActiveState(idleBehavior);
                 }
@@ -171,10 +163,6 @@ public abstract class Enemy extends StateMachine {
         }
     }
 
-    public void debugDraw(ShapeRenderer renderer){
-        if (activeState instanceof AiMoveState) ((AiMoveState)this.activeState).debugDraw(renderer);
-    }
-
     public void setPosition(float x, float y) {
         phys.getBody().velocity.set(0, 0);
         phys.getBody().aabb.xy.set(x, y);
@@ -195,7 +183,7 @@ public abstract class Enemy extends StateMachine {
     }
 
     public Vector2 getCenter() {
-        return new Vector2(pos.x + SIZE / 2, pos.y + SIZE / 2);
+        return new Vector2(pos.x + SIZE() / 2, pos.y + SIZE() / 2);
     }
 
     public BitWorld getWorld(){
@@ -222,8 +210,14 @@ public abstract class Enemy extends StateMachine {
         phys.getBody().props.maxVoluntarySpeed = speed;
     }
 
-    public void debugMonkeyAi(float x, float y){
+    public void setAiMovementGoal(float x, float y){
         setActiveState(new AiIdleState(input, false));
         setActiveState(new AiMoveState(this, input, new Vector2(x, y)));
     }
+
+    public void draw(ShapeRenderer renderer){
+        if (activeState instanceof AiMoveState) ((AiMoveState)this.activeState).debugDraw(renderer);
+    }
+
+    protected abstract AttackBehavior getAttack();
 }

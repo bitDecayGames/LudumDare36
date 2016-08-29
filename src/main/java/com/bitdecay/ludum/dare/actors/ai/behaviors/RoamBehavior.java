@@ -2,7 +2,7 @@ package com.bitdecay.ludum.dare.actors.ai.behaviors;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.bitdecay.ludum.dare.actors.ai.Monkey;
+import com.bitdecay.ludum.dare.actors.ai.Enemy;
 import com.bitdecay.ludum.dare.interfaces.IState;
 
 public class RoamBehavior implements IState {
@@ -10,9 +10,9 @@ public class RoamBehavior implements IState {
     private Vector2 home;
     private float roamDistance;
     private Vector2 randomPos;
-    private Monkey ai;
+    private Enemy ai;
 
-    public RoamBehavior(Monkey ai, Vector2 home, float roamDistance){
+    public RoamBehavior(Enemy ai, Vector2 home, float roamDistance){
         this.home = home;
         this.roamDistance = roamDistance;
         this.ai = ai;
@@ -20,9 +20,8 @@ public class RoamBehavior implements IState {
 
     @Override
     public void enter() {
-        System.out.println("Enter Roam");
         resetRandomPosition();
-        ai.debugMonkeyAi(randomPos.x, randomPos.y);
+        ai.setAiMovementGoal(randomPos.x, randomPos.y);
     }
 
     @Override

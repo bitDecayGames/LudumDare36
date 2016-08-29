@@ -9722,6 +9722,17 @@
     },
     "uuid" : "fea94c50-2328-4d1e-898d-b37575c75794",
     "name" : "wings"
+  } ], [ "com.bitdecay.ludum.dare.editor.GorillaEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 96.0,
+        "y" : -80.0
+      },
+      "width" : 11.0,
+      "height" : 14.0
+    },
+    "uuid" : "ee99da79-24ab-406c-b8fe-4bc0f24e2e00",
+    "name" : "gorilla"
   } ], [ "com.bitdecay.ludum.dare.editor.shippart.CockpitEditorObject", {
     "rect" : {
       "xy" : {
@@ -9777,6 +9788,17 @@
     },
     "uuid" : "26156e50-fa27-411f-8fd2-29c2e1c66a05",
     "name" : "monkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.GorillaEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 208.0,
+        "y" : 32.0
+      },
+      "width" : 11.0,
+      "height" : 14.0
+    },
+    "uuid" : "163c3dc6-d680-4f45-8bdb-338a1d4871b6",
+    "name" : "gorilla"
   } ], [ "com.bitdecay.ludum.dare.editor.deadship.DeadShipEditorObject", {
     "rect" : {
       "xy" : {
@@ -9788,6 +9810,17 @@
     },
     "uuid" : "5eda6510-d523-43b7-be14-c285731fe0d0",
     "name" : "deadShip"
+  } ], [ "com.bitdecay.ludum.dare.editor.GorillaEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 112.0,
+        "y" : -16.0
+      },
+      "width" : 11.0,
+      "height" : 14.0
+    },
+    "uuid" : "6a1bfbf2-a885-4718-941f-7496a856ec07",
+    "name" : "gorilla"
   } ] ] ],
   "triggers" : [ "java.util.ArrayList", [ ] ],
   "gridOffset" : {

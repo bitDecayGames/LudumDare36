@@ -18,7 +18,6 @@ public class AiIdleState implements IState {
 
     @Override
     public void enter() {
-        System.out.println("Enter AiIdle blocked:" + wasMovementBlocked);
     }
 
     @Override
