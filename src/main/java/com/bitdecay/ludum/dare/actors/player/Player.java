@@ -52,6 +52,9 @@ public class Player extends StateMachine implements IRemoveable {
     private float invincibleTimer;
     private float shootTimer;
 
+    public boolean canShoot = false;
+    public boolean canFly = false;
+
 
     private LevelInteractionComponent levelComponent;
     private float shootAgain = 0;
@@ -71,7 +74,7 @@ public class Player extends StateMachine implements IRemoveable {
         phys = createBody();
         setCarryPhysics(false);
 
-        jetpack = new JetPackComponent((JumperBody) phys.getBody(), camera);
+        jetpack = new JetPackComponent(this, camera);
 
         keyboard = new KeyboardControlComponent();
 
@@ -108,7 +111,7 @@ public class Player extends StateMachine implements IRemoveable {
 
         // Switch to carry animation set.
         if (shipPart != null && currentAnim != animCarry) {
-            System.out.println("entering carry anim");
+            //System.out.println("entering carry anim");
             remove(AnimationComponent.class);
             remove(ShipPartComponent.class);
             append(animCarry);
@@ -118,13 +121,13 @@ public class Player extends StateMachine implements IRemoveable {
         } else if (shipPart == null) {
             if(shootTimer > 0) {
                 if (currentAnim != animShoot) {
-                    System.out.println("entering shoot anim");
+                   // System.out.println("entering shoot anim");
                     remove(AnimationComponent.class);
                     append(animShoot);
                     setCarryPhysics(false);
                 }
             }else if (currentAnim != animNormal) {
-                System.out.println("entering normal anim");
+                //System.out.println("entering normal anim");
                 remove(AnimationComponent.class);
                 append(animNormal);
                 setCarryPhysics(false);
@@ -144,24 +147,22 @@ public class Player extends StateMachine implements IRemoveable {
         super.update(delta);
 
         shootAgain += delta;
-        if (keyboard.isJustPressed(InputAction.SHOOT) && shootAgain > .25){
+        if (keyboard.isJustPressed(InputAction.SHOOT) && shootAgain > .25 && canShoot){
             shootAgain = 0;
             resetShootTimer();
             setActiveState(new ShootState(components));
-            camera.shake(0.05f);
+            camera.shake(0.05f, 2f);
         }
 
         if (timer.complete() &&
-            keyboard.isJustPressed(PlayerAction.DOWN) &&
-
-            hasShipPart()) {
-            getShipPart().removeFromPlayer(false, phys.getBody().velocity);
-
+            keyboard.isJustPressed(PlayerAction.DOWN) && hasShipPart()) {
+            dropShipPart();
             timer.reset();
         }
 
         // Reset if player falls or dies.
         if (pos.y < DEATH_Y) {
+            dropShipPart();
             setPosition(0, 0);
         }
 
@@ -246,6 +247,12 @@ public class Player extends StateMachine implements IRemoveable {
     public ShipPartComponent getShipPart() {
         return ((ShipPartComponent) getFirstComponent(ShipPartComponent.class));
     }
+
+    public void dropShipPart(){
+        ShipPartComponent comp = getShipPart();
+        if (comp != null) comp.removeFromPlayer(false, phys.getBody().velocity);
+    }
+
 
     public boolean hasShipPart() {
         return getShipPart() != null;

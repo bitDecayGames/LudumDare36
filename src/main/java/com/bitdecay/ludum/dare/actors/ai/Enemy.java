@@ -1,6 +1,7 @@
 package com.bitdecay.ludum.dare.actors.ai;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.BodyType;
@@ -90,6 +91,7 @@ public abstract class Enemy extends StateMachine implements IShapeDraw, ContactL
         JumperBody body = new JumperBody();
         body.props.deceleration = 10000;
         body.props.maxVoluntarySpeed = 20;
+        body.props.gravityModifier = MathUtils.random(0.8f, 1.2f);
         body.jumperProps = new JumperProperties();
         body.jumperProps.jumpCount = 1;
         body.jumperProps.jumpVariableHeightWindow = JUMP_HEIGHT();
