@@ -40,7 +40,7 @@ public class Player extends StateMachine implements IRemoveable {
     private final HealthComponent health;
     private final AttackComponent attack;
     private final JetPackComponent jetpack;
-    private final PhysicsComponent phys;
+    public final PhysicsComponent phys;
     private final KeyboardControlComponent keyboard;
     private final TimerComponent timer;
 
@@ -150,8 +150,10 @@ public class Player extends StateMachine implements IRemoveable {
 
         if (timer.complete() &&
             keyboard.isJustPressed(PlayerAction.DOWN) &&
-            hasShipPart())  {
-            getShipPart().removeFromPlayer(false);
+
+            hasShipPart()) {
+            getShipPart().removeFromPlayer(false, phys.getBody().velocity);
+
             timer.reset();
         }
 
