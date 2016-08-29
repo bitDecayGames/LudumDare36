@@ -40,7 +40,7 @@ public class Player extends StateMachine {
     private final HealthComponent health;
     private final AttackComponent attack;
     private final JetPackComponent jetpack;
-    private final PhysicsComponent phys;
+    public final PhysicsComponent phys;
     private final KeyboardControlComponent keyboard;
     private final TimerComponent timer;
 
@@ -152,7 +152,7 @@ public class Player extends StateMachine {
         if (timer.complete() &&
             keyboard.isJustPressed(PlayerAction.DOWN) &&
             hasShipPart()) {
-            getShipPart().removeFromPlayer(false);
+            getShipPart().removeFromPlayer(false, phys.getBody().velocity);
             timer.reset();
         }
 

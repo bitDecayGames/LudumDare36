@@ -4,9 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.bitdecay.ludum.dare.screens.GameScreen;
-import com.bitdecay.ludum.dare.screens.MainMenuScreen;
-import com.bitdecay.ludum.dare.screens.OpeningSceneCutScreen;
-import com.bitdecay.ludum.dare.screens.SplashScreen;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlasLoader;
 
@@ -29,5 +26,6 @@ public class LudumDareGame extends Game {
 //        setScreen(new MainMenuScreen(this));
 //        setScreen(new SplashScreen(this));
         setScreen(new OpeningSceneCutScreen(this));
+        //setScreen(new SplashScreen(this));
     }
 }

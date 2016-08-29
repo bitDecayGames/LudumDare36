@@ -26,10 +26,7 @@ import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.actors.GameObject;
-import com.bitdecay.ludum.dare.actors.ai.Enemy;
-import com.bitdecay.ludum.dare.actors.ai.Gorilla;
-import com.bitdecay.ludum.dare.actors.ai.Monkey;
-import com.bitdecay.ludum.dare.actors.ai.Warrior;
+import com.bitdecay.ludum.dare.actors.ai.*;
 import com.bitdecay.ludum.dare.actors.ai.bat.Bat;
 import com.bitdecay.ludum.dare.actors.environment.DeadShip;
 import com.bitdecay.ludum.dare.actors.environment.HealthTotem;
@@ -51,6 +48,7 @@ import java.util.*;
 
 public class GameScreen implements Screen, EditorHook {
     public static final boolean DEBUG = false;
+    public static final String LEVEL_NAME = "flatTest.level";
 
     private LudumDareGame game;
 
@@ -116,7 +114,7 @@ public class GameScreen implements Screen, EditorHook {
         tilesetMap.put(5, rockBackgroundTileTextures.toArray(TextureRegion.class));
         tilesetMap.put(6, rock2rockTileTextures.toArray(TextureRegion.class));
 
-        currentLevel = LevelUtilities.loadLevel(ResourceDir.path("thePit.level"));
+        currentLevel = LevelUtilities.loadLevel(ResourceDir.path(LEVEL_NAME));
         world.setLevel(currentLevel);
         levelChanged(currentLevel);
 
@@ -361,6 +359,7 @@ public class GameScreen implements Screen, EditorHook {
         items.add(new DeadShipEditorObject());
         items.add(new HealthTotemEditorObject());
         items.add(new MonkeyEditorObject());
+        items.add(new InsaneMonkeyEditorObject());
         items.add(new GorillaEditorObject());
         items.add(new WarriorEditorObject());
         items.add(new BatEditorObject());
@@ -383,6 +382,9 @@ public class GameScreen implements Screen, EditorHook {
                     ship.setPosition(p.x, p.y);
                 } else if (rlo instanceof MonkeyEditorObject) {
                     Monkey monkey = new Monkey(p.x, p.y, player);
+                    monkey.addToScreen(levelInteraction);
+                } else if (rlo instanceof InsaneMonkeyEditorObject) {
+                    InsaneMonkey monkey = new InsaneMonkey(p.x, p.y, player);
                     monkey.addToScreen(levelInteraction);
                 } else if (rlo instanceof HealthTotemEditorObject) {
                     HealthTotem totem = new HealthTotem(player);
