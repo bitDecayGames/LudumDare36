@@ -37,7 +37,7 @@ public class Hud {
 
         shipPartsText = new TextScreenObject(new PositionComponent(screenWidth - 175, screenHeight - 115), "SHIP PARTS 0/5", Color.WHITE);
 
-        healthX = screenWidth - 175da;
+        healthX = screenWidth - 175;
         healthY = screenHeight - 100;
         healthText = new TextScreenObject(new PositionComponent(healthX + 10, healthY + 31), "", new Color(0x00, 0xfc, 0xfc, 1));
         healthText.useFont2(true);
@@ -56,7 +56,7 @@ public class Hud {
         float newFuel=player.getJetpack().currentFuel / player.getJetpack().maxFuel;
 
         //uiBatch.draw(healthBar.getFrame(), 450, 0);
-        float rotation = (240 * newFuel) - 160;
+        float rotation = (240 * newFuel) - 165;
         uiBatch.draw(fuelGauge, fuelX, fuelY);
         uiBatch.draw(fuelNeedle, fuelX, fuelY, 32, 32, 64, 64, 1, 1, rotation);
 
