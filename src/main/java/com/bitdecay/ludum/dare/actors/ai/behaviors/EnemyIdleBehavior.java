@@ -22,7 +22,6 @@ public class EnemyIdleBehavior implements IState {
 
     @Override
     public void enter() {
-        System.out.println("Enter Idle");
         switchToRandomIdle();
         resetTimer();
     }

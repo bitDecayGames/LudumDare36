@@ -1,19 +1,19 @@
 package com.bitdecay.ludum.dare.actors.ai.behaviors;
 
-import com.bitdecay.ludum.dare.actors.ai.Monkey;
+import com.bitdecay.ludum.dare.actors.ai.Enemy;
 import com.bitdecay.ludum.dare.components.AIControlComponent;
 import com.bitdecay.ludum.dare.control.InputAction;
 import com.bitdecay.ludum.dare.interfaces.IState;
 
 public class FrustratedBehavior implements IState {
 
-    private Monkey ai;
+    private Enemy ai;
     private AIControlComponent input;
     private RoamBehavior roamBehavior;
 
     float timer;
 
-    public FrustratedBehavior(Monkey ai, AIControlComponent input, RoamBehavior roamBehavior){
+    public FrustratedBehavior(Enemy ai, AIControlComponent input, RoamBehavior roamBehavior){
         this.ai = ai;
         this.input = input;
         this.roamBehavior = roamBehavior;
@@ -21,7 +21,6 @@ public class FrustratedBehavior implements IState {
 
     @Override
     public void enter() {
-        System.out.println("Enter Frustrated");
         timer = 2;
     }
 

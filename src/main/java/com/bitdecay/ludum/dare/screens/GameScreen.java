@@ -22,6 +22,8 @@ import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
+import com.bitdecay.ludum.dare.actors.GameObject;
+import com.bitdecay.ludum.dare.actors.ai.Gorilla;
 import com.bitdecay.ludum.dare.actors.ai.Monkey;
 import com.bitdecay.ludum.dare.actors.environment.DeadShip;
 import com.bitdecay.ludum.dare.actors.environment.HealthTotem;
@@ -31,11 +33,13 @@ import com.bitdecay.ludum.dare.background.BackgroundManager;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
+import com.bitdecay.ludum.dare.editor.GorillaEditorObject;
 import com.bitdecay.ludum.dare.editor.HealthTotemEditorObject;
 import com.bitdecay.ludum.dare.editor.MonkeyEditorObject;
 import com.bitdecay.ludum.dare.editor.deadship.DeadShipEditorObject;
 import com.bitdecay.ludum.dare.editor.shippart.*;
 import com.bitdecay.ludum.dare.hud.Hud;
+import com.bitdecay.ludum.dare.interfaces.IShapeDraw;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 
@@ -54,7 +58,6 @@ public class GameScreen implements Screen, EditorHook {
 
     private Hud hud;
     private Player player;
-    private Monkey monkey;
 
     private SpriteBatch uiBatch;
     private SpriteBatch gobsBatch;
@@ -93,9 +96,6 @@ public class GameScreen implements Screen, EditorHook {
         currentLevel = LevelUtilities.loadLevel(ResourceDir.path("thePit.level"));
         world.setLevel(currentLevel);
         levelChanged(currentLevel);
-
-        monkey = new Monkey(0, 0, player);
-        monkey.addToScreen(new LevelInteractionComponent(world, gobs));
 
         hud = new Hud(player);
         uiBatch = new SpriteBatch();
@@ -191,7 +191,11 @@ public class GameScreen implements Screen, EditorHook {
         // debug renderer
         debugRenderer.setProjectionMatrix(cam.combined);
         debugRenderer.begin();
-        monkey.debugDraw(debugRenderer);
+        Iterator<GameObject> iter = gobs.getIter();
+        while(iter.hasNext()){
+            GameObject obj = iter.next();
+            if (obj instanceof IShapeDraw) ((IShapeDraw) obj).draw(debugRenderer);
+        }
         debugRenderer.end();
 
         // UI/HUD
@@ -252,7 +256,7 @@ public class GameScreen implements Screen, EditorHook {
         //TODO: LF ,for testing monkey ai
 //        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 //            Vector3 worldPos = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-//            monkey.debugMonkeyAi(worldPos.x, worldPos.y);
+//            monkey.setAiMovementGoal(worldPos.x, worldPos.y);
 //        }
     }
 
@@ -277,6 +281,7 @@ public class GameScreen implements Screen, EditorHook {
         items.add(new DeadShipEditorObject());
         items.add(new HealthTotemEditorObject());
         items.add(new MonkeyEditorObject());
+        items.add(new GorillaEditorObject());
 
         return items;
     }
@@ -301,6 +306,9 @@ public class GameScreen implements Screen, EditorHook {
                     HealthTotem totem = new HealthTotem(player);
                     totem.setPosition(p.x, p.y);
                     totem.addToLevel(levelInteraction);
+                } else if (rlo instanceof GorillaEditorObject) {
+                    Gorilla gorilla = new Gorilla(p.x, p.y, player);
+                    gorilla.addToScreen(levelInteraction);
                 }
             }
         }

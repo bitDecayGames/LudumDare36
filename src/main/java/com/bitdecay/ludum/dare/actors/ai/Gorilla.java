@@ -2,8 +2,8 @@ package com.bitdecay.ludum.dare.actors.ai;
 
 import com.bitdecay.ludum.dare.actors.ai.behaviors.AttackBehavior;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.EnemyIdleBehavior;
-import com.bitdecay.ludum.dare.actors.ai.behaviors.JumpAttackBehavior;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.RoamBehavior;
+import com.bitdecay.ludum.dare.actors.ai.behaviors.RunAttackBehavior;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bytebreakstudios.animagic.animation.Animation;
 import com.bytebreakstudios.animagic.animation.Animator;
@@ -15,23 +15,27 @@ import java.util.List;
 
 import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 
-public class Monkey extends Enemy {
+public class Gorilla extends Enemy {
 
     public static final float SCALE = 0.5f;
 
+    public Gorilla(float startX, float startY, Player player){
+        super(startX, startY, player);
+    }
+
     @Override
     protected String NAME() {
-        return "monkey";
+        return "gorilla";
     }
 
     @Override
     protected float SCALE() {
-        return Monkey.SCALE;
+        return Gorilla.SCALE;
     }
 
     @Override
     protected float SIZE() {
-        return 8;
+        return 12;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class Monkey extends Enemy {
 
     @Override
     protected float AGRO_RANGE() {
-        return 112;
+        return 64;
     }
 
     @Override
@@ -71,29 +75,24 @@ public class Monkey extends Enemy {
 
     @Override
     protected float JUMP_HEIGHT() {
-        return 32;
-    }
-
-    public Monkey(float startX, float startY, Player player) {
-        super(startX, startY, player);
+        return 16;
     }
 
     @Override
-    protected List<String> getIdleAnimations(){
+    protected List<String> getIdleAnimations() {
         List<String> idles = new ArrayList<>();
         idles.add("stand");
-        idles.add("scratch");
-        idles.add("banana");
         return idles;
     }
 
     @Override
     protected void setupAnimation(Animator a) {
-        a.addAnimation(new Animation("walk", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/walk").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("stand", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/stand").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/jump").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("scratch", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/idles/scratch").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("banana", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/idles/eat").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("walk", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/run").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("stand", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/sit").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/jump").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/death").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("pain", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/pain").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("lunge", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/lunge").toArray(AnimagicTextureRegion.class)));
         a.switchToAnimation("stand");
     }
 
@@ -107,7 +106,6 @@ public class Monkey extends Enemy {
 
     @Override
     protected AttackBehavior getAttack() {
-        return new JumpAttackBehavior(this, player, input, ATTACK_RANGE());
+        return new RunAttackBehavior(this, player, input, ATTACK_RANGE());
     }
-
 }

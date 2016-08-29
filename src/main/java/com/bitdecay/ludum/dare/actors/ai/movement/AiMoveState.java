@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.geom.BitPointInt;
-import com.bitdecay.ludum.dare.actors.ai.Monkey;
+import com.bitdecay.ludum.dare.actors.ai.Enemy;
 import com.bitdecay.ludum.dare.components.AIControlComponent;
 import com.bitdecay.ludum.dare.control.InputAction;
 import com.bitdecay.ludum.dare.interfaces.IState;
@@ -19,14 +19,14 @@ import static com.bitdecay.ludum.dare.util.BitWorldUtils.posToIndex;
 
 public class AiMoveState implements IState {
 
-    private Monkey me;
+    private Enemy me;
     private AIControlComponent input;
     private AiNode goal;
     private List<AiNode> nodes = new ArrayList<>();
 
     private boolean isBlocked = false;
 
-    public AiMoveState(Monkey me, AIControlComponent input, Vector2 goalPos) {
+    public AiMoveState(Enemy me, AIControlComponent input, Vector2 goalPos) {
         if (me == null) throw new RuntimeException("Cant have null ai monkey");
         if (input == null) throw new RuntimeException("Cant have null ai input");
         if (goalPos == null) throw new RuntimeException("Cant have null ai target");
@@ -359,7 +359,6 @@ public class AiMoveState implements IState {
 
     @Override
     public void enter() {
-        System.out.println("Enter AiMove");
     }
 
     @Override
