@@ -24,6 +24,8 @@ public class AiMoveState implements IState {
     private AiNode goal;
     private List<AiNode> nodes = new ArrayList<>();
 
+    private boolean isBlocked = false;
+
     public AiMoveState(Monkey me, AIControlComponent input, Vector2 goalPos) {
         if (me == null) throw new RuntimeException("Cant have null ai monkey");
         if (input == null) throw new RuntimeException("Cant have null ai input");
@@ -39,6 +41,7 @@ public class AiMoveState implements IState {
         // calculate all the sub targets
         nodes.add(start);
         recurseThroughNodes(nodes.get(0), goal, nodes);
+        isBlocked = nodes.size() <= 1;
     }
 
     private void recurseThroughNodes(AiNode currentNode, AiNode goal, List<AiNode> visitedNodes){
@@ -367,7 +370,7 @@ public class AiMoveState implements IState {
         // TODO: figure out how to get to the next node
         if (nodes.size() == 0){
             // TODO: go to a different state, you've reached your goal
-            return new AiIdleState(input);
+            return new AiIdleState(input, isBlocked);
         } else {
             // TODO: travel to the node
             AiNode nextNode = nodes.get(0);
@@ -400,6 +403,8 @@ public class AiMoveState implements IState {
     private boolean isAtNode(AiNode node) {
         return node != null && me.getCenter().dst(node.pos) < 5;
     }
+
+    public boolean isBlocked(){return isBlocked;}
 
     private interface BoolCheck{
         boolean boolCheck(AiNodeNeighbors neighbors);

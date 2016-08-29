@@ -36,9 +36,10 @@ import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 public class Monkey extends StateMachine {
     private final float SIZE = 8;
     private final int WALKING_SPEED = 20;
-    private final int ATTACK_SPEED = 60;
+    private final int ATTACK_SPEED = 80;
     private final int FLYING_SPEED = 60;
-    private final float AGRO_RANGE = 64;
+    private final float AGRO_RANGE = 112;
+    private final float ATTACK_RANGE = 16;
 
     private final SizeComponent size;
     private final PositionComponent pos;
@@ -54,10 +55,11 @@ public class Monkey extends StateMachine {
     private StateMachine behavior;
     private EnemyIdleBehavior idleBehavior;
     private RoamBehavior roamBehavior;
+    private boolean Agroed;
 
     public Monkey(float startX, float startY, Player player) {
         this.player = player;
-
+        Agroed =false;
         size = new SizeComponent(100, 100);
         pos = new PositionComponent(startX, startY);
         health = new HealthComponent(10, 10);
@@ -127,11 +129,11 @@ public class Monkey extends StateMachine {
         input.update(delta);
         super.update(delta);
         behavior.update(delta);
+        if(behavior.getActiveState() == idleBehavior) Agroed = false;
 
         if (!(behavior.getActiveState() instanceof JumpAttackBehavior) && getPosition().dst(player.getPosition()) < AGRO_RANGE){
-            behavior.setActiveState(new JumpAttackBehavior(this, player, new FrustratedBehavior(this, input, roamBehavior), AGRO_RANGE));
+            behavior.setActiveState(new JumpAttackBehavior(this, player, input, ATTACK_RANGE));
         }
-
         if (isGrounded()) setSpeed(WALKING_SPEED);
         else setSpeed(FLYING_SPEED);
 
@@ -146,8 +148,9 @@ public class Monkey extends StateMachine {
             case RIGHT_STANDING:
             case LEFT_STANDING:
                 if (activeState instanceof AiIdleState) {
-                    if (!(behavior.getActiveState() instanceof FrustratedBehavior) &&
-                            !(behavior.getActiveState() instanceof JumpAttackBehavior)) behavior.setActiveState(idleBehavior);
+                    if (behavior.getActiveState() instanceof JumpAttackBehavior){
+                        if (getPosition().dst(player.getPosition()) > ATTACK_RANGE && ((AiIdleState) activeState).wasMovementBlocked()) behavior.setActiveState(new FrustratedBehavior(this, input, roamBehavior));
+                    } else if (!(behavior.getActiveState() instanceof FrustratedBehavior)) behavior.setActiveState(idleBehavior);
                 }
                 break;
             case RIGHT_RUNNING:
@@ -237,6 +240,7 @@ public class Monkey extends StateMachine {
     }
 
     public void debugMonkeyAi(float x, float y){
+        setActiveState(new AiIdleState(input, false));
         setActiveState(new AiMoveState(this, input, new Vector2(x, y)));
     }
 }

@@ -22,7 +22,7 @@ public class FrustratedBehavior implements IState {
     @Override
     public void enter() {
         System.out.println("Enter Frustrated");
-        timer = 5;
+        timer = 2;
     }
 
     @Override

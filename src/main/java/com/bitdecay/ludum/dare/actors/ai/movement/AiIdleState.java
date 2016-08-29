@@ -6,19 +6,19 @@ import com.bitdecay.ludum.dare.components.AIControlComponent;
 import com.bitdecay.ludum.dare.control.InputAction;
 import com.bitdecay.ludum.dare.interfaces.IState;
 
-
-
 public class AiIdleState implements IState {
 
     private AIControlComponent input;
+    private boolean wasMovementBlocked;
 
-    public AiIdleState(AIControlComponent input) {
+    public AiIdleState(AIControlComponent input, boolean wasMovementBlocked) {
         this.input = input;
+        this.wasMovementBlocked = wasMovementBlocked;
     }
 
     @Override
     public void enter() {
-        System.out.println("Enter AiIdle");
+        System.out.println("Enter AiIdle blocked:" + wasMovementBlocked);
     }
 
     @Override
@@ -36,6 +36,8 @@ public class AiIdleState implements IState {
             input.pressed(InputAction.RIGHT);
         return null;
     }
+
+    public boolean wasMovementBlocked(){ return wasMovementBlocked; }
 }
 
 
