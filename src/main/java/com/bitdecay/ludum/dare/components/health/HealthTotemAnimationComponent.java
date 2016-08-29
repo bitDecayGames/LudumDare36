@@ -13,7 +13,7 @@ public class HealthTotemAnimationComponent extends AnimationComponent {
     public HealthTotemAnimationComponent() {
         super("healthTotem", null, SCALE, null);
 
-        animator.addAnimation(new Animation("stand", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("decor/shrines").toArray(AnimagicTextureRegion.class)));
+        animator.addAnimation(new Animation("stand", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.25f), atlas.findRegions("decor/shrines").toArray(AnimagicTextureRegion.class)));
 
         animator.switchToAnimation("stand");
     }
