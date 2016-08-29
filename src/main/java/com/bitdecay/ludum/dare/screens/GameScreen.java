@@ -55,7 +55,8 @@ import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 public class GameScreen implements Screen, EditorHook {
     public static final boolean DEBUG = false;
 //    public static final String LEVEL_NAME = "flatTest.level";
-    public static final String LEVEL_NAME = "thePit.level";
+//    public static final String LEVEL_NAME = "thePit.level";
+    public static final String LEVEL_NAME = "testShipPart.level";
 
     public static final Color HURT_TINT = new Color(1, 0.5f, 0.5f, 1);
 
@@ -414,6 +415,7 @@ public class GameScreen implements Screen, EditorHook {
                 if (rlo instanceof IEditorShipPart) {
                     ShipPart part = new ShipPart(rlo.name());
                     part.setPosition(p.x, p.y);
+                    part.setInitialPosition(p.x,p.y);
                     part.addToLevel(levelInteraction);
                 } else if (rlo instanceof DeadShipEditorObject) {
                     DeadShip ship = DeadShip.create(player, levelInteraction, this);
