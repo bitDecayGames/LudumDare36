@@ -11,7 +11,6 @@ import com.bitdecay.jump.geom.BitRectangle;
 import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.jump.render.JumperRenderStateWatcher;
 import com.bitdecay.ludum.dare.actors.StateMachine;
-import com.bitdecay.ludum.dare.actors.state.HurtState;
 import com.bitdecay.ludum.dare.actors.state.ShootState;
 import com.bitdecay.ludum.dare.actors.state.StandState;
 import com.bitdecay.ludum.dare.components.*;
@@ -33,6 +32,7 @@ public class Player extends StateMachine {
 
     private final AnimationComponent animNormal;
     private final AnimationComponent animCarry;
+    private final AnimationComponent animShoot;
 
     private final SizeComponent size;
     private final PositionComponent pos;
@@ -43,6 +43,9 @@ public class Player extends StateMachine {
     private final KeyboardControlComponent keyboard;
     private final TimerComponent timer;
 
+    private double invincibleTimer;
+    private double shootTimer;
+
     private LevelInteractionComponent levelComponent;
     private float shootAgain = 0;
 
@@ -51,8 +54,9 @@ public class Player extends StateMachine {
         pos = new PositionComponent(0, 0);
         health = new HealthComponent(MAX_HEALTH, MAX_HEALTH);
 
-        animNormal = new PlayerAnimationComponent(pos, false);
-        animCarry = new PlayerAnimationComponent(pos, true);
+        animNormal = new PlayerAnimationComponent(pos, PlayerAnimationComponent.AnimType.NORMAL);
+        animCarry = new PlayerAnimationComponent(pos, PlayerAnimationComponent.AnimType.CARRY);
+        animShoot = new PlayerAnimationComponent(pos, PlayerAnimationComponent.AnimType.SHOOT);
 
         attack = new AttackComponent(10);
 
@@ -67,7 +71,7 @@ public class Player extends StateMachine {
 
         timer = new TimerComponent(0.5f);
 
-        append(size).append(pos).append(phys).append(health).append(jetpack).append(animNormal).append(keyboard).append(timer);
+        append(size).append(pos).append(phys).append(health).append(jetpack).append(animNormal).append(keyboard).append(timer).append(new FollowComponent());
         setActiveState(new StandState(components));
     }
 
@@ -96,14 +100,25 @@ public class Player extends StateMachine {
 
         // Switch to carry animation set.
         if (shipPart != null && currentAnim != animCarry) {
+            System.out.println("entering carry anim");
             remove(AnimationComponent.class);
             append(animCarry);
             setCarryPhysics(true);
         // Switch to normal animation set.
-        } else if (shipPart == null && currentAnim != animNormal) {
-            remove(AnimationComponent.class);
-            append(animNormal);
-            setCarryPhysics(false);
+        } else if (shipPart == null) {
+            if(shootTimer > 0) {
+                if (currentAnim != animShoot) {
+                    System.out.println("entering shoot anim");
+                    remove(AnimationComponent.class);
+                    append(animShoot);
+                    setCarryPhysics(false);
+                }
+            }else if (currentAnim != animNormal) {
+                System.out.println("entering normal anim");
+                remove(AnimationComponent.class);
+                append(animNormal);
+                setCarryPhysics(false);
+            }
         }
     }
 
@@ -123,6 +138,7 @@ public class Player extends StateMachine {
         shootAgain += delta;
         if (keyboard.isJustPressed(InputAction.SHOOT) && shootAgain > .5){
             shootAgain = 0;
+            resetShootTimer();
             setActiveState(new ShootState(components));
         }
 
@@ -140,6 +156,9 @@ public class Player extends StateMachine {
             health.health = health.max;
             setPosition(0, 0);
         }
+
+        invincibleTimer -= delta;
+        shootTimer -= delta;
     }
 
     @Override
@@ -154,7 +173,11 @@ public class Player extends StateMachine {
     }
 
     public void hit(AttackComponent attackComponent) {
-        setActiveState(new HurtState(components, attackComponent));
+        if(invincibleTimer <= 0) {
+            this.health.health -= attackComponent.attack;
+            this.animNormal.animator.switchToAnimation("hurt");
+            resetInvincibility();
+        }
     }
 
     public void setPosition(float x, float y) {
@@ -194,6 +217,10 @@ public class Player extends StateMachine {
 //        shapeRenderer.rect(pos.x, pos.y, size.w, size.h);
     }
 
+    private void resetInvincibility(){
+        invincibleTimer = .5;
+    }
+
     public JetPackComponent getJetpack(){
         return jetpack;
     }
@@ -205,6 +232,11 @@ public class Player extends StateMachine {
     public boolean hasShipPart() {
         return getShipPart() != null;
     }
+
+    public void resetShootTimer(){
+        shootTimer = 0.5;
+    }
+
 
     public TimerComponent getTimer() {
         return timer;

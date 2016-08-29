@@ -17,7 +17,7 @@ import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 
 public class Gorilla extends Enemy {
 
-    public static final float SCALE = 0.5f;
+    public static final float SCALE = 0.6f;
 
     public Gorilla(float startX, float startY, Player player){
         super(startX, startY, player);
@@ -35,7 +35,7 @@ public class Gorilla extends Enemy {
 
     @Override
     protected float SIZE() {
-        return 12;
+        return 14;
     }
 
     @Override
@@ -76,6 +76,21 @@ public class Gorilla extends Enemy {
     @Override
     protected float JUMP_HEIGHT() {
         return 16;
+    }
+
+    @Override
+    protected int ATTACK_STRENGTH(){
+        return 20;
+    }
+
+    @Override
+    protected String HURT_SFX(){
+        return "MonkeyHurt";
+    }
+
+    @Override
+    protected String DEATH_SFX(){
+        return "MonkeyVaporize";
     }
 
     @Override

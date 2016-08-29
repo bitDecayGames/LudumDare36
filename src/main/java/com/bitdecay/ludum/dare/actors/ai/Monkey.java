@@ -61,17 +61,32 @@ public class Monkey extends Enemy {
 
     @Override
     protected float START_HEALTH() {
-        return 10;
+        return 20;
     }
 
     @Override
     protected float MAX_HEALTH() {
-        return 10;
+        return 20;
     }
 
     @Override
     protected float JUMP_HEIGHT() {
         return 32;
+    }
+
+    @Override
+    protected int ATTACK_STRENGTH(){
+        return 10;
+    }
+
+    @Override
+    protected String HURT_SFX(){
+        return "MonkeyHurt";
+    }
+
+    @Override
+    protected String DEATH_SFX(){
+        return "MonkeyVaporize";
     }
 
     public Monkey(float startX, float startY, Player player) { super(startX, startY, player); }
@@ -92,6 +107,7 @@ public class Monkey extends Enemy {
         a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/jump").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("scratch", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/idles/scratch").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("banana", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/idles/eat").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/death").toArray(AnimagicTextureRegion.class)));
         a.switchToAnimation("stand");
     }
 
@@ -107,5 +123,4 @@ public class Monkey extends Enemy {
     protected AttackBehavior getAttack() {
         return new JumpAttackBehavior(this, player, input, ATTACK_RANGE());
     }
-
 }
