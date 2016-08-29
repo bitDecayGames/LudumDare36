@@ -12,3 +12,4 @@
 classes
 **/packed
 dependency-reduced-pom.xml
+src/main/resources/packed

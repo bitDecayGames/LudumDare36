@@ -1,5 +1,6 @@
 package com.bitdecay.ludum.dare.actors.environment;
 
+import com.badlogic.gdx.Game;
 import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.geom.BitPoint;
 import com.bitdecay.ludum.dare.actors.InteractableObject;
@@ -9,6 +10,7 @@ import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
 import com.bitdecay.ludum.dare.components.health.HealthTotemComponent;
 import com.bitdecay.ludum.dare.components.ship.DeadShipAnimationComponent;
 import com.bitdecay.ludum.dare.components.ship.ShipPartComponent;
+import com.bitdecay.ludum.dare.screens.GameScreen;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,16 +20,20 @@ public class DeadShip extends InteractableObject {
 
     private final HealthTotemComponent healthTotem;
 
-    private DeadShip(Player player) {
+    private GameScreen gameScreen;
+
+    private DeadShip(Player player, GameScreen gameScreen) {
         super(new DeadShipAnimationComponent("deadShip"));
 
         healthTotem = new HealthTotemComponent(position, player);
 
         append(healthTotem);
+
+        this.gameScreen = gameScreen;
     }
 
-    public static DeadShip create(Player player, LevelInteractionComponent levelInteraction) {
-        return ((DeadShip) (new DeadShip(player)).addToLevel(levelInteraction));
+    public static DeadShip create(Player player, LevelInteractionComponent levelInteraction, GameScreen gameScreen) {
+        return ((DeadShip) (new DeadShip(player, gameScreen)).addToLevel(levelInteraction));
     }
 
     public static int getNumCollectedParts() {
@@ -48,6 +54,9 @@ public class DeadShip extends InteractableObject {
 
         if (bitBody.userObject instanceof Player) {
             Player player = ((Player) bitBody.userObject);
+            player.canShoot = true;
+            player.canFly = true;
+            gameScreen.secondTutorial = true;
 
             if (player.hasShipPart()) {
                 ShipPartComponent component = player.getShipPart();

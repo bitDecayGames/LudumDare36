@@ -34,7 +34,7 @@ public class ShipPart extends InteractableObject implements IUpdate{
         this.name = name;
 
         shipPartComponent = new ShipPartComponent(name, this);
-        append(new ImportantNearPlayerComponent());
+        append(new ImportantNearPlayerComponent(150));
     }
 
     public static TextureRegion getRegion(String name) {

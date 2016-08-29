@@ -7,6 +7,7 @@ import com.bitdecay.jump.Facing;
 import com.bitdecay.jump.JumperBody;
 import com.bitdecay.jump.control.state.GroundedControlState;
 import com.bitdecay.jump.control.state.JumpingControlState;
+import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bitdecay.ludum.dare.interfaces.IDraw;
@@ -17,11 +18,12 @@ import com.bitdecay.ludum.dare.interfaces.IUpdate;
  */
 public class JetPackComponent implements IComponent, IUpdate, IDraw {
     private JumperBody playerJumpBody;
+    private Player player;
     private FollowOrthoCamera camera;
 
     public final float maxFuel = 50;
 
-    public float currentFuel = 50;
+    public float currentFuel = 0;
 
     public final int FIRST_TICK_FUEL_COST = 5;
 
@@ -31,8 +33,9 @@ public class JetPackComponent implements IComponent, IUpdate, IDraw {
 
     ParticleEffect fx;
 
-    public JetPackComponent(JumperBody playerJumpBody, FollowOrthoCamera camera) {
-        this.playerJumpBody = playerJumpBody;
+    public JetPackComponent(Player player, FollowOrthoCamera camera) {
+        this.player = player;
+        this.playerJumpBody = (JumperBody) player.phys.getBody();
         this.camera = camera;
         fx = new ParticleEffect();
         fx.load(Gdx.files.internal("particle/flame3.p"), Gdx.files.internal("particle"));
@@ -78,7 +81,7 @@ public class JetPackComponent implements IComponent, IUpdate, IDraw {
             if(currentFuel < 0){
                 currentFuel = 0;
             }
-        } else if (canRefuel && currentFuel < maxFuel){
+        } else if (canRefuel && currentFuel < maxFuel && player.canFly){
             currentFuel+=5;
             if(currentFuel > maxFuel){
                 currentFuel = maxFuel;

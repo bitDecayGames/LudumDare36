@@ -2,9 +2,11 @@ package com.bitdecay.ludum.dare.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -42,14 +44,20 @@ import com.bitdecay.ludum.dare.editor.shippart.*;
 import com.bitdecay.ludum.dare.hud.Hud;
 import com.bitdecay.ludum.dare.interfaces.IShapeDraw;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
+import com.bytebreakstudios.animagic.animation.Animation;
+import com.bytebreakstudios.animagic.animation.FrameRate;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 
 import java.util.*;
+
+import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 
 public class GameScreen implements Screen, EditorHook {
     public static final boolean DEBUG = false;
 //    public static final String LEVEL_NAME = "flatTest.level";
     public static final String LEVEL_NAME = "thePit.level";
+
+    public static final Color HURT_TINT = new Color(1, 0.5f, 0.5f, 1);
 
     private LudumDareGame game;
 
@@ -71,9 +79,16 @@ public class GameScreen implements Screen, EditorHook {
 
     LevelInteractionComponent levelInteraction;
 
+    Animation hurtAnimation;
+
     Pixmap black = new Pixmap(1, 1, Pixmap.Format.RGB888);
     Sprite fader;
     float faderAlpha = 0;
+
+    private float gameTime = 0;
+
+    public boolean secondTutorial = false;
+    public float secondTutorialTime = 0;
 
     public GameScreen(LudumDareGame game) {
         this.game = game;
@@ -97,14 +112,16 @@ public class GameScreen implements Screen, EditorHook {
         levelInteraction = new LevelInteractionComponent(world, gobs);
 
 
-        Array<AnimagicTextureRegion> aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec");
-        Array<AnimagicTextureRegion> bridgesTileTextures = LudumDareGame.atlas.findRegions("tiles/bridges");
-        Array<AnimagicTextureRegion> rockTileTextures = LudumDareGame.atlas.findRegions("tiles/rock");
-        Array<AnimagicTextureRegion> aztecBackgroundTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec_bgt");
-        Array<AnimagicTextureRegion> aztecVinesTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec_vines");
-        Array<AnimagicTextureRegion> rockBackgroundTileTextures = LudumDareGame.atlas.findRegions("tiles/rock_bgt");
-        Array<AnimagicTextureRegion> rock2rockTileTextures = LudumDareGame.atlas.findRegions("tiles/rock2rock");
-        Array<AnimagicTextureRegion> aztec2aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec2aztec");
+        Array<AnimagicTextureRegion> aztecTileTextures = atlas.findRegions("tiles/aztec");
+        Array<AnimagicTextureRegion> bridgesTileTextures = atlas.findRegions("tiles/bridges");
+        Array<AnimagicTextureRegion> rockTileTextures = atlas.findRegions("tiles/rock");
+        Array<AnimagicTextureRegion> aztecBackgroundTileTextures = atlas.findRegions("tiles/aztec_bgt");
+        Array<AnimagicTextureRegion> aztecVinesTileTextures = atlas.findRegions("tiles/aztec_vines");
+        Array<AnimagicTextureRegion> rockBackgroundTileTextures = atlas.findRegions("tiles/rock_bgt");
+        Array<AnimagicTextureRegion> rock2rockTileTextures = atlas.findRegions("tiles/rock2rock");
+        Array<AnimagicTextureRegion> aztec2aztecTileTextures = atlas.findRegions("tiles/aztec2aztec");
+
+        hurtAnimation = new Animation("hurt", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("screen/hurt").toArray(AnimagicTextureRegion.class));
 
         tilesetMap.put(0, aztecTileTextures.toArray(TextureRegion.class));
         tilesetMap.put(3, aztecBackgroundTileTextures.toArray(TextureRegion.class));
@@ -195,6 +212,8 @@ public class GameScreen implements Screen, EditorHook {
             return;
         }
 
+        BitmapFont font = new BitmapFont(Gdx.files.internal("fonts/bit.fnt"), Gdx.files.internal("fonts/bit.png"), false);
+
         // Background
         gobsBatch.begin();
 
@@ -212,6 +231,14 @@ public class GameScreen implements Screen, EditorHook {
         drawLevel();
 
         gobs.draw(gobsBatch);
+
+        if (gameTime < 10) {
+            font.draw(gobsBatch, "Press 'A' and 'D' to move Left and Right.\nPress 'Arrow Down' to pick up and drop ship parts.", -45, 30);
+        }
+        if (secondTutorial && secondTutorialTime < 10) {
+            font.draw(gobsBatch, "Press 'W' to use your jetpack.\nPress 'Space' to fire your laser.", 310, -50);
+        }
+
         gobsBatch.end();
 
         // debug renderer
@@ -230,6 +257,11 @@ public class GameScreen implements Screen, EditorHook {
         uiBatch.begin();
         hud.render(uiBatch);
         fader.draw(uiBatch);
+
+        if (player.isInvincible()) {
+            hurtAnimation.update(1f / 60f);
+            uiBatch.draw(hurtAnimation.getFrame(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
         uiBatch.end();
 
     }
@@ -275,6 +307,11 @@ public class GameScreen implements Screen, EditorHook {
     }
 
     public void update(float delta) {
+        gameTime += delta;
+        if(secondTutorial){
+            secondTutorialTime += delta;
+        }
+
         world.step(delta);
         gobs.update(delta);
 
@@ -380,7 +417,7 @@ public class GameScreen implements Screen, EditorHook {
                     part.setInitialPosition(p.x,p.y);
                     part.addToLevel(levelInteraction);
                 } else if (rlo instanceof DeadShipEditorObject) {
-                    DeadShip ship = DeadShip.create(player, levelInteraction);
+                    DeadShip ship = DeadShip.create(player, levelInteraction, this);
                     ship.setPosition(p.x, p.y);
                 } else if (rlo instanceof MonkeyEditorObject) {
                     Monkey monkey = new Monkey(p.x, p.y, player);
@@ -424,7 +461,7 @@ public class GameScreen implements Screen, EditorHook {
         world.setLevel(level);
         forceBackgroundTiles(level);
 
-        player.addToScreen(levelInteraction);
         buildGameObjects(level.otherObjects);
+        player.addToScreen(levelInteraction);
     }
 }
