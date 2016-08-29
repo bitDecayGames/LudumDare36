@@ -51,7 +51,6 @@ import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 import java.util.*;
 
 public class GameScreen implements Screen, EditorHook {
-
     private LudumDareGame game;
 
     FollowOrthoCamera camera;
@@ -393,6 +392,7 @@ public class GameScreen implements Screen, EditorHook {
     @Override
     public void levelChanged(Level level) {
         currentLevel = level;
+        gobs.clear();
         world.removeAllBodies();
         world.setLevel(level);
         forceBackgroundTiles(level);
