@@ -84,7 +84,7 @@ public class GameScreen implements Screen, EditorHook {
         tilesetMap.put(3, aztecBackgroundTileTextures.toArray(TextureRegion.class));
         tilesetMap.put(4, aztecVinesTileTextures.toArray(TextureRegion.class));
 
-        currentLevel = LevelUtilities.loadLevel(ResourceDir.path("aiObstacleCourse.level"));
+        currentLevel = LevelUtilities.loadLevel(ResourceDir.path("thePit.level"));
         world.setLevel(currentLevel);
         levelChanged(currentLevel);
 
