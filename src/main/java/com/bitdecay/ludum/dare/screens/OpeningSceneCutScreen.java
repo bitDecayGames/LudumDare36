@@ -143,6 +143,7 @@ public class OpeningSceneCutScreen implements Screen {
 
     @Override
     public void dispose() {
+        buff.dispose();
         stage.dispose();
     }
 }
