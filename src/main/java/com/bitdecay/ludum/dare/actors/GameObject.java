@@ -60,6 +60,14 @@ public class GameObject implements IUpdate, IDraw, IPreDraw, IShapeDraw {
         return returnList;
     }
 
+    public <T extends IComponent> Optional<T> findComponent(Class<T> clazz){
+        try{
+            return Optional.of(clazz.cast(getComponents(clazz).get(0)));
+        } catch (Exception e){
+            return Optional.empty();
+        }
+    }
+
     public boolean hasComponent(Class<? extends IComponent> clazz) {
         return getComponents(clazz).size() > 0;
     }
