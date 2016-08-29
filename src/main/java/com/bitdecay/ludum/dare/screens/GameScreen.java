@@ -24,12 +24,14 @@ import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.actors.ai.Monkey;
 import com.bitdecay.ludum.dare.actors.environment.DeadShip;
+import com.bitdecay.ludum.dare.actors.environment.HealthTotem;
 import com.bitdecay.ludum.dare.actors.items.ShipPart;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.background.BackgroundManager;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
 import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
+import com.bitdecay.ludum.dare.editor.HealthTotemEditorObject;
 import com.bitdecay.ludum.dare.editor.MonkeyEditorObject;
 import com.bitdecay.ludum.dare.editor.deadship.DeadShipEditorObject;
 import com.bitdecay.ludum.dare.editor.shippart.*;
@@ -273,6 +275,7 @@ public class GameScreen implements Screen, EditorHook {
         items.add(new ShieldModuleEditorObject());
         items.add(new WingsEditorObject());
         items.add(new DeadShipEditorObject());
+        items.add(new HealthTotemEditorObject());
         items.add(new MonkeyEditorObject());
 
         return items;
@@ -289,11 +292,15 @@ public class GameScreen implements Screen, EditorHook {
                     part.setPosition(p.x, p.y);
                     part.addToLevel(levelInteraction);
                 } else if (rlo instanceof DeadShipEditorObject) {
-                    DeadShip ship = DeadShip.create(levelInteraction);
+                    DeadShip ship = DeadShip.create(player, levelInteraction);
                     ship.setPosition(p.x, p.y);
                 } else if (rlo instanceof MonkeyEditorObject) {
                     Monkey monkey = new Monkey(p.x, p.y, player);
                     monkey.addToScreen(levelInteraction);
+                } else if (rlo instanceof HealthTotemEditorObject) {
+                    HealthTotem totem = new HealthTotem(player);
+                    totem.setPosition(p.x, p.y);
+                    totem.addToLevel(levelInteraction);
                 }
             }
         }
@@ -315,7 +322,7 @@ public class GameScreen implements Screen, EditorHook {
         world.removeAllBodies();
         world.setLevel(level);
 
-        buildGameObjects(level.otherObjects);
         player.addToScreen(levelInteraction);
+        buildGameObjects(level.otherObjects);
     }
 }

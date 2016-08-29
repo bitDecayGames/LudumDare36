@@ -5,6 +5,7 @@ import com.bitdecay.ludum.dare.actors.InteractableObject;
 import com.bitdecay.ludum.dare.actors.items.ShipPart;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.components.*;
+import com.bitdecay.ludum.dare.components.health.HealthTotemComponent;
 import com.bitdecay.ludum.dare.components.ship.DeadShipAnimationComponent;
 import com.bitdecay.ludum.dare.components.ship.ShipPartComponent;
 
@@ -14,12 +15,18 @@ import java.util.Set;
 public class DeadShip extends InteractableObject {
     private static final Set<String> collectedParts = new HashSet<>();
 
-    private DeadShip() {
+    private final HealthTotemComponent healthTotem;
+
+    private DeadShip(Player player) {
         super(new DeadShipAnimationComponent("deadShip"));
+
+        healthTotem = new HealthTotemComponent(position, player);
+
+        append(healthTotem);
     }
 
-    public static DeadShip create(LevelInteractionComponent levelInteraction) {
-        return ((DeadShip) (new DeadShip()).addToLevel(levelInteraction));
+    public static DeadShip create(Player player, LevelInteractionComponent levelInteraction) {
+        return ((DeadShip) (new DeadShip(player)).addToLevel(levelInteraction));
     }
 
     public static int getNumCollectedParts() {
