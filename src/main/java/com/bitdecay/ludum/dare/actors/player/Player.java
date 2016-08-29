@@ -20,6 +20,7 @@ import com.bitdecay.ludum.dare.components.ship.ShipPartComponent;
 import com.bitdecay.ludum.dare.control.InputAction;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bitdecay.ludum.dare.interfaces.IRemoveable;
+import com.bitdecay.ludum.dare.util.SoundLibrary;
 
 public class Player extends StateMachine implements IRemoveable {
     private static final float MAX_HEALTH = 113;
@@ -31,6 +32,8 @@ public class Player extends StateMachine implements IRemoveable {
 
     private static final int JUMP_STRENGTH = 150;
     private static final int JUMP_STRENGTH_CARRY = 80;
+
+    private static final String HURT_SFX = "MonkeyVaporize";
 
     private final AnimationComponent animNormal;
     private final AnimationComponent animCarry;
@@ -185,6 +188,7 @@ public class Player extends StateMachine implements IRemoveable {
             this.health.health -= attackComponent.attack;
             this.animNormal.animator.switchToAnimation("hurt");
             resetInvincibility();
+            SoundLibrary.playSound(HURT_SFX);
         }
     }
 
