@@ -89,6 +89,8 @@ public class GameObjects implements IUpdate, IDraw, IShapeDraw {
 
     public void clear() {
         gameObjects.clear();
+        pendingRemoves.clear();
+        pendingAdds.clear();
     }
 
     public List<AINodeGameObject> getAINodes() {

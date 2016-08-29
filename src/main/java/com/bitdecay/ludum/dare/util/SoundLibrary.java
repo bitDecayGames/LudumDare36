@@ -3,6 +3,7 @@ package com.bitdecay.ludum.dare.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.bitdecay.ludum.dare.ResourceDir;
 
 import java.util.HashMap;
@@ -39,8 +40,12 @@ public class SoundLibrary {
         sounds.put("Randomize2", new SoundEffect(0.07f));
         sounds.put("Scwaaaap", new SoundEffect(0.07f));
         sounds.put("ShipBeacon", new SoundEffect(0.07f));
+        sounds.put("ShipAlarm", new SoundEffect(0.1f));
+        sounds.put("crashBig", new SoundEffect(0.1f));
 
         musics.put("ambientGame", new MusicEffect(1.5f));
+        musics.put("ambientIntro", new MusicEffect(1.5f));
+        musics.put("AlarmExtended", new MusicEffect(.1f));
     }
 
     public static synchronized Sound playSound(String name) {
@@ -76,11 +81,19 @@ public class SoundLibrary {
 
         music = musics.get(name);
         if (music.music == null) {
-            music.music = Gdx.audio.newMusic(ResourceDir.internal("music/" + name + ".mp3"));
+            FileHandle musicFile = ResourceDir.internal("music/" + name + ".mp3");
+            if (!musicFile.exists()) {
+                musicFile = ResourceDir.internal("music/" + name + ".wav");
+            }
+            music.music = Gdx.audio.newMusic(musicFile);
             musics.put(name, music);
         }
 
         return music;
+    }
+
+    public static void stopMusic(String name) {
+        getMusic(name).music.stop();
     }
 
 

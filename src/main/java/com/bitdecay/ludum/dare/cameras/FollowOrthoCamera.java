@@ -1,6 +1,7 @@
 package com.bitdecay.ludum.dare.cameras;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.ludum.dare.util.CRectangle;
 
@@ -41,6 +42,10 @@ public class FollowOrthoCamera extends OrthographicCamera {
     private float maxW = 0;
     private float maxH = 0;
 
+    private boolean shake = false;
+    private float shakeStrength = 0;
+    private float shakeDuration = 0;
+
     public FollowOrthoCamera(float width, float height){
         super(width, height);
         originalWidth = width;
@@ -55,6 +60,10 @@ public class FollowOrthoCamera extends OrthographicCamera {
 
     @Override
     public void update(){
+        update(1f / 60f);
+    }
+
+    public void update(float delta){
         super.update();
         if (pointsToFollow != null && pointsToFollow.size() > 0) {
             getWorldMaxWindow();
@@ -78,6 +87,26 @@ public class FollowOrthoCamera extends OrthographicCamera {
             goToTargets();
             pointsToFollow = new ArrayList<>();
         }
+        if (shake){
+            translate(MathUtils.random(-shakeStrength, shakeStrength), MathUtils.random(-shakeStrength, shakeStrength));
+
+            shakeDuration -= delta;
+            if (shakeDuration <= 0){
+                shake = false;
+            }
+        }
+    }
+
+    public void shake(float duration){
+        this.shake = true;
+        this.shakeStrength = 5;
+        this.shakeDuration = duration;
+    }
+
+    public void rumble(){
+        this.shake = true;
+        this.shakeStrength = 1;
+        this.shakeDuration = 0.0001f;
     }
 
     private boolean testAllPoints(){

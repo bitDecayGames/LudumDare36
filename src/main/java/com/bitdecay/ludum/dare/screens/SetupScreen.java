@@ -5,11 +5,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.actors.player.Player;
+import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.components.PositionComponent;
 import com.bitdecay.ludum.dare.components.SizeComponent;
 import com.bitdecay.ludum.dare.control.InputUtil;
@@ -25,7 +25,7 @@ import java.util.List;
 
 public class SetupScreen implements Screen {
 
-    OrthographicCamera camera;
+    FollowOrthoCamera camera;
     AnimagicSpriteBatch batch;
 
     LudumDareGame game;
@@ -92,7 +92,7 @@ public class SetupScreen implements Screen {
     private void setupPlayers() {
         players = new ArrayList<>();
 
-        players.add(new Player());
+        players.add(new Player(camera));
 
         SizeComponent size = new SizeComponent(BOX_SIDE, BOX_SIDE);
     }
@@ -105,7 +105,7 @@ public class SetupScreen implements Screen {
 
     @Override
     public void show() {
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera = new FollowOrthoCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.lookAt(0, 0, 0);
         batch = new AnimagicSpriteBatch(camera);
         batch.isShaderOn(false);
