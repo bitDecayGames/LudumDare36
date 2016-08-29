@@ -1,10 +1,11 @@
 package com.bitdecay.ludum.dare.actors.environment;
 
 import com.bitdecay.jump.BitBody;
+import com.bitdecay.jump.geom.BitPoint;
 import com.bitdecay.ludum.dare.actors.InteractableObject;
 import com.bitdecay.ludum.dare.actors.items.ShipPart;
 import com.bitdecay.ludum.dare.actors.player.Player;
-import com.bitdecay.ludum.dare.components.*;
+import com.bitdecay.ludum.dare.components.LevelInteractionComponent;
 import com.bitdecay.ludum.dare.components.health.HealthTotemComponent;
 import com.bitdecay.ludum.dare.components.ship.DeadShipAnimationComponent;
 import com.bitdecay.ludum.dare.components.ship.ShipPartComponent;
@@ -50,7 +51,7 @@ public class DeadShip extends InteractableObject {
 
             if (player.hasShipPart()) {
                 ShipPartComponent component = player.getShipPart();
-                component.removeFromPlayer(true);
+                component.removeFromPlayer(true, new BitPoint(0, 0));
                 name = component.name;
             }
         } else if (bitBody.userObject instanceof ShipPart) {
