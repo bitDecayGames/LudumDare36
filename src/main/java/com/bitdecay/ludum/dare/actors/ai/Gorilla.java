@@ -122,6 +122,6 @@ public class Gorilla extends Enemy {
 
     @Override
     protected GameObject getDeath(){
-        return new MonkeyDeath(this.pos,this.phys.getBody().facing);
+        return new GorillaDeath(this.pos,this.phys.getBody().facing);
     }
 }

@@ -71,7 +71,7 @@ public class Player extends StateMachine {
 
         timer = new TimerComponent(0.5f);
 
-        append(size).append(pos).append(phys).append(health).append(jetpack).append(animNormal).append(keyboard).append(timer);
+        append(size).append(pos).append(phys).append(health).append(jetpack).append(animNormal).append(keyboard).append(timer).append(new FollowComponent());
         setActiveState(new StandState(components));
     }
 

@@ -30,6 +30,7 @@ public class ShipPart extends InteractableObject {
         this.name = name;
 
         shipPartComponent = new ShipPartComponent(name, this);
+        append(new ImportantNearPlayerComponent());
     }
 
     public static TextureRegion getRegion(String name) {

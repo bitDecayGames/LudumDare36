@@ -3329,6 +3329,28 @@
     },
     "uuid" : "957cd5cf-6ac8-42ac-910f-34af196bf444",
     "name" : "monkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.GorillaEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 208.0,
+        "y" : 32.0
+      },
+      "width" : 11.0,
+      "height" : 14.0
+    },
+    "uuid" : "a6cdeeaf-405b-4b1b-bb84-10ad2ae922df",
+    "name" : "gorilla"
+  } ], [ "com.bitdecay.ludum.dare.editor.GorillaEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 176.0,
+        "y" : 16.0
+      },
+      "width" : 11.0,
+      "height" : 14.0
+    },
+    "uuid" : "9b393bdb-c6c9-4c5f-8d98-bcdbac1b7553",
+    "name" : "gorilla"
   } ] ] ],
   "triggers" : [ "java.util.ArrayList", [ ] ],
   "gridOffset" : {
