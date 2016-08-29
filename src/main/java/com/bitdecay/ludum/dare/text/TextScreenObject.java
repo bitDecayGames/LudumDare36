@@ -17,4 +17,8 @@ public class TextScreenObject extends GameObject {
     public void setText(String s) {
         textComp.setText(s);
     }
+
+    public void useFont2(boolean b) {
+        textComp.useFont2(b);
+    }
 }
