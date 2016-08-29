@@ -115,7 +115,7 @@ public class GameScreen implements Screen, EditorHook {
         Array<AnimagicTextureRegion> rock2rockTileTextures = atlas.findRegions("tiles/rock2rock");
         Array<AnimagicTextureRegion> aztec2aztecTileTextures = atlas.findRegions("tiles/aztec2aztec");
 
-        hurtAnimation = new Animation("walk", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("screen/hurt").toArray(AnimagicTextureRegion.class));
+        hurtAnimation = new Animation("hurt", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("screen/hurt").toArray(AnimagicTextureRegion.class));
 
         tilesetMap.put(0, aztecTileTextures.toArray(TextureRegion.class));
         tilesetMap.put(3, aztecBackgroundTileTextures.toArray(TextureRegion.class));
