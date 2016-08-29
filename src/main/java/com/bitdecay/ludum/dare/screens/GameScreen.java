@@ -2,8 +2,10 @@ package com.bitdecay.ludum.dare.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -24,10 +26,10 @@ import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
-import com.bitdecay.ludum.dare.actors.ai.Warrior;
 import com.bitdecay.ludum.dare.actors.ai.Enemy;
 import com.bitdecay.ludum.dare.actors.ai.Gorilla;
 import com.bitdecay.ludum.dare.actors.ai.Monkey;
+import com.bitdecay.ludum.dare.actors.ai.Warrior;
 import com.bitdecay.ludum.dare.actors.environment.DeadShip;
 import com.bitdecay.ludum.dare.actors.environment.HealthTotem;
 import com.bitdecay.ludum.dare.actors.items.ShipPart;
@@ -70,8 +72,19 @@ public class GameScreen implements Screen, EditorHook {
 
     LevelInteractionComponent levelInteraction;
 
+    Pixmap black = new Pixmap(1, 1, Pixmap.Format.RGB888);
+    Sprite fader;
+    float faderAlpha = 0;
+
     public GameScreen(LudumDareGame game) {
         this.game = game;
+
+        black.drawPixel(1, 1, 0x000000);
+        fader = new Sprite(new TextureRegion(new Texture(black)));
+        fader.setAlpha(faderAlpha);
+        fader.setPosition(0, 0);
+        fader.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        black.dispose();
 
         camera = new FollowOrthoCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.maxZoom = 0.4f;
@@ -97,7 +110,7 @@ public class GameScreen implements Screen, EditorHook {
         tilesetMap.put(3, aztecBackgroundTileTextures.toArray(TextureRegion.class));
         tilesetMap.put(4, aztecVinesTileTextures.toArray(TextureRegion.class));
 
-        currentLevel = LevelUtilities.loadLevel(ResourceDir.path("flatTest.level"));
+        currentLevel = LevelUtilities.loadLevel(ResourceDir.path("thePit.level"));
         world.setLevel(currentLevel);
         levelChanged(currentLevel);
 
@@ -173,7 +186,9 @@ public class GameScreen implements Screen, EditorHook {
     }
 
     private void draw(OrthographicCamera cam) {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if (faderAlpha >= 1) {
+            return;
+        }
 
         // Background
         gobsBatch.begin();
@@ -207,6 +222,7 @@ public class GameScreen implements Screen, EditorHook {
         // UI/HUD
         uiBatch.begin();
         hud.render(uiBatch);
+        fader.draw(uiBatch);
         uiBatch.end();
 
     }
@@ -254,6 +270,15 @@ public class GameScreen implements Screen, EditorHook {
     public void update(float delta) {
         world.step(delta);
         gobs.update(delta);
+
+        if (DeadShip.getNumCollectedParts() >= 6) {
+            faderAlpha += .01;
+            fader.setAlpha(faderAlpha);
+
+            if (faderAlpha >= 1) {
+                game.setScreen(new CreditsScreen(game));
+            }
+        }
 
         // This adds anything with a FollowComponent to the camera view (player)
         gobs.findWithComponents(FollowComponent.class, PositionComponent.class).forEach(obj -> {
