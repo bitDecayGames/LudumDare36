@@ -236,7 +236,7 @@ public class GameScreen implements Screen, EditorHook {
             font.draw(gobsBatch, "Press 'A' and 'D' to move Left and Right.\nPress 'Arrow Down' to pick up and drop ship parts.", -45, 30);
         }
         if (secondTutorial && secondTutorialTime < 10) {
-            font.draw(gobsBatch, "Press 'W' to use your jetpack.\nPress 'Space' to fire your laser.", 400, -10);
+            font.draw(gobsBatch, "Press 'W' to use your jetpack.\nPress 'Space' to fire your laser.", 310, -50);
         }
 
         gobsBatch.end();
