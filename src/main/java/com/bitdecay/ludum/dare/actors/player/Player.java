@@ -155,16 +155,14 @@ public class Player extends StateMachine implements IRemoveable {
         }
 
         if (timer.complete() &&
-            keyboard.isJustPressed(PlayerAction.DOWN) &&
-
-            hasShipPart()) {
-            getShipPart().removeFromPlayer(false, phys.getBody().velocity);
-
+            keyboard.isJustPressed(PlayerAction.DOWN) && hasShipPart()) {
+            dropShipPart();
             timer.reset();
         }
 
         // Reset if player falls or dies.
         if (pos.y < DEATH_Y) {
+            dropShipPart();
             setPosition(0, 0);
         }
 
@@ -249,6 +247,11 @@ public class Player extends StateMachine implements IRemoveable {
     public ShipPartComponent getShipPart() {
         return ((ShipPartComponent) getFirstComponent(ShipPartComponent.class));
     }
+
+    public void dropShipPart(){
+        getShipPart().removeFromPlayer(false, phys.getBody().velocity);
+    }
+
 
     public boolean hasShipPart() {
         return getShipPart() != null;

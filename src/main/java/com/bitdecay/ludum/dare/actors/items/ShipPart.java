@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.control.PlayerAction;
+import com.bitdecay.jump.geom.BitPoint;
 import com.bitdecay.ludum.dare.actors.InteractableObject;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.components.ImportantNearPlayerComponent;
@@ -68,14 +69,13 @@ public class ShipPart extends InteractableObject implements IUpdate{
     @Override
     public void update(float delta){
         super.update(delta);
-        if(this.getPhysics().getBody().aabb.xy.y<= -1500){
+        if(this.getPhysics().getBody().aabb.xy.y <= -1500){
            respawn();
         }
     }
 
     public void setInitialPosition(float x, float y) {
         home = new Vector2(x,y);
-        System.out.println("Home: "+ home);
     }
 
     @Override
@@ -107,6 +107,7 @@ public class ShipPart extends InteractableObject implements IUpdate{
     }
 
     public void respawn(){
+        this.physics.getBody().velocity = new BitPoint(0, 0);
         this.setPosition(this.home.x, this.home.y + 5);
     }
 }
