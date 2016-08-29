@@ -26,7 +26,7 @@ import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 
 public class Bat extends StateMachine implements IShapeDraw, ContactListener, IRemoveable, IAgroable {
 
-    public static final float SCALE = 0.2f;
+    public static final float SCALE = 0.35f;
 
     private PositionComponent pos;
     private AnimationComponent anim;
