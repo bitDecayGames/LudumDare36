@@ -24,6 +24,7 @@ import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
+import com.bitdecay.ludum.dare.actors.ai.Warrior;
 import com.bitdecay.ludum.dare.actors.ai.Enemy;
 import com.bitdecay.ludum.dare.actors.ai.Gorilla;
 import com.bitdecay.ludum.dare.actors.ai.Monkey;
@@ -38,6 +39,7 @@ import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.editor.GorillaEditorObject;
 import com.bitdecay.ludum.dare.editor.HealthTotemEditorObject;
 import com.bitdecay.ludum.dare.editor.MonkeyEditorObject;
+import com.bitdecay.ludum.dare.editor.WarriorEditorObject;
 import com.bitdecay.ludum.dare.editor.deadship.DeadShipEditorObject;
 import com.bitdecay.ludum.dare.editor.shippart.*;
 import com.bitdecay.ludum.dare.hud.Hud;
@@ -317,6 +319,7 @@ public class GameScreen implements Screen, EditorHook {
         items.add(new HealthTotemEditorObject());
         items.add(new MonkeyEditorObject());
         items.add(new GorillaEditorObject());
+        items.add(new WarriorEditorObject());
 
         return items;
     }
@@ -344,6 +347,9 @@ public class GameScreen implements Screen, EditorHook {
                 } else if (rlo instanceof GorillaEditorObject) {
                     Gorilla gorilla = new Gorilla(p.x, p.y, player);
                     gorilla.addToScreen(levelInteraction);
+                } else if (rlo instanceof WarriorEditorObject) {
+                    Warrior warrior = new Warrior(p.x, p.y, player);
+                    warrior.addToScreen(levelInteraction);
                 }
             }
         }

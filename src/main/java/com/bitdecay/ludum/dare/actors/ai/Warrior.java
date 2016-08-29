@@ -15,22 +15,22 @@ import java.util.List;
 
 import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 
-public class Gorilla extends Enemy {
+public class Warrior extends Enemy {
 
     public static final float SCALE = 0.5f;
 
-    public Gorilla(float startX, float startY, Player player){
+    public Warrior(float startX, float startY, Player player){
         super(startX, startY, player);
     }
 
     @Override
     protected String NAME() {
-        return "gorilla";
+        return "warrior";
     }
 
     @Override
     protected float SCALE() {
-        return Gorilla.SCALE;
+        return Warrior.SCALE;
     }
 
     @Override
@@ -102,12 +102,11 @@ public class Gorilla extends Enemy {
 
     @Override
     protected void setupAnimation(Animator a) {
-        a.addAnimation(new Animation("walk", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("gorilla/run").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("stand", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/sit").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/jump").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/death").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("pain", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/pain").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("lunge", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/lunge").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("walk", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.3f), atlas.findRegions("native/run").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("stand", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("native/stand").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("native/jump").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("native/death").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("pain", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("native/pain").toArray(AnimagicTextureRegion.class)));
         a.switchToAnimation("stand");
     }
 

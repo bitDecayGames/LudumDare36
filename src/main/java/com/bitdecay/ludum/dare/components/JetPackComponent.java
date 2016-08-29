@@ -34,7 +34,7 @@ public class JetPackComponent implements IComponent, IUpdate, IDraw {
         fx = new ParticleEffect();
         fx.load(Gdx.files.internal("particle/flame3.p"), Gdx.files.internal("particle"));
         fx.scaleEffect(.5f);
-        fx.setPosition(playerJumpBody.aabb.xy.x, playerJumpBody.aabb.xy.y);
+        fx.setPosition(playerJumpBody.aabb.xy.x, playerJumpBody.aabb.xy.y - 3);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class JetPackComponent implements IComponent, IUpdate, IDraw {
         } else {
             offset -= 5;
         }
-        fx.setPosition(playerJumpBody.aabb.xy.x + offset, playerJumpBody.aabb.xy.y + 8);
+        fx.setPosition(playerJumpBody.aabb.xy.x + offset, playerJumpBody.aabb.xy.y + 5);
         fx.update(delta);
 
         if(playerJumpBody.controller.getStatus().equals(JumpingControlState.class.getSimpleName())){
