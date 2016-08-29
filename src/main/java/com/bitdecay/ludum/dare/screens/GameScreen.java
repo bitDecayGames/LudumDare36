@@ -50,7 +50,6 @@ import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 import java.util.*;
 
 public class GameScreen implements Screen, EditorHook {
-
     public static final boolean DEBUG = false;
 
     private LudumDareGame game;
@@ -412,6 +411,7 @@ public class GameScreen implements Screen, EditorHook {
     @Override
     public void levelChanged(Level level) {
         currentLevel = level;
+        gobs.clear();
         world.removeAllBodies();
         world.setLevel(level);
         forceBackgroundTiles(level);
