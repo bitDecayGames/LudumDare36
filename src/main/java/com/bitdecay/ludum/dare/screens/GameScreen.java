@@ -460,7 +460,7 @@ public class GameScreen implements Screen, EditorHook {
         world.setLevel(level);
         forceBackgroundTiles(level);
 
-        player.addToScreen(levelInteraction);
         buildGameObjects(level.otherObjects);
+        player.addToScreen(levelInteraction);
     }
 }
