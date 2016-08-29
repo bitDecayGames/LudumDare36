@@ -1,8 +1,10 @@
 package com.bitdecay.ludum.dare.screens.cutScene;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.bitdecay.ludum.dare.LudumDareGame;
@@ -18,6 +20,11 @@ import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 public class Scene2 extends CutSceneFrame{
     private boolean crashPlayed = false;
     private float sceneTime = 0;
+
+    ParticleEffect boom;
+    private float boomLifeSpan = 5f;
+    private float boomDuration = 0;
+    private boolean boomStarted = false;
 
     private Animation ship;
     private float shipX = -100;
@@ -56,7 +63,7 @@ public class Scene2 extends CutSceneFrame{
     private float roid8Y = 0;
 
     private Animation roid9;
-    private float roid9X = -650;
+    private float roid9X = -550;
     private float roid9Y = -50;
     private float roid9Rot = 0;
 
@@ -83,13 +90,31 @@ public class Scene2 extends CutSceneFrame{
         urt = new Animation("urt", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(.1f), new AnimagicTextureRegion[]{atlas.findRegion("asteroids/omicron-persei6")});
         space = new Animation("bg", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(.1f), new AnimagicTextureRegion[]{atlas.findRegion("bg/space")});
 
-        time = 5f;
+        boom = new ParticleEffect();
+        boom.load(Gdx.files.internal("particle/boom.p"), Gdx.files.internal("particle"));
+        boom.scaleEffect(1f);
+        boom.setPosition(0, 0);
+
+        time = 4.5f;
     }
 
     @Override
     public void update(float delta) {
         ship.update(delta);
         sceneTime += delta;
+
+        if(!boomStarted && sceneTime >= 4){
+            boom.setPosition(shipX + 100, shipY + 50);
+            boomStarted = true;
+            boom.start();
+        } else {
+            boom.update(delta);
+            boomDuration += delta;
+        }
+        if (boomDuration >= boomLifeSpan){
+            boom.allowCompletion();
+        }
+
 
         shipX += .1;
         shipY += .1;
@@ -115,7 +140,8 @@ public class Scene2 extends CutSceneFrame{
         urtX -= .5;
         urtY += .3;
 
-        if (sceneTime > 4.9 && !crashPlayed){
+
+        if (sceneTime > 4 && !crashPlayed){
             crashPlayed = true;
             SoundLibrary.playSound("crashBig");
             // TODO: perhaps an explosion sprite?
@@ -143,7 +169,7 @@ public class Scene2 extends CutSceneFrame{
         batchy.draw(roid7.getFrame(), roid7X, roid7Y);
         batchy.draw(roid8.getFrame(), roid8X, roid8Y);
         batchy.draw(roid9.getFrame(), roid9X, roid9Y, roid9.getFrame().getRegionWidth()/2, roid9.getFrame().getRegionHeight()/2, roid9.getFrame().getRegionWidth(), roid9.getFrame().getRegionHeight(), 1, 1, roid9Rot);
-
+        boom.draw(batchy);
         batchy.end();
 
         buff.end();

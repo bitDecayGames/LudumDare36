@@ -1,10 +1,13 @@
 package com.bitdecay.ludum.dare.screens.cutScene;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.bitdecay.ludum.dare.LudumDareGame;
+import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
 import com.bytebreakstudios.animagic.animation.Animation;
 import com.bytebreakstudios.animagic.animation.FrameRate;
@@ -74,8 +77,7 @@ public class Scene3 extends CutSceneFrame{
 
         space = new Animation("bg", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(.1f), new AnimagicTextureRegion[]{atlas.findRegion("bg/space")});
 
-
-        time = 10;
+        time = 5;
     }
 
     @Override
@@ -86,38 +88,38 @@ public class Scene3 extends CutSceneFrame{
         }
 
         shipRotation ++;
-        shipXScale -= .001;
-        shipYScale -= .001;
+        shipXScale -= .002;
+        shipYScale -= .002;
         shipX += .6;
         shipY -= .1;
 
 
         cockRotation ++;
-        cockXScale -= .001;
-        cockYScale -= .001;
+        cockXScale -= .002;
+        cockYScale -= .002;
         cockX += .6;
         cockY -= .2;
 
         engineRotation ++;
-        engineXScale -= .001;
-        engineYScale -= .001;
+        engineXScale -= .002;
+        engineYScale -= .002;
         engineX += .5;
         engineY += .1;
 
         navModRotation ++;
-        navModXScale -= .001;
-        navModYScale -= .001;
+        navModXScale -= .002;
+        navModYScale -= .002;
         navModX += .7;
         navModY += .1;
 
         wingRotation ++;
-        wingXScale -= .001;
-        wingYScale -= .001;
+        wingXScale -= .002;
+        wingYScale -= .002;
         wingX += .7;
         wingY -= .2;
 
-        urtXsize *= 1.0005;
-        urtYsize *= 1.0005;
+        urtXsize *= 1.0008;
+        urtYsize *= 1.0008;
         urtX -= .1;
         urtY -= .1;
 
