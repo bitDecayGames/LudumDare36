@@ -45,9 +45,11 @@ public class OpeningSceneCutScreen implements Screen {
         Scene1 scene1 = new Scene1();
         Scene2 scene2 = new Scene2();
         Scene3 scene3 = new Scene3();
+        Scene4 scene4 = new Scene4();
         animations.add(scene1);
         animations.add(scene2);
         animations.add(scene3);
+        animations.add(scene4);
 
         currentScene = animations.get(0);
 

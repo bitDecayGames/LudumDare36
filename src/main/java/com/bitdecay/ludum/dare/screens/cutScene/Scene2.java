@@ -56,7 +56,7 @@ public class Scene2 extends CutSceneFrame{
     private float roid8Y = 0;
 
     private Animation roid9;
-    private float roid9X = -1200;
+    private float roid9X = -650;
     private float roid9Y = -50;
     private float roid9Rot = 0;
 
@@ -83,7 +83,7 @@ public class Scene2 extends CutSceneFrame{
         urt = new Animation("urt", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(.1f), new AnimagicTextureRegion[]{atlas.findRegion("asteroids/omicron-persei6")});
         space = new Animation("bg", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(.1f), new AnimagicTextureRegion[]{atlas.findRegion("bg/space")});
 
-        time = 9.5f;
+        time = 5f;
     }
 
     @Override
@@ -115,7 +115,7 @@ public class Scene2 extends CutSceneFrame{
         urtX -= .5;
         urtY += .3;
 
-        if (sceneTime > 9.8 && !crashPlayed){
+        if (sceneTime > 4.9 && !crashPlayed){
             crashPlayed = true;
             SoundLibrary.playSound("crashBig");
             // TODO: perhaps an explosion sprite?
