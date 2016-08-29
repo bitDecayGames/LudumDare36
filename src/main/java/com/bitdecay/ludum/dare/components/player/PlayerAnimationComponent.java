@@ -1,5 +1,6 @@
 package com.bitdecay.ludum.dare.components.player;
 
+import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.ludum.dare.components.AnimationComponent;
 import com.bitdecay.ludum.dare.components.PositionComponent;
 import com.bytebreakstudios.animagic.animation.Animation;
@@ -10,7 +11,7 @@ import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 
 public class PlayerAnimationComponent extends AnimationComponent {
     public PlayerAnimationComponent(PositionComponent position, boolean carry) {
-        super("player", position, 0.5f, null);
+        super("player", position, 0.5f, new Vector2(0, -3));
 
         String carryStr = carry ? "/carry" : "";
         String standPath = carry ? "player/run/carry/1" : "player/stand";

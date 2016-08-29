@@ -72,7 +72,7 @@ public abstract class Enemy extends StateMachine implements IShapeDraw, ContactL
         pos = new PositionComponent(startX, startY);
         health = new HealthComponent(START_HEALTH(), MAX_HEALTH());
         attack = new AttackComponent(ATTACK_STRENGTH());
-        anim = new AnimationComponent(NAME(), pos, SCALE(), new Vector2());
+        anim = new AnimationComponent(NAME(), pos, SCALE(), new Vector2(0, -3));
         setupAnimation(anim.animator);
         phys = createBody();
         input = new AIControlComponent();
