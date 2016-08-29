@@ -19,8 +19,9 @@ import com.bitdecay.ludum.dare.components.player.PlayerAnimationComponent;
 import com.bitdecay.ludum.dare.components.ship.ShipPartComponent;
 import com.bitdecay.ludum.dare.control.InputAction;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
+import com.bitdecay.ludum.dare.interfaces.IRemoveable;
 
-public class Player extends StateMachine {
+public class Player extends StateMachine implements IRemoveable {
     private static final float MAX_HEALTH = 113;
 
     private static final float DEATH_Y = -1500;
@@ -34,7 +35,6 @@ public class Player extends StateMachine {
     private final AnimationComponent animNormal;
     private final AnimationComponent animCarry;
     private final AnimationComponent animShoot;
-
     private final SizeComponent size;
     private final PositionComponent pos;
     private final HealthComponent health;
@@ -48,6 +48,7 @@ public class Player extends StateMachine {
 
     private double invincibleTimer;
     private double shootTimer;
+
 
     private LevelInteractionComponent levelComponent;
     private float shootAgain = 0;
@@ -139,10 +140,8 @@ public class Player extends StateMachine {
     public void update(float delta) {
         super.update(delta);
 
-        updateAnimationComponent();
-
         shootAgain += delta;
-        if (keyboard.isJustPressed(InputAction.SHOOT) && shootAgain > .5){
+        if (keyboard.isJustPressed(InputAction.SHOOT) && shootAgain > .25){
             shootAgain = 0;
             resetShootTimer();
             setActiveState(new ShootState(components));
@@ -151,21 +150,23 @@ public class Player extends StateMachine {
 
         if (timer.complete() &&
             keyboard.isJustPressed(PlayerAction.DOWN) &&
+
             hasShipPart()) {
             getShipPart().removeFromPlayer(false, phys.getBody().velocity);
+
             timer.reset();
         }
 
         // Reset if player falls or dies.
         if (pos.y < DEATH_Y) {
             setPosition(0, 0);
-        } else if (health.health <= 0) {
-            health.health = health.max;
-            setPosition(0, 0);
         }
 
         invincibleTimer -= delta;
         shootTimer -= delta;
+
+        updateAnimationComponent();
+
     }
 
     @Override
@@ -194,6 +195,7 @@ public class Player extends StateMachine {
 
     //TODO change how controls are gotten
     public InputComponent getInputComponent() {
+
         IComponent input = getFirstComponent(InputComponent.class);
         if (input != null) {
             return (InputComponent) input;
@@ -252,4 +254,21 @@ public class Player extends StateMachine {
     public HealthComponent getHealth() {
         return health;
     }
+
+
+    @Override
+    public boolean shouldRemove() {
+        if (health.health <= 0) {
+            return true;
+        }
+        return false;
+    }
+
+        @Override
+        public void remove() {
+            levelComponent.addToLevel( new PlayerDeath((AnimationComponent) getFirstComponent(AnimationComponent.class), pos, "LongDeath", this, levelComponent), null);
+            levelComponent.removeFromObjects(this);
+            System.out.println("Player removed");
+
+        }
 }

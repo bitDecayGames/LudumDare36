@@ -65,12 +65,12 @@ public class Gorilla extends Enemy {
 
     @Override
     protected float START_HEALTH() {
-        return 10;
+        return 30;
     }
 
     @Override
     protected float MAX_HEALTH() {
-        return 10;
+        return 30;
     }
 
     @Override

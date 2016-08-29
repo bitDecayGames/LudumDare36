@@ -23,11 +23,22 @@ public class LevelInteractionComponent implements IComponent {
     }
 
     public void addToLevel(GameObject obj, PhysicsComponent phys) {
-        getWorld().addBody(phys.getBody());
+        if (phys != null) {
+            getWorld().addBody(phys.getBody());
+        }
         getObjects().add(obj);
     }
 
-    public void removeFromLevel(PhysicsComponent phys) {
+    public void addToObjects(GameObject obj){
+        getObjects().add(obj);
+    }
+
+    public void removeFromObjects(GameObject obj){
+        obj.append(new RemoveNowComponent());
+    }
+
+    public void removeFromLevel(GameObject obj, PhysicsComponent phys) {
         getWorld().removeBody(phys.getBody());
+        obj.append(new RemoveNowComponent());
     }
 }

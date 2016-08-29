@@ -3,6 +3,7 @@ package com.bitdecay.ludum.dare.collection;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.bitdecay.ludum.dare.actors.GameObject;
+import com.bitdecay.ludum.dare.components.RemoveNowComponent;
 import com.bitdecay.ludum.dare.gameobject.AINodeGameObject;
 import com.bitdecay.ludum.dare.interfaces.*;
 import com.bytebreakstudios.animagic.texture.AnimagicSpriteBatch;
@@ -43,7 +44,7 @@ public class GameObjects implements IUpdate, IDraw, IShapeDraw {
         gameObjects.forEach(obj -> {
             obj.update(delta);
 
-            if (obj instanceof IRemoveable && ((IRemoveable) obj).shouldRemove()) {
+            if (obj.hasComponent(RemoveNowComponent.class) || (obj instanceof IRemoveable && ((IRemoveable) obj).shouldRemove())) {
                 pendingRemoves.add(obj);
             }
         });
@@ -63,6 +64,7 @@ public class GameObjects implements IUpdate, IDraw, IShapeDraw {
         pendingRemoves.forEach(obj -> ((IRemoveable) obj).remove());
         pendingRemoves.clear();
     }
+
 
     public List<GameObject> findWithComponents(Class<? extends IComponent>... components){
         return gameObjects.stream().filter(obj -> {
