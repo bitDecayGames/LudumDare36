@@ -103,6 +103,12 @@ public class FollowOrthoCamera extends OrthographicCamera {
         this.shakeDuration = duration;
     }
 
+    public void shake(float duration, float strength){
+        this.shake = true;
+        this.shakeStrength = strength;
+        this.shakeDuration = duration;
+    }
+
     public void rumble(){
         this.shake = true;
         this.shakeStrength = 1;

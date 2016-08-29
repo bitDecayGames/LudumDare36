@@ -148,7 +148,7 @@ public class Player extends StateMachine implements IRemoveable {
             shootAgain = 0;
             resetShootTimer();
             setActiveState(new ShootState(components));
-            camera.shake(0.05f);
+            camera.shake(0.05f, 2f);
         }
 
         if (timer.complete() &&
