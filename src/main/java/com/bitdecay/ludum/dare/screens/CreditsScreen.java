@@ -48,20 +48,20 @@ public class CreditsScreen implements Screen {
 
         Skin skin = new Skin(ResourceDir.internal("skins/skin.json"));
 
-        background = new Image(LudumDareGame.atlas.findRegion("buzzkill/dankest_boat"));
+        background = new Image(LudumDareGame.atlas.findRegion("bg/space"));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        lblTitle = new Label("Credits", skin);
+        lblTitle = new Label(" Credits", skin);
         lblTitle.setFontScale(10);
         lblTitle.setFillParent(true);
         lblTitle.setAlignment(Align.top, Align.left);
-        lblTitle.setColor(Color.WHITE);
+        lblTitle.setColor(Color.SKY);
 
         lblBack = new Label("Press esc/B to go back", skin);
         lblBack.setFontScale(5);
         lblBack.setFillParent(true);
         lblBack.setAlignment(Align.bottom, Align.right);
-        lblBack.setColor(Color.WHITE);
+        lblBack.setColor(Color.GRAY);
 
         lblCredits = new Label("Oculomancers (Art): " + SPACE_AFTER_TITLE +
                 "Erik \"Groovemaster\"\n Meredith" + SPACE_AFTER_NAME +
