@@ -249,7 +249,8 @@ public class Player extends StateMachine implements IRemoveable {
     }
 
     public void dropShipPart(){
-        getShipPart().removeFromPlayer(false, phys.getBody().velocity);
+        ShipPartComponent comp = getShipPart();
+        if (comp != null) comp.removeFromPlayer(false, phys.getBody().velocity);
     }
 
 
