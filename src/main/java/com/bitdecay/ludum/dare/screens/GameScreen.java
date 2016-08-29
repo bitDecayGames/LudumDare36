@@ -48,7 +48,8 @@ import java.util.*;
 
 public class GameScreen implements Screen, EditorHook {
     public static final boolean DEBUG = false;
-    public static final String LEVEL_NAME = "flatTest.level";
+//    public static final String LEVEL_NAME = "flatTest.level";
+    public static final String LEVEL_NAME = "thePit.level";
 
     private LudumDareGame game;
 

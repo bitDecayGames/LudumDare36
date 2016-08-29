@@ -168,7 +168,7 @@ public class MainMenuScreen implements Screen {
     }
 
     private void gotoGame() {
-        game.setScreen(new OpeningSceneCutScreen(game));
+        game.setScreen(new GameScreen(game));
     }
 
     private void gotoCredits() {
