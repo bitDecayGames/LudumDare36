@@ -13,6 +13,7 @@ import com.bitdecay.jump.render.JumperRenderStateWatcher;
 import com.bitdecay.ludum.dare.actors.StateMachine;
 import com.bitdecay.ludum.dare.actors.state.ShootState;
 import com.bitdecay.ludum.dare.actors.state.StandState;
+import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.components.player.PlayerAnimationComponent;
 import com.bitdecay.ludum.dare.components.ship.ShipPartComponent;
@@ -43,13 +44,16 @@ public class Player extends StateMachine {
     private final KeyboardControlComponent keyboard;
     private final TimerComponent timer;
 
+    private final FollowOrthoCamera camera;
+
     private double invincibleTimer;
     private double shootTimer;
 
     private LevelInteractionComponent levelComponent;
     private float shootAgain = 0;
 
-    public Player() {
+    public Player(FollowOrthoCamera camera) {
+        this.camera = camera;
         size = new SizeComponent(100, 100);
         pos = new PositionComponent(0, 0);
         health = new HealthComponent(MAX_HEALTH, MAX_HEALTH);
@@ -63,7 +67,7 @@ public class Player extends StateMachine {
         phys = createBody();
         setCarryPhysics(false);
 
-        jetpack = new JetPackComponent((JumperBody) phys.getBody());
+        jetpack = new JetPackComponent((JumperBody) phys.getBody(), camera);
 
         keyboard = new KeyboardControlComponent();
 
@@ -140,6 +144,7 @@ public class Player extends StateMachine {
             shootAgain = 0;
             resetShootTimer();
             setActiveState(new ShootState(components));
+            camera.shake(0.05f);
         }
 
         if (timer.complete() &&
