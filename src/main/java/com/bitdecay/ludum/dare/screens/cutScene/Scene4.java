@@ -1,13 +1,8 @@
 package com.bitdecay.ludum.dare.screens.cutScene;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.bitdecay.ludum.dare.LudumDareGame;
-import com.bitdecay.ludum.dare.util.SoundLibrary;
 import com.bytebreakstudios.animagic.animation.Animation;
 import com.bytebreakstudios.animagic.animation.FrameRate;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
@@ -69,10 +64,7 @@ public class Scene4 extends CutSceneFrame{
     }
 
     @Override
-    public TextureRegion getRenderedTextureRegion(OrthographicCamera camera) {
-        FrameBuffer buff = new FrameBuffer(Pixmap.Format.RGB888, (int) camera.viewportWidth, (int) camera.viewportHeight, false);
-        buff.begin();
-
+    public void getRenderedTextureRegion(OrthographicCamera camera, FrameBuffer buff) {
         batchy.setProjectionMatrix(camera.combined);
         batchy.begin();
 
@@ -91,8 +83,5 @@ public class Scene4 extends CutSceneFrame{
         }
 
         batchy.end();
-
-        buff.end();
-        return new TextureRegion(buff.getColorBufferTexture());
     }
 }

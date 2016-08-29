@@ -90,9 +90,12 @@ public class GameScreen implements Screen, EditorHook {
 
     public boolean secondTutorial = false;
     public float secondTutorialTime = 0;
+    private BitmapFont font;
 
     public GameScreen(LudumDareGame game) {
         this.game = game;
+
+        font = new BitmapFont(Gdx.files.internal("fonts/bit.fnt"), Gdx.files.internal("fonts/bit.png"), false);
 
         black.drawPixel(1, 1, 0x000000);
         fader = new Sprite(new TextureRegion(new Texture(black)));
@@ -199,7 +202,6 @@ public class GameScreen implements Screen, EditorHook {
     @Override
     public void render(float delta) {
         update(delta);
-
         draw(camera);
     }
 
@@ -212,8 +214,6 @@ public class GameScreen implements Screen, EditorHook {
         if (faderAlpha >= 1) {
             return;
         }
-
-        BitmapFont font = new BitmapFont(Gdx.files.internal("fonts/bit.fnt"), Gdx.files.internal("fonts/bit.png"), false);
 
         // Background
         gobsBatch.begin();
@@ -270,6 +270,8 @@ public class GameScreen implements Screen, EditorHook {
     private void drawLevel() {
         /**
          * TODO: we still need to find a better way to load a grid into the world but with custom tile objects.
+         *
+         * // TODO: Only render what is on the camera
          * It shouldn't be hard, but it does need to be done.
          **/
         for (int x = 0; x < currentLevel.gridObjects.length; x++) {

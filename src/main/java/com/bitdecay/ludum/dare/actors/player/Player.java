@@ -178,7 +178,7 @@ public class Player extends StateMachine implements IRemoveable {
         ShipPartComponent shipPart = getShipPart();
         AnimationComponent anim = ((AnimationComponent) getFirstComponent(AnimationComponent.class));
         if (shipPart != null && anim != null) {
-            shipPart.flipVerticalAxis(!anim.getFlipVerticalAxis());
+            shipPart.flipVerticalAxis(anim.getFlipVerticalAxis());
         }
 
         super.draw(spriteBatch);

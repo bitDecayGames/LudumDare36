@@ -5,6 +5,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -36,6 +38,8 @@ public class OpeningSceneCutScreen implements Screen {
     private Sprite sprite = new Sprite();
 
     private Stage stage = new Stage();
+
+    private FrameBuffer buff = new FrameBuffer(Pixmap.Format.RGB888, (int) camera.viewportWidth, (int) camera.viewportHeight, false);
 
     public OpeningSceneCutScreen(LudumDareGame game){
         music = SoundLibrary.loopMusic("ambientIntro");
@@ -96,7 +100,13 @@ public class OpeningSceneCutScreen implements Screen {
 
         if (currentScene != null) {
             currentScene.update(delta);
-            sprite.setRegion(currentScene.getRenderedTextureRegion(camera));
+            buff.begin();
+            Gdx.gl.glClearColor(0, 0, 0, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            currentScene.getRenderedTextureRegion(camera, buff);
+            buff.end();
+
+            sprite.setRegion(buff.getColorBufferTexture());
             sprite.flip(false, true);
 
             if(stateTime >= currentScene.time && !currentlyInChange) {
@@ -133,6 +143,7 @@ public class OpeningSceneCutScreen implements Screen {
 
     @Override
     public void dispose() {
+        buff.dispose();
         stage.dispose();
     }
 }

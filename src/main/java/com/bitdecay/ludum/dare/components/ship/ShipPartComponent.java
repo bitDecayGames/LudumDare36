@@ -124,8 +124,8 @@ public class ShipPartComponent implements IComponent, IUpdate, IDraw, IRemoveabl
         // Done here otherwise it trails the player by a bit.
         if (player != null) {
             Vector2 playerPosition = player.getPosition();
-            position.x = playerPosition.x + DRAW_OFFSET.x;
-            position.y = playerPosition.y + DRAW_OFFSET.y;
+            position.x = playerPosition.x + ShipPart.offsets.get(name).x;
+            position.y = playerPosition.y + ShipPart.offsets.get(name).y;
         }
 
         animation.draw(spriteBatch);
