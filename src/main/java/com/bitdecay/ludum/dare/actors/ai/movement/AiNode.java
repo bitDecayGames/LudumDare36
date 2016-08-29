@@ -1,4 +1,4 @@
-package com.bitdecay.ludum.dare.actors.ai;
+package com.bitdecay.ludum.dare.actors.ai.movement;
 
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.geom.BitPointInt;

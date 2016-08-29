@@ -9,12 +9,18 @@ import com.bitdecay.jump.Facing;
 import com.bitdecay.jump.JumperBody;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.control.PlayerInputController;
-import com.bitdecay.jump.geom.BitPointInt;
 import com.bitdecay.jump.geom.BitRectangle;
 import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.jump.render.JumperRenderState;
 import com.bitdecay.jump.render.JumperRenderStateWatcher;
 import com.bitdecay.ludum.dare.actors.StateMachine;
+import com.bitdecay.ludum.dare.actors.ai.behaviors.EnemyIdleBehavior;
+import com.bitdecay.ludum.dare.actors.ai.behaviors.FrustratedBehavior;
+import com.bitdecay.ludum.dare.actors.ai.behaviors.JumpAttackBehavior;
+import com.bitdecay.ludum.dare.actors.ai.behaviors.RoamBehavior;
+import com.bitdecay.ludum.dare.actors.ai.movement.AiIdleState;
+import com.bitdecay.ludum.dare.actors.ai.movement.AiMoveState;
+import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bytebreakstudios.animagic.animation.Animation;
@@ -22,12 +28,17 @@ import com.bytebreakstudios.animagic.animation.Animator;
 import com.bytebreakstudios.animagic.animation.FrameRate;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 
 public class Monkey extends StateMachine {
     private final float SIZE = 8;
     private final int WALKING_SPEED = 20;
+    private final int ATTACK_SPEED = 60;
     private final int FLYING_SPEED = 60;
+    private final float AGRO_RANGE = 64;
 
     private final SizeComponent size;
     private final PositionComponent pos;
@@ -38,7 +49,15 @@ public class Monkey extends StateMachine {
 
     private LevelInteractionComponent levelComponent;
 
-    public Monkey(float startX, float startY) {
+    private Player player;
+
+    private StateMachine behavior;
+    private EnemyIdleBehavior idleBehavior;
+    private RoamBehavior roamBehavior;
+
+    public Monkey(float startX, float startY, Player player) {
+        this.player = player;
+
         size = new SizeComponent(100, 100);
         pos = new PositionComponent(startX, startY);
         health = new HealthComponent(10, 10);
@@ -50,6 +69,16 @@ public class Monkey extends StateMachine {
         phys.getBody().controller = new PlayerInputController(input);
 
         append(size).append(pos).append(phys).append(health).append(anim);
+
+        behavior = new StateMachine();
+    }
+
+    private List<String> getIdleAnimations(){
+        List<String> idles = new ArrayList<>();
+        idles.add("stand");
+        idles.add("scratch");
+        idles.add("banana");
+        return idles;
     }
 
     private PhysicsComponent createBody() {
@@ -72,6 +101,8 @@ public class Monkey extends StateMachine {
         a.addAnimation(new Animation("walk", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/walk").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("stand", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/stand").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/jump").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("scratch", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/idles/scratch").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("banana", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/idles/eat").toArray(AnimagicTextureRegion.class)));
         a.switchToAnimation("stand");
     }
 
@@ -83,15 +114,30 @@ public class Monkey extends StateMachine {
         append(levelComponent);
 
         levelComponent.addToLevel(this, phys);
+
+        idleBehavior = new EnemyIdleBehavior(anim.animator, getIdleAnimations());
+        roamBehavior = new RoamBehavior(this, getCenter(), 100);
+        idleBehavior.roamBehavior = roamBehavior;
+        behavior.setActiveState(idleBehavior);
+        //behavior.setActiveState(new FrustratedBehavior(this, input, roamBehavior));
     }
 
     @Override
     public void update(float delta) {
         input.update(delta);
         super.update(delta);
+        behavior.update(delta);
 
-        if (isGrounded()) phys.getBody().props.maxVoluntarySpeed = WALKING_SPEED;
-        else phys.getBody().props.maxVoluntarySpeed = FLYING_SPEED;
+        if (!(behavior.getActiveState() instanceof JumpAttackBehavior) && getPosition().dst(player.getPosition()) < AGRO_RANGE){
+            behavior.setActiveState(new JumpAttackBehavior(this, player, new FrustratedBehavior(this, input, roamBehavior), AGRO_RANGE));
+        }
+
+        if (isGrounded()) setSpeed(WALKING_SPEED);
+        else setSpeed(FLYING_SPEED);
+
+        if (activeState instanceof AiMoveState){
+            if (behavior.getActiveState() instanceof JumpAttackBehavior) setSpeed(ATTACK_SPEED);
+        }
 
         updateFacing();
 
@@ -99,8 +145,9 @@ public class Monkey extends StateMachine {
 
             case RIGHT_STANDING:
             case LEFT_STANDING:
-                if (anim.animator.currentAnimationName() != "stand") {
-                    anim.animator.switchToAnimation("stand");
+                if (activeState instanceof AiIdleState) {
+                    if (!(behavior.getActiveState() instanceof FrustratedBehavior) &&
+                            !(behavior.getActiveState() instanceof JumpAttackBehavior)) behavior.setActiveState(idleBehavior);
                 }
                 break;
             case RIGHT_RUNNING:
@@ -185,16 +232,11 @@ public class Monkey extends StateMachine {
         }
     }
 
+    private void setSpeed(int speed){
+        phys.getBody().props.maxVoluntarySpeed = speed;
+    }
+
     public void debugMonkeyAi(float x, float y){
-        setActiveState(new AiIdleState(input));
         setActiveState(new AiMoveState(this, input, new Vector2(x, y)));
-    }
-
-    public Vector2 debugIndexToPos(int x, int y){
-        return ((AiMoveState)this.activeState).indexToPos(new BitPointInt(x,y));
-    }
-
-    public BitPointInt debugPosToIndex(float x, float y){
-        return ((AiMoveState)this.activeState).posToIndex(new Vector2(x,y));
     }
 }

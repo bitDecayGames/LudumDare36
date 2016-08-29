@@ -32,6 +32,10 @@ public class StateMachine extends GameObject {
         }
     }
 
+    public IState getActiveState(){
+        return activeState;
+    }
+
     @Override
     public void update(float delta) {
         if (activeState != null) {

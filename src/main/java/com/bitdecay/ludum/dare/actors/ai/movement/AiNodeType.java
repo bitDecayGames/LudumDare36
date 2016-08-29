@@ -1,9 +1,8 @@
-package com.bitdecay.ludum.dare.actors.ai;
+package com.bitdecay.ludum.dare.actors.ai.movement;
 
 public enum AiNodeType {
     START,
     WALK,
-    CLIMB,
     JUMP,
     STOP
 }

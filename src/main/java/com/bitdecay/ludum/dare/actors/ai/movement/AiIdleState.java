@@ -1,4 +1,4 @@
-package com.bitdecay.ludum.dare.actors.ai;
+package com.bitdecay.ludum.dare.actors.ai.movement;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -18,7 +18,7 @@ public class AiIdleState implements IState {
 
     @Override
     public void enter() {
-
+        System.out.println("Enter AiIdle");
     }
 
     @Override
