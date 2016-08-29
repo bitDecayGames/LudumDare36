@@ -6,11 +6,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bitdecay.ludum.dare.interfaces.IComponent;
 import com.bitdecay.ludum.dare.interfaces.IDraw;
-import com.bytebreakstudios.animagic.texture.AnimagicSpriteBatch;
 
 public class TextComponent implements IComponent, IDraw {
 
-    BitmapFont font;
+    BitmapFont currentFont;
+    BitmapFont font1;
+    BitmapFont font2;
     String text;
 
     PositionComponent position;
@@ -18,10 +19,15 @@ public class TextComponent implements IComponent, IDraw {
     public TextComponent(PositionComponent position) {
         this.position = position;
 
-        font = new BitmapFont(Gdx.files.internal("fonts/bit.fnt"));
-        font.getData().setScale(5);
-        font.setColor(Color.BLUE);
+        font1 = new BitmapFont(Gdx.files.internal("fonts/bit.fnt"));
+        font1.getData().setScale(5);
+        font1.setColor(Color.BLUE);
 
+        font2 = new BitmapFont(Gdx.files.internal("fonts/digiface.fnt"));
+//        font2.getData().setScale(5);
+        font2.setColor(Color.BLUE);
+
+        currentFont = font1;
     }
 
     public TextComponent setText(String text) {
@@ -31,18 +37,22 @@ public class TextComponent implements IComponent, IDraw {
     }
 
     public TextComponent setColor(Color color) {
-        font.setColor(color);
+        currentFont.setColor(color);
 
         return this;
     }
 
     public TextComponent setScale(float s) {
-        font.getData().setScale(s);
+        currentFont.getData().setScale(s);
         return this;
     }
 
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        font.draw(spriteBatch, text, position.x, position.y);
+        currentFont.draw(spriteBatch, text, position.x, position.y);
+    }
+
+    public void useFont2(boolean b) {
+        currentFont = b ? font2 : font1;
     }
 }

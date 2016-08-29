@@ -19,7 +19,7 @@ public class JetPackComponent implements IComponent, IUpdate, IDraw {
 
     public final float maxFuel = 50;
 
-    public float currentFuel = 100;
+    public float currentFuel = 50;
 
     public final int FIRST_TICK_FUEL_COST = 5;
 
