@@ -30,12 +30,12 @@ public class ShipPart extends InteractableObject implements IUpdate{
     public static Map<String, BitPoint> offsets;
     static {
         offsets = new HashMap<>();
-        offsets.put(ALIEN_GUN, new BitPoint(0, 5));
-        offsets.put(COCKPIT, new BitPoint(0, 5));
-        offsets.put(ENGINE, new BitPoint(0, 2));
-        offsets.put(NAV_MODULE, new BitPoint(0, 2));
-        offsets.put(SHIELD_MODULE, new BitPoint(0, 5));
-        offsets.put(WINGS, new BitPoint(0, 5));
+        offsets.put(ALIEN_GUN, new BitPoint(-6, -3));
+        offsets.put(COCKPIT, new BitPoint(-2, -3));
+        offsets.put(ENGINE, new BitPoint(-1, -3));
+        offsets.put(NAV_MODULE, new BitPoint(0, -4));
+        offsets.put(SHIELD_MODULE, new BitPoint(0, -4));
+        offsets.put(WINGS, new BitPoint(-22, -3));
     }
 
 
