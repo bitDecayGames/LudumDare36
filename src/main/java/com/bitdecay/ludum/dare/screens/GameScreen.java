@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -75,6 +76,11 @@ public class GameScreen implements Screen, EditorHook {
     Sprite fader;
     float faderAlpha = 0;
 
+    private float gameTime = 0;
+
+    public boolean secondTutorial = false;
+    public float secondTutorialTime = 0;
+
     public GameScreen(LudumDareGame game) {
         this.game = game;
 
@@ -95,6 +101,7 @@ public class GameScreen implements Screen, EditorHook {
         world.setGravity(0, -900);
         player = new Player(camera);
         levelInteraction = new LevelInteractionComponent(world, gobs);
+
 
 
         Array<AnimagicTextureRegion> aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec");
@@ -195,6 +202,8 @@ public class GameScreen implements Screen, EditorHook {
             return;
         }
 
+        BitmapFont font = new BitmapFont(Gdx.files.internal("fonts/bit.fnt"), Gdx.files.internal("fonts/bit.png"), false);
+
         // Background
         gobsBatch.begin();
 
@@ -212,6 +221,14 @@ public class GameScreen implements Screen, EditorHook {
         drawLevel();
 
         gobs.draw(gobsBatch);
+
+        if (gameTime < 10) {
+            font.draw(gobsBatch, "Press 'A' and 'D' to move Left and Right.\nPress 'Arrow Down' to pick up and drop ship parts.", -45, 30);
+        }
+        if (secondTutorial && secondTutorialTime < 10) {
+            font.draw(gobsBatch, "Press 'W' to use your jetpack.\nPress 'Space' to fire your laser.", 400, -10);
+        }
+
         gobsBatch.end();
 
         // debug renderer
@@ -275,6 +292,11 @@ public class GameScreen implements Screen, EditorHook {
     }
 
     public void update(float delta) {
+        gameTime += delta;
+        if(secondTutorial){
+            secondTutorialTime += delta;
+        }
+
         world.step(delta);
         gobs.update(delta);
 
@@ -379,7 +401,7 @@ public class GameScreen implements Screen, EditorHook {
                     part.setPosition(p.x, p.y);
                     part.addToLevel(levelInteraction);
                 } else if (rlo instanceof DeadShipEditorObject) {
-                    DeadShip ship = DeadShip.create(player, levelInteraction);
+                    DeadShip ship = DeadShip.create(player, levelInteraction, this);
                     ship.setPosition(p.x, p.y);
                 } else if (rlo instanceof MonkeyEditorObject) {
                     Monkey monkey = new Monkey(p.x, p.y, player);
