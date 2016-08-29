@@ -23,7 +23,7 @@ public class LudumDareGame extends Game {
         assetManager.finishLoading();
         atlas = assetManager.get(ResourceDir.path("packed/main.atlas"), AnimagicTextureAtlas.class);
 
-//        setScreen(new GameScreen(this));
-        setScreen(new OpeningSceneCutScreen(this));
+        setScreen(new GameScreen(this));
+//        setScreen(new OpeningSceneCutScreen(this));
     }
 }
