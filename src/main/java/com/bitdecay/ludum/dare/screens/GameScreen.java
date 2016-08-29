@@ -24,7 +24,7 @@ import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
-import com.bitdecay.ludum.dare.actors.Warrior;
+import com.bitdecay.ludum.dare.actors.ai.Warrior;
 import com.bitdecay.ludum.dare.actors.ai.Enemy;
 import com.bitdecay.ludum.dare.actors.ai.Gorilla;
 import com.bitdecay.ludum.dare.actors.ai.Monkey;

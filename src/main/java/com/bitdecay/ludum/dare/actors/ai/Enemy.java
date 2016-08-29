@@ -47,6 +47,7 @@ public abstract class Enemy extends StateMachine implements IShapeDraw, ContactL
     protected abstract float JUMP_HEIGHT();
     protected abstract int ATTACK_STRENGTH();
     protected abstract String HURT_SFX();
+    protected abstract String DEATH_SFX();
 
     protected final SizeComponent size;
     protected final PositionComponent pos;
@@ -242,7 +243,9 @@ public abstract class Enemy extends StateMachine implements IShapeDraw, ContactL
 
     protected abstract AttackBehavior getAttack();
 
-    protected abstract GameObject getDeath();
+    protected GameObject getDeath(){
+        return new EnemyDeath(anim, pos, DEATH_SFX());
+    }
 
     public void goAgro(){
         behavior.setActiveState(getAttack());

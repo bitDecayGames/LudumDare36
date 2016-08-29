@@ -1,6 +1,5 @@
 package com.bitdecay.ludum.dare.actors.ai;
 
-import com.bitdecay.ludum.dare.actors.GameObject;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.AttackBehavior;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.EnemyIdleBehavior;
 import com.bitdecay.ludum.dare.actors.ai.behaviors.JumpAttackBehavior;
@@ -85,6 +84,11 @@ public class Monkey extends Enemy {
         return "MonkeyHurt";
     }
 
+    @Override
+    protected String DEATH_SFX(){
+        return "MonkeyVaporize";
+    }
+
     public Monkey(float startX, float startY, Player player) { super(startX, startY, player); }
 
     @Override
@@ -103,6 +107,7 @@ public class Monkey extends Enemy {
         a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/jump").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("scratch", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/idles/scratch").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("banana", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/idles/eat").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/death").toArray(AnimagicTextureRegion.class)));
         a.switchToAnimation("stand");
     }
 
@@ -117,10 +122,5 @@ public class Monkey extends Enemy {
     @Override
     protected AttackBehavior getAttack() {
         return new JumpAttackBehavior(this, player, input, ATTACK_RANGE());
-    }
-
-    @Override
-    protected GameObject getDeath(){
-        return new MonkeyDeath(this.pos,this.phys.getBody().facing);
     }
 }

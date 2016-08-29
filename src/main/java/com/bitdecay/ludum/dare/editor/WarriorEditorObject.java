@@ -5,7 +5,7 @@ import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.annotation.CantInspect;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
 import com.bitdecay.jump.geom.BitRectangle;
-import com.bitdecay.ludum.dare.actors.Warrior;
+import com.bitdecay.ludum.dare.actors.ai.Warrior;
 
 import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 
