@@ -107,6 +107,6 @@ public class ShipPart extends InteractableObject implements IUpdate{
     }
 
     public void respawn(){
-        this.setPosition(this.home.x, this.home.y);
+        this.setPosition(this.home.x, this.home.y + 5);
     }
 }
