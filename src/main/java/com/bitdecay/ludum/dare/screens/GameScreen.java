@@ -106,12 +106,14 @@ public class GameScreen implements Screen, EditorHook {
         Array<AnimagicTextureRegion> aztecVinesTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec_vines");
         Array<AnimagicTextureRegion> rockBackgroundTileTextures = LudumDareGame.atlas.findRegions("tiles/rock_bgt");
         Array<AnimagicTextureRegion> rock2rockTileTextures = LudumDareGame.atlas.findRegions("tiles/rock2rock");
+        Array<AnimagicTextureRegion> aztec2aztecTileTextures = LudumDareGame.atlas.findRegions("tiles/aztec2aztec");
 
         tilesetMap.put(0, aztecTileTextures.toArray(TextureRegion.class));
+        tilesetMap.put(3, aztecBackgroundTileTextures.toArray(TextureRegion.class));
+        tilesetMap.put(7, aztec2aztecTileTextures.toArray(TextureRegion.class));
+        tilesetMap.put(4, aztecVinesTileTextures.toArray(TextureRegion.class));
         tilesetMap.put(1, bridgesTileTextures.toArray(TextureRegion.class));
         tilesetMap.put(2, rockTileTextures.toArray(TextureRegion.class));
-        tilesetMap.put(3, aztecBackgroundTileTextures.toArray(TextureRegion.class));
-        tilesetMap.put(4, aztecVinesTileTextures.toArray(TextureRegion.class));
         tilesetMap.put(5, rockBackgroundTileTextures.toArray(TextureRegion.class));
         tilesetMap.put(6, rock2rockTileTextures.toArray(TextureRegion.class));
 
@@ -336,13 +338,15 @@ public class GameScreen implements Screen, EditorHook {
     @Override
     public List<EditorIdentifierObject> getTilesets() {
         return Arrays.asList(
-                new EditorIdentifierObject(0, "Aztec", tilesetMap.get(0)[0]),
+
                 new EditorIdentifierObject(1, "Bridges", tilesetMap.get(1)[0]),
                 new EditorIdentifierObject(2, "Rock", tilesetMap.get(2)[0]),
+                new EditorIdentifierObject(5, "RockBack", tilesetMap.get(5)[0]),
+                new EditorIdentifierObject(6, "Rock2Rock", tilesetMap.get(6)[0]),
+                new EditorIdentifierObject(0, "Aztec", tilesetMap.get(0)[0]),
                 new EditorIdentifierObject(3, "AztecBack", tilesetMap.get(3)[0]),
-                new EditorIdentifierObject(4, "Vines", tilesetMap.get(4)[0]),
-                new EditorIdentifierObject(5, "RockBack", tilesetMap.get(2)[0]),
-                new EditorIdentifierObject(6, "RockBack", tilesetMap.get(6)[0]));
+                new EditorIdentifierObject(7, "Aztec2Aztec", tilesetMap.get(7)[0]),
+                new EditorIdentifierObject(4, "Vines", tilesetMap.get(4)[0]));
     }
 
     @Override
