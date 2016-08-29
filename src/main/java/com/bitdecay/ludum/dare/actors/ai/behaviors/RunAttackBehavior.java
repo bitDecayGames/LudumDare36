@@ -3,10 +3,9 @@ package com.bitdecay.ludum.dare.actors.ai.behaviors;
 import com.bitdecay.ludum.dare.actors.ai.Enemy;
 import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.components.AIControlComponent;
-import com.bitdecay.ludum.dare.control.InputAction;
 import com.bitdecay.ludum.dare.interfaces.IState;
 
-public class JumpAttackBehavior extends AttackBehavior {
+public class RunAttackBehavior extends AttackBehavior {
 
     private Enemy ai;
     private Player player;
@@ -15,7 +14,7 @@ public class JumpAttackBehavior extends AttackBehavior {
 
     private float timer;
 
-    public JumpAttackBehavior(Enemy ai, Player player, AIControlComponent input, float attackRange){
+    public RunAttackBehavior(Enemy ai, Player player, AIControlComponent input, float attackRange){
         this.ai = ai;
         this.player = player;
         this.input = input;
@@ -38,7 +37,6 @@ public class JumpAttackBehavior extends AttackBehavior {
             if (ai.getPosition().dst(player.getPosition()) > attackRange) ai.setAiMovementGoal(player.getPosition().x, player.getPosition().y);
             resetTimer();
         }
-        if (ai.isGrounded()) input.justPressed(InputAction.JUMP);
         return null;
     }
 

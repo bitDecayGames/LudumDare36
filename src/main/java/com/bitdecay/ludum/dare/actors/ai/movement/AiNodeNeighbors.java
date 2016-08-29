@@ -2,6 +2,7 @@ package com.bitdecay.ludum.dare.actors.ai.movement;
 
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.geom.BitPointInt;
+import com.bitdecay.ludum.dare.util.BitWorldUtils;
 
 public class AiNodeNeighbors {
     public boolean topLeft;
@@ -62,11 +63,7 @@ public class AiNodeNeighbors {
     }
 
     private boolean isBodyAtIndex(int x, int y){
-        try {
-            return world.getGrid()[x][y] != null;
-        } catch (Exception e){
-            return false;
-        }
+        return BitWorldUtils.bodyAtIndex(world, new BitPointInt(x, y)) != null;
     }
 
     public String toString(){

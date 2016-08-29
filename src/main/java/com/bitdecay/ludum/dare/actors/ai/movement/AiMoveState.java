@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.jump.geom.BitPointInt;
-import com.bitdecay.ludum.dare.actors.ai.Monkey;
+import com.bitdecay.ludum.dare.actors.ai.Enemy;
 import com.bitdecay.ludum.dare.components.AIControlComponent;
 import com.bitdecay.ludum.dare.control.InputAction;
 import com.bitdecay.ludum.dare.interfaces.IState;
@@ -19,14 +19,14 @@ import static com.bitdecay.ludum.dare.util.BitWorldUtils.posToIndex;
 
 public class AiMoveState implements IState {
 
-    private Monkey me;
+    private Enemy me;
     private AIControlComponent input;
     private AiNode goal;
     private List<AiNode> nodes = new ArrayList<>();
 
     private boolean isBlocked = false;
 
-    public AiMoveState(Monkey me, AIControlComponent input, Vector2 goalPos) {
+    public AiMoveState(Enemy me, AIControlComponent input, Vector2 goalPos) {
         if (me == null) throw new RuntimeException("Cant have null ai monkey");
         if (input == null) throw new RuntimeException("Cant have null ai input");
         if (goalPos == null) throw new RuntimeException("Cant have null ai target");
@@ -35,12 +35,14 @@ public class AiMoveState implements IState {
         this.input = input;
         BitPointInt startIndex = posToIndex(me.getWorld(), this.me.getCenter());
         BitPointInt goalIndex = posToIndex(me.getWorld(), goalPos);
-        this.goal = new AiNode(indexToPos(me.getWorld(), goalIndex), goalIndex, AiNodeType.STOP);
-        AiNode start = new AiNode(this.me.getCenter(), startIndex, AiNodeType.START);
+        if (startIndex != null && goalIndex != null) {
+            this.goal = new AiNode(indexToPos(me.getWorld(), goalIndex), goalIndex, AiNodeType.STOP);
+            AiNode start = new AiNode(this.me.getCenter(), startIndex, AiNodeType.START);
 
-        // calculate all the sub targets
-        nodes.add(start);
-        recurseThroughNodes(nodes.get(0), goal, nodes);
+            // calculate all the sub targets
+            nodes.add(start);
+            recurseThroughNodes(nodes.get(0), goal, nodes);
+        }
         isBlocked = nodes.size() <= 1;
     }
 
@@ -357,7 +359,6 @@ public class AiMoveState implements IState {
 
     @Override
     public void enter() {
-        System.out.println("Enter AiMove");
     }
 
     @Override
