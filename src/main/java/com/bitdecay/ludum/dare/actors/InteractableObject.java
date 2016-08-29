@@ -94,6 +94,8 @@ public class InteractableObject extends StateMachine implements ContactListener,
 
         levelInteraction.addToLevel(this, physics);
 
+        remove(RemoveNowComponent.class);
+
         return this;
     }
 
