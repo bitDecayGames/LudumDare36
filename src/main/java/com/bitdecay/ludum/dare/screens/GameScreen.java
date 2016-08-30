@@ -235,10 +235,10 @@ public class GameScreen implements Screen, EditorHook {
 
         gobs.draw(gobsBatch);
 
-        if (gameTime < 10) {
-            font.draw(gobsBatch, "Press 'A' and 'D' to move Left and Right.\nPress 'Arrow Down' to pick up and drop ship parts.", -45, 30);
+        if (gameTime < 40) {
+            font.draw(gobsBatch, "Press 'A' and 'D' to move Left and Right.\nPress 'Arrow Down' to pick up and drop ship parts.\nYou can throw your ship parts.", -45, 30);
         }
-        if (secondTutorial && secondTutorialTime < 10) {
+        if (secondTutorial && secondTutorialTime < 40) {
             font.draw(gobsBatch, "Press 'W' to use your jetpack.\nPress 'Space' to fire your laser.", 310, -50);
         }
 
