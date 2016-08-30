@@ -70336,17 +70336,6 @@
     },
     "uuid" : "1bec5c3e-d068-48f2-afb7-575b7e308e74",
     "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.shippart.ShieldModuleEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 544.0,
-        "y" : -304.0
-      },
-      "width" : 8.5,
-      "height" : 6.0
-    },
-    "uuid" : "9114a031-ad23-497f-a91b-a96159936d26",
-    "name" : "shieldModule"
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
@@ -71007,6 +70996,17 @@
     },
     "uuid" : "188930ba-032e-46b4-a9f2-eebb81a70152",
     "name" : "warrior"
+  } ], [ "com.bitdecay.ludum.dare.editor.shippart.ShieldModuleEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1504.0,
+        "y" : -112.0
+      },
+      "width" : 8.5,
+      "height" : 6.0
+    },
+    "uuid" : "47a363da-6075-4a19-8791-ea51e7a853be",
+    "name" : "shieldModule"
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {

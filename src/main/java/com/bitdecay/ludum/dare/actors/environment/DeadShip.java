@@ -1,6 +1,5 @@
 package com.bitdecay.ludum.dare.actors.environment;
 
-import com.badlogic.gdx.Game;
 import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.geom.BitPoint;
 import com.bitdecay.ludum.dare.actors.InteractableObject;
@@ -54,8 +53,7 @@ public class DeadShip extends InteractableObject {
 
         if (bitBody.userObject instanceof Player) {
             Player player = ((Player) bitBody.userObject);
-            player.canShoot = true;
-            player.canFly = true;
+            player.naked = false;
             gameScreen.secondTutorial = true;
 
             if (player.hasShipPart()) {

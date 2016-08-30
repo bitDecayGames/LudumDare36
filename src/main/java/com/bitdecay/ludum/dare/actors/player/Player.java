@@ -38,6 +38,8 @@ public class Player extends StateMachine implements IRemoveable {
     private final AnimationComponent animNormal;
     private final AnimationComponent animCarry;
     private final AnimationComponent animShoot;
+    private final AnimationComponent animNaked;
+
     private final SizeComponent size;
     private final PositionComponent pos;
     private final HealthComponent health;
@@ -52,9 +54,7 @@ public class Player extends StateMachine implements IRemoveable {
     private float invincibleTimer;
     private float shootTimer;
 
-    public boolean canShoot = false;
-    public boolean canFly = false;
-
+    public boolean naked = true;
 
     private LevelInteractionComponent levelComponent;
     private float shootAgain = 0;
@@ -68,6 +68,7 @@ public class Player extends StateMachine implements IRemoveable {
         animNormal = new PlayerAnimationComponent(pos, PlayerAnimationComponent.AnimType.NORMAL);
         animCarry = new PlayerAnimationComponent(pos, PlayerAnimationComponent.AnimType.CARRY);
         animShoot = new PlayerAnimationComponent(pos, PlayerAnimationComponent.AnimType.SHOOT);
+        animNaked = new PlayerAnimationComponent(pos, PlayerAnimationComponent.AnimType.NAKED);
 
         attack = new AttackComponent(10);
 
@@ -119,7 +120,11 @@ public class Player extends StateMachine implements IRemoveable {
             setCarryPhysics(true);
         // Switch to normal animation set.
         } else if (shipPart == null) {
-            if(shootTimer > 0) {
+            if (naked) {
+                remove(AnimationComponent.class);
+                append(animNaked);
+                setCarryPhysics(false);
+            } else if(shootTimer > 0) {
                 if (currentAnim != animShoot) {
                    // System.out.println("entering shoot anim");
                     remove(AnimationComponent.class);
@@ -147,7 +152,7 @@ public class Player extends StateMachine implements IRemoveable {
         super.update(delta);
 
         shootAgain += delta;
-        if (keyboard.isJustPressed(InputAction.SHOOT) && shootAgain > .25 && canShoot){
+        if (keyboard.isJustPressed(InputAction.SHOOT) && shootAgain > .25 && !naked){
             shootAgain = 0;
             resetShootTimer();
             setActiveState(new ShootState(components));
@@ -282,9 +287,9 @@ public class Player extends StateMachine implements IRemoveable {
 
         @Override
         public void remove() {
+            dropShipPart();
             levelComponent.addToLevel( new PlayerDeath((AnimationComponent) getFirstComponent(AnimationComponent.class), pos, "LongDeath", this, levelComponent), null);
             levelComponent.removeFromObjects(this);
-            System.out.println("Player removed");
 
         }
 }

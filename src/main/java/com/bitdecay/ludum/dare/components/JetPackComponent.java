@@ -81,7 +81,7 @@ public class JetPackComponent implements IComponent, IUpdate, IDraw {
             if(currentFuel < 0){
                 currentFuel = 0;
             }
-        } else if (canRefuel && currentFuel < maxFuel && player.canFly){
+        } else if (canRefuel && currentFuel < maxFuel && !player.naked){
             currentFuel+=5;
             if(currentFuel > maxFuel){
                 currentFuel = maxFuel;
