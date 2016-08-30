@@ -6,7 +6,7 @@
     <artifactId>LudumDare36</artifactId>
     <packaging>jar</packaging>
 
-    <name>Ludum Dare 36</name>
+    <name>Sporgs Mishap</name>
     <version>1.0</version>
 
     <properties>
