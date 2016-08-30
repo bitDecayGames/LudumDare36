@@ -54,7 +54,7 @@ public class MainMenuScreen implements Screen {
 
         startLbl = new Label("Start", skin);
         startLbl.setFontScale(8);
-        startLbl.setColor(Color.WHITE);
+        startLbl.setColor(Color.BLACK);
         startLbl.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -64,7 +64,7 @@ public class MainMenuScreen implements Screen {
 
         creditsLbl = new Label("Credits", skin);
         creditsLbl.setFontScale(8);
-        creditsLbl.setColor(Color.WHITE);
+        creditsLbl.setColor(Color.BLACK);
         creditsLbl.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -74,7 +74,7 @@ public class MainMenuScreen implements Screen {
 
         quitLbl = new Label("Quit", skin);
         quitLbl.setFontScale(8);
-        quitLbl.setColor(Color.WHITE);
+        quitLbl.setColor(Color.BLACK);
         quitLbl.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -185,23 +185,23 @@ public class MainMenuScreen implements Screen {
         switch(menuSelection){
             case 0:
                 // start selected
-                startLbl.setColor(Color.YELLOW);
-                creditsLbl.setColor(Color.WHITE);
-                quitLbl.setColor(Color.WHITE);
+                startLbl.setColor(Color.GREEN);
+                creditsLbl.setColor(Color.BLACK);
+                quitLbl.setColor(Color.BLACK);
                 break;
 
             case 1:
                 // credits selected
-                startLbl.setColor(Color.WHITE);
-                creditsLbl.setColor(Color.YELLOW);
-                quitLbl.setColor(Color.WHITE);
+                startLbl.setColor(Color.BLACK);
+                creditsLbl.setColor(Color.GREEN);
+                quitLbl.setColor(Color.BLACK);
                 break;
 
             case 2:
                 // exit selected
-                startLbl.setColor(Color.WHITE);
-                creditsLbl.setColor(Color.WHITE);
-                quitLbl.setColor(Color.YELLOW);
+                startLbl.setColor(Color.BLACK);
+                creditsLbl.setColor(Color.BLACK);
+                quitLbl.setColor(Color.GREEN);
                 break;
         }
     }

@@ -29,7 +29,7 @@ public class EndingCutSceneScreen implements Screen {
 
     private LudumDareGame game;
 
-    private OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    private OrthographicCamera camera = new OrthographicCamera(LudumDareGame.res.x, LudumDareGame.res.y);
 
     private int currentAnimationIndex = -1;
     private CutSceneFrame currentScene;
