@@ -4687,7 +4687,7 @@
     },
     "uuid" : "bcc3e559-e4d1-4078-b32f-d05c1e65b26d",
     "material" : 5,
-    "renderNValue" : 11,
+    "renderNValue" : 9,
     "collideNValue" : 15,
     "oneway" : false
   }, {
@@ -5432,35 +5432,7 @@
     "renderNValue" : 14,
     "collideNValue" : 15,
     "oneway" : false
-  }, null, null, null, null, null, null, {
-    "rect" : {
-      "xy" : {
-        "x" : -240.0,
-        "y" : -560.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "cdbe3713-e289-453c-944a-d21950696bb2",
-    "material" : 2,
-    "renderNValue" : 3,
-    "collideNValue" : 3,
-    "oneway" : false
-  }, {
-    "rect" : {
-      "xy" : {
-        "x" : -240.0,
-        "y" : -544.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "d9743dac-cbcb-4455-abd8-413aa2e16ce4",
-    "material" : 6,
-    "renderNValue" : 7,
-    "collideNValue" : 7,
-    "oneway" : false
-  }, {
+  }, null, null, null, null, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : -240.0,
@@ -5471,8 +5443,8 @@
     },
     "uuid" : "50671ad4-0a4a-4825-8f05-f18a7187f512",
     "material" : 6,
-    "renderNValue" : 7,
-    "collideNValue" : 7,
+    "renderNValue" : 3,
+    "collideNValue" : 3,
     "oneway" : false
   }, {
     "rect" : {
@@ -6241,8 +6213,8 @@
     },
     "uuid" : "d5ba68a6-6616-469f-bfa5-19b1232b8d4d",
     "material" : 2,
-    "renderNValue" : 11,
-    "collideNValue" : 11,
+    "renderNValue" : 3,
+    "collideNValue" : 3,
     "oneway" : false
   }, {
     "rect" : {
@@ -6255,8 +6227,8 @@
     },
     "uuid" : "4f1576af-76a3-4828-b48f-8ab4bc41da8d",
     "material" : 2,
-    "renderNValue" : 15,
-    "collideNValue" : 15,
+    "renderNValue" : 7,
+    "collideNValue" : 7,
     "oneway" : false
   }, {
     "rect" : {
@@ -16125,8 +16097,8 @@
     },
     "uuid" : "67174ddc-c2a1-45f9-9e7d-9134a2fed704",
     "material" : 2,
-    "renderNValue" : 12,
-    "collideNValue" : 12,
+    "renderNValue" : 14,
+    "collideNValue" : 14,
     "oneway" : false
   }, {
     "rect" : {
@@ -16604,7 +16576,21 @@
     "renderNValue" : 14,
     "collideNValue" : 15,
     "oneway" : false
-  }, null, null, null, null, {
+  }, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 0.0,
+        "y" : -448.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "c222c180-8d31-4e95-91cf-0e0c3a669a33",
+    "material" : 2,
+    "renderNValue" : 8,
+    "collideNValue" : 8,
+    "oneway" : false
+  }, null, {
     "rect" : {
       "xy" : {
         "x" : 0.0,
@@ -18270,7 +18256,21 @@
     "renderNValue" : 14,
     "collideNValue" : 15,
     "oneway" : false
-  }, null, null, null, null, null, null, null, null, null, null, null, {
+  }, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 64.0,
+        "y" : -416.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "b91ff5f0-d46c-472b-9867-2e33d4340e4e",
+    "material" : 1,
+    "renderNValue" : 2,
+    "collideNValue" : 2,
+    "oneway" : true
+  }, null, null, null, null, null, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 64.0,
@@ -18561,7 +18561,7 @@
     },
     "uuid" : "3f23b030-145d-452b-afc1-ba5c7719e47c",
     "material" : 2,
-    "renderNValue" : 4,
+    "renderNValue" : 14,
     "collideNValue" : 4,
     "oneway" : false
   }, {
@@ -18872,7 +18872,21 @@
     "renderNValue" : 6,
     "collideNValue" : 6,
     "oneway" : false
-  }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+  }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 96.0,
+        "y" : -416.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "c53635c0-11d5-4800-816d-2a5ded7d2bd5",
+    "material" : 1,
+    "renderNValue" : 10,
+    "collideNValue" : 8,
+    "oneway" : true
+  }, null, null, null, null, null, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 96.0,
@@ -19250,7 +19264,21 @@
     "renderNValue" : 6,
     "collideNValue" : 6,
     "oneway" : false
-  }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+  }, null, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 112.0,
+        "y" : -416.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "868645af-409d-4541-9416-83265188d00a",
+    "material" : 1,
+    "renderNValue" : 8,
+    "collideNValue" : 0,
+    "oneway" : true
+  }, null, null, null, null, null, null, null, null, null, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 112.0,
@@ -19936,7 +19964,21 @@
     "renderNValue" : 14,
     "collideNValue" : 14,
     "oneway" : false
-  }, null, null, null, null, null, null, null, null, null, null, {
+  }, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 144.0,
+        "y" : -432.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "3d89b59c-6404-403e-bff0-df6294e59437",
+    "material" : 1,
+    "renderNValue" : 0,
+    "collideNValue" : 0,
+    "oneway" : true
+  }, null, null, null, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 144.0,
@@ -20818,7 +20860,21 @@
     "renderNValue" : 4,
     "collideNValue" : 4,
     "oneway" : false
-  }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+  }, null, null, null, null, null, null, null, null, null, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 192.0,
+        "y" : -368.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "4dfdb755-8909-462a-b1c2-072d89fba80b",
+    "material" : 2,
+    "renderNValue" : 2,
+    "collideNValue" : 2,
+    "oneway" : false
+  }, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 192.0,
@@ -21014,7 +21070,49 @@
     "renderNValue" : 8,
     "collideNValue" : 8,
     "oneway" : false
-  }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+  }, null, null, null, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 208.0,
+        "y" : -496.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "398f9f22-53f3-4c43-99fd-bb01c750a18a",
+    "material" : 1,
+    "renderNValue" : 2,
+    "collideNValue" : 0,
+    "oneway" : true
+  }, null, null, null, null, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 208.0,
+        "y" : -384.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "2ad1defd-a824-4aea-b359-450cc9117e02",
+    "material" : 5,
+    "renderNValue" : 3,
+    "collideNValue" : 15,
+    "oneway" : false
+  }, {
+    "rect" : {
+      "xy" : {
+        "x" : 208.0,
+        "y" : -368.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "be643d72-e11f-4f15-8a6e-7e734c7eda55",
+    "material" : 6,
+    "renderNValue" : 8,
+    "collideNValue" : 8,
+    "oneway" : false
+  }, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 208.0,
@@ -21224,7 +21322,21 @@
     "renderNValue" : 10,
     "collideNValue" : 10,
     "oneway" : false
-  }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ], [ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+  }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ], [ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 224.0,
+        "y" : -496.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "a01a8600-0501-4d69-99ac-cce9a711549d",
+    "material" : 1,
+    "renderNValue" : 10,
+    "collideNValue" : 0,
+    "oneway" : true
+  }, null, null, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 224.0,
@@ -21235,7 +21347,7 @@
     },
     "uuid" : "59983cd9-59ce-474f-a762-f0199cb9a279",
     "material" : 5,
-    "renderNValue" : 1,
+    "renderNValue" : 9,
     "collideNValue" : 15,
     "oneway" : false
   }, {
@@ -21249,7 +21361,7 @@
     },
     "uuid" : "e556922b-845f-455c-aa4a-b286a17e9975",
     "material" : 5,
-    "renderNValue" : 5,
+    "renderNValue" : 13,
     "collideNValue" : 15,
     "oneway" : false
   }, {
@@ -21532,7 +21644,21 @@
     "renderNValue" : 2,
     "collideNValue" : 2,
     "oneway" : true
-  }, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+  }, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 240.0,
+        "y" : -496.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "5e677432-4f9f-4918-9cc3-410723bf0509",
+    "material" : 1,
+    "renderNValue" : 8,
+    "collideNValue" : 0,
+    "oneway" : true
+  }, null, null, null, null, null, null, null, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 240.0,
@@ -21655,7 +21781,7 @@
     },
     "uuid" : "972eea2d-76c7-4da1-b13d-2e2657f1f9f3",
     "material" : 5,
-    "renderNValue" : 10,
+    "renderNValue" : 8,
     "collideNValue" : 15,
     "oneway" : false
   }, null, {
@@ -21907,24 +22033,10 @@
     },
     "uuid" : "553d6518-730d-4c2c-92a8-c21cb983b179",
     "material" : 5,
-    "renderNValue" : 7,
+    "renderNValue" : 6,
     "collideNValue" : 15,
     "oneway" : false
-  }, {
-    "rect" : {
-      "xy" : {
-        "x" : 256.0,
-        "y" : -144.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "ee680218-d427-41ae-b8a4-79b135e6188f",
-    "material" : 6,
-    "renderNValue" : 1,
-    "collideNValue" : 1,
-    "oneway" : false
-  }, {
+  }, null, {
     "rect" : {
       "xy" : {
         "x" : 256.0,
@@ -21933,11 +22045,11 @@
       "width" : 16.0,
       "height" : 16.0
     },
-    "uuid" : "31abc3d3-b406-4dde-9efa-077fb008c273",
-    "material" : 6,
-    "renderNValue" : 5,
-    "collideNValue" : 5,
-    "oneway" : false
+    "uuid" : "4bb90be4-b8ec-48d6-9e9f-ee814422ef10",
+    "material" : 5,
+    "renderNValue" : 3,
+    "collideNValue" : 15,
+    "oneway" : true
   }, {
     "rect" : {
       "xy" : {
@@ -21949,8 +22061,8 @@
     },
     "uuid" : "3c0f3642-ff6c-47d9-aeaa-6f37a819a120",
     "material" : 2,
-    "renderNValue" : 15,
-    "collideNValue" : 15,
+    "renderNValue" : 11,
+    "collideNValue" : 11,
     "oneway" : false
   }, {
     "rect" : {
@@ -22115,7 +22227,7 @@
       "width" : 16.0,
       "height" : 16.0
     },
-    "uuid" : "60fb0c62-28a6-4922-b115-83d9b56b6d7a",
+    "uuid" : "3cecf625-f8ff-405d-9832-9c1e71d4c99b",
     "material" : 3,
     "renderNValue" : 5,
     "collideNValue" : 15,
@@ -22271,7 +22383,7 @@
     },
     "uuid" : "6634c722-5c9f-4524-af2b-3188ef6da322",
     "material" : 5,
-    "renderNValue" : 15,
+    "renderNValue" : 7,
     "collideNValue" : 15,
     "oneway" : false
   }, {
@@ -22523,7 +22635,7 @@
     },
     "uuid" : "96b82efa-e5a2-4f06-a738-4032f370b252",
     "material" : 2,
-    "renderNValue" : 12,
+    "renderNValue" : 13,
     "collideNValue" : 12,
     "oneway" : false
   }, {
@@ -22535,11 +22647,11 @@
       "width" : 16.0,
       "height" : 16.0
     },
-    "uuid" : "e17421a5-b057-4fb2-9c76-6d13491e235f",
-    "material" : 5,
-    "renderNValue" : 13,
-    "collideNValue" : 15,
-    "oneway" : false
+    "uuid" : "0e723103-b67c-419d-a441-5c838dc6dc1c",
+    "material" : 6,
+    "renderNValue" : 4,
+    "collideNValue" : 4,
+    "oneway" : true
   }, {
     "rect" : {
       "xy" : {
@@ -22862,7 +22974,21 @@
     "renderNValue" : 14,
     "collideNValue" : 15,
     "oneway" : false
-  }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+  }, null, null, null, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 320.0,
+        "y" : -496.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "42818dde-0434-48e1-a7fe-dd9f80c9f98c",
+    "material" : 1,
+    "renderNValue" : 2,
+    "collideNValue" : 2,
+    "oneway" : false
+  }, null, null, null, null, null, null, null, null, null, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 320.0,
@@ -23142,7 +23268,21 @@
     "renderNValue" : 4,
     "collideNValue" : 15,
     "oneway" : false
-  }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+  }, null, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 336.0,
+        "y" : -496.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "71d373e7-4b8a-41d9-a2c7-0a5d8174661a",
+    "material" : 1,
+    "renderNValue" : 10,
+    "collideNValue" : 8,
+    "oneway" : false
+  }, null, null, null, null, null, null, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 336.0,
@@ -23433,8 +23573,8 @@
     },
     "uuid" : "7218125d-0046-4deb-ba36-4b5d55908753",
     "material" : 1,
-    "renderNValue" : 2,
-    "collideNValue" : 2,
+    "renderNValue" : 10,
+    "collideNValue" : 10,
     "oneway" : true
   }, null, null, null, null, null, null, null, null, null, null, {
     "rect" : {
@@ -23543,11 +23683,11 @@
       "width" : 16.0,
       "height" : 16.0
     },
-    "uuid" : "d32cb369-2e2b-42b4-a215-5c22d2a22fa0",
-    "material" : 5,
-    "renderNValue" : 14,
-    "collideNValue" : 15,
-    "oneway" : false
+    "uuid" : "acb28522-ceed-4ed4-aca0-d5dbd3a1dc09",
+    "material" : 1,
+    "renderNValue" : 2,
+    "collideNValue" : 2,
+    "oneway" : true
   }, null, null, null, null, null, {
     "rect" : {
       "xy" : {
@@ -23825,7 +23965,7 @@
     },
     "uuid" : "4c60b60e-4ad8-49e9-84b2-7da397936764",
     "material" : 6,
-    "renderNValue" : 7,
+    "renderNValue" : 15,
     "collideNValue" : 7,
     "oneway" : false
   }, {
@@ -25620,7 +25760,21 @@
     "renderNValue" : 10,
     "collideNValue" : 15,
     "oneway" : false
-  }, null, null, null, null, null, null, null, {
+  }, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 464.0,
+        "y" : -528.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "2bea83b0-21dd-4c8b-9183-20ff379c9ab0",
+    "material" : 1,
+    "renderNValue" : 2,
+    "collideNValue" : 2,
+    "oneway" : false
+  }, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 464.0,
@@ -26093,8 +26247,8 @@
     },
     "uuid" : "67e7ecb4-5e79-4122-9ee6-fce2e39405ec",
     "material" : 2,
-    "renderNValue" : 6,
-    "collideNValue" : 6,
+    "renderNValue" : 14,
+    "collideNValue" : 14,
     "oneway" : false
   }, null, null, null, {
     "rect" : {
@@ -31441,7 +31595,7 @@
     },
     "uuid" : "aa6b1f7e-7e55-4120-b3a2-40c74eb45b6e",
     "material" : 2,
-    "renderNValue" : 13,
+    "renderNValue" : 15,
     "collideNValue" : 13,
     "oneway" : false
   }, {
@@ -31864,7 +32018,21 @@
     "renderNValue" : 14,
     "collideNValue" : 15,
     "oneway" : false
-  }, null, null, null, null, null, null, {
+  }, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 688.0,
+        "y" : -208.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "01ede013-9a90-4914-b3a6-e1ab464787b9",
+    "material" : 1,
+    "renderNValue" : 10,
+    "collideNValue" : 8,
+    "oneway" : true
+  }, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 688.0,
@@ -32393,10 +32561,24 @@
     },
     "uuid" : "01adae6f-0856-436a-a7ed-302931fed909",
     "material" : 5,
-    "renderNValue" : 6,
+    "renderNValue" : 7,
     "collideNValue" : 15,
     "oneway" : false
-  }, null, null, null, null, null, null, null, {
+  }, {
+    "rect" : {
+      "xy" : {
+        "x" : 704.0,
+        "y" : -208.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "582f3f1e-e9df-4ea6-b1e0-7bbb73e3aec0",
+    "material" : 1,
+    "renderNValue" : 8,
+    "collideNValue" : 0,
+    "oneway" : true
+  }, null, null, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 704.0,
@@ -32981,7 +33163,7 @@
     },
     "uuid" : "178b05b5-db47-4b35-a364-88cc772d348b",
     "material" : 2,
-    "renderNValue" : 12,
+    "renderNValue" : 14,
     "collideNValue" : 12,
     "oneway" : false
   }, {
@@ -33037,7 +33219,7 @@
     },
     "uuid" : "689baec9-7703-4cb2-9e2a-ac5a0fe8cb51",
     "material" : 5,
-    "renderNValue" : 4,
+    "renderNValue" : 12,
     "collideNValue" : 15,
     "oneway" : false
   }, null, null, null, null, null, null, null, null, {
@@ -33446,7 +33628,21 @@
     "renderNValue" : 14,
     "collideNValue" : 14,
     "oneway" : false
-  }, null, null, null, null, {
+  }, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 736.0,
+        "y" : -272.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "f26e19a1-26d2-4e9c-b8ac-983241e67c50",
+    "material" : 1,
+    "renderNValue" : 10,
+    "collideNValue" : 8,
+    "oneway" : true
+  }, null, {
     "rect" : {
       "xy" : {
         "x" : 736.0,
@@ -33768,7 +33964,35 @@
     "renderNValue" : 14,
     "collideNValue" : 14,
     "oneway" : false
-  }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+  }, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 752.0,
+        "y" : -272.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "31daee47-2d92-41de-a942-ba7dd97d6bb8",
+    "material" : 1,
+    "renderNValue" : 8,
+    "collideNValue" : 0,
+    "oneway" : true
+  }, null, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 752.0,
+        "y" : -208.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "33a52d11-6c0a-4471-97f1-2a8b7b7a7603",
+    "material" : 1,
+    "renderNValue" : 2,
+    "collideNValue" : 0,
+    "oneway" : true
+  }, null, null, null, null, null, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 752.0,
@@ -34020,7 +34244,21 @@
     "renderNValue" : 14,
     "collideNValue" : 14,
     "oneway" : false
-  }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+  }, null, null, null, null, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 768.0,
+        "y" : -208.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "dbf17799-e852-475d-aa04-2e6e6e66f317",
+    "material" : 1,
+    "renderNValue" : 10,
+    "collideNValue" : 0,
+    "oneway" : true
+  }, null, null, null, null, null, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 768.0,
@@ -34300,7 +34538,21 @@
     "renderNValue" : 14,
     "collideNValue" : 14,
     "oneway" : false
-  }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, {
+  }, null, null, null, null, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 784.0,
+        "y" : -208.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "8cda3ec3-296e-4e6c-8ac5-728813d6700c",
+    "material" : 1,
+    "renderNValue" : 10,
+    "collideNValue" : 2,
+    "oneway" : true
+  }, null, null, null, null, null, null, null, null, null, {
     "rect" : {
       "xy" : {
         "x" : 784.0,
@@ -34633,7 +34885,7 @@
     },
     "uuid" : "54a76f62-c0e3-46f6-b29c-cd93806e2d30",
     "material" : 2,
-    "renderNValue" : 6,
+    "renderNValue" : 14,
     "collideNValue" : 6,
     "oneway" : false
   }, null, null, null, null, null, null, null, null, null, {
@@ -35042,7 +35294,21 @@
     "renderNValue" : 6,
     "collideNValue" : 15,
     "oneway" : false
-  }, null, null, null, null, null, null, {
+  }, null, null, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 816.0,
+        "y" : -96.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "5418b5be-120d-4349-ac4a-4dbf9a37bf94",
+    "material" : 2,
+    "renderNValue" : 2,
+    "collideNValue" : 2,
+    "oneway" : false
+  }, null, null, {
     "rect" : {
       "xy" : {
         "x" : 816.0,
@@ -35403,10 +35669,24 @@
     },
     "uuid" : "56da3735-4364-49c3-a4ec-8b831621d3f1",
     "material" : 5,
-    "renderNValue" : 2,
+    "renderNValue" : 3,
     "collideNValue" : 15,
     "oneway" : false
-  }, null, null, null, {
+  }, {
+    "rect" : {
+      "xy" : {
+        "x" : 832.0,
+        "y" : -96.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "1cc29a25-b2a9-4887-88dd-4bda70c23f38",
+    "material" : 6,
+    "renderNValue" : 10,
+    "collideNValue" : 10,
+    "oneway" : false
+  }, null, null, {
     "rect" : {
       "xy" : {
         "x" : 832.0,
@@ -35767,7 +36047,7 @@
     },
     "uuid" : "22cc48b8-5b9b-473f-897d-8cc5ffe99d0c",
     "material" : 5,
-    "renderNValue" : 15,
+    "renderNValue" : 13,
     "collideNValue" : 15,
     "oneway" : false
   }, {
@@ -35823,8 +36103,8 @@
     },
     "uuid" : "85d93821-34c5-4865-9498-37b0aac6bc47",
     "material" : 2,
-    "renderNValue" : 6,
-    "collideNValue" : 6,
+    "renderNValue" : 14,
+    "collideNValue" : 14,
     "oneway" : false
   }, null, null, {
     "rect" : {
@@ -36187,24 +36467,10 @@
     },
     "uuid" : "ea2b0f9e-92ac-4c93-b985-023633151674",
     "material" : 5,
-    "renderNValue" : 15,
+    "renderNValue" : 12,
     "collideNValue" : 15,
     "oneway" : false
-  }, {
-    "rect" : {
-      "xy" : {
-        "x" : 864.0,
-        "y" : -160.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "b4dc4e97-0170-477e-b45a-7e6464fc4e64",
-    "material" : 5,
-    "renderNValue" : 15,
-    "collideNValue" : 15,
-    "oneway" : false
-  }, {
+  }, null, {
     "rect" : {
       "xy" : {
         "x" : 864.0,
@@ -36215,7 +36481,7 @@
     },
     "uuid" : "ba020dac-7117-4c80-ba21-ae2dfa3be372",
     "material" : 5,
-    "renderNValue" : 15,
+    "renderNValue" : 11,
     "collideNValue" : 15,
     "oneway" : false
   }, {
@@ -36736,21 +37002,7 @@
     "renderNValue" : 14,
     "collideNValue" : 14,
     "oneway" : false
-  }, {
-    "rect" : {
-      "xy" : {
-        "x" : 880.0,
-        "y" : -176.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "f4694ee7-3dd7-47d6-83f7-e54e63c9e1af",
-    "material" : 5,
-    "renderNValue" : 15,
-    "collideNValue" : 15,
-    "oneway" : false
-  }, {
+  }, null, {
     "rect" : {
       "xy" : {
         "x" : 880.0,
@@ -36761,7 +37013,7 @@
     },
     "uuid" : "3dd49aa2-2b28-4cc2-afe5-bc6ffc57c17b",
     "material" : 5,
-    "renderNValue" : 15,
+    "renderNValue" : 3,
     "collideNValue" : 15,
     "oneway" : false
   }, {
@@ -37170,21 +37422,7 @@
     "renderNValue" : 14,
     "collideNValue" : 14,
     "oneway" : false
-  }, {
-    "rect" : {
-      "xy" : {
-        "x" : 896.0,
-        "y" : -176.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "b0ec785b-68f2-4ab1-90a1-d8636338b2b7",
-    "material" : 5,
-    "renderNValue" : 13,
-    "collideNValue" : 15,
-    "oneway" : false
-  }, {
+  }, null, {
     "rect" : {
       "xy" : {
         "x" : 896.0,
@@ -54933,7 +55171,7 @@
     },
     "uuid" : "36745e5d-2c6c-443b-87c1-7ee33e3df779",
     "material" : 5,
-    "renderNValue" : 15,
+    "renderNValue" : 13,
     "collideNValue" : 15,
     "oneway" : false
   }, {
@@ -55507,24 +55745,10 @@
     },
     "uuid" : "0971a64a-fb6d-4f28-9584-08c9057a3908",
     "material" : 5,
-    "renderNValue" : 15,
+    "renderNValue" : 14,
     "collideNValue" : 15,
     "oneway" : false
-  }, {
-    "rect" : {
-      "xy" : {
-        "x" : 1456.0,
-        "y" : -272.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "2e4d2868-b06e-49be-8de0-15da54b11788",
-    "material" : 5,
-    "renderNValue" : 15,
-    "collideNValue" : 15,
-    "oneway" : false
-  }, {
+  }, null, {
     "rect" : {
       "xy" : {
         "x" : 1456.0,
@@ -55535,7 +55759,7 @@
     },
     "uuid" : "b5ede206-e3cc-4ed1-bde5-94f120f064da",
     "material" : 5,
-    "renderNValue" : 15,
+    "renderNValue" : 11,
     "collideNValue" : 15,
     "oneway" : false
   }, {
@@ -56109,7 +56333,7 @@
     },
     "uuid" : "ecf56d03-aa3e-49db-be81-6938ec178c57",
     "material" : 5,
-    "renderNValue" : 15,
+    "renderNValue" : 7,
     "collideNValue" : 15,
     "oneway" : false
   }, {
@@ -57451,7 +57675,7 @@
       "width" : 16.0,
       "height" : 16.0
     },
-    "uuid" : "e2c19a4b-c39c-4068-81fb-36bddb5db9cf",
+    "uuid" : "a6ea4d9a-51b5-409c-bd9d-3aae3d80cc44",
     "material" : 3,
     "renderNValue" : 15,
     "collideNValue" : 15,
@@ -59299,10 +59523,10 @@
       "width" : 16.0,
       "height" : 16.0
     },
-    "uuid" : "f312c347-1147-48d6-ada8-f35041387c5b",
-    "material" : 3,
-    "renderNValue" : 15,
-    "collideNValue" : 15,
+    "uuid" : "59065218-712c-475a-84dc-44f2d90dfae2",
+    "material" : 7,
+    "renderNValue" : 0,
+    "collideNValue" : 0,
     "oneway" : false
   }, {
     "rect" : {
@@ -61919,7 +62143,7 @@
     },
     "uuid" : "336d0ad2-8c33-46a9-a80a-53e00f1cfd44",
     "material" : 3,
-    "renderNValue" : 13,
+    "renderNValue" : 15,
     "collideNValue" : 15,
     "oneway" : false
   }, {
@@ -62468,7 +62692,21 @@
     "renderNValue" : 14,
     "collideNValue" : 15,
     "oneway" : false
-  }, null, null, null, null, {
+  }, null, {
+    "rect" : {
+      "xy" : {
+        "x" : 1648.0,
+        "y" : -384.0
+      },
+      "width" : 16.0,
+      "height" : 16.0
+    },
+    "uuid" : "45f5bbf6-4905-44dd-a7e7-3d26ec54e6bf",
+    "material" : 7,
+    "renderNValue" : 0,
+    "collideNValue" : 0,
+    "oneway" : false
+  }, null, null, {
     "rect" : {
       "xy" : {
         "x" : 1648.0,
@@ -63011,7 +63249,7 @@
     },
     "uuid" : "6ce61b10-368e-41b8-b6ca-b56418625ae8",
     "material" : 3,
-    "renderNValue" : 6,
+    "renderNValue" : 14,
     "collideNValue" : 15,
     "oneway" : false
   }, null, null, null, {
@@ -70127,18 +70365,7 @@
     "collideNValue" : 12,
     "oneway" : false
   }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ] ],
-  "otherObjects" : [ "java.util.ArrayList", [ [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : -320.0,
-        "y" : -448.0
-      },
-      "width" : 8.0,
-      "height" : 9.0
-    },
-    "uuid" : "a9f17986-04ff-4922-90c1-829c1b1436c9",
-    "name" : "insanemonkey"
-  } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
+  "otherObjects" : [ "java.util.ArrayList", [ [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
     "rect" : {
       "xy" : {
         "x" : 256.0,
@@ -70148,28 +70375,6 @@
       "height" : 9.0
     },
     "uuid" : "c33ea29b-6bbc-4d3a-87f2-4aa1c2f079ea",
-    "name" : "monkey"
-  } ], [ "com.bitdecay.ludum.dare.editor.WarriorEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 1648.0,
-        "y" : -416.0
-      },
-      "width" : 14.5,
-      "height" : 16.0
-    },
-    "uuid" : "99a494e5-4228-4835-b953-c6c4d91df72b",
-    "name" : "warrior"
-  } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 0.0,
-        "y" : -176.0
-      },
-      "width" : 8.0,
-      "height" : 9.0
-    },
-    "uuid" : "a8fdfa22-ff42-4da8-a564-89497d6dfd03",
     "name" : "monkey"
   } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
     "rect" : {
@@ -70203,6 +70408,457 @@
       "height" : 6.2999997
     },
     "uuid" : "a088af42-433c-41a2-9352-f5ec0c52d7e5",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1184.0,
+        "y" : 64.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "0616c2d2-398b-434d-990b-3898095d795d",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1616.0,
+        "y" : -64.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "14951107-ac2c-4fa5-974d-61b01c125af7",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1328.0,
+        "y" : -368.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "132a7fcb-fb56-4ed2-9c6f-01fc657cfc93",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 464.0,
+        "y" : -352.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "d9e2f606-6cbd-423f-8fba-c9bd20d334cd",
+    "name" : "insanemonkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : -336.0,
+        "y" : -240.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "8bed1958-1887-441c-95c1-def9b5d6a9c4",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1344.0,
+        "y" : 32.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "17db018e-4ea3-47ce-ac42-19d34c84107d",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.GorillaEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1760.0,
+        "y" : -368.0
+      },
+      "width" : 13.200001,
+      "height" : 16.800001
+    },
+    "uuid" : "6e291d5d-5acd-4aaf-8cdb-fe6c941d3b6a",
+    "name" : "gorilla"
+  } ], [ "com.bitdecay.ludum.dare.editor.shippart.CockpitEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 224.0,
+        "y" : -16.0
+      },
+      "width" : 31.0,
+      "height" : 10.5
+    },
+    "uuid" : "5df5d316-85c1-4406-b1f1-5b7e83537af7",
+    "name" : "cockpit"
+  } ], [ "com.bitdecay.ludum.dare.editor.HealthTotemEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1504.0,
+        "y" : -112.0
+      },
+      "width" : 25.0,
+      "height" : 31.0
+    },
+    "uuid" : "d47dfe81-425b-48d3-9ee2-7389362b996a",
+    "name" : "shrines"
+  } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1072.0,
+        "y" : -384.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "84e417b1-0a75-4920-a2c2-1183f395825b",
+    "name" : "monkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : -400.0,
+        "y" : -400.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "42e285c3-e588-4390-b8ba-c73df9fdde8d",
+    "name" : "insanemonkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : -336.0,
+        "y" : -560.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "de9da4a4-b135-4563-82df-1671b879b29a",
+    "name" : "insanemonkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : -224.0,
+        "y" : -32.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "111043e2-8a43-4320-81f6-3e03dec4fc3d",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 416.0,
+        "y" : -160.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "54693026-f85f-419b-a724-9f20983a3d33",
+    "name" : "monkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.GorillaEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : -112.0,
+        "y" : -432.0
+      },
+      "width" : 13.200001,
+      "height" : 16.800001
+    },
+    "uuid" : "c390966d-8695-41e4-986a-b4e3b6f2afcb",
+    "name" : "gorilla"
+  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 384.0,
+        "y" : -480.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "a11131cd-e32a-4185-b464-1b7ea2b5ea8a",
+    "name" : "insanemonkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1296.0,
+        "y" : -368.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "f2568c0e-45cd-42ae-b257-98f36ac884de",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 560.0,
+        "y" : -336.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "81ef8f01-8bce-40e6-bee9-899d7169678f",
+    "name" : "insanemonkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 608.0,
+        "y" : -496.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "8fbc47f6-c312-4697-85db-c830e3bf2aec",
+    "name" : "insanemonkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.shippart.WingsEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 960.0,
+        "y" : -352.0
+      },
+      "width" : 36.0,
+      "height" : 14.5
+    },
+    "uuid" : "8cba088f-8c26-44a4-9320-4de513138188",
+    "name" : "wings"
+  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1856.0,
+        "y" : -192.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "e3f04e23-89c1-40c1-9327-f28626d41f58",
+    "name" : "insanemonkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : -304.0,
+        "y" : 32.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "7f61739b-2174-426a-9f92-83a5876a19b2",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : -96.0,
+        "y" : -384.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "fb366757-e6ef-40e9-a7a4-83d8bfedf8b0",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 384.0,
+        "y" : -400.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "da28f95e-4519-4a52-ab9b-2fb06a284884",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.shippart.NavModuleEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 512.0,
+        "y" : -192.0
+      },
+      "width" : 9.5,
+      "height" : 8.5
+    },
+    "uuid" : "8b1d2500-24ad-4e97-b535-79d4bb8141d5",
+    "name" : "navModule"
+  } ], [ "com.bitdecay.ludum.dare.editor.shippart.AlienGunEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 704.0,
+        "y" : -256.0
+      },
+      "width" : 20.5,
+      "height" : 4.5
+    },
+    "uuid" : "fd9897c4-e58e-4e8d-9df5-6f9dabd8ba91",
+    "name" : "alienGun"
+  } ], [ "com.bitdecay.ludum.dare.editor.WarriorEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1168.0,
+        "y" : 0.0
+      },
+      "width" : 14.5,
+      "height" : 16.0
+    },
+    "uuid" : "797bf38d-ba9f-4095-a4ab-54801b2afb20",
+    "name" : "warrior"
+  } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 128.0,
+        "y" : -176.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "8463c00d-6d10-460a-b380-fb3ec122a233",
+    "name" : "monkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 224.0,
+        "y" : -384.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "1b5f2c20-a462-4e8c-9c25-b3fd84630491",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 96.0,
+        "y" : -176.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "77a2dd86-4cd3-4978-b034-ff7d0fa26e88",
+    "name" : "monkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : -320.0,
+        "y" : -528.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "59dd07a9-273b-4e9c-93be-087903edf230",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.WarriorEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 784.0,
+        "y" : -304.0
+      },
+      "width" : 14.5,
+      "height" : 16.0
+    },
+    "uuid" : "0b9ff6d4-ba7d-46ac-b409-83f979dcb264",
+    "name" : "warrior"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : -240.0,
+        "y" : -32.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "053978a7-0575-4261-b447-d05097d22111",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 32.0,
+        "y" : -640.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "f882f1c9-e6c2-41a1-a0f4-fade94e3aa83",
+    "name" : "insanemonkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : -320.0,
+        "y" : -448.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "a9f17986-04ff-4922-90c1-829c1b1436c9",
+    "name" : "insanemonkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1584.0,
+        "y" : 0.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "747fc9b6-2248-4385-81fa-217532bfcbe1",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.WarriorEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1648.0,
+        "y" : -416.0
+      },
+      "width" : 14.5,
+      "height" : 16.0
+    },
+    "uuid" : "99a494e5-4228-4835-b953-c6c4d91df72b",
+    "name" : "warrior"
+  } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 0.0,
+        "y" : -176.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "a8fdfa22-ff42-4da8-a564-89497d6dfd03",
+    "name" : "monkey"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1552.0,
+        "y" : 0.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "0fc206d1-fd9a-4b27-b1dd-42bcfdfa6c3b",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.WarriorEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1600.0,
+        "y" : -96.0
+      },
+      "width" : 14.5,
+      "height" : 16.0
+    },
+    "uuid" : "41596890-6212-4cdb-b21d-da72faddeefd",
+    "name" : "warrior"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 1568.0,
+        "y" : 0.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "267bc3be-dd0a-441b-9ea1-d3debfa5bf2c",
     "name" : "bat"
   } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
     "rect" : {
@@ -70273,28 +70929,6 @@
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
-        "x" : 1184.0,
-        "y" : 64.0
-      },
-      "width" : 4.5499997,
-      "height" : 6.2999997
-    },
-    "uuid" : "0616c2d2-398b-434d-990b-3898095d795d",
-    "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 1616.0,
-        "y" : -64.0
-      },
-      "width" : 4.5499997,
-      "height" : 6.2999997
-    },
-    "uuid" : "14951107-ac2c-4fa5-974d-61b01c125af7",
-    "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
-    "rect" : {
-      "xy" : {
         "x" : 1504.0,
         "y" : -32.0
       },
@@ -70314,17 +70948,6 @@
     },
     "uuid" : "f4847eaa-f1aa-4646-8a5b-f627548ef238",
     "name" : "warrior"
-  } ], [ "com.bitdecay.ludum.dare.editor.HealthTotemEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 1504.0,
-        "y" : -112.0
-      },
-      "width" : 25.0,
-      "height" : 31.0
-    },
-    "uuid" : "d0350a03-eeeb-4d6a-bbad-6b19fe4c0501",
-    "name" : "shrines"
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
@@ -70347,28 +70970,6 @@
     },
     "uuid" : "82293217-8301-4106-a810-c9369a34fb71",
     "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 1328.0,
-        "y" : -368.0
-      },
-      "width" : 4.5499997,
-      "height" : 6.2999997
-    },
-    "uuid" : "132a7fcb-fb56-4ed2-9c6f-01fc657cfc93",
-    "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 464.0,
-        "y" : -352.0
-      },
-      "width" : 8.0,
-      "height" : 9.0
-    },
-    "uuid" : "d9e2f606-6cbd-423f-8fba-c9bd20d334cd",
-    "name" : "insanemonkey"
   } ], [ "com.bitdecay.ludum.dare.editor.GorillaEditorObject", {
     "rect" : {
       "xy" : {
@@ -70405,17 +71006,6 @@
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
-        "x" : -336.0,
-        "y" : -240.0
-      },
-      "width" : 4.5499997,
-      "height" : 6.2999997
-    },
-    "uuid" : "8bed1958-1887-441c-95c1-def9b5d6a9c4",
-    "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
-    "rect" : {
-      "xy" : {
         "x" : 1664.0,
         "y" : -320.0
       },
@@ -70423,17 +71013,6 @@
       "height" : 6.2999997
     },
     "uuid" : "429cf0e0-cc1b-45c6-b3ac-5a78f1f0ef57",
-    "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 1344.0,
-        "y" : 32.0
-      },
-      "width" : 4.5499997,
-      "height" : 6.2999997
-    },
-    "uuid" : "17db018e-4ea3-47ce-ac42-19d34c84107d",
     "name" : "bat"
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
@@ -70468,17 +71047,6 @@
     },
     "uuid" : "08f611cc-2647-45f6-a487-08856ac11fc5",
     "name" : "insanemonkey"
-  } ], [ "com.bitdecay.ludum.dare.editor.shippart.CockpitEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 224.0,
-        "y" : -16.0
-      },
-      "width" : 31.0,
-      "height" : 10.5
-    },
-    "uuid" : "5df5d316-85c1-4406-b1f1-5b7e83537af7",
-    "name" : "cockpit"
   } ], [ "com.bitdecay.ludum.dare.editor.shippart.EngineEditorObject", {
     "rect" : {
       "xy" : {
@@ -70534,17 +71102,17 @@
     },
     "uuid" : "b0fcd4fb-8829-4c96-a0cd-c10a445e3ec0",
     "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
+  } ], [ "com.bitdecay.ludum.dare.editor.shippart.ShieldModuleEditorObject", {
     "rect" : {
       "xy" : {
-        "x" : 1072.0,
-        "y" : -384.0
+        "x" : 1552.0,
+        "y" : -32.0
       },
-      "width" : 8.0,
-      "height" : 9.0
+      "width" : 8.5,
+      "height" : 6.0
     },
-    "uuid" : "84e417b1-0a75-4920-a2c2-1183f395825b",
-    "name" : "monkey"
+    "uuid" : "35e8185b-5950-4f13-82d3-2dfd04af9098",
+    "name" : "shieldModule"
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
@@ -70559,6 +71127,17 @@
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
+        "x" : 1600.0,
+        "y" : 0.0
+      },
+      "width" : 4.5499997,
+      "height" : 6.2999997
+    },
+    "uuid" : "fcd53a94-8963-4aa4-b963-4a0bde9d0766",
+    "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+    "rect" : {
+      "xy" : {
         "x" : 1360.0,
         "y" : 32.0
       },
@@ -70567,17 +71146,6 @@
     },
     "uuid" : "5f78463a-b288-4efa-b87f-1dfd4b899256",
     "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : -400.0,
-        "y" : -400.0
-      },
-      "width" : 8.0,
-      "height" : 9.0
-    },
-    "uuid" : "42e285c3-e588-4390-b8ba-c73df9fdde8d",
-    "name" : "insanemonkey"
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
@@ -70589,17 +71157,6 @@
     },
     "uuid" : "410cf6e4-b353-45fa-8254-c45ad444a87d",
     "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : -336.0,
-        "y" : -560.0
-      },
-      "width" : 8.0,
-      "height" : 9.0
-    },
-    "uuid" : "de9da4a4-b135-4563-82df-1671b879b29a",
-    "name" : "insanemonkey"
   } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
     "rect" : {
       "xy" : {
@@ -70633,28 +71190,6 @@
     },
     "uuid" : "edeace4b-5690-47cc-92d7-6c1942c56c6b",
     "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : -224.0,
-        "y" : -32.0
-      },
-      "width" : 4.5499997,
-      "height" : 6.2999997
-    },
-    "uuid" : "111043e2-8a43-4320-81f6-3e03dec4fc3d",
-    "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 416.0,
-        "y" : -160.0
-      },
-      "width" : 8.0,
-      "height" : 9.0
-    },
-    "uuid" : "54693026-f85f-419b-a724-9f20983a3d33",
-    "name" : "monkey"
   } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
     "rect" : {
       "xy" : {
@@ -70666,17 +71201,6 @@
     },
     "uuid" : "d23a1b51-feaf-4ce0-ab40-c689e6f841e0",
     "name" : "monkey"
-  } ], [ "com.bitdecay.ludum.dare.editor.GorillaEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : -112.0,
-        "y" : -432.0
-      },
-      "width" : 13.200001,
-      "height" : 16.800001
-    },
-    "uuid" : "c390966d-8695-41e4-986a-b4e3b6f2afcb",
-    "name" : "gorilla"
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
@@ -70688,28 +71212,6 @@
     },
     "uuid" : "e1b01ce5-a8b1-43ac-895a-81c0a41ae660",
     "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 1296.0,
-        "y" : -368.0
-      },
-      "width" : 4.5499997,
-      "height" : 6.2999997
-    },
-    "uuid" : "f2568c0e-45cd-42ae-b257-98f36ac884de",
-    "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 560.0,
-        "y" : -336.0
-      },
-      "width" : 8.0,
-      "height" : 9.0
-    },
-    "uuid" : "81ef8f01-8bce-40e6-bee9-899d7169678f",
-    "name" : "insanemonkey"
   } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
     "rect" : {
       "xy" : {
@@ -70721,28 +71223,6 @@
     },
     "uuid" : "0da47879-c621-491c-b976-68e8d0121257",
     "name" : "insanemonkey"
-  } ], [ "com.bitdecay.ludum.dare.editor.GorillaEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 1456.0,
-        "y" : -272.0
-      },
-      "width" : 13.200001,
-      "height" : 16.800001
-    },
-    "uuid" : "c1854b84-4fa2-4274-a116-3d3a2c8c7c84",
-    "name" : "gorilla"
-  } ], [ "com.bitdecay.ludum.dare.editor.shippart.WingsEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 960.0,
-        "y" : -352.0
-      },
-      "width" : 36.0,
-      "height" : 14.5
-    },
-    "uuid" : "8cba088f-8c26-44a4-9320-4de513138188",
-    "name" : "wings"
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
@@ -70765,28 +71245,6 @@
     },
     "uuid" : "91490f4c-bfef-47b1-8d3c-7b639707d927",
     "name" : "insanemonkey"
-  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 1856.0,
-        "y" : -192.0
-      },
-      "width" : 8.0,
-      "height" : 9.0
-    },
-    "uuid" : "e3f04e23-89c1-40c1-9327-f28626d41f58",
-    "name" : "insanemonkey"
-  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : -304.0,
-        "y" : 32.0
-      },
-      "width" : 4.5499997,
-      "height" : 6.2999997
-    },
-    "uuid" : "7f61739b-2174-426a-9f92-83a5876a19b2",
-    "name" : "bat"
   } ], [ "com.bitdecay.ludum.dare.editor.WarriorEditorObject", {
     "rect" : {
       "xy" : {
@@ -70842,28 +71300,17 @@
     },
     "uuid" : "29e55bfa-cfb1-4237-9aa2-5f3ff95b6026",
     "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
+  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
     "rect" : {
       "xy" : {
-        "x" : -96.0,
-        "y" : -384.0
+        "x" : 800.0,
+        "y" : -192.0
       },
-      "width" : 4.5499997,
-      "height" : 6.2999997
+      "width" : 8.0,
+      "height" : 9.0
     },
-    "uuid" : "fb366757-e6ef-40e9-a7a4-83d8bfedf8b0",
-    "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 384.0,
-        "y" : -400.0
-      },
-      "width" : 4.5499997,
-      "height" : 6.2999997
-    },
-    "uuid" : "da28f95e-4519-4a52-ab9b-2fb06a284884",
-    "name" : "bat"
+    "uuid" : "f3cbca00-d2dd-482e-8243-1b0c8f29ee54",
+    "name" : "insanemonkey"
   } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
     "rect" : {
       "xy" : {
@@ -70897,39 +71344,6 @@
     },
     "uuid" : "0eccf097-cf8a-43fa-86b9-31a81b57aff8",
     "name" : "monkey"
-  } ], [ "com.bitdecay.ludum.dare.editor.GorillaEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 272.0,
-        "y" : -416.0
-      },
-      "width" : 13.200001,
-      "height" : 16.800001
-    },
-    "uuid" : "29d1607e-1173-4525-9f1d-a99a6c83db7f",
-    "name" : "gorilla"
-  } ], [ "com.bitdecay.ludum.dare.editor.shippart.NavModuleEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 512.0,
-        "y" : -192.0
-      },
-      "width" : 9.5,
-      "height" : 8.5
-    },
-    "uuid" : "8b1d2500-24ad-4e97-b535-79d4bb8141d5",
-    "name" : "navModule"
-  } ], [ "com.bitdecay.ludum.dare.editor.shippart.AlienGunEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 704.0,
-        "y" : -256.0
-      },
-      "width" : 20.5,
-      "height" : 4.5
-    },
-    "uuid" : "fd9897c4-e58e-4e8d-9df5-6f9dabd8ba91",
-    "name" : "alienGun"
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
@@ -70941,6 +71355,17 @@
     },
     "uuid" : "4ecb7e19-830c-41a3-8293-64f0017ff884",
     "name" : "bat"
+  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
+    "rect" : {
+      "xy" : {
+        "x" : 272.0,
+        "y" : -416.0
+      },
+      "width" : 8.0,
+      "height" : 9.0
+    },
+    "uuid" : "eca1cad1-f12b-4f5c-84e3-d7db29751bdf",
+    "name" : "insanemonkey"
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
@@ -70952,17 +71377,6 @@
     },
     "uuid" : "e66b2df7-fda8-4ec2-8886-46df7dd6c8c4",
     "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.WarriorEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 1168.0,
-        "y" : 0.0
-      },
-      "width" : 14.5,
-      "height" : 16.0
-    },
-    "uuid" : "797bf38d-ba9f-4095-a4ab-54801b2afb20",
-    "name" : "warrior"
   } ], [ "com.bitdecay.ludum.dare.editor.GorillaEditorObject", {
     "rect" : {
       "xy" : {
@@ -70996,17 +71410,6 @@
     },
     "uuid" : "188930ba-032e-46b4-a9f2-eebb81a70152",
     "name" : "warrior"
-  } ], [ "com.bitdecay.ludum.dare.editor.shippart.ShieldModuleEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 1504.0,
-        "y" : -112.0
-      },
-      "width" : 8.5,
-      "height" : 6.0
-    },
-    "uuid" : "47a363da-6075-4a19-8791-ea51e7a853be",
-    "name" : "shieldModule"
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
@@ -71029,17 +71432,6 @@
     },
     "uuid" : "efdcd5d1-55ae-4052-8594-ea11e52ee18a",
     "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 128.0,
-        "y" : -176.0
-      },
-      "width" : 8.0,
-      "height" : 9.0
-    },
-    "uuid" : "8463c00d-6d10-460a-b380-fb3ec122a233",
-    "name" : "monkey"
   } ], [ "com.bitdecay.ludum.dare.editor.WarriorEditorObject", {
     "rect" : {
       "xy" : {
@@ -71054,39 +71446,6 @@
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
-        "x" : 224.0,
-        "y" : -384.0
-      },
-      "width" : 4.5499997,
-      "height" : 6.2999997
-    },
-    "uuid" : "1b5f2c20-a462-4e8c-9c25-b3fd84630491",
-    "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.MonkeyEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 96.0,
-        "y" : -176.0
-      },
-      "width" : 8.0,
-      "height" : 9.0
-    },
-    "uuid" : "77a2dd86-4cd3-4978-b034-ff7d0fa26e88",
-    "name" : "monkey"
-  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : -320.0,
-        "y" : -528.0
-      },
-      "width" : 4.5499997,
-      "height" : 6.2999997
-    },
-    "uuid" : "59dd07a9-273b-4e9c-93be-087903edf230",
-    "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
-    "rect" : {
-      "xy" : {
         "x" : 240.0,
         "y" : -528.0
       },
@@ -71095,39 +71454,6 @@
     },
     "uuid" : "2d4a80e2-059d-4d1a-96e0-16ea96c76030",
     "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.WarriorEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 784.0,
-        "y" : -304.0
-      },
-      "width" : 14.5,
-      "height" : 16.0
-    },
-    "uuid" : "0b9ff6d4-ba7d-46ac-b409-83f979dcb264",
-    "name" : "warrior"
-  } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : -240.0,
-        "y" : -32.0
-      },
-      "width" : 4.5499997,
-      "height" : 6.2999997
-    },
-    "uuid" : "053978a7-0575-4261-b447-d05097d22111",
-    "name" : "bat"
-  } ], [ "com.bitdecay.ludum.dare.editor.InsaneMonkeyEditorObject", {
-    "rect" : {
-      "xy" : {
-        "x" : 32.0,
-        "y" : -640.0
-      },
-      "width" : 8.0,
-      "height" : 9.0
-    },
-    "uuid" : "f882f1c9-e6c2-41a1-a0f4-fade94e3aa83",
-    "name" : "insanemonkey"
   } ], [ "com.bitdecay.ludum.dare.editor.BatEditorObject", {
     "rect" : {
       "xy" : {
