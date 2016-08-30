@@ -17,3 +17,12 @@
 2. ```cd ludumdare36/```
 3. ```mvn compile```
 4. Go into the project in your IDE, right click the Launcher.java file and run as a main class.
+
+
+## Package to Distribute
+
+```mvn package```
+
+Find the file in ```target/LudumDare36-<version>-packaged.zip```
+
+Unzip the file, double click the jar.
