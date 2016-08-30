@@ -36,16 +36,17 @@ public class SoundLibrary {
         sounds.put("MonkeyHurt", new SoundEffect(0.5f));
         sounds.put("MonkeyVaporize", new SoundEffect(0.4f));
         sounds.put("Power", new SoundEffect(0.07f));
-        sounds.put("Quake", new SoundEffect(0.07f));
+        sounds.put("Quake", new SoundEffect(0.7f));
         sounds.put("Randomize2", new SoundEffect(0.07f));
         sounds.put("Scwaaaap", new SoundEffect(0.07f));
         sounds.put("ShipBeacon", new SoundEffect(0.07f));
         sounds.put("ShipAlarm", new SoundEffect(0.1f));
         sounds.put("crashBig", new SoundEffect(0.1f));
+        sounds.put("Vaporize", new SoundEffect(0.1f));
 
         musics.put("ambientGame", new MusicEffect(1.5f));
         musics.put("ambientIntro", new MusicEffect(1.5f));
-        musics.put("AlarmExtended", new MusicEffect(.1f));
+        musics.put("AlarmExtended", new MusicEffect(.03f));
     }
 
     public static synchronized Sound playSound(String name) {

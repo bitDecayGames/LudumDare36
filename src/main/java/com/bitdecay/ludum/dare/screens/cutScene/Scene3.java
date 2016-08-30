@@ -1,5 +1,6 @@
 package com.bitdecay.ludum.dare.screens.cutScene;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.bitdecay.ludum.dare.LudumDareGame;
@@ -13,6 +14,9 @@ import com.bytebreakstudios.animagic.texture.AnimagicTextureRegion;
  * Created by jacob on 8/28/16.
  */
 public class Scene3 extends CutSceneFrame{
+
+    float sceneTime = 0;
+
     Animation ship;
     Animation cock;
     Animation engine;
@@ -57,6 +61,7 @@ public class Scene3 extends CutSceneFrame{
     private float wingYScale = 1;
 
     private boolean musicPlaying = false;
+    private Music music;
 
     public Scene3(){
         AnimagicTextureAtlas atlas = LudumDareGame.atlas;
@@ -77,9 +82,16 @@ public class Scene3 extends CutSceneFrame{
 
     @Override
     public void update(float delta) {
+        sceneTime += delta;
         if (!musicPlaying) {
             musicPlaying = true;
-            SoundLibrary.loopMusic("AlarmExtended");
+            music = SoundLibrary.loopMusic("AlarmExtended");
+        } else {
+            float volume = (float) (music.getVolume()-.00007);
+            music.setVolume(volume <= 0 ? 0 : volume);
+        }
+        if (sceneTime >= time) {
+            music.stop();
         }
 
         shipRotation ++;
