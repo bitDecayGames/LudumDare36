@@ -12,7 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.bitdecay.ludum.dare.LudumDareGame;
-import com.bitdecay.ludum.dare.screens.cutScene.*;
+import com.bitdecay.ludum.dare.screens.cutScene.CutSceneFrame;
+import com.bitdecay.ludum.dare.screens.cutScene.FinalScene1;
+import com.bitdecay.ludum.dare.screens.cutScene.FinalScene2;
+import com.bitdecay.ludum.dare.screens.cutScene.Sprite;
 import com.bitdecay.ludum.dare.util.SoundLibrary;
 
 import java.util.ArrayList;
@@ -21,7 +24,7 @@ import java.util.List;
 /**
  * Created by mwingfield on 8/6/15.
  */
-public class OpeningSceneCutScreen implements Screen {
+public class EndingCutSceneScreen implements Screen {
 //    private static final HTMLLogger log = HTMLLogger.getLogger(GameScreen.class, LogGroup.System);
 
     private LudumDareGame game;
@@ -41,19 +44,17 @@ public class OpeningSceneCutScreen implements Screen {
 
     private FrameBuffer buff = new FrameBuffer(Pixmap.Format.RGB888, (int) camera.viewportWidth, (int) camera.viewportHeight, false);
 
-    public OpeningSceneCutScreen(LudumDareGame game){
+    public EndingCutSceneScreen(LudumDareGame game){
         music = SoundLibrary.loopMusic("ambientIntro");
 
         this.game = game;
 
-        Scene1 scene1 = new Scene1();
-        Scene2 scene2 = new Scene2();
-        Scene3 scene3 = new Scene3();
-        Scene4 scene4 = new Scene4();
+        FinalScene1 scene1 = new FinalScene1();
+        FinalScene2 scene2 = new FinalScene2();
         animations.add(scene1);
         animations.add(scene2);
-        animations.add(scene3);
-        animations.add(scene4);
+//        animations.add(scene3);
+//        animations.add(scene4);
 
         currentScene = animations.get(0);
 
@@ -73,17 +74,14 @@ public class OpeningSceneCutScreen implements Screen {
             stage.addAction(Actions.fadeIn(1));
         } else {
             stage.addAction(Actions.sequence(Actions.fadeOut(1),
-                    Actions.run(( () -> {
-                        SoundLibrary.stopMusic("AlarmExtended");
-//                        game.setScreen(new GameScreen(game));
-                        game.setScreen(new SplashScreen(game));
-                    })))
+                    Actions.run(( () -> game.setScreen(new CreditsScreen(game)))))
             );
         }
     }
 
     @Override
     public void show() {
+        SoundLibrary.stopMusic("ambientGame");
         SoundLibrary.loopMusic("ambientIntro");
     }
 
@@ -109,7 +107,7 @@ public class OpeningSceneCutScreen implements Screen {
                 currentlyInChange = true;
                 stage.addAction(Actions.sequence(Actions.fadeOut(1),
                         Actions.run(() -> changeToNextScene()))
-                  );
+                );
             }
         }
 
