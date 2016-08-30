@@ -55,8 +55,8 @@ import static com.bitdecay.ludum.dare.LudumDareGame.atlas;
 public class GameScreen implements Screen, EditorHook {
     public static final boolean DEBUG = false;
 //    public static final String LEVEL_NAME = "flatTest.level";
-//    public static final String LEVEL_NAME = "thePit.level";
-    public static final String LEVEL_NAME = "testShipPart.level";
+    public static final String LEVEL_NAME = "thePit.level";
+//    public static final String LEVEL_NAME = "testShipPart.level";
 
     public static final Color HURT_TINT = new Color(1, 0.5f, 0.5f, 1);
 
@@ -137,6 +137,7 @@ public class GameScreen implements Screen, EditorHook {
         tilesetMap.put(6, rock2rockTileTextures.toArray(TextureRegion.class));
 
         currentLevel = LevelUtilities.loadLevel(ResourceDir.path(LEVEL_NAME));
+
         world.setLevel(currentLevel);
         levelChanged(currentLevel);
 
