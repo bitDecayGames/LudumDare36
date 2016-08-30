@@ -9,8 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.bitdecay.ludum.dare.LudumDareGame;
-import com.bitdecay.ludum.dare.control.InputUtil;
-import com.bitdecay.ludum.dare.control.Xbox360Pad;
 
 public class SplashScreen implements Screen {
 
@@ -73,7 +71,7 @@ public class SplashScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (InputUtil.isJustPressed(Input.Keys.S, Xbox360Pad.START)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             nextScreen();
         }
 

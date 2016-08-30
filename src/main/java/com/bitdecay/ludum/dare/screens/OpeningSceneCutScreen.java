@@ -1,6 +1,7 @@
 package com.bitdecay.ludum.dare.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -105,7 +106,7 @@ public class OpeningSceneCutScreen implements Screen {
             sprite.setRegion(buff.getColorBufferTexture());
             sprite.flip(false, true);
 
-            if(stateTime >= currentScene.time && !currentlyInChange) {
+            if((stateTime >= currentScene.time && !currentlyInChange) || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 currentlyInChange = true;
                 stage.addAction(Actions.sequence(Actions.fadeOut(1),
                         Actions.run(() -> changeToNextScene()))

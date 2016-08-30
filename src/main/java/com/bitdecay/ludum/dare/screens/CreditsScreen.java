@@ -13,8 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
-import com.bitdecay.ludum.dare.control.InputUtil;
-import com.bitdecay.ludum.dare.control.Xbox360Pad;
 
 public class CreditsScreen implements Screen {
 
@@ -98,7 +96,7 @@ public class CreditsScreen implements Screen {
                 Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        game.setScreen(new MainMenuScreen(game));
+                        nextScreen();
                     }
                 })
 
@@ -114,28 +112,16 @@ public class CreditsScreen implements Screen {
         stage.act();
         stage.draw();
 
-        if (!active) {
-            stage.addAction(Actions.sequence(
-                    Actions.fadeOut(1),
-                    Actions.delay(.5f),
-                    Actions.run(new Runnable() {
-                        @Override
-                        public void run() {
-                            game.setScreen(new SetupScreen(game));
-                        }
-                    })
-            ));
-        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) nextScreen();
+    }
+
+    public void nextScreen(){
+        game.setScreen(new MainMenuScreen(game));
     }
 
 
     public void update(float delta){
 
-        if (InputUtil.isPressed(Input.Keys.ESCAPE, Xbox360Pad.B) || InputUtil.isPressed(Input.Keys.B, Xbox360Pad.B)) {
-            escWasPressed = true;
-        } else if (escWasPressed && !(InputUtil.isPressed(Input.Keys.ESCAPE, Xbox360Pad.B))){
-            game.setScreen(new MainMenuScreen(game));
-        }
     }
 
     @Override
