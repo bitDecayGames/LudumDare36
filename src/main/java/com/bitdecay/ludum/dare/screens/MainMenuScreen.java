@@ -18,6 +18,7 @@ import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.control.InputUtil;
 import com.bitdecay.ludum.dare.control.Xbox360Pad;
+import com.bitdecay.ludum.dare.util.SoundLibrary;
 
 public class MainMenuScreen implements Screen {
 
@@ -98,6 +99,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void show() {
+        SoundLibrary.loopMusic("ambientIntro");
 //         animate the main menu when entering
         menu.addAction(Actions.alpha(0));
         background.addAction(Actions.sequence(

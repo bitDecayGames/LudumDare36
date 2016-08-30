@@ -3,6 +3,7 @@ package com.bitdecay.ludum.dare.screens.cutScene;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.bitdecay.ludum.dare.LudumDareGame;
+import com.bitdecay.ludum.dare.util.SoundLibrary;
 import com.bytebreakstudios.animagic.animation.Animation;
 import com.bytebreakstudios.animagic.animation.FrameRate;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
@@ -15,6 +16,8 @@ public class Scene4 extends CutSceneFrame{
     Animation cock;
     Animation bg;
     Animation alien;
+
+    boolean crashPlayed = false;
 
     private float cockX = 500;
     private float cockY = 200;
@@ -73,6 +76,10 @@ public class Scene4 extends CutSceneFrame{
         if(sceneTime < 1.6) {
             batchy.draw(cock.getFrame(), cockX, cockY, cock.getFrame().getRegionWidth() / 2, cock.getFrame().getRegionHeight() / 2, cock.getFrame().getRegionHeight(), cock.getFrame().getRegionWidth(), cockXScale, cockYScale, cockRotation, false);
         } else {
+            if (!crashPlayed) {
+                crashPlayed = true;
+                SoundLibrary.playSound("Vaporize");
+            }
             if (!cockSwitch){
                 cockSwitch = true;
                 alienX = cockX;

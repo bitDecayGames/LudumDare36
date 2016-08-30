@@ -33,10 +33,8 @@ public class SplashScreen implements Screen {
 
     @Override
     public void show() {
+//        SoundLibrary.loopMusic("ambientIntro");
         // TODO add intro music.
-//        if(LudumDareGame.MUSIC_ON) {
-//            INTRO_MUSIC = SoundLibrary.loopMusic("hero_immortal_short_intro");
-//        }
 
         bdWallpaper.addAction(Actions.alpha(0));
         ldWallpaper.addAction(

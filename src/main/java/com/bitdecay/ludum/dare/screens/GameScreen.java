@@ -197,6 +197,7 @@ public class GameScreen implements Screen, EditorHook {
 
     @Override
     public void show() {
+        SoundLibrary.stopMusic("ambientIntro");
         SoundLibrary.loopMusic("ambientGame");
     }
 
@@ -324,7 +325,7 @@ public class GameScreen implements Screen, EditorHook {
             fader.setAlpha(faderAlpha);
 
             if (faderAlpha >= 1) {
-                game.setScreen(new CreditsScreen(game));
+                game.setScreen(new EndingCutSceneScreen(game));
             }
         }
 
