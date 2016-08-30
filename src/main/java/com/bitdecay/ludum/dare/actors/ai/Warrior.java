@@ -105,7 +105,7 @@ public class Warrior extends Enemy {
         a.addAnimation(new Animation("walk", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.3f), atlas.findRegions("native/run").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("stand", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("native/stand").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("native/jump").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("native/death").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.1f), atlas.findRegions("native/death").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("pain", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("native/pain").toArray(AnimagicTextureRegion.class)));
         a.switchToAnimation("stand");
     }

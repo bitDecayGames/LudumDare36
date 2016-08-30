@@ -107,7 +107,7 @@ public class Monkey extends Enemy {
         a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/jump").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("scratch", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/idles/scratch").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("banana", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/idles/eat").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("monkey/death").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.1f), atlas.findRegions("monkey/death").toArray(AnimagicTextureRegion.class)));
         a.switchToAnimation("stand");
     }
 

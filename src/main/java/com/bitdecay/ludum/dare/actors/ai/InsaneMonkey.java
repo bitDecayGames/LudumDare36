@@ -104,7 +104,7 @@ public class InsaneMonkey extends Enemy {
         a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("insanemonkey/jump").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("scratch", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("insanemonkey/idles/scratch").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("banana", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("insanemonkey/idles/eat").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("insanemonkey/death").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.1f), atlas.findRegions("insanemonkey/death").toArray(AnimagicTextureRegion.class)));
         a.switchToAnimation("stand");
     }
 

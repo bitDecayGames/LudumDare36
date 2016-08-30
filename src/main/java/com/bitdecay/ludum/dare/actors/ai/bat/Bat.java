@@ -111,7 +111,7 @@ public class Bat extends StateMachine implements IShapeDraw, ContactListener, IR
     protected void setupAnimation(Animator a){
         a.addAnimation(new Animation("fly", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("bat/fly").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("hang", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("bat/hang").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("bat/death").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.1f), atlas.findRegions("bat/death").toArray(AnimagicTextureRegion.class)));
         a.switchToAnimation("hang");
     }
 

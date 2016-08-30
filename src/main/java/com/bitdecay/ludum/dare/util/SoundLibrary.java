@@ -18,8 +18,8 @@ public class SoundLibrary {
         sounds.put("Groan", new SoundEffect(0.15f));
         sounds.put("Hit_Hurt2", new SoundEffect(0.1f));
         sounds.put("Hit_Hurt3", new SoundEffect(0.02f));
-        sounds.put("HurtSound1", new SoundEffect(0.04f));
-        sounds.put("HurtSound2", new SoundEffect(0.02f));
+        sounds.put("HurtSound1", new SoundEffect(0.2f));
+        sounds.put("HurtSound2", new SoundEffect(0.4f));
         sounds.put("Jetpack", new SoundEffect(0.25f));
         sounds.put("JetpackLong", new SoundEffect(0.05f));
         sounds.put("Laser_Shoot1", new SoundEffect(0.07f));
@@ -34,7 +34,7 @@ public class SoundLibrary {
         sounds.put("LongDeath", new SoundEffect(0.07f));
         sounds.put("MonkeyCall", new SoundEffect(0.07f));
         sounds.put("MonkeyHurt", new SoundEffect(0.5f));
-        sounds.put("MonkeyVaporize", new SoundEffect(0.4f));
+        sounds.put("MonkeyVaporize", new SoundEffect(0.1f));
         sounds.put("Power", new SoundEffect(0.07f));
         sounds.put("Quake", new SoundEffect(0.7f));
         sounds.put("Randomize2", new SoundEffect(0.07f));

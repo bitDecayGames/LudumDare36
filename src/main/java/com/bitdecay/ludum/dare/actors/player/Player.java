@@ -33,7 +33,7 @@ public class Player extends StateMachine implements IRemoveable {
     private static final int JUMP_STRENGTH = 150;
     private static final int JUMP_STRENGTH_CARRY = 80;
 
-    private static final String HURT_SFX = "MonkeyVaporize";
+    private static final String HURT_SFX = "HurtSound1";
 
     private final AnimationComponent animNormal;
     private final AnimationComponent animCarry;
