@@ -104,7 +104,7 @@ public class GameScreen implements Screen, EditorHook {
         fader.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         black.dispose();
 
-        camera = new FollowOrthoCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera = new FollowOrthoCamera(LudumDareGame.res.x, LudumDareGame.res.y);
         camera.maxZoom = 0.4f;
         camera.minZoom = 1f;
         camera.snapSpeed = 0.04f;
