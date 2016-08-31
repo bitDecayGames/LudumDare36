@@ -105,7 +105,7 @@ public class Gorilla extends Enemy {
         a.addAnimation(new Animation("walk", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.1f), atlas.findRegions("gorilla/run").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("stand", Animation.AnimationPlayState.REPEAT, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/sit").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("jump", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/jump").toArray(AnimagicTextureRegion.class)));
-        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/death").toArray(AnimagicTextureRegion.class)));
+        a.addAnimation(new Animation("death", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.1f), atlas.findRegions("gorilla/death").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("pain", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/pain").toArray(AnimagicTextureRegion.class)));
         a.addAnimation(new Animation("lunge", Animation.AnimationPlayState.ONCE, FrameRate.perFrame(0.2f), atlas.findRegions("gorilla/lunge").toArray(AnimagicTextureRegion.class)));
         a.switchToAnimation("stand");
