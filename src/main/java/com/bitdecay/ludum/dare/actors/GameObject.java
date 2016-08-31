@@ -77,6 +77,17 @@ public class GameObject implements IUpdate, IDraw, IPreDraw, IShapeDraw {
         return components.size() > 0 ? components.get(0) : null;
     }
 
+    protected boolean hasComponentQueued(Class<? extends IComponent> clazz) {
+        for(IComponent pending : pendingAdds) {
+            if (pending.getClass().equals(clazz)) {
+                return true;
+            } else if (clazz.isAssignableFrom(pending.getClass())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<BitBody> build(LevelObject levelObject) {
         return Collections.emptyList();
     }

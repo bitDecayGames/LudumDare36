@@ -76,6 +76,7 @@ public class ShipPart extends InteractableObject implements IUpdate{
 
             if (timer.complete() &&
                 !player.hasShipPart() &&
+                !player.hasShipPartQueued() &&
                 player.getInputComponent().isJustPressed(PlayerAction.DOWN)) {
                 shipPartComponent.addToPlayer(player, levelInteraction);
 

@@ -263,6 +263,10 @@ public class Player extends StateMachine implements IRemoveable {
         return getShipPart() != null;
     }
 
+    public boolean hasShipPartQueued() {
+        return hasComponentQueued(ShipPartComponent.class);
+    }
+
     public void resetShootTimer(){
         shootTimer = 0.5f;
     }
