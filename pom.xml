@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
 
     <name>Sporgs Mishap</name>
-    <version>1.1</version>
+    <version>1.2</version>
 
     <properties>
         <log4jVersion>1.2.17</log4jVersion>

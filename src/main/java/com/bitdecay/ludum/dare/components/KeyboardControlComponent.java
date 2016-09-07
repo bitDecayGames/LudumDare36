@@ -1,13 +1,10 @@
 package com.bitdecay.ludum.dare.components;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.bitdecay.jump.control.PlayerAction;
-import com.bitdecay.jump.control.PlayerInputController;
 import com.bitdecay.jump.gdx.input.GDXControls;
-import com.bitdecay.jump.gdx.input.KeyState;
-import com.bitdecay.ludum.dare.actors.player.Player;
+import com.bitdecay.ludum.dare.control.GameControls;
 import com.bitdecay.ludum.dare.control.InputAction;
+import com.bitdecay.ludum.dare.control.MultiKeyState;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,18 +21,18 @@ public class KeyboardControlComponent extends InputComponent {
 
     public boolean enabled = true;
 
-    static Map<InputAction, Integer> actionsToKeys = new HashMap<>();
+    static Map<InputAction, MultiKeyState> actionsToKeys = new HashMap<>();
 
     static {
-        actionsToKeys.put(InputAction.SHOOT, Input.Keys.SPACE);
+        actionsToKeys.put(InputAction.SHOOT, GameControls.Fire.state());
     }
 
     public KeyboardControlComponent() {
         keyboard = new GDXControls();
-        keyboard.set(PlayerAction.JUMP, new KeyState(Input.Keys.W));
-        keyboard.set(PlayerAction.LEFT, new KeyState(Input.Keys.A));
-        keyboard.set(PlayerAction.RIGHT, new KeyState(Input.Keys.D));
-        keyboard.set(PlayerAction.DOWN, new KeyState(Input.Keys.DOWN));
+        keyboard.set(PlayerAction.JUMP, GameControls.JetPack.state());
+        keyboard.set(PlayerAction.LEFT, GameControls.Left.state());
+        keyboard.set(PlayerAction.RIGHT, GameControls.Right.state());
+        keyboard.set(PlayerAction.DOWN, GameControls.PickUp.state());
     }
 
     @Override
@@ -75,21 +72,11 @@ public class KeyboardControlComponent extends InputComponent {
 
     @Override
     public boolean isPressed(InputAction action) {
-        int key;
-        if (!inControl) return false;
-        else if (actionsToKeys.containsKey(action)) key = actionsToKeys.get(action);
-        else return false;
-
-        return Gdx.input.isKeyPressed(key);
+        return inControl && actionsToKeys.containsKey(action) && actionsToKeys.get(action).isPressed();
     }
 
     @Override
     public boolean isJustPressed(InputAction action) {
-        int key;
-        if (!inControl) return false;
-        else if (actionsToKeys.containsKey(action)) key = actionsToKeys.get(action);
-        else return false;
-
-        return Gdx.input.isKeyJustPressed(key);
+        return inControl && actionsToKeys.containsKey(action) && actionsToKeys.get(action).isJustPressed();
     }
 }
