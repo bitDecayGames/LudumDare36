@@ -92,7 +92,7 @@ public class GameScreen implements Screen, EditorHook {
     public boolean secondTutorial = false;
     public float secondTutorialTime = 0;
 
-    public String tutorialStr = "Press " + GameControls.Left + " to move Left\n and " + GameControls.Right + " to move Right.\nPress " + GameControls.PickUp + " to pick up\nand drop ship parts.\nTip: you can throw your ship parts";
+    public String tutorialStr = "Press " + GameControls.Left + " to move Left\n  and " + GameControls.Right + " to move Right.\nPress " + GameControls.PickUp + " to pick up\n  and drop ship parts.\nTip: you can throw your ship parts";
     public String secondTutorialStr = "You found your jetpack and laser!!\nPress " + GameControls.JetPack + " to use your jetpack.\nPress " + GameControls.Fire + " to fire your laser.";
 
 
@@ -242,7 +242,7 @@ public class GameScreen implements Screen, EditorHook {
         gobs.draw(gobsBatch);
 
         if (gameTime < 40) {
-            font.draw(gobsBatch, tutorialStr, -45, 30);
+            font.draw(gobsBatch, tutorialStr, -45, 40);
         }
         if (secondTutorial && secondTutorialTime < 40) {
             font.draw(gobsBatch, secondTutorialStr, 300, -40);

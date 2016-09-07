@@ -9,11 +9,15 @@ public class Launcher {
     public static void main(String[] args) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.resizable = false;
-        config.width = 1600;
-        config.height = 900;
+        // medium is default
+        config.width = 1200;
+        config.height = 675;
 
         if (args != null && args.length > 0) {
-            if (arg(args, "medium")) {
+            if (arg(args, "high")){
+                config.width = 1600;
+                config.height = 900;
+            } else if (arg(args, "medium")) {
                 config.width = 1200;
                 config.height = 675;
             } else if (arg(args, "small")) {
