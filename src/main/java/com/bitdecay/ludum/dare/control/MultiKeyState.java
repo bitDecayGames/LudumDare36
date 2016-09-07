@@ -23,7 +23,7 @@ public class MultiKeyState extends KeyState {
 
     @Override
     public boolean isJustPressed() {
-        return !isPressed() && keys.stream().filter(key -> Gdx.input.isKeyJustPressed(key)).findFirst().isPresent();
+        return keys.stream().filter(key -> Gdx.input.isKeyJustPressed(key)).findFirst().isPresent();
     }
 
 
