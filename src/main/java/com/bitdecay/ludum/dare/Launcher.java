@@ -25,9 +25,13 @@ public class Launcher {
 
         }
         System.out.println("Run Mode: " + ResourceDir.getRunMode());
-        if (ResourceDir.getRunMode() == ResourceDir.RunMode.DEV) AnimagicTexturePacker.pack(ResourceDir.get("assets"), ResourceDir.get("packed"));
+        boolean debug = false;
+        if (ResourceDir.getRunMode() == ResourceDir.RunMode.DEV) {
+            debug = true;
+            AnimagicTexturePacker.pack(ResourceDir.get("assets"), ResourceDir.get("packed"));
+        }
 
-        new LwjglApplication(new LudumDareGame(), config);
+        new LwjglApplication(new LudumDareGame(debug), config);
     }
 
     private static boolean arg(String[] args, String arg){
