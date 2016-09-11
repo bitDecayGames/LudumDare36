@@ -7,7 +7,6 @@ import com.bitdecay.jump.Facing;
 import com.bitdecay.jump.JumperBody;
 import com.bitdecay.jump.collision.ContactListener;
 import com.bitdecay.jump.geom.BitRectangle;
-import com.bitdecay.jump.level.TileBody;
 import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
@@ -138,12 +137,6 @@ public class Projectile extends GameObject implements ContactListener, IRemoveab
         if (bitBody.userObject instanceof Player) {
             ((Player) bitBody.userObject).hit(attackComponent);
             shouldRemove = true;
-        }
-        // TODO Add more logic for damage here if we hit a player.
-        if (bitBody.userObject instanceof TileBody) {
-            if (((TileBody) bitBody.userObject).nValue != 0) {
-                shouldRemove = true;
-            }
         }
     }
 
