@@ -157,9 +157,8 @@ public class GameScreen implements Screen, EditorHook {
             for (int y = 0; y < level.gridObjects[0].length; y++) {
                 TileObject obj = level.gridObjects[x][y];
                 if (obj != null && isBackgroundMaterial(obj.material)) {
-//                    obj.collideNValue = 15;
-//                    updateOwnNeighborValues(level.gridObjects, x, y);
-                    level.gridObjects[x][y] = null;
+                    obj.collideNValue = 15;
+                    updateOwnNeighborValues(level.gridObjects, x, y);
                 }
             }
         }
@@ -325,7 +324,6 @@ public class GameScreen implements Screen, EditorHook {
 
         long timer = System.nanoTime();
         world.step(delta);
-        System.out.println("World step took: " + (System.nanoTime() - timer));
         gobs.update(delta);
 
         if (DeadShip.getNumCollectedParts() >= 6) {

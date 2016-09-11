@@ -91,6 +91,11 @@ public class Projectile extends GameObject implements ContactListener, IRemoveab
     public void update(float delta) {
         super.update(delta);
 
+        if (phys.getBody().velocity.len() == 0) {
+            // the bullet has been stopped by a wall or something else.
+            shouldRemove = true;
+        }
+
         if (timedComponent.shouldRemove()) {
             shouldRemove = true;
         }
