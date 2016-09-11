@@ -17,7 +17,8 @@
 1. ```git clone git@github.com:bitDecayGames/LudumDare36.git ludumdare36```
 2. ```cd ludumdare36/```
 3. ```mvn compile```
-4. Go into the project in your IDE, right click the Launcher.java file and run as a main class.
+4. Go into the project in your IDE, right click the Launcher.java file and run as a main class. (This should throw an error)
+5. Edit the launch configuration and add `dev` as a program argument in order to get it to build the image atlas
 
 
 ## Package to Distribute

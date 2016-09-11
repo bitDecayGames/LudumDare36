@@ -35,6 +35,7 @@ import com.bitdecay.ludum.dare.background.BackgroundManager;
 import com.bitdecay.ludum.dare.cameras.FollowOrthoCamera;
 import com.bitdecay.ludum.dare.collection.GameObjects;
 import com.bitdecay.ludum.dare.components.*;
+import com.bitdecay.ludum.dare.control.GameControls;
 import com.bitdecay.ludum.dare.editor.*;
 import com.bitdecay.ludum.dare.editor.deadship.DeadShipEditorObject;
 import com.bitdecay.ludum.dare.editor.shippart.*;
@@ -89,6 +90,11 @@ public class GameScreen implements Screen, EditorHook {
 
     public boolean secondTutorial = false;
     public float secondTutorialTime = 0;
+
+    public String tutorialStr = "Press " + GameControls.Left + " to move Left\n  and " + GameControls.Right + " to move Right.\nPress " + GameControls.PickUp + " to pick up\n  and drop ship parts.\nTip: you can throw your ship parts";
+    public String secondTutorialStr = "You found your jetpack and laser!!\nPress " + GameControls.JetPack + " to use your jetpack.\nPress " + GameControls.Fire + " to fire your laser.";
+
+
     private BitmapFont font;
 
     public GameScreen(LudumDareGame game) {
@@ -235,10 +241,10 @@ public class GameScreen implements Screen, EditorHook {
         gobs.draw(gobsBatch);
 
         if (gameTime < 40) {
-            font.draw(gobsBatch, "Press 'A' and 'D' to move Left and Right.\nPress 'Arrow Down' to pick up\nand drop ship parts.\nYou can throw your ship parts.", -45, 30);
+            font.draw(gobsBatch, tutorialStr, -45, 40);
         }
         if (secondTutorial && secondTutorialTime < 40) {
-            font.draw(gobsBatch, "You found your jetpack and laser!!\nPress 'W' to use your jetpack.\nPress 'Space' to fire your laser.", 300, -40);
+            font.draw(gobsBatch, secondTutorialStr, 300, -40);
         }
 
         gobsBatch.end();
