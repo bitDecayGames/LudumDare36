@@ -2,10 +2,7 @@ package com.bitdecay.ludum.dare.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -59,6 +56,8 @@ public class GameScreen implements Screen, EditorHook {
 //    public static final String LEVEL_NAME = "testShipPart.level";
 
     public static final Color HURT_TINT = new Color(1, 0.5f, 0.5f, 1);
+
+    FPSLogger fpsLogger = new FPSLogger();
 
     private LudumDareGame game;
 
@@ -138,7 +137,6 @@ public class GameScreen implements Screen, EditorHook {
 
         currentLevel = LevelUtilities.loadLevel(ResourceDir.path(LEVEL_NAME));
 
-        world.setLevel(currentLevel);
         levelChanged(currentLevel);
 
         hud = new Hud(player);
@@ -153,8 +151,9 @@ public class GameScreen implements Screen, EditorHook {
             for (int y = 0; y < level.gridObjects[0].length; y++) {
                 TileObject obj = level.gridObjects[x][y];
                 if (obj != null && isBackgroundMaterial(obj.material)) {
-                    obj.collideNValue = 15;
-                    updateOwnNeighborValues(level.gridObjects, x, y);
+//                    obj.collideNValue = 15;
+//                    updateOwnNeighborValues(level.gridObjects, x, y);
+                    level.gridObjects[x][y] = null;
                 }
             }
         }
@@ -312,12 +311,15 @@ public class GameScreen implements Screen, EditorHook {
     }
 
     public void update(float delta) {
+        fpsLogger.log();
         gameTime += delta;
         if(secondTutorial){
             secondTutorialTime += delta;
         }
 
+        long timer = System.nanoTime();
         world.step(delta);
+        System.out.println("World step took: " + (System.nanoTime() - timer));
         gobs.update(delta);
 
         if (DeadShip.getNumCollectedParts() >= 6) {
@@ -463,8 +465,8 @@ public class GameScreen implements Screen, EditorHook {
         currentLevel = level;
         gobs.clear();
         world.removeAllBodies();
-        world.setLevel(level);
         forceBackgroundTiles(level);
+        world.setLevel(level);
 
         buildGameObjects(level.otherObjects);
         player.addToScreen(levelInteraction);

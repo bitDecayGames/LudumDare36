@@ -1,13 +1,13 @@
 package com.bitdecay.ludum.dare.actors.projectile;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.BooleanArray;
 import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.Facing;
 import com.bitdecay.jump.JumperBody;
 import com.bitdecay.jump.collision.ContactListener;
 import com.bitdecay.jump.geom.BitRectangle;
+import com.bitdecay.jump.level.TileBody;
 import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
@@ -132,9 +132,14 @@ public class Projectile extends GameObject implements ContactListener, IRemoveab
         // If we hit another player, set them to their hurt state.
         if (bitBody.userObject instanceof Player) {
             ((Player) bitBody.userObject).hit(attackComponent);
+            shouldRemove = true;
         }
         // TODO Add more logic for damage here if we hit a player.
-        shouldRemove = true;
+        if (bitBody.userObject instanceof TileBody) {
+            if (((TileBody) bitBody.userObject).nValue != 0) {
+                shouldRemove = true;
+            }
+        }
     }
 
     public AttackComponent getAttack(){
