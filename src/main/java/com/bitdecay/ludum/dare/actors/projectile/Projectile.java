@@ -11,7 +11,6 @@ import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.actors.GameObject;
-import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.interfaces.IRemoveable;
 import com.bytebreakstudios.animagic.animation.Animation;
@@ -133,11 +132,7 @@ public class Projectile extends GameObject implements ContactListener, IRemoveab
         if (bitBody.equals(sourcePhysicsComponent.getBody())) {
             return;
         }
-        // If we hit another player, set them to their hurt state.
-        if (bitBody.userObject instanceof Player) {
-            ((Player) bitBody.userObject).hit(attackComponent);
-            shouldRemove = true;
-        }
+        shouldRemove = true;
     }
 
     public AttackComponent getAttack(){

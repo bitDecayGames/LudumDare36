@@ -10,15 +10,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
 import com.bitdecay.jump.geom.ArrayUtilities;
 import com.bitdecay.jump.geom.BitPoint;
-import com.bitdecay.jump.level.Direction;
-import com.bitdecay.jump.level.Level;
-import com.bitdecay.jump.level.LevelObject;
-import com.bitdecay.jump.level.TileObject;
+import com.bitdecay.jump.level.*;
 import com.bitdecay.jump.leveleditor.EditorHook;
 import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
@@ -472,7 +470,23 @@ public class GameScreen implements Screen, EditorHook {
         forceBackgroundTiles(level);
         world.setLevel(level);
 
+        removeEventsFromBackground();
+
         buildGameObjects(level.otherObjects);
         player.addToScreen(levelInteraction);
+    }
+
+    private void removeEventsFromBackground() {
+        BitBody[][] grid = world.getGrid();
+        for (BitBody[] x : grid) {
+            for (BitBody body : x) {
+                if (body instanceof TileBody) {
+                    TileBody tileBody = (TileBody) body;
+                    if (isBackgroundMaterial(tileBody.material)) {
+                        tileBody.props.firesListenerEvents = false;
+                    }
+                }
+            }
+        }
     }
 }
