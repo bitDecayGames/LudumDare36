@@ -90,7 +90,6 @@ public class ShipPartComponent implements IComponent, IUpdate, IDraw, IRemoveabl
                 }
             }
 
-            System.out.println("Initial part vel: " + initialVelocity);
             shipPart.getPhysics().getBody().velocity.set(initialVelocity.scale(3.5f));
             shipPart.setPosition(partStartPos.x, partStartPos.y);
 

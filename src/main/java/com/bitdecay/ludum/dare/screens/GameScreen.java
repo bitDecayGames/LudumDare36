@@ -2,10 +2,7 @@ package com.bitdecay.ludum.dare.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,15 +10,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
 import com.bitdecay.jump.geom.ArrayUtilities;
 import com.bitdecay.jump.geom.BitPoint;
-import com.bitdecay.jump.level.Direction;
-import com.bitdecay.jump.level.Level;
-import com.bitdecay.jump.level.LevelObject;
-import com.bitdecay.jump.level.TileObject;
+import com.bitdecay.jump.level.*;
 import com.bitdecay.jump.leveleditor.EditorHook;
 import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
@@ -60,6 +55,8 @@ public class GameScreen implements Screen, EditorHook {
 //    public static final String LEVEL_NAME = "testShipPart.level";
 
     public static final Color HURT_TINT = new Color(1, 0.5f, 0.5f, 1);
+
+    FPSLogger fpsLogger = new FPSLogger();
 
     private LudumDareGame game;
 
@@ -144,7 +141,6 @@ public class GameScreen implements Screen, EditorHook {
 
         currentLevel = LevelUtilities.loadLevel(ResourceDir.path(LEVEL_NAME));
 
-        world.setLevel(currentLevel);
         levelChanged(currentLevel);
 
         hud = new Hud(player);
@@ -318,11 +314,13 @@ public class GameScreen implements Screen, EditorHook {
     }
 
     public void update(float delta) {
+        fpsLogger.log();
         gameTime += delta;
         if(secondTutorial){
             secondTutorialTime += delta;
         }
 
+        long timer = System.nanoTime();
         world.step(delta);
         gobs.update(delta);
 
@@ -469,10 +467,26 @@ public class GameScreen implements Screen, EditorHook {
         currentLevel = level;
         gobs.clear();
         world.removeAllBodies();
-        world.setLevel(level);
         forceBackgroundTiles(level);
+        world.setLevel(level);
+
+        removeEventsFromBackground();
 
         buildGameObjects(level.otherObjects);
         player.addToScreen(levelInteraction);
+    }
+
+    private void removeEventsFromBackground() {
+        BitBody[][] grid = world.getGrid();
+        for (BitBody[] x : grid) {
+            for (BitBody body : x) {
+                if (body instanceof TileBody) {
+                    TileBody tileBody = (TileBody) body;
+                    if (isBackgroundMaterial(tileBody.material)) {
+                        tileBody.props.firesListenerEvents = false;
+                    }
+                }
+            }
+        }
     }
 }

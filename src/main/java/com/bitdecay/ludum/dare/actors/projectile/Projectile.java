@@ -1,7 +1,6 @@
 package com.bitdecay.ludum.dare.actors.projectile;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.BooleanArray;
 import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.Facing;
@@ -12,7 +11,6 @@ import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.ludum.dare.LudumDareGame;
 import com.bitdecay.ludum.dare.ResourceDir;
 import com.bitdecay.ludum.dare.actors.GameObject;
-import com.bitdecay.ludum.dare.actors.player.Player;
 import com.bitdecay.ludum.dare.components.*;
 import com.bitdecay.ludum.dare.interfaces.IRemoveable;
 import com.bytebreakstudios.animagic.animation.Animation;
@@ -91,6 +89,11 @@ public class Projectile extends GameObject implements ContactListener, IRemoveab
     public void update(float delta) {
         super.update(delta);
 
+        if (phys.getBody().velocity.len() == 0) {
+            // the bullet has been stopped by a wall or something else.
+            shouldRemove = true;
+        }
+
         if (timedComponent.shouldRemove()) {
             shouldRemove = true;
         }
@@ -129,11 +132,6 @@ public class Projectile extends GameObject implements ContactListener, IRemoveab
         if (bitBody.equals(sourcePhysicsComponent.getBody())) {
             return;
         }
-        // If we hit another player, set them to their hurt state.
-        if (bitBody.userObject instanceof Player) {
-            ((Player) bitBody.userObject).hit(attackComponent);
-        }
-        // TODO Add more logic for damage here if we hit a player.
         shouldRemove = true;
     }
 
